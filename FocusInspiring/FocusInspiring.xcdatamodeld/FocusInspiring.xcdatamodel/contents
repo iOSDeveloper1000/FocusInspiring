@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D64" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DataItem" representedClassName="DataItem" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="holder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Inspiration" inverseName="items" inverseEntity="Inspiration"/>
+    </entity>
+    <entity name="Inspiration" representedClassName="Inspiration" syncable="YES" codeGenerationType="class">
+        <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="previewImage" optional="YES" attributeType="Binary"/>
+        <attribute name="terminationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="DataItem" inverseName="holder" inverseEntity="DataItem"/>
+    </entity>
+    <elements>
+        <element name="Inspiration" positionX="-96.04376220703125" positionY="-20.72225952148438" width="128" height="133"/>
+        <element name="DataItem" positionX="157.7109375" positionY="54.382080078125" width="128" height="73"/>
+    </elements>
+</model>
