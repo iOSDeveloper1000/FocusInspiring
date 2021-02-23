@@ -13,6 +13,16 @@
 		E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */; };
 		E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E732C73B25DBE11900A4CE31 /* Assets.xcassets */; };
 		E732C73F25DBE11900A4CE31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E732C73D25DBE11900A4CE31 /* LaunchScreen.storyboard */; };
+		E769880E25E5472E0020466A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769880D25E5472E0020466A /* NetworkClient.swift */; };
+		E769881125E548420020466A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881025E548420020466A /* DataController.swift */; };
+		E769881925E54BCB0020466A /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881825E54BCB0020466A /* NoteCell.swift */; };
+		E769881C25E54BEF0020466A /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881B25E54BEF0020466A /* NoteDetailView.swift */; };
+		E769882125E54C220020466A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882025E54C220020466A /* StartViewController.swift */; };
+		E769882425E54C6C0020466A /* AddNewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882325E54C6C0020466A /* AddNewNoteViewController.swift */; };
+		E769882925E54CD60020466A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882825E54CD60020466A /* ListViewController.swift */; };
+		E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */; };
+		E769882F25E54DD90020466A /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882E25E54DD90020466A /* EditNoteViewController.swift */; };
+		E769883225E54E420020466A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769883125E54E420020466A /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +34,16 @@
 		E732C73B25DBE11900A4CE31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E732C73E25DBE11900A4CE31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E732C74025DBE11900A4CE31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E769880D25E5472E0020466A /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		E769881025E548420020466A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		E769881825E54BCB0020466A /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		E769881B25E54BEF0020466A /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
+		E769882025E54C220020466A /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		E769882325E54C6C0020466A /* AddNewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteViewController.swift; sourceTree = "<group>"; };
+		E769882825E54CD60020466A /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNoteViewController.swift; sourceTree = "<group>"; };
+		E769882E25E54DD90020466A /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
+		E769883125E54E420020466A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +78,63 @@
 			children = (
 				E732C72F25DBE11800A4CE31 /* AppDelegate.swift */,
 				E732C73125DBE11800A4CE31 /* SceneDelegate.swift */,
-				E732C73525DBE11800A4CE31 /* Main.storyboard */,
-				E732C73B25DBE11900A4CE31 /* Assets.xcassets */,
-				E732C73D25DBE11900A4CE31 /* LaunchScreen.storyboard */,
 				E732C74025DBE11900A4CE31 /* Info.plist */,
-				E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */,
+				E769881525E549030020466A /* Storyboards */,
+				E769881625E549140020466A /* Assets */,
+				E769881325E548E60020466A /* Model */,
+				E769881E25E54BF80020466A /* View */,
+				E769882625E54C760020466A /* Controller */,
 			);
 			path = FocusInspiring;
+			sourceTree = "<group>";
+		};
+		E769881325E548E60020466A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */,
+				E769880D25E5472E0020466A /* NetworkClient.swift */,
+				E769881025E548420020466A /* DataController.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E769881525E549030020466A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E732C73525DBE11800A4CE31 /* Main.storyboard */,
+				E732C73D25DBE11900A4CE31 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E769881625E549140020466A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				E732C73B25DBE11900A4CE31 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		E769881E25E54BF80020466A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E769881825E54BCB0020466A /* NoteCell.swift */,
+				E769881B25E54BEF0020466A /* NoteDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E769882625E54C760020466A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E769882025E54C220020466A /* StartViewController.swift */,
+				E769882325E54C6C0020466A /* AddNewNoteViewController.swift */,
+				E769882825E54CD60020466A /* ListViewController.swift */,
+				E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */,
+				E769882E25E54DD90020466A /* EditNoteViewController.swift */,
+				E769883125E54E420020466A /* SearchViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +208,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E769881125E548420020466A /* DataController.swift in Sources */,
+				E769882125E54C220020466A /* StartViewController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
+				E769881925E54BCB0020466A /* NoteCell.swift in Sources */,
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
+				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
+				E769882425E54C6C0020466A /* AddNewNoteViewController.swift in Sources */,
+				E769883225E54E420020466A /* SearchViewController.swift in Sources */,
+				E769880E25E5472E0020466A /* NetworkClient.swift in Sources */,
+				E769882925E54CD60020466A /* ListViewController.swift in Sources */,
+				E769882F25E54DD90020466A /* EditNoteViewController.swift in Sources */,
+				E769881C25E54BEF0020466A /* NoteDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
