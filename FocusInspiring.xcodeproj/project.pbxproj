@@ -17,12 +17,14 @@
 		E769881125E548420020466A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881025E548420020466A /* DataController.swift */; };
 		E769881925E54BCB0020466A /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881825E54BCB0020466A /* NoteCell.swift */; };
 		E769881C25E54BEF0020466A /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881B25E54BEF0020466A /* NoteDetailView.swift */; };
-		E769882125E54C220020466A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882025E54C220020466A /* StartViewController.swift */; };
-		E769882425E54C6C0020466A /* AddNewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882325E54C6C0020466A /* AddNewNoteViewController.swift */; };
+		E769882125E54C220020466A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882025E54C220020466A /* HomeViewController.swift */; };
+		E769882425E54C6C0020466A /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882325E54C6C0020466A /* EditNoteViewController.swift */; };
 		E769882925E54CD60020466A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882825E54CD60020466A /* ListViewController.swift */; };
 		E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */; };
-		E769882F25E54DD90020466A /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882E25E54DD90020466A /* EditNoteViewController.swift */; };
+		E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882E25E54DD90020466A /* AddNewNoteViewController.swift */; };
 		E769883225E54E420020466A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769883125E54E420020466A /* SearchViewController.swift */; };
+		E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */; };
+		E76BF3E825E915D400EE4992 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E725E915D400EE4992 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,12 +40,14 @@
 		E769881025E548420020466A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		E769881825E54BCB0020466A /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		E769881B25E54BEF0020466A /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
-		E769882025E54C220020466A /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		E769882325E54C6C0020466A /* AddNewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteViewController.swift; sourceTree = "<group>"; };
+		E769882025E54C220020466A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E769882325E54C6C0020466A /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
 		E769882825E54CD60020466A /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNoteViewController.swift; sourceTree = "<group>"; };
-		E769882E25E54DD90020466A /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
+		E769882E25E54DD90020466A /* AddNewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteViewController.swift; sourceTree = "<group>"; };
 		E769883125E54E420020466A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InspirationItem+Extension.swift"; sourceTree = "<group>"; };
+		E76BF3E725E915D400EE4992 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 				E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */,
 				E769880D25E5472E0020466A /* NetworkClient.swift */,
 				E769881025E548420020466A /* DataController.swift */,
+				E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,12 +132,13 @@
 		E769882625E54C760020466A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E769882025E54C220020466A /* StartViewController.swift */,
-				E769882325E54C6C0020466A /* AddNewNoteViewController.swift */,
+				E769882025E54C220020466A /* HomeViewController.swift */,
+				E769882325E54C6C0020466A /* EditNoteViewController.swift */,
 				E769882825E54CD60020466A /* ListViewController.swift */,
 				E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */,
-				E769882E25E54DD90020466A /* EditNoteViewController.swift */,
+				E769882E25E54DD90020466A /* AddNewNoteViewController.swift */,
 				E769883125E54E420020466A /* SearchViewController.swift */,
+				E76BF3E725E915D400EE4992 /* TabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -209,17 +215,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E769881125E548420020466A /* DataController.swift in Sources */,
-				E769882125E54C220020466A /* StartViewController.swift in Sources */,
+				E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */,
+				E769882125E54C220020466A /* HomeViewController.swift in Sources */,
+				E76BF3E825E915D400EE4992 /* TabBarController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
 				E769881925E54BCB0020466A /* NoteCell.swift in Sources */,
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
-				E769882425E54C6C0020466A /* AddNewNoteViewController.swift in Sources */,
+				E769882425E54C6C0020466A /* EditNoteViewController.swift in Sources */,
 				E769883225E54E420020466A /* SearchViewController.swift in Sources */,
 				E769880E25E5472E0020466A /* NetworkClient.swift in Sources */,
 				E769882925E54CD60020466A /* ListViewController.swift in Sources */,
-				E769882F25E54DD90020466A /* EditNoteViewController.swift in Sources */,
+				E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */,
 				E769881C25E54BEF0020466A /* NoteDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
