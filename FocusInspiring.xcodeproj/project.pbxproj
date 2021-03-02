@@ -25,6 +25,9 @@
 		E769883225E54E420020466A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769883125E54E420020466A /* SearchViewController.swift */; };
 		E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */; };
 		E76BF3E825E915D400EE4992 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E725E915D400EE4992 /* TabBarController.swift */; };
+		E7DF981B25EE53C000026EE3 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */; };
+		E7ED60AD25EF78AD00811762 /* PeriodPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60AC25EF78AD00811762 /* PeriodPickerDelegate.swift */; };
+		E7ED60B225EFA9DC00811762 /* TextNoteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* TextNoteDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		E769883125E54E420020466A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InspirationItem+Extension.swift"; sourceTree = "<group>"; };
 		E76BF3E725E915D400EE4992 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
+		E7ED60AC25EF78AD00811762 /* PeriodPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodPickerDelegate.swift; sourceTree = "<group>"; };
+		E7ED60B125EFA9DC00811762 /* TextNoteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNoteDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +131,8 @@
 			children = (
 				E769881825E54BCB0020466A /* NoteCell.swift */,
 				E769881B25E54BEF0020466A /* NoteDetailView.swift */,
+				E7ED60AC25EF78AD00811762 /* PeriodPickerDelegate.swift */,
+				E7ED60B125EFA9DC00811762 /* TextNoteDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -139,6 +147,7 @@
 				E769882E25E54DD90020466A /* AddNewNoteViewController.swift */,
 				E769883125E54E420020466A /* SearchViewController.swift */,
 				E76BF3E725E915D400EE4992 /* TabBarController.swift */,
+				E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -214,9 +223,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7DF981B25EE53C000026EE3 /* ViewController+Extension.swift in Sources */,
 				E769881125E548420020466A /* DataController.swift in Sources */,
 				E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */,
 				E769882125E54C220020466A /* HomeViewController.swift in Sources */,
+				E7ED60AD25EF78AD00811762 /* PeriodPickerDelegate.swift in Sources */,
 				E76BF3E825E915D400EE4992 /* TabBarController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
@@ -224,6 +235,7 @@
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
 				E769882425E54C6C0020466A /* EditNoteViewController.swift in Sources */,
+				E7ED60B225EFA9DC00811762 /* TextNoteDelegate.swift in Sources */,
 				E769883225E54E420020466A /* SearchViewController.swift in Sources */,
 				E769880E25E5472E0020466A /* NetworkClient.swift in Sources */,
 				E769882925E54CD60020466A /* ListViewController.swift in Sources */,
