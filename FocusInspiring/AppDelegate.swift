@@ -11,10 +11,32 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    struct DefaultKey {
+        static let hasLaunchedBefore = "App has launched before"
+        static let timeCountForPicker = "Key for Picker Time Counter Raw Value"
+        static let timeUnitForPicker = "Key for Picker Time Unit Raw Value"
+    }
 
+    func setUserDefaultsIfFirstLaunch() {
+        if UserDefaults.standard.bool(forKey: DefaultKey.hasLaunchedBefore) {
+            print("App FocusInspiring has launched before")
+        } else {
+            print("First launch of App FocusInspiring")
+
+            // Initialize user default values
+            UserDefaults.standard.set(2, forKey: DefaultKey.timeCountForPicker)
+            UserDefaults.standard.set(DateCalculator.DateUnit.week.rawValue, forKey: DefaultKey.timeUnitForPicker)
+
+            UserDefaults.standard.set(true, forKey: DefaultKey.hasLaunchedBefore)
+            UserDefaults.standard.synchronize()
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        setUserDefaultsIfFirstLaunch()
+
         return true
     }
 

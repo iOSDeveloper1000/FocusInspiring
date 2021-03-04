@@ -13,81 +13,63 @@ import UIKit
 
 class PeriodPickerDelegate: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    // MARK: Time Units
+    // MARK: Constants
 
-    enum TimeUnit: Int, CaseIterable {
-        case second = 0 // @todo - only for easier testing
-        case minute     // @todo - only for easier testing
-        case hour       // @todo - only for easier testing
-        case day
-        case week
-        case month
-        case year
+    struct Constant {
+        static let timeCounterComponent: Int = 1
+        static let timeUnitComponent: Int = 2
 
-        var stringValue: String {
-            switch self {
-            case .second: return "second"
-            case .minute: return "minute"
-            case .hour: return "hour"
-            case .day: return "day"
-            case .week: return "week"
-            case .month: return "month"
-            case .year: return "year"
-            }
-        }
+        static let pickerDescriptiveString = "Present in:  "
+        static let timeCounterMaxValue: Int = 30
     }
 
 
-    var selectedCount: Int?
-    var selectedUnit: String?
+    // MARK: Properties
+
+    var selectedRawCount: Int?
+    var selectedRawUnit: Int?
 
 
     // MARK: Delegate and Data Source methods
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        return Constant.timeUnitComponent + 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 
-        var numberOfRows: Int = 1
-
         switch component {
         case 0:
-            numberOfRows = 60
-        case 1:
-            numberOfRows = TimeUnit.allCases.count
+            return 1
+        case Constant.timeCounterComponent:
+            return Constant.timeCounterMaxValue
+        case Constant.timeUnitComponent:
+            return DateCalculator.DateUnit.allCases.count
         default:
-            print("ERROR Default case not available")
+            fatalError("Default case in picker view not available")
         }
-
-        return numberOfRows
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
         switch component {
         case 0:
+            return Constant.pickerDescriptiveString
+        case Constant.timeCounterComponent:
             return String(row + 1)
-        case 1:
-            return TimeUnit(rawValue: row)?.stringValue ?? "???"
+        case Constant.timeUnitComponent:
+            return DateCalculator.DateUnit(rawValue: row)?.stringValue ?? nil
         default:
-            return "???"
+            return nil
         }
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
-        if component == 0 {
-
-            selectedCount = row + 1
-
-        } else if component == 1 {
-
-            selectedUnit = TimeUnit.init(rawValue: row)?.stringValue
-
+        if component == Constant.timeCounterComponent {
+            selectedRawCount = row
+        } else if component == Constant.timeUnitComponent {
+            selectedRawUnit = row
         }
-
     }
-
 }

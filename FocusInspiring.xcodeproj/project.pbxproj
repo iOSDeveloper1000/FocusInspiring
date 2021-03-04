@@ -25,6 +25,7 @@
 		E769883225E54E420020466A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769883125E54E420020466A /* SearchViewController.swift */; };
 		E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */; };
 		E76BF3E825E915D400EE4992 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E725E915D400EE4992 /* TabBarController.swift */; };
+		E772162225F2516A00867C20 /* DateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772162125F2516A00867C20 /* DateCalculator.swift */; };
 		E7DF981B25EE53C000026EE3 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */; };
 		E7ED60AD25EF78AD00811762 /* PeriodPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60AC25EF78AD00811762 /* PeriodPickerDelegate.swift */; };
 		E7ED60B225EFA9DC00811762 /* TextNoteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* TextNoteDelegate.swift */; };
@@ -51,6 +52,7 @@
 		E769883125E54E420020466A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InspirationItem+Extension.swift"; sourceTree = "<group>"; };
 		E76BF3E725E915D400EE4992 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		E772162125F2516A00867C20 /* DateCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculator.swift; sourceTree = "<group>"; };
 		E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		E7ED60AC25EF78AD00811762 /* PeriodPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodPickerDelegate.swift; sourceTree = "<group>"; };
 		E7ED60B125EFA9DC00811762 /* TextNoteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNoteDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				E769880D25E5472E0020466A /* NetworkClient.swift */,
 				E769881025E548420020466A /* DataController.swift */,
 				E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */,
+				E772162125F2516A00867C20 /* DateCalculator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				E769882925E54CD60020466A /* ListViewController.swift in Sources */,
 				E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */,
 				E769881C25E54BEF0020466A /* NoteDetailView.swift in Sources */,
+				E772162225F2516A00867C20 /* DateCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

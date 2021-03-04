@@ -43,20 +43,17 @@ class AddNewNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        periodPickerDelegate = PeriodPickerDelegate()
-        textNoteDelegate = TextNoteDelegate()
+        setUpPeriodPicker()
 
-        periodPickerView.delegate = periodPickerDelegate
-        periodPickerView.dataSource = periodPickerDelegate
+        textNoteDelegate = TextNoteDelegate()
         textView.delegate = textNoteDelegate
+
+        clearUserInterface()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // @todo fetch field entries from UserDefaults
-
-        clearUserInterface()
         toggleUserInterface(enable: true)
     }
 
@@ -89,12 +86,17 @@ class AddNewNoteViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: Any) {
         toggleUserInterface(enable: false)
 
-        popupAlert(title: "Finished the description?", message: "If so, you get reminded of your new inspiration in \(periodPickerDelegate.selectedCount ?? 1) \(periodPickerDelegate.selectedUnit ?? "").", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [
+        guard let target = calculateTargetDate() else {
+            fatalError("Cannot compute target date for representing note")
+        }
+
+        popupAlert(title: "Description finished?", message: "If so, you get reminded of your new inspiration on \(target).", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [
                     { _ in
                         self.toggleUserInterface(enable: true)
                     },
                     { _ in
-                        self.saveNewItem()
+                        self.saveNewItem(targetDate: target)
+                        self.saveUserDefaults()
 
                         self.clearUserInterface()
                         self.toggleUserInterface(enable: true)
@@ -103,38 +105,28 @@ class AddNewNoteViewController: UIViewController {
     }
 
 
-    // MARK: Helper
+    // MARK: Setup
 
-    private func saveNewItem() {
-        let newItem = InspirationItem(context: dataController.viewContext)
-        newItem.active = true
-        newItem.creationDate = Date()
-        newItem.presentingDate = Date() // @todo alert controller for asking user
-        newItem.title = titleField.text
-        newItem.text = textView.text
-        if let image = imageView.image {
-            newItem.image = image.pngData()
-        }
-        // @todo store file attachments
+    private func setUpPeriodPicker() {
 
-        dataController.saveViewContext()
+        periodPickerDelegate = PeriodPickerDelegate()
+
+        periodPickerView.delegate = periodPickerDelegate
+        periodPickerView.dataSource = periodPickerDelegate
+
+        // Fetch picker rows from stored user specific values
+        let pickerCountRow: Int = UserDefaults.standard.integer(forKey: AppDelegate.DefaultKey.timeCountForPicker)
+        let pickerUnitRow: Int = UserDefaults.standard.integer(forKey: AppDelegate.DefaultKey.timeUnitForPicker)
+
+        let pickerCountComponent = PeriodPickerDelegate.Constant.timeCounterComponent
+        let pickerUnitComponent = PeriodPickerDelegate.Constant.timeUnitComponent
+
+        periodPickerView.selectRow(pickerCountRow, inComponent: pickerCountComponent, animated: true)
+        periodPickerView.selectRow(pickerUnitRow, inComponent: pickerUnitComponent, animated: true)
+
     }
 
-    private func toggleUserInterface(enable: Bool) {
-        titleField.isEnabled = enable
-        textView.isUserInteractionEnabled = enable
-        imageButton.isEnabled = enable
-        periodPickerView.isUserInteractionEnabled = enable
-        cameraButton.isEnabled = enable
-        fileButton.isEnabled = false // @todo file attaching to be implemented
-        saveButton.isEnabled = enable
-    }
-
-    private func clearUserInterface() {
-        titleField.text = ""
-        textView.text = "Enter your text note here."
-        imageView.image = nil
-    }
+    // MARK: Process
 
     private func pickImage(sourceType: UIImagePickerController.SourceType) {
 
@@ -156,7 +148,70 @@ class AddNewNoteViewController: UIViewController {
                         }
             ])
         }
+    }
 
+    private func saveNewItem(targetDate: Date) {
+        let newItem = InspirationItem(context: dataController.viewContext)
+        newItem.active = true
+        newItem.creationDate = Date()
+        newItem.presentingDate = targetDate
+        newItem.title = titleField.text
+        newItem.text = textView.text
+        if let image = imageView.image {
+            newItem.image = image.pngData()
+        }
+        // @todo store file attachments
+
+        dataController.saveViewContext()
+    }
+
+    private func calculateTargetDate() -> Date? {
+
+        // Retrieve selected count value from picker view, default value if picker was not changed
+        let selectedPickerRawCount = periodPickerDelegate.selectedRawCount ?? UserDefaults.standard.integer(forKey: AppDelegate.DefaultKey.timeCountForPicker)
+
+        // Retrieve selected unit from picker view, default value if picker was not changed
+        let selectedPickerRawUnit = periodPickerDelegate.selectedRawUnit ?? UserDefaults.standard.integer(forKey: AppDelegate.DefaultKey.timeUnitForPicker)
+
+        // Convert picker raw values to computable time values
+        let pickerCount = selectedPickerRawCount + 1
+        guard let pickerUnit = DateCalculator.DateUnit(rawValue: selectedPickerRawUnit) else {
+            return nil
+        }
+
+        // Use DateCalculator to compute target date for representing note
+        let dateComponents = DateCalculator.convertDateUnits2DateComponents(value: pickerCount, unit: pickerUnit)
+        let targetDate = DateCalculator.addToCurrentDate(period: dateComponents)
+
+        return targetDate
+    }
+
+    private func saveUserDefaults() {
+        if let selectedRawCount = periodPickerDelegate.selectedRawCount {
+            UserDefaults.standard.set(selectedRawCount, forKey: AppDelegate.DefaultKey.timeCountForPicker)
+        }
+        if let selectedRawUnit = periodPickerDelegate.selectedRawUnit {
+            UserDefaults.standard.set(selectedRawUnit, forKey: AppDelegate.DefaultKey.timeUnitForPicker)
+        }
+    }
+
+
+    // MARK: User Interface
+
+    private func toggleUserInterface(enable: Bool) {
+        titleField.isEnabled = enable
+        textView.isUserInteractionEnabled = enable
+        imageButton.isEnabled = enable
+        periodPickerView.isUserInteractionEnabled = enable
+        cameraButton.isEnabled = enable
+        fileButton.isEnabled = false // @todo file attaching to be implemented
+        saveButton.isEnabled = enable
+    }
+
+    private func clearUserInterface() {
+        titleField.text = ""
+        textView.text = "Enter your text note here."
+        imageView.image = nil
     }
 }
 
