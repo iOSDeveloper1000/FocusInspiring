@@ -126,7 +126,7 @@ class AddNewNoteViewController: UIViewController {
 
     }
 
-    // MARK: Process
+    // MARK: Core functionality
 
     private func pickImage(sourceType: UIImagePickerController.SourceType) {
 
@@ -158,7 +158,7 @@ class AddNewNoteViewController: UIViewController {
         newItem.title = titleField.text
         newItem.text = textView.text
         if let image = imageView.image {
-            newItem.image = image.pngData()
+            newItem.image = image.jpegData(compressionQuality: 0.98)
         }
         // @todo store file attachments
 
@@ -216,7 +216,7 @@ class AddNewNoteViewController: UIViewController {
 }
 
 
-// MARK: UIImagePickerControllerDelegate
+// MARK: UIImagePickerController Delegation
 
 extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 

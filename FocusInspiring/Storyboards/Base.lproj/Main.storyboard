@@ -164,25 +164,52 @@
         <!--Glory-->
         <scene sceneID="bEC-Ld-n1h">
             <objects>
-                <collectionViewController id="50N-dE-yFR" customClass="ListViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="50N-dE-yFR" customClass="CollectionViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Tch-1o-D7T">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="w3C-KH-XgD">
-                            <size key="itemSize" width="128" height="128"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="w3C-KH-XgD">
+                            <size key="itemSize" width="200" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="HQP-BD-HF6" customClass="NoteCell" customModule="FocusInspiring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vRt-B8-bNR">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="InspirationalNoteIdentifier" id="fXT-Pp-s4m" customClass="InspirationalNoteCell" customModule="FocusInspiring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bU5-7U-cZk">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="enJ-M4-kyD">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="144"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaC-je-JY6">
+                                            <rect key="frame" x="0.0" y="144" width="200" height="56"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="56" id="zx3-xc-CzI"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="enJ-M4-kyD" secondAttribute="trailing" id="7BA-60-aEM"/>
+                                        <constraint firstItem="enJ-M4-kyD" firstAttribute="leading" secondItem="bU5-7U-cZk" secondAttribute="leading" id="G97-J5-gti"/>
+                                        <constraint firstAttribute="trailing" secondItem="RaC-je-JY6" secondAttribute="trailing" id="Srz-V5-6Mr"/>
+                                        <constraint firstItem="RaC-je-JY6" firstAttribute="leading" secondItem="bU5-7U-cZk" secondAttribute="leading" id="cVA-Sm-5vW"/>
+                                        <constraint firstItem="RaC-je-JY6" firstAttribute="top" secondItem="enJ-M4-kyD" secondAttribute="bottom" id="m9M-DR-WqK"/>
+                                        <constraint firstAttribute="bottom" secondItem="RaC-je-JY6" secondAttribute="bottom" id="vwy-7k-cxo"/>
+                                        <constraint firstItem="enJ-M4-kyD" firstAttribute="top" secondItem="bU5-7U-cZk" secondAttribute="top" id="wem-eK-Shk"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="enJ-M4-kyD" id="0Zp-Y3-Zpj"/>
+                                    <outlet property="subTitle" destination="RaC-je-JY6" id="cND-yY-keB"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -192,10 +219,13 @@
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Glory" id="jWP-BN-fZx"/>
                     <navigationItem key="navigationItem" id="dSg-Ye-KFZ"/>
+                    <connections>
+                        <outlet property="flowLayout" destination="w3C-KH-XgD" id="NXm-Pz-axc"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nit-wP-YMX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="745" y="696"/>
+            <point key="canvasLocation" x="744.92753623188412" y="695.75892857142856"/>
         </scene>
         <!--Display-->
         <scene sceneID="5fx-s8-XQx">

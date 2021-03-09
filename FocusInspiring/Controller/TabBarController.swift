@@ -24,13 +24,13 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         // Setup child view controllers
-        setupChildViewControllers()
+        setUpChildViewControllers()
     }
     
     // MARK: Helper
     
-    private func setupChildViewControllers() {
-        // @todo
+    private func setUpChildViewControllers() {
+
         guard let viewControllers = viewControllers else {
             fatalError("No view controller found")
         }
@@ -41,8 +41,10 @@ class TabBarController: UITabBarController {
                 controller.dataController = dataController
             case let controller as AddNewNoteViewController:
                 controller.dataController = dataController
+            case let controller as CollectionViewController:
+                controller.dataController = dataController
             default:
-                print("Default case not in use")
+                break
             }
         }
     }

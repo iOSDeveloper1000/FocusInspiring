@@ -105,7 +105,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     }
 
 
-    // MARK: Setup and View
+    // MARK: Setup
 
     private func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
@@ -152,6 +152,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
             presentingDateLabel.text = "Displayed on \(dateFormatter.string(from: displayedItem.presentingDate!))"
             if let imgData = displayedItem.image {
                 imageView.image = UIImage(data: imgData)
+            } else {
+                imageView.image = nil
             }
             textView.text = displayedItem.text
 
@@ -166,7 +168,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 }
 
 
-// MARK: User interface helper
+// MARK: User Interface
 
 extension DisplayNoteViewController {
 
