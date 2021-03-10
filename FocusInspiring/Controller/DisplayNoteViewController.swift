@@ -100,8 +100,17 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
-        // @todo implement delete function
-        print("Delete button pressed")
+
+        popupAlert(title: "Delete this note permanently?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [
+                    nil,
+                    { _ in
+                        // Delete currently displayed note in managed object context
+                        self.dataController.viewContext.delete(self.displayedItem)
+                        self.dataController.saveViewContext()
+
+                        self.displayNextItem()
+                    }
+        ])
     }
 
 
@@ -160,11 +169,17 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
             removeBackgroundMessage()
 
         } else {
-            print("No item found")
+
+            displayedItem = nil
 
             setBackgroundMessage(message: "No more inspirational notes to display this time.\n\nFeel lucky anyway! :-)")
         }
     }
+
+
+    // MARK: Handler
+
+    // @todo
 }
 
 

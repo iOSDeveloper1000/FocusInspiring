@@ -13,7 +13,7 @@ import UIKit
 
 extension UIViewController{
     
-    public func popupAlert(title: String, message: String, alertStyle: UIAlertController.Style, actionTitles: [String], actionStyles: [UIAlertAction.Style], actions: [((UIAlertAction) -> Void)]){
+    public func popupAlert(title: String, message: String, alertStyle: UIAlertController.Style, actionTitles: [String], actionStyles: [UIAlertAction.Style], actions: [((UIAlertAction) -> Void)?]){
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: alertStyle)
         
