@@ -1,5 +1,5 @@
 //
-//  TabBarController.swift
+//  RootViewController.swift
 //  FocusInspiring
 //
 //  Created by Arno Seidel on 26.02.21.
@@ -9,9 +9,9 @@
 import UIKit
 
 
-// MARK: TabBarController: UITabBarController
+// MARK: RootViewController: UITabBarController
 
-class TabBarController: UITabBarController {
+class RootViewController: UITabBarController {
     
     // MARK: Properties
     
@@ -22,12 +22,12 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Setup child view controllers
+
         setUpChildViewControllers()
     }
+
     
-    // MARK: Helper
+    // MARK: Setup
     
     private func setUpChildViewControllers() {
 
@@ -36,13 +36,20 @@ class TabBarController: UITabBarController {
         }
         
         for controller in viewControllers {
+
             switch controller {
+
             case let controller as DisplayNoteViewController:
                 controller.dataController = dataController
+
             case let controller as AddNewNoteViewController:
                 controller.dataController = dataController
-            case let controller as CollectionViewController:
-                controller.dataController = dataController
+
+            case let navigationVC as UINavigationController:
+                if let collectionVC = navigationVC.topViewController as? CollectionViewController {
+                    collectionVC.dataController = dataController
+                }
+
             default:
                 break
             }
