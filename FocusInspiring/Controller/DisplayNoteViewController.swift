@@ -31,11 +31,9 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     // MARK: Properties
 
     var displayedItem: InspirationItem!
-
     var fetchedItems: [InspirationItem] = []
 
     var dataController: DataController!
-
     var fetchedResultsController: NSFetchedResultsController<InspirationItem>!
 
     /* Date formatter for the displayed creation and presenting date */

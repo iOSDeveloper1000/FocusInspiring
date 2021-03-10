@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     struct DefaultKey {
         static let hasLaunchedBefore = "App has launched before"
+
         static let timeCountForPicker = "Key for Picker Time Counter Raw Value"
         static let timeUnitForPicker = "Key for Picker Time Unit Raw Value"
     }

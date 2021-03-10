@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E72EE63A25F97DE400B228C5 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EE63925F97DE400B228C5 /* CustomTextField.swift */; };
 		E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E732C72F25DBE11800A4CE31 /* AppDelegate.swift */; };
 		E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E732C73125DBE11800A4CE31 /* SceneDelegate.swift */; };
 		E732C73725DBE11800A4CE31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E732C73525DBE11800A4CE31 /* Main.storyboard */; };
@@ -27,10 +28,11 @@
 		E772162225F2516A00867C20 /* DateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E772162125F2516A00867C20 /* DateCalculator.swift */; };
 		E7DF981B25EE53C000026EE3 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */; };
 		E7ED60AD25EF78AD00811762 /* PeriodPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60AC25EF78AD00811762 /* PeriodPickerDelegate.swift */; };
-		E7ED60B225EFA9DC00811762 /* TextNoteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* TextNoteDelegate.swift */; };
+		E7ED60B225EFA9DC00811762 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* CustomTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E72EE63925F97DE400B228C5 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		E732C72C25DBE11800A4CE31 /* FocusInspiring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusInspiring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E732C72F25DBE11800A4CE31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E732C73125DBE11800A4CE31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,7 +55,7 @@
 		E772162125F2516A00867C20 /* DateCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculator.swift; sourceTree = "<group>"; };
 		E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		E7ED60AC25EF78AD00811762 /* PeriodPickerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodPickerDelegate.swift; sourceTree = "<group>"; };
-		E7ED60B125EFA9DC00811762 /* TextNoteDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNoteDelegate.swift; sourceTree = "<group>"; };
+		E7ED60B125EFA9DC00811762 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +135,8 @@
 				E769881825E54BCB0020466A /* InspirationalNoteCell.swift */,
 				E769881B25E54BEF0020466A /* NoteDetailView.swift */,
 				E7ED60AC25EF78AD00811762 /* PeriodPickerDelegate.swift */,
-				E7ED60B125EFA9DC00811762 /* TextNoteDelegate.swift */,
+				E7ED60B125EFA9DC00811762 /* CustomTextView.swift */,
+				E72EE63925F97DE400B228C5 /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */,
 				E769882125E54C220020466A /* HomeViewController.swift in Sources */,
 				E7ED60AD25EF78AD00811762 /* PeriodPickerDelegate.swift in Sources */,
+				E72EE63A25F97DE400B228C5 /* CustomTextField.swift in Sources */,
 				E76BF3E825E915D400EE4992 /* RootViewController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
@@ -235,7 +239,7 @@
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
 				E769882425E54C6C0020466A /* EditNoteViewController.swift in Sources */,
-				E7ED60B225EFA9DC00811762 /* TextNoteDelegate.swift in Sources */,
+				E7ED60B225EFA9DC00811762 /* CustomTextView.swift in Sources */,
 				E769880E25E5472E0020466A /* NetworkClient.swift in Sources */,
 				E769882925E54CD60020466A /* CollectionViewController.swift in Sources */,
 				E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */,

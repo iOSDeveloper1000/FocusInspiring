@@ -7,17 +7,24 @@
 //
 
 import UIKit
+import CoreData
 
 
-// MARK: AddNewNoteViewController: UIViewController
+// MARK: AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDelegate
 
-class AddNewNoteViewController: UIViewController {
+class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDelegate {
+
+    typealias SaveKey = AppDelegate.DefaultKey
+
+    // Key used for assigning TemporaryDataItem in CoreData to this view controller
+    private let addNewNoteKey: String = "AddNewNoteKey"
+
 
     // MARK: Outlets
 
-    @IBOutlet weak var titleField: UITextField!
+    @IBOutlet weak var titleField: CustomTextField!
     @IBOutlet weak var periodPickerView: UIPickerView!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: CustomTextView!
     @IBOutlet weak var imageView: UIImageView!
 
     @IBOutlet weak var imageButton: UIBarButtonItem!
@@ -32,10 +39,12 @@ class AddNewNoteViewController: UIViewController {
 
     var targetDate: Date!
 
+    var temporaryNote: TemporaryDataItem!
+
     var dataController: DataController!
+    var fetchedResultsController: NSFetchedResultsController<TemporaryDataItem>!
 
     var periodPickerDelegate: PeriodPickerDelegate!
-    var textNoteDelegate: TextNoteDelegate!
 
 
     // MARK: Life cycle
@@ -43,18 +52,23 @@ class AddNewNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpPeriodPicker()
+        setUpFetchedResultsController() // Fetch temporary note object
 
-        textNoteDelegate = TextNoteDelegate()
-        textView.delegate = textNoteDelegate
-
-        clearUserInterface()
+        setUpUserInterface()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        setUpFetchedResultsController()
+
         toggleUserInterface(enable: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        fetchedResultsController = nil
     }
 
 
@@ -93,6 +107,53 @@ class AddNewNoteViewController: UIViewController {
 
     // MARK: Setup
 
+    private func setUpFetchedResultsController() {
+        let fetchRequest:NSFetchRequest<TemporaryDataItem> = TemporaryDataItem.fetchRequest()
+
+        fetchRequest.predicate = NSPredicate(format: "objectKey == %@", addNewNoteKey)
+        fetchRequest.sortDescriptors = []
+
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.backgroundContext, sectionNameKeyPath: nil, cacheName: "temporaryNote")
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+
+            switch fetchedResultsController.fetchedObjects?.count ?? 0 {
+            case 0:
+                // Instantiate new data item since none was found
+                print("Instantiate new data item since none was found")
+                temporaryNote = TemporaryDataItem(context: dataController.backgroundContext)
+                temporaryNote.objectKey = addNewNoteKey
+                dataController.saveBackgroundContext()
+            case 1:
+                temporaryNote = fetchedResultsController.fetchedObjects![0]
+            default:
+                fatalError("The fetch for an AddNewNote data item delivered multiple objects")
+            }
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+    }
+
+    private func setUpUserInterface() {
+
+        setUpPeriodPicker()
+
+        titleField.setUpCustomTextField(with: temporaryNote?.title, saveRoutine: { (titleString) in
+            self.temporaryNote?.title = titleString
+            self.dataController.saveBackgroundContext()
+        })
+
+        textView.setUpCustomTextView(with: temporaryNote?.attributedText, saveRoutine: { (attributedString) in
+            self.temporaryNote?.attributedText = attributedString
+            self.dataController.saveBackgroundContext()
+        })
+
+        if let imgData = temporaryNote?.image {
+            imageView.image = UIImage(data: imgData)
+        }
+    }
+
     private func setUpPeriodPicker() {
 
         periodPickerDelegate = PeriodPickerDelegate()
@@ -101,16 +162,16 @@ class AddNewNoteViewController: UIViewController {
         periodPickerView.dataSource = periodPickerDelegate
 
         // Fetch picker rows from stored user specific values
-        let pickerCountRow: Int = UserDefaults.standard.integer(forKey: AppDelegate.DefaultKey.timeCountForPicker)
-        let pickerUnitRow: Int = UserDefaults.standard.integer(forKey: AppDelegate.DefaultKey.timeUnitForPicker)
+        let pickerCountRow: Int = UserDefaults.standard.integer(forKey: SaveKey.timeCountForPicker)
+        let pickerUnitRow: Int = UserDefaults.standard.integer(forKey: SaveKey.timeUnitForPicker)
 
         let pickerCountComponent = PeriodPickerDelegate.Constant.timeCounterComponent
         let pickerUnitComponent = PeriodPickerDelegate.Constant.timeUnitComponent
 
         periodPickerView.selectRow(pickerCountRow, inComponent: pickerCountComponent, animated: true)
         periodPickerView.selectRow(pickerUnitRow, inComponent: pickerUnitComponent, animated: true)
-
     }
+
 
     // MARK: Core functionality
 
@@ -149,10 +210,10 @@ class AddNewNoteViewController: UIViewController {
     private func calculateTargetDate() -> Date? {
 
         // Retrieve selected count value from picker view, default value if picker was not changed
-        let selectedPickerRawCount = periodPickerDelegate.selectedRawCount ?? UserDefaults.standard.integer(forKey: AppDelegate.DefaultKey.timeCountForPicker)
+        let selectedPickerRawCount = periodPickerDelegate.selectedRawCount ?? UserDefaults.standard.integer(forKey: SaveKey.timeCountForPicker)
 
         // Retrieve selected unit from picker view, default value if picker was not changed
-        let selectedPickerRawUnit = periodPickerDelegate.selectedRawUnit ?? UserDefaults.standard.integer(forKey: AppDelegate.DefaultKey.timeUnitForPicker)
+        let selectedPickerRawUnit = periodPickerDelegate.selectedRawUnit ?? UserDefaults.standard.integer(forKey: SaveKey.timeUnitForPicker)
 
         // Convert picker raw values to computable time values
         let pickerCount = selectedPickerRawCount + 1
@@ -169,10 +230,10 @@ class AddNewNoteViewController: UIViewController {
 
     private func saveUserDefaults() {
         if let selectedRawCount = periodPickerDelegate.selectedRawCount {
-            UserDefaults.standard.set(selectedRawCount, forKey: AppDelegate.DefaultKey.timeCountForPicker)
+            UserDefaults.standard.set(selectedRawCount, forKey: SaveKey.timeCountForPicker)
         }
         if let selectedRawUnit = periodPickerDelegate.selectedRawUnit {
-            UserDefaults.standard.set(selectedRawUnit, forKey: AppDelegate.DefaultKey.timeUnitForPicker)
+            UserDefaults.standard.set(selectedRawUnit, forKey: SaveKey.timeUnitForPicker)
         }
     }
 
@@ -214,9 +275,16 @@ class AddNewNoteViewController: UIViewController {
     }
 
     private func clearUserInterface() {
-        titleField.text = ""
-        textView.text = "Enter your text note here."
+        titleField.clearTextField()
+        textView.clearTextView()
         imageView.image = nil
+
+        // Clear also temporary note from managed object context
+        temporaryNote.title = nil
+        temporaryNote.attributedText = nil
+        temporaryNote.image = nil
+
+        dataController.saveBackgroundContext()
     }
 }
 
@@ -227,9 +295,13 @@ extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigatio
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 
-            imageView.image = image
+            imageView.image = uiImage
+
+            // Save image data in temporarily
+            temporaryNote?.image = uiImage.jpegData(compressionQuality: 0.98)
+            dataController.saveBackgroundContext()
 
         } else {
             // @todo error handling

@@ -22,7 +22,6 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
     // MARK: Properties
 
     var dataController: DataController!
-
     var fetchedResultsController: NSFetchedResultsController<InspirationItem>!
 
     private struct LayoutConstant {
@@ -57,7 +56,7 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        flowLayout.invalidateLayout()
+        flowLayout?.invalidateLayout()
     }
 
 
