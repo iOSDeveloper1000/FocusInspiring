@@ -30,7 +30,7 @@ class AddNewNoteViewController: UIViewController {
 
     // MARK: Properties
 
-    var newItem: InspirationItem!
+    var targetDate: Date!
 
     var dataController: DataController!
 
@@ -75,12 +75,7 @@ class AddNewNoteViewController: UIViewController {
 
     @IBAction func clearButtonPressed(_ sender: Any) {
         // Get confirmation by user to clear unsaved contents
-        popupAlert(title: "Are you sure to delete the unsaved note?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [
-                    { _ in },
-                    { _ in
-                        self.clearUserInterface()
-                    }
-        ])
+        popupAlert(title: "Are you sure to delete the unsaved note?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [nil, clearHandler(alertAction:)])
     }
 
     @IBAction func saveButtonPressed(_ sender: Any) {
@@ -90,18 +85,9 @@ class AddNewNoteViewController: UIViewController {
             fatalError("Cannot compute target date for representing note")
         }
 
-        popupAlert(title: "Description finished?", message: "If so, you get reminded of your new inspiration on \(target).", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [
-                    { _ in
-                        self.toggleUserInterface(enable: true)
-                    },
-                    { _ in
-                        self.saveNewItem(targetDate: target)
-                        self.saveUserDefaults()
+        targetDate = target
 
-                        self.clearUserInterface()
-                        self.toggleUserInterface(enable: true)
-                    }
-        ])
+        popupAlert(title: "Description finished?", message: "If so, you get reminded of your new inspiration on \(targetDate!).", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [abortSaveHandler(alertAction:), saveHandler(alertAction:)])
     }
 
 
@@ -139,14 +125,9 @@ class AddNewNoteViewController: UIViewController {
             present(imagePicker, animated: true, completion: nil)
 
         } else {
+            let sourceTypeDescription = (sourceType == .camera) ? "Camera" : "Photo library"
 
-            popupAlert(title: "\(sourceType.rawValue) not available", message: "It seems like the requested source type cannot be used. Assert to allow usage in the settings.", alertStyle: .alert, actionTitles: ["Cancel", "Go to Settings"], actionStyles: [.cancel, .default], actions: [
-                        { _ in },
-                        { _ in
-                            print("Go to settings pressed")
-                            // @todo implement Go to settings
-                        }
-            ])
+            popupAlert(title: "\(sourceTypeDescription) not available", message: "It seems like the requested source type cannot be used. Assert allowing usage in the settings.", alertStyle: .alert, actionTitles: ["Cancel", "Go to Settings"], actionStyles: [.cancel, .default], actions: [nil, sourceNotAvailableHandler(alertAction:)])
         }
     }
 
@@ -193,6 +174,30 @@ class AddNewNoteViewController: UIViewController {
         if let selectedRawUnit = periodPickerDelegate.selectedRawUnit {
             UserDefaults.standard.set(selectedRawUnit, forKey: AppDelegate.DefaultKey.timeUnitForPicker)
         }
+    }
+
+
+    // MARK: Handler
+
+    func clearHandler(alertAction: UIAlertAction) {
+        clearUserInterface()
+    }
+
+    func abortSaveHandler(alertAction: UIAlertAction) {
+        toggleUserInterface(enable: true)
+    }
+
+    func saveHandler(alertAction: UIAlertAction) {
+        saveNewItem(targetDate: targetDate)
+        saveUserDefaults()
+
+        clearUserInterface()
+        toggleUserInterface(enable: true)
+    }
+
+    func sourceNotAvailableHandler(alertAction: UIAlertAction) {
+        print("Go to settings pressed")
+        // @todo implement Go to settings
     }
 
 

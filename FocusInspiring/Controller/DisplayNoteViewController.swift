@@ -78,15 +78,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     // MARK: Actions
 
     @IBAction func checkmarkButtonPressed(_ sender: Any) {
-        popupAlert(title: "Congratulations!", message: "Confirming adds the note to the List of Glory.", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [
-                    { _ in },
-                    { _ in
-                        self.displayedItem.active = false
-                        self.dataController.saveViewContext()
-
-                        self.displayNextItem()
-                    }
-        ])
+        popupAlert(title: "Congratulations!", message: "Confirming adds the note to the List of Glory.", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [nil, checkmarkHandler(alertAction:)])
     }
 
     @IBAction func repeatButtonPressed(_ sender: Any) {
@@ -100,17 +92,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
-
-        popupAlert(title: "Delete this note permanently?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [
-                    nil,
-                    { _ in
-                        // Delete currently displayed note in managed object context
-                        self.dataController.viewContext.delete(self.displayedItem)
-                        self.dataController.saveViewContext()
-
-                        self.displayNextItem()
-                    }
-        ])
+        popupAlert(title: "Delete note permanently?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [nil, deleteHandler(alertAction:)])
     }
 
 
@@ -179,7 +161,20 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
     // MARK: Handler
 
-    // @todo
+    func checkmarkHandler(alertAction: UIAlertAction) {
+        displayedItem.active = false
+        dataController.saveViewContext()
+
+        displayNextItem()
+    }
+
+    func deleteHandler(alertAction: UIAlertAction) {
+        // Deleting currently displayed note
+        dataController.viewContext.delete(displayedItem)
+        dataController.saveViewContext()
+
+        displayNextItem()
+    }
 }
 
 
