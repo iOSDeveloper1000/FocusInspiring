@@ -181,7 +181,11 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 extension DisplayNoteViewController {
 
     func setBackgroundMessage(message: String) {
-        backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+
+        if backgroundLabel == nil {
+            backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        }
+
         backgroundLabel.text = message
         backgroundLabel.textAlignment = .center
         backgroundLabel.textColor = .gray
@@ -191,10 +195,7 @@ extension DisplayNoteViewController {
     }
     
     func removeBackgroundMessage() {
-        if backgroundLabel != nil {
-            backgroundLabel.removeFromSuperview()
-            backgroundLabel = nil
-        }
+        backgroundLabel?.removeFromSuperview()
     }
 
     func hideUIElements(_ hide: Bool) {
