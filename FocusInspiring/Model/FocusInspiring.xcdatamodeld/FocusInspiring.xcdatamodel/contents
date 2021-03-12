@@ -7,10 +7,10 @@
     </entity>
     <entity name="InspirationItem" representedClassName="InspirationItem" syncable="YES" codeGenerationType="class">
         <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="attributedText" optional="YES" attributeType="Transformable" customClassName="NSAttributedString"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="presentingDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="AttachedDataItem" inverseName="holder" inverseEntity="AttachedDataItem"/>
     </entity>
@@ -22,7 +22,7 @@
     </entity>
     <elements>
         <element name="AttachedDataItem" positionX="157.7109375" positionY="54.382080078125" width="128" height="74"/>
-        <element name="InspirationItem" positionX="-96.04376220703125" positionY="-20.72225952148438" width="128" height="148"/>
+        <element name="InspirationItem" positionX="-96.04376220703125" positionY="-20.72225952148438" width="128" height="134"/>
         <element name="TemporaryDataItem" positionX="145.6859130859375" positionY="-84.90017700195312" width="128" height="103"/>
     </elements>
 </model>

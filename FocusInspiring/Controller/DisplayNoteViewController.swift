@@ -144,7 +144,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
             } else {
                 imageView.image = nil
             }
-            textView.text = displayedItem.text
+            textView.attributedText = displayedItem.attributedText
 
             removeBackgroundMessage()
 

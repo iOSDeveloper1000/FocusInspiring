@@ -202,7 +202,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
         // Save text note if one was created
         if textView.text != CustomTextView.TextConstant.defaultPlaceholder {
-            newItem.text = textView.text
+            newItem.attributedText = textView.attributedText
         }
 
         // Save image if one was selected
