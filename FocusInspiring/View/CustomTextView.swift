@@ -40,8 +40,9 @@ class CustomTextView: UITextView, UITextViewDelegate {
         }
     }
 
+    // Set textview to placeholder text with default formatting
     public func clearTextView() {
-        text = TextConstant.defaultPlaceholder
+        attributedText = makeAttributedPlaceholder()
         textColor = UIColor.lightGray
     }
 
@@ -61,9 +62,9 @@ class CustomTextView: UITextView, UITextViewDelegate {
 
         saveContentChanges?(textView.attributedText)
 
-        // Reset placeholder text
+        // Reset to placeholder text
         if textView.text.isEmpty {
-            textView.text = TextConstant.defaultPlaceholder
+            textView.attributedText = makeAttributedPlaceholder()
             textView.textColor = UIColor.lightGray
         }
     }
@@ -134,5 +135,14 @@ class CustomTextView: UITextView, UITextViewDelegate {
         selectedTextRange = selectedTextRangeCopy
 
         saveContentChanges?(newAttributedString)
+    }
+
+    private func makeAttributedPlaceholder() -> NSAttributedString {
+        let attributedPlaceholder = NSMutableAttributedString(string: TextConstant.defaultPlaceholder)
+        let placeholderRange = NSMakeRange(0, attributedPlaceholder.length)
+
+        attributedPlaceholder.setAttributes([.font: UIFont.systemFont(ofSize: TextConstant.defaultTextFontSize)], range: placeholderRange)
+
+        return attributedPlaceholder
     }
 }

@@ -66,7 +66,7 @@ class DataController {
             do {
                 try viewContext.save()
             
-                print("Succesfully saved")
+                print("Successfully saved")
             } catch {
                 print("Could not save viewContext: \(error.localizedDescription)")
                 

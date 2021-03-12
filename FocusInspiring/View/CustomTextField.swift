@@ -41,7 +41,7 @@ class CustomTextField: UITextField, UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+
         saveContentChanges?(textField.text ?? "")
     }
 

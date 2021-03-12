@@ -89,7 +89,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     @IBAction func clearButtonPressed(_ sender: Any) {
         // Get confirmation by user to clear unsaved contents
-        popupAlert(title: "Are you sure to delete the unsaved note?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [nil, clearHandler(alertAction:)])
+        popupAlert(title: "Delete unsaved note?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [nil, clearHandler(alertAction:)])
     }
 
     @IBAction func saveButtonPressed(_ sender: Any) {
@@ -121,7 +121,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
             switch fetchedResultsController.fetchedObjects?.count ?? 0 {
             case 0:
                 // Instantiate new data item since none was found
-                print("Instantiate new data item since none was found")
                 temporaryNote = TemporaryDataItem(context: dataController.backgroundContext)
                 temporaryNote.objectKey = addNewNoteKey
                 dataController.saveBackgroundContext()
@@ -193,12 +192,20 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
     private func saveNewItem(targetDate: Date) {
+
         let newItem = InspirationItem(context: dataController.viewContext)
+
         newItem.active = true
         newItem.creationDate = Date()
         newItem.presentingDate = targetDate
         newItem.title = titleField.text
-        newItem.text = textView.text
+
+        // Save text note if one was created
+        if textView.text != CustomTextView.TextConstant.defaultPlaceholder {
+            newItem.text = textView.text
+        }
+
+        // Save image if one was selected
         if let image = imageView.image {
             newItem.image = image.jpegData(compressionQuality: 0.98)
         }
@@ -299,7 +306,7 @@ extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigatio
 
             imageView.image = uiImage
 
-            // Save image data in temporarily
+            // Save image data in temporary note
             temporaryNote?.image = uiImage.jpegData(compressionQuality: 0.98)
             dataController.saveBackgroundContext()
 
