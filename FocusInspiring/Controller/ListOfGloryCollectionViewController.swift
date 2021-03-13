@@ -1,5 +1,5 @@
 //
-//  CollectionViewController.swift
+//  ListOfGloryCollectionViewController.swift
 //  FocusInspiring
 //
 //  Created by Arno Seidel on 23.02.21.
@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 
 
-// MARK: CollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate
+// MARK: ListOfGloryCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate
 
-class CollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
+class ListOfGloryCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: Outlets
 
@@ -23,6 +23,8 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
 
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<InspirationItem>!
+
+    private let reuseIdentifier = "InspirationalNoteIdentifier"
 
     private struct LayoutConstant {
         static let spacing: CGFloat = 15
@@ -81,7 +83,7 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
     }
 
 
-    // MARK: Collection View Delegation
+    // MARK: CollectionView DataSource & Delegation
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
 
@@ -95,7 +97,7 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InspirationalNoteIdentifier", for: indexPath) as! InspirationalNoteCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InspirationalNoteCell
 
         let note = fetchedResultsController.object(at: indexPath)
 
@@ -120,7 +122,7 @@ class CollectionViewController: UICollectionViewController, NSFetchedResultsCont
 
 // MARK: Collection View Flow Layout Delegation
 
-extension CollectionViewController: UICollectionViewDelegateFlowLayout {
+extension ListOfGloryCollectionViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 

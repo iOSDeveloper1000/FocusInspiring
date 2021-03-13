@@ -46,7 +46,7 @@ class RootViewController: UITabBarController {
                 controller.dataController = dataController
 
             case let navigationVC as UINavigationController:
-                if let collectionVC = navigationVC.topViewController as? CollectionViewController {
+                if let collectionVC = navigationVC.topViewController as? ListOfGloryCollectionViewController {
                     collectionVC.dataController = dataController
                 }
 

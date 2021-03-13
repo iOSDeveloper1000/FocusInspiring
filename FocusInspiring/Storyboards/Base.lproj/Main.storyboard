@@ -49,12 +49,19 @@
                                             <action selector="imageButtonPressed:" destination="cQ3-22-2wb" id="0cj-sV-C07"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Camera" image="camera" catalog="system" id="UkY-Tf-YTP">
+                                    <barButtonItem title="Capture photo" image="camera" catalog="system" id="UkY-Tf-YTP">
                                         <connections>
                                             <action selector="cameraButtonPressed:" destination="cQ3-22-2wb" id="Tz6-kZ-dOy"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Add File" image="rectangle.and.paperclip" catalog="system" id="ORh-5p-WNK">
+                                    <barButtonItem title="Search Flickr Photo" image="magnifyingglass" catalog="system" id="BvF-Gr-ETZ">
+                                        <connections>
+                                            <segue destination="BbD-1a-Xaw" kind="popoverPresentation" identifier="SegueToFlickrSearch" popoverAnchorBarButtonItem="BvF-Gr-ETZ" id="oMZ-Cc-pzj">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Attach File" image="rectangle.and.paperclip" catalog="system" id="ORh-5p-WNK">
                                         <connections>
                                             <action selector="fileButtonPressed:" destination="cQ3-22-2wb" id="hgi-sj-533"/>
                                         </connections>
@@ -127,7 +134,82 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T9r-FR-Tzm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="744.92753623188412" y="34.821428571428569"/>
+            <point key="canvasLocation" x="926" y="35"/>
+        </scene>
+        <!--Flickr Search Collection View Controller-->
+        <scene sceneID="tbB-20-CbI">
+            <objects>
+                <collectionViewController id="qWg-Wr-F1a" customClass="FlickrSearchCollectionViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6j0-gT-dfL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RDS-hT-r36">
+                            <size key="itemSize" width="200" height="200"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlickrSearchIdentifier" id="8wR-C6-wsE" userLabel="FlickrSearchCell" customClass="FlickrSearchCell" customModule="FocusInspiring" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CDA-j4-bPB">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8BL-zB-uki">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="HIV-05-rD4">
+                                            <rect key="frame" x="90" y="90" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8BL-zB-uki" firstAttribute="top" secondItem="CDA-j4-bPB" secondAttribute="top" id="2AG-Pu-w47"/>
+                                        <constraint firstItem="HIV-05-rD4" firstAttribute="centerX" secondItem="CDA-j4-bPB" secondAttribute="centerX" id="5po-DR-zdK"/>
+                                        <constraint firstAttribute="bottom" secondItem="8BL-zB-uki" secondAttribute="bottom" id="Lk0-dr-nFQ"/>
+                                        <constraint firstItem="HIV-05-rD4" firstAttribute="centerY" secondItem="CDA-j4-bPB" secondAttribute="centerY" id="Yv7-Ce-XBS"/>
+                                        <constraint firstItem="8BL-zB-uki" firstAttribute="leading" secondItem="CDA-j4-bPB" secondAttribute="leading" id="t8u-f4-YVq"/>
+                                        <constraint firstAttribute="trailing" secondItem="8BL-zB-uki" secondAttribute="trailing" id="yNk-dp-Zgu"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="activityIndicator" destination="HIV-05-rD4" id="dEl-nR-WtV"/>
+                                    <outlet property="imageView" destination="8BL-zB-uki" id="sPY-hH-MQA"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="qWg-Wr-F1a" id="Txk-S8-oxg"/>
+                            <outlet property="delegate" destination="qWg-Wr-F1a" id="BXe-zf-Lmx"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="y8E-ol-gaA">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="NPW-G9-nU8">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="qWg-Wr-F1a" id="4QA-Jb-s9q"/>
+                            </connections>
+                        </barButtonItem>
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for Flickr Images         " textAlignment="natural" minimumFontSize="17" id="CEf-YS-YVK" userLabel="Search for Flickr Images">
+                            <rect key="frame" x="87" y="11" width="240.5" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="qWg-Wr-F1a" id="191-XV-Juz"/>
+                            </connections>
+                        </textField>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="NPW-G9-nU8" id="aEU-Nr-OjP"/>
+                        <outlet property="flowLayout" destination="RDS-hT-r36" id="pVn-cH-aAK"/>
+                        <outlet property="searchField" destination="CEf-YS-YVK" id="8bL-dQ-cd3"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RqA-0B-CqS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2389.8550724637685" y="34.821428571428569"/>
         </scene>
         <!--Home-->
         <scene sceneID="otZ-Vp-vcm">
@@ -159,12 +241,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQu-zZ-9Q5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="-328"/>
+            <point key="canvasLocation" x="2072" y="-683"/>
         </scene>
         <!--Your personal List of Glory-->
         <scene sceneID="bEC-Ld-n1h">
             <objects>
-                <collectionViewController id="50N-dE-yFR" customClass="CollectionViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="50N-dE-yFR" customClass="ListOfGloryCollectionViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Tch-1o-D7T">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -176,7 +258,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="InspirationalNoteIdentifier" id="fXT-Pp-s4m" customClass="InspirationalNoteCell" customModule="FocusInspiring" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="InspirationalNoteIdentifier" id="fXT-Pp-s4m" userLabel="InspirationalNoteCell" customClass="InspirationalNoteCell" customModule="FocusInspiring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bU5-7U-cZk">
@@ -224,7 +306,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nit-wP-YMX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1530" y="696"/>
+            <point key="canvasLocation" x="1452" y="696"/>
         </scene>
         <!--Display-->
         <scene sceneID="5fx-s8-XQx">
@@ -259,7 +341,7 @@
                                                     <action selector="deleteButtonPressed:" destination="A9m-Vf-l2n" id="G83-Zi-578"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="Edit Note" image="pencil" catalog="system" id="xWb-eP-Don">
+                                            <barButtonItem title="Edit Note" image="square.and.pencil" catalog="system" id="xWb-eP-Don">
                                                 <connections>
                                                     <action selector="editButtonPressed:" destination="A9m-Vf-l2n" id="euX-qY-dCB"/>
                                                 </connections>
@@ -478,7 +560,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y8L-4e-GPd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2468.1159420289855" y="393.75"/>
+            <point key="canvasLocation" x="3376.811594202899" y="393.75"/>
         </scene>
         <!--Glory-->
         <scene sceneID="AaJ-wg-sr0">
@@ -499,14 +581,33 @@
             </objects>
             <point key="canvasLocation" x="744.92753623188412" y="695.75892857142856"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VEK-oP-JxD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BbD-1a-Xaw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TH0-5e-aOr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qWg-Wr-F1a" kind="relationship" relationship="rootViewController" id="FBE-an-wUS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mS5-9N-bGi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1677" y="35"/>
+        </scene>
     </scenes>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
-        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="96"/>
         <image name="rectangle.and.paperclip" catalog="system" width="128" height="99"/>
         <image name="repeat" catalog="system" width="128" height="99"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

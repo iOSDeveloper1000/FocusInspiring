@@ -101,7 +101,26 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
         targetDate = target
 
-        popupAlert(title: "Description finished?", message: "If so, you get reminded of your new inspiration on \(targetDate!).", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [abortSaveHandler(alertAction:), saveHandler(alertAction:)])
+        popupAlert(title: "Note finished?", message: "If so, you get reminded of your new inspiration on \(targetDate!).", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [abortSaveHandler(alertAction:), saveHandler(alertAction:)])
+    }
+
+
+    // MARK: Segue
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToFlickrSearch" {
+            let navigationController = segue.destination as! UINavigationController
+            let flickrController = navigationController.topViewController as! FlickrSearchCollectionViewController
+
+            flickrController.returnImage = { imageData in
+
+                self.imageView.image = UIImage(data: imageData)
+
+                // Save image data in temporary note
+                self.temporaryNote?.image = imageData
+                self.dataController.saveBackgroundContext()
+            }
+        }
     }
 
 
