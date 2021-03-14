@@ -16,19 +16,24 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     typealias SaveKey = AppDelegate.DefaultKey
 
-    // Key used for assigning TemporaryDataItem in CoreData to this view controller
+    /// Key used for assigning TemporaryDataItem in CoreData to this view controller
     private let addNewNoteKey: String = "AddNewNoteKey"
+
+    private func presentTimeMessage(_ period: String) -> String {
+        return "Will be presented in: " + period
+    }
 
 
     // MARK: Outlets
 
     @IBOutlet weak var titleField: CustomTextField!
-    @IBOutlet weak var periodPickerView: UIPickerView!
     @IBOutlet weak var textView: CustomTextView!
     @IBOutlet weak var imageView: UIImageView!
-
+    @IBOutlet weak var presentInTextField: UITextField!
+    
     @IBOutlet weak var imageButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var searchForImageButton: UIBarButtonItem!
     @IBOutlet weak var fileButton: UIBarButtonItem!
 
     @IBOutlet weak var clearButton: UIBarButtonItem!
@@ -37,14 +42,22 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     // MARK: Properties
 
-    var targetDate: Date!
+    //var targetDate: Date!
 
     var temporaryNote: TemporaryDataItem!
 
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<TemporaryDataItem>!
 
-    var periodPickerDelegate: PeriodPickerDelegate!
+    /// Date formatter for the displayed dates
+    let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        return df
+    }()
+
+    /// Pickerview presented as keyboard for presenting period textfield
+    var periodPickerBoard: PeriodPicker!
 
 
     // MARK: Life cycle
@@ -52,7 +65,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpFetchedResultsController() // Fetch temporary note object
+        /// Fetch object with temporary note
+        setUpFetchedResultsController()
 
         setUpUserInterface()
     }
@@ -88,20 +102,33 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
     @IBAction func clearButtonPressed(_ sender: Any) {
-        // Get confirmation by user to clear unsaved contents
-        popupAlert(title: "Delete unsaved note?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [nil, clearHandler(alertAction:)])
+        /// Disallow user to edit during clear action
+        toggleUserInterface(enable: false)
+
+        /// Get confirmation by user to clear unsaved contents
+        popupAlert(title: "Your unsaved note will be deleted permanently.", message: "", alertStyle: .actionSheet, actionTitles: ["Clear", "Cancel"], actionStyles: [.destructive, .cancel], actions: [clearHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
     }
 
     @IBAction func saveButtonPressed(_ sender: Any) {
+        /// Disallow user to edit during save action
         toggleUserInterface(enable: false)
 
-        guard let target = calculateTargetDate() else {
-            fatalError("Cannot compute target date for representing note")
+        if let targetDate = DateCalculator.getTargetDate(from: periodPickerBoard) {
+            popupAlert(title: "Your new inspirational note will be saved and presented on \(dateFormatter.string(from: targetDate))", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
+        } else {
+            popupAlert(title: "Internal error", message: "Cannot compute future date. Try to set a different time period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
         }
+    }
 
-        targetDate = target
+    @IBAction func cancelPickerPressed(_ sender: UIBarButtonItem?) {
+        presentInTextField.resignFirstResponder()
+    }
 
-        popupAlert(title: "Note finished?", message: "If so, you get reminded of your new inspiration on \(targetDate!).", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [abortSaveHandler(alertAction:), saveHandler(alertAction:)])
+    @IBAction func donePickerPressed(_ sender: UIBarButtonItem?) {
+        presentInTextField.resignFirstResponder()
+
+        let periodString = DateCalculator.getPeriodString(from: periodPickerBoard)
+        presentInTextField.text = presentTimeMessage(periodString)
     }
 
 
@@ -155,8 +182,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     private func setUpUserInterface() {
 
-        setUpPeriodPicker()
-
         titleField.setUpCustomTextField(with: temporaryNote?.title, saveRoutine: { (titleString) in
             self.temporaryNote?.title = titleString
             self.dataController.saveBackgroundContext()
@@ -170,24 +195,36 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         if let imgData = temporaryNote?.image {
             imageView.image = UIImage(data: imgData)
         }
+
+        setUpTextFieldWithPeriodPicker()
+
+        /// Enter textfield text with period specified by last user operation
+        periodPickerBoard.setRowsFromUserDefaults()
+        let periodString = DateCalculator.getPeriodString(from: periodPickerBoard)
+        presentInTextField.text = presentTimeMessage(periodString)
     }
 
-    private func setUpPeriodPicker() {
+    private func setUpTextFieldWithPeriodPicker() {
+        periodPickerBoard = PeriodPicker()
 
-        periodPickerDelegate = PeriodPickerDelegate()
+        periodPickerBoard.delegate = periodPickerBoard
+        periodPickerBoard.dataSource = periodPickerBoard
 
-        periodPickerView.delegate = periodPickerDelegate
-        periodPickerView.dataSource = periodPickerDelegate
+        periodPickerBoard.backgroundColor = .lightGray
+        periodPickerBoard.reloadAllComponents()
 
-        // Fetch picker rows from stored user specific values
-        let pickerCountRow: Int = UserDefaults.standard.integer(forKey: SaveKey.timeCountForPicker)
-        let pickerUnitRow: Int = UserDefaults.standard.integer(forKey: SaveKey.timeUnitForPicker)
+        /// Link textfield to the periodpicker
+        presentInTextField.inputView = periodPickerBoard
 
-        let pickerCountComponent = PeriodPickerDelegate.Constant.timeCounterComponent
-        let pickerUnitComponent = PeriodPickerDelegate.Constant.timeUnitComponent
+        /// Make toolbar for leaving the pickerview
+        let pickerAccesssory = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
 
-        periodPickerView.selectRow(pickerCountRow, inComponent: pickerCountComponent, animated: true)
-        periodPickerView.selectRow(pickerUnitRow, inComponent: pickerUnitComponent, animated: true)
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelPickerPressed(_:)))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePickerPressed(_:)))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        pickerAccesssory.items = [cancelButton, flexSpace, doneButton]
+
+        presentInTextField.inputAccessoryView = pickerAccesssory
     }
 
 
@@ -210,57 +247,31 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
     }
 
-    private func saveNewItem(targetDate: Date) {
+    private func saveNewItem() {
 
         let newItem = InspirationItem(context: dataController.viewContext)
 
         newItem.active = true
         newItem.creationDate = Date()
-        newItem.presentingDate = targetDate
+        newItem.presentingDate = DateCalculator.getTargetDate(from: periodPickerBoard)
         newItem.title = titleField.text
 
-        // Save text note if one was created
+        /// Save text note if one was created
         if textView.text != CustomTextView.TextConstant.defaultPlaceholder {
             newItem.attributedText = textView.attributedText
         }
 
-        // Save image if one was selected
+        /// Save image if one was selected
         if let image = imageView.image {
             newItem.image = image.jpegData(compressionQuality: 0.98)
         }
+
         // @todo store file attachments
 
         dataController.saveViewContext()
-    }
 
-    private func calculateTargetDate() -> Date? {
-
-        // Retrieve selected count value from picker view, default value if picker was not changed
-        let selectedPickerRawCount = periodPickerDelegate.selectedRawCount ?? UserDefaults.standard.integer(forKey: SaveKey.timeCountForPicker)
-
-        // Retrieve selected unit from picker view, default value if picker was not changed
-        let selectedPickerRawUnit = periodPickerDelegate.selectedRawUnit ?? UserDefaults.standard.integer(forKey: SaveKey.timeUnitForPicker)
-
-        // Convert picker raw values to computable time values
-        let pickerCount = selectedPickerRawCount + 1
-        guard let pickerUnit = DateCalculator.DateUnit(rawValue: selectedPickerRawUnit) else {
-            return nil
-        }
-
-        // Use DateCalculator to compute target date for representing note
-        let dateComponents = DateCalculator.convertDateUnits2DateComponents(value: pickerCount, unit: pickerUnit)
-        let targetDate = DateCalculator.addToCurrentDate(period: dateComponents)
-
-        return targetDate
-    }
-
-    private func saveUserDefaults() {
-        if let selectedRawCount = periodPickerDelegate.selectedRawCount {
-            UserDefaults.standard.set(selectedRawCount, forKey: SaveKey.timeCountForPicker)
-        }
-        if let selectedRawUnit = periodPickerDelegate.selectedRawUnit {
-            UserDefaults.standard.set(selectedRawUnit, forKey: SaveKey.timeUnitForPicker)
-        }
+        /// Save period selection each time user confirms by saving a note
+        periodPickerBoard.saveSelectedRowsToUserDefaults()
     }
 
 
@@ -268,16 +279,20 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     func clearHandler(alertAction: UIAlertAction) {
         clearUserInterface()
+
+        /// Reenable user interface for further editing
+        toggleUserInterface(enable: true)
     }
 
-    func abortSaveHandler(alertAction: UIAlertAction) {
+    func cancelActionSheetHandler(alertAction: UIAlertAction) {
+        /// Reenable user interface for further editing
         toggleUserInterface(enable: true)
     }
 
     func saveHandler(alertAction: UIAlertAction) {
-        saveNewItem(targetDate: targetDate)
-        saveUserDefaults()
+        saveNewItem()
 
+        /// Clear and reenable user interface for a further note
         clearUserInterface()
         toggleUserInterface(enable: true)
     }
@@ -293,10 +308,14 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     private func toggleUserInterface(enable: Bool) {
         titleField.isEnabled = enable
         textView.isUserInteractionEnabled = enable
+        presentInTextField.isEnabled = enable
+
         imageButton.isEnabled = enable
-        periodPickerView.isUserInteractionEnabled = enable
         cameraButton.isEnabled = enable
+        searchForImageButton.isEnabled = enable
         fileButton.isEnabled = false // @todo file attaching to be implemented
+
+        clearButton.isEnabled = enable
         saveButton.isEnabled = enable
     }
 
@@ -305,7 +324,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         textView.clearTextView()
         imageView.image = nil
 
-        // Clear also temporary note from managed object context
+        /// Clear also temporary note from managed object context
         temporaryNote.title = nil
         temporaryNote.attributedText = nil
         temporaryNote.image = nil

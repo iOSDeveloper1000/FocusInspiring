@@ -24,42 +24,65 @@ public class DateCalculator {
         case second     // @todo - only for easier testing
         case minute     // @todo - only for easier testing
 
-        var stringValue: String {
+        var toString: String {
             switch self {
-            case .day: return "day(s)"
-            case .week: return "week(s)"
-            case .month: return "month(s)"
-            case .year: return "year(s)"
-            case .second: return "second(s)"
-            case .minute: return "minute(s)"
+            case .day: return "day"
+            case .week: return "week"
+            case .month: return "month"
+            case .year: return "year"
+            case .second: return "second"
+            case .minute: return "minute"
             }
         }
     }
 
 
-    // MARK: Date calculation
+    // MARK: Public Interface
 
-    class func convertDateUnits2DateComponents(value: Int, unit: DateUnit) -> DateComponents {
+    class func getPeriodString(from picker: PeriodPicker) -> String {
 
+        let selectedRawCount = picker.getCountRow()
+        let selectedRawUnit = picker.getUnitRow()
+
+        let countString = String(selectedRawCount + 1)
+
+        if let unitString = DateUnit(rawValue: selectedRawUnit)?.toString {
+            return countString + " " + unitString + ((selectedRawCount > 0) ? "s" : "")
+        } else {
+            return "???"
+        }
+    }
+
+    class func getTargetDate(from picker: PeriodPicker) -> Date? {
+
+        let selectedRawCount = picker.getCountRow()
+        let selectedRawUnit = picker.getUnitRow()
+
+        // Convert raw values from period picker to computable time values
+        let count: Int = selectedRawCount + 1
+        guard let unit = DateUnit(rawValue: selectedRawUnit) else {
+            return nil
+        }
+
+        // Calculate and return target date
+        return convertPeriodToFutureDate(count: count, unit: unit)
+    }
+
+
+    // MARK: Helper
+
+    private class func convertPeriodToFutureDate(count: Int, unit: DateUnit) -> Date? {
         var components = DateComponents()
 
         switch unit {
-        case .second: components.second = value
-        case .minute: components.minute = value
-        case .day: components.day = value
-        case .week: components.weekOfYear = value
-        case .month: components.month = value
-        case .year: components.year = value
+        case .second: components.second = count
+        case .minute: components.minute = count
+        case .day: components.day = count
+        case .week: components.weekOfYear = count
+        case .month: components.month = count
+        case .year: components.year = count
         }
 
-        return components
-    }
-
-    class func addToCurrentDate(period: DateComponents) -> Date? {
-
-        let resultingDate = Calendar.autoupdatingCurrent.date(byAdding: period, to: Date())
-        print("Resulting date: \(resultingDate!)")
-
-        return resultingDate
+        return Calendar.autoupdatingCurrent.date(byAdding: components, to: Date())
     }
 }

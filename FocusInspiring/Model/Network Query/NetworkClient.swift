@@ -14,7 +14,7 @@ class NetworkClient {
     struct Constant {
         static let endpoint = "https://api.flickr.com/services/rest"
         static let staticUrl = "https://live.staticflickr.com"
-        static let apiKey = "ab82a64b5870e18b8ef8d10139d2ff58"
+        static let apiKey = ""
         static let apiMethod = "flickr.photos.search"
         static let photosPerPage = 30
         static let pageNumber = 7

@@ -56,7 +56,7 @@
                                     </barButtonItem>
                                     <barButtonItem title="Search Flickr Photo" image="magnifyingglass" catalog="system" id="BvF-Gr-ETZ">
                                         <connections>
-                                            <segue destination="BbD-1a-Xaw" kind="popoverPresentation" identifier="SegueToFlickrSearch" popoverAnchorBarButtonItem="BvF-Gr-ETZ" id="oMZ-Cc-pzj">
+                                            <segue destination="BbD-1a-Xaw" kind="popoverPresentation" identifier="SegueToFlickrSearch" popoverAnchorBarButtonItem="BvF-Gr-ETZ" id="gIO-Cj-8Gn">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
@@ -69,11 +69,8 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="SMz-rK-asP"/>
                                 </items>
                             </toolbar>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="18I-Qq-aOv">
-                                <rect key="frame" x="20" y="458" width="374" height="311"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8G1-R4-jOS">
-                                <rect key="frame" x="20" y="98" width="374" height="352"/>
+                                <rect key="frame" x="20" y="98" width="374" height="661"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jPO-Oe-yU7" customClass="CustomTextField" customModule="FocusInspiring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
@@ -83,37 +80,43 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="We3-QL-Miz">
-                                        <rect key="frame" x="0.0" y="40" width="374" height="80"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="74Z-hi-Fpd">
+                                        <rect key="frame" x="0.0" y="40" width="374" height="591"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jut-pC-Sec" customClass="CustomTextView" customModule="FocusInspiring" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="295.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="18I-Qq-aOv">
+                                                <rect key="frame" x="0.0" y="295.5" width="374" height="295.5"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Present in:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3jy-1q-Wva">
+                                        <rect key="frame" x="0.0" y="631" width="374" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="uUu-cA-wnK"/>
+                                            <constraint firstAttribute="height" constant="30" id="Xc0-dm-cJL"/>
                                         </constraints>
-                                    </pickerView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jut-pC-Sec" customClass="CustomTextView" customModule="FocusInspiring" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="374" height="232"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <color key="textColor" systemColor="labelColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lAP-IG-2m3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="18I-Qq-aOv" firstAttribute="leading" secondItem="lAP-IG-2m3" secondAttribute="leading" constant="20" id="6mX-pC-eTA"/>
-                            <constraint firstItem="18I-Qq-aOv" firstAttribute="top" secondItem="8G1-R4-jOS" secondAttribute="bottom" constant="8" symbolic="YES" id="GjJ-Sm-P6Z"/>
                             <constraint firstItem="8G1-R4-jOS" firstAttribute="leading" secondItem="lAP-IG-2m3" secondAttribute="leading" constant="20" id="HVV-Vg-E6z"/>
                             <constraint firstItem="VPE-BZ-oOj" firstAttribute="trailing" secondItem="S36-Wr-T48" secondAttribute="trailing" id="KCL-Pb-6GL"/>
-                            <constraint firstItem="VPE-BZ-oOj" firstAttribute="top" secondItem="18I-Qq-aOv" secondAttribute="bottom" id="OXX-2S-cwg"/>
+                            <constraint firstItem="VPE-BZ-oOj" firstAttribute="top" secondItem="8G1-R4-jOS" secondAttribute="bottom" constant="10" id="Lv0-fm-afe"/>
                             <constraint firstItem="S36-Wr-T48" firstAttribute="leading" secondItem="lAP-IG-2m3" secondAttribute="leading" id="POQ-W3-hr6"/>
                             <constraint firstItem="lAP-IG-2m3" firstAttribute="trailing" secondItem="8G1-R4-jOS" secondAttribute="trailing" constant="20" id="Rjs-cT-kWx"/>
-                            <constraint firstItem="lAP-IG-2m3" firstAttribute="trailing" secondItem="18I-Qq-aOv" secondAttribute="trailing" constant="20" id="UQc-zS-gPI"/>
                             <constraint firstItem="S36-Wr-T48" firstAttribute="trailing" secondItem="lAP-IG-2m3" secondAttribute="trailing" id="UeX-85-BHJ"/>
                             <constraint firstItem="S36-Wr-T48" firstAttribute="top" secondItem="lAP-IG-2m3" secondAttribute="top" id="XnS-t3-A2l"/>
-                            <constraint firstItem="18I-Qq-aOv" firstAttribute="top" secondItem="Qow-bc-sK2" secondAttribute="centerY" constant="10" id="aOq-X9-mEO"/>
                             <constraint firstItem="VPE-BZ-oOj" firstAttribute="leading" secondItem="S36-Wr-T48" secondAttribute="leading" id="fOU-7k-fmB"/>
                             <constraint firstItem="8G1-R4-jOS" firstAttribute="top" secondItem="S36-Wr-T48" secondAttribute="bottom" constant="10" id="reX-yN-aIR"/>
                             <constraint firstItem="VPE-BZ-oOj" firstAttribute="bottom" secondItem="lAP-IG-2m3" secondAttribute="bottom" id="vEq-yn-43n"/>
@@ -126,8 +129,9 @@
                         <outlet property="fileButton" destination="ORh-5p-WNK" id="0C9-8B-pBa"/>
                         <outlet property="imageButton" destination="HK1-yf-PvI" id="Gk2-9h-ujH"/>
                         <outlet property="imageView" destination="18I-Qq-aOv" id="lFu-TR-Vka"/>
-                        <outlet property="periodPickerView" destination="We3-QL-Miz" id="CV5-x7-f8N"/>
+                        <outlet property="presentInTextField" destination="3jy-1q-Wva" id="Msh-lf-VC8"/>
                         <outlet property="saveButton" destination="ERD-SO-fEy" id="gf1-kp-2va"/>
+                        <outlet property="searchForImageButton" destination="BvF-Gr-ETZ" id="gZT-Uc-jKO"/>
                         <outlet property="textView" destination="jut-pC-Sec" id="hy9-WE-MqL"/>
                         <outlet property="titleField" destination="jPO-Oe-yU7" id="rQY-R9-i36"/>
                     </connections>
@@ -363,33 +367,33 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xcI-Ad-OvF" userLabel="MetaData Stack View">
-                                        <rect key="frame" x="0.0" y="48" width="374" height="40"/>
+                                        <rect key="frame" x="0.0" y="48" width="374" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBe-d0-mpp" userLabel="Creation Date">
-                                                <rect key="frame" x="0.0" y="0.0" width="182" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="182" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x24-zf-p5R" userLabel="Presenting Date">
-                                                <rect key="frame" x="192" y="0.0" width="182" height="40"/>
+                                                <rect key="frame" x="192" y="0.0" width="182" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="aoE-vY-xw6"/>
+                                            <constraint firstAttribute="height" constant="30" id="aoE-vY-xw6"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="it9-PW-Txv" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="96" width="374" height="609"/>
+                                        <rect key="frame" x="0.0" y="86" width="374" height="581"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8i1-nZ-goM">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="304.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="290.5"/>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eT1-Wt-hey">
-                                                <rect key="frame" x="0.0" y="304.5" width="374" height="304.5"/>
+                                                <rect key="frame" x="0.0" y="290.5" width="374" height="290.5"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <color key="textColor" systemColor="labelColor"/>
@@ -398,6 +402,14 @@
                                             </textView>
                                         </subviews>
                                     </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Present again in:   " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-8Q-2gp">
+                                        <rect key="frame" x="0.0" y="675" width="374" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="qMw-Cu-YCs"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -422,6 +434,7 @@
                         <outlet property="imageView" destination="8i1-nZ-goM" id="UfT-EL-Gfk"/>
                         <outlet property="presentingDateLabel" destination="x24-zf-p5R" id="0my-Yh-7h6"/>
                         <outlet property="repeatButton" destination="y9o-9E-rPg" id="l5C-i5-lXQ"/>
+                        <outlet property="representInTextField" destination="n5D-8Q-2gp" id="2d1-kk-QVz"/>
                         <outlet property="textView" destination="eT1-Wt-hey" id="YJS-t6-NP6"/>
                         <outlet property="titleLabel" destination="uIW-Nv-RTg" id="9GK-zp-pHz"/>
                     </connections>

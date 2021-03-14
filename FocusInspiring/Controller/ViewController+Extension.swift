@@ -9,10 +9,9 @@
 import UIKit
 
 
-// Extension for alert messages, as described in https://stackoverflow.com/a/60414319
-
 extension UIViewController{
-    
+
+    /// Generic construction of alert messages, as described in https://stackoverflow.com/a/60414319
     public func popupAlert(title: String, message: String, alertStyle: UIAlertController.Style, actionTitles: [String], actionStyles: [UIAlertAction.Style], actions: [((UIAlertAction) -> Void)?]){
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: alertStyle)
@@ -23,7 +22,23 @@ extension UIViewController{
             
             alertController.addAction(action)
         }
+
+        /// Workaround, see below
+        alertController.pruneNegativeWidthConstraints()
         
         present(alertController, animated: true)
+    }
+}
+
+
+extension UIAlertController {
+
+    /// Workaround for the enduring iOS bug with actionsheets described here: https://stackoverflow.com/a/58666480
+    func pruneNegativeWidthConstraints() {
+        for subView in self.view.subviews {
+            for constraint in subView.constraints where constraint.debugDescription.contains("width == - 16") {
+                subView.removeConstraint(constraint)
+            }
+        }
     }
 }

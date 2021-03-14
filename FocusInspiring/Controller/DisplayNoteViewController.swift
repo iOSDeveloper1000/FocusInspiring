@@ -14,6 +14,12 @@ import CoreData
 
 class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
+    private func presentTimeMessage(_ period: String) -> String {
+        return "Further cycle for: " + period + "?"
+    }
+    private let emptyControllerMessage = "No more inspirational notes to display this time.\n\nFeel lucky anyway! :-)"
+
+
     // MARK: Outlets
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,7 +27,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var presentingDateLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
-
+    @IBOutlet weak var representInTextField: UITextField!
+    
     @IBOutlet weak var checkmarkButton: UIBarButtonItem!
     @IBOutlet weak var repeatButton: UIBarButtonItem!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -36,14 +43,17 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<InspirationItem>!
 
-    /* Date formatter for the displayed creation and presenting date */
+    /// Date formatter for the displayed dates
     let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .medium
         return df
     }()
 
-    // Label for displaying a message in case no more items are available
+    /// Pickerview presented as keyboard for representing period textfield
+    var periodPickerBoard: PeriodPicker!
+
+    /// Label for displaying a message in case no more items are available
     var backgroundLabel: UILabel!
 
 
@@ -53,6 +63,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
         super.viewDidLoad()
 
         setupFetchedResultsController()
+
+        setUpTextFieldWithPeriodPicker()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,10 +72,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
         setupFetchedResultsController()
 
-        // Display first inspirational note
+        /// Display first inspirational note
         displayNextItem()
-
-        setUpViewLayout()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,12 +86,17 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     // MARK: Actions
 
     @IBAction func checkmarkButtonPressed(_ sender: Any) {
-        popupAlert(title: "Congratulations!", message: "Confirming adds the note to the List of Glory.", alertStyle: .alert, actionTitles: ["Cancel", "OK"], actionStyles: [.cancel, .default], actions: [nil, checkmarkHandler(alertAction:)])
+
+        popupAlert(title: "Congratulations!", message: "Your inspiration will be added to your personal List of Glory.", alertStyle: .actionSheet, actionTitles: ["Add to List of Glory", "Cancel"], actionStyles: [.default, .cancel], actions: [checkmarkHandler(alertAction:), nil])
     }
 
     @IBAction func repeatButtonPressed(_ sender: Any) {
-        // @todo implement repeat function
-        print("Repeat button pressed")
+
+        if let targetDate = DateCalculator.getTargetDate(from: periodPickerBoard) {
+            popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: targetDate)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
+        } else {
+            popupAlert(title: "Internal error", message: "Cannot compute future date. Try to set a different time period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+        }
     }
     
     @IBAction func editButtonPressed(_ sender: Any) {
@@ -90,7 +105,19 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     }
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
-        popupAlert(title: "Delete note permanently?", message: "", alertStyle: .alert, actionTitles: ["Cancel", "Delete"], actionStyles: [.cancel, .destructive], actions: [nil, deleteHandler(alertAction:)])
+
+        popupAlert(title: "Your note will be deleted permanently.", message: "", alertStyle: .actionSheet, actionTitles: ["Delete", "Cancel"], actionStyles: [.destructive, .cancel], actions: [deleteHandler(alertAction:), nil])
+    }
+
+    @IBAction func cancelPickerPressed(_ sender: UIBarButtonItem?) {
+        representInTextField.resignFirstResponder()
+    }
+
+    @IBAction func donePickerPressed(_ sender: UIBarButtonItem?) {
+        representInTextField.resignFirstResponder()
+
+        let periodString = DateCalculator.getPeriodString(from: periodPickerBoard)
+        representInTextField.text = presentTimeMessage(periodString)
     }
 
 
@@ -99,14 +126,14 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     private func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
 
-        /* Get all items dated for today or earlier */
+        /// Get all items dated for today or earlier
         let current = Date()
         fetchRequest.predicate = NSPredicate(format: "active == TRUE AND presentingDate <= %@", current as CVarArg)
 
         let sortDescriptor = NSSortDescriptor(key: "presentingDate", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
 
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "inspirationItems")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "currentActiveNotes")
         fetchedResultsController.delegate = self
         do {
             try fetchedResultsController.performFetch()
@@ -116,8 +143,27 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
         }
     }
 
-    private func setUpViewLayout() {
-        textView.isUserInteractionEnabled = false
+    private func setUpTextFieldWithPeriodPicker() {
+        periodPickerBoard = PeriodPicker()
+
+        periodPickerBoard.delegate = periodPickerBoard
+        periodPickerBoard.dataSource = periodPickerBoard
+
+        periodPickerBoard.backgroundColor = .lightGray
+        periodPickerBoard.reloadAllComponents()
+
+        /// Link textfield to the periodpicker
+        representInTextField.inputView = periodPickerBoard
+
+        /// Make toolbar for leaving the pickerview
+        let pickerAccesssory = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
+
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelPickerPressed(_:)))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePickerPressed(_:)))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        pickerAccesssory.items = [cancelButton, flexSpace, doneButton]
+
+        representInTextField.inputAccessoryView = pickerAccesssory
     }
 
 
@@ -127,15 +173,14 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
         let isItemAvailable = !fetchedItems.isEmpty
 
-        // Set user interface
-        hideUIElements(!isItemAvailable)
-        enableNavigationBarItems(isItemAvailable)
+        /// Set user interface
+        prepareUIForNextItem(show: isItemAvailable)
 
         if isItemAvailable {
 
             displayedItem = fetchedItems.popLast()
 
-            // Fill in content into the view fields
+            /// Fill in content into the view fields
             titleLabel.text = displayedItem.title
             creationDateLabel.text = "Created on \(dateFormatter.string(from: displayedItem.creationDate!))"
             presentingDateLabel.text = "Displayed on \(dateFormatter.string(from: displayedItem.presentingDate!))"
@@ -152,7 +197,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
             displayedItem = nil
 
-            setBackgroundMessage(message: "No more inspirational notes to display this time.\n\nFeel lucky anyway! :-)")
+            setBackgroundMessage(message: emptyControllerMessage)
         }
     }
 
@@ -160,27 +205,62 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     // MARK: Handler
 
     func checkmarkHandler(alertAction: UIAlertAction) {
+        /// Set this item to inactive, i.e. put it to List of Glory
         displayedItem.active = false
         dataController.saveViewContext()
 
         displayNextItem()
     }
 
+    func repeatHandler(alertAction: UIAlertAction) {
+        /// Change date of next presentation to newly computed date
+        displayedItem.presentingDate = DateCalculator.getTargetDate(from: periodPickerBoard)
+        dataController.saveViewContext()
+
+        /// Save period selection each time user confirms by saving a note
+        periodPickerBoard.saveSelectedRowsToUserDefaults()
+
+        displayNextItem()
+    }
+
     func deleteHandler(alertAction: UIAlertAction) {
-        // Deleting currently displayed note
+        /// Delete currently displayed note
         dataController.viewContext.delete(displayedItem)
         dataController.saveViewContext()
 
         displayNextItem()
     }
-}
 
 
-// MARK: User Interface
+    // MARK: User Interface
 
-extension DisplayNoteViewController {
+    private func prepareUIForNextItem(show: Bool) {
 
-    func setBackgroundMessage(message: String) {
+        /// Enable/Disable navigationbar items
+        let barButtons: [UIBarButtonItem] = [checkmarkButton, repeatButton, editButton, deleteButton]
+        for barButton in barButtons {
+            barButton.isEnabled = show
+        }
+
+        /// Permanently disallow editing in this controller
+        textView.isUserInteractionEnabled = false
+
+        /// Display/hide UI elements
+        let subviews: [UIView] = [titleLabel, creationDateLabel, presentingDateLabel, imageView, textView, representInTextField]
+        for element in subviews {
+            element.isHidden = !show
+        }
+
+        if show {
+            /// Enter textfield text with period specified by last user operation
+            periodPickerBoard.setRowsFromUserDefaults()
+            let periodString = DateCalculator.getPeriodString(from: periodPickerBoard)
+            representInTextField.text = presentTimeMessage(periodString)
+        }
+
+    }
+
+    private func setBackgroundMessage(message: String) {
 
         if backgroundLabel == nil {
             backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
@@ -194,23 +274,7 @@ extension DisplayNoteViewController {
         view.addSubview(backgroundLabel)
     }
     
-    func removeBackgroundMessage() {
+    private func removeBackgroundMessage() {
         backgroundLabel?.removeFromSuperview()
     }
-
-    func hideUIElements(_ hide: Bool) {
-        titleLabel.isHidden = hide
-        creationDateLabel.isHidden = hide
-        presentingDateLabel.isHidden = hide
-        imageView.isHidden = hide
-        textView.isHidden = hide
-    }
-
-    func enableNavigationBarItems(_ enable: Bool) {
-        checkmarkButton.isEnabled = enable
-        repeatButton.isEnabled = enable
-        editButton.isEnabled = enable
-        deleteButton.isEnabled = enable
-    }
 }
-

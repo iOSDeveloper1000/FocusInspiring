@@ -11,6 +11,9 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private let periodPickerInitialCount: Int = 2 // row index 2 corresponds to natural count 3
+    private let periodPickerInitialUnit: Int = DateCalculator.DateUnit.week.rawValue
+
     struct DefaultKey {
         static let hasLaunchedBefore = "App has launched before"
 
@@ -25,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("First launch of App FocusInspiring")
 
             // Initialize user default values
-            UserDefaults.standard.set(2, forKey: DefaultKey.timeCountForPicker)
-            UserDefaults.standard.set(DateCalculator.DateUnit.week.rawValue, forKey: DefaultKey.timeUnitForPicker)
+            UserDefaults.standard.set(periodPickerInitialCount, forKey: DefaultKey.timeCountForPicker)
+            UserDefaults.standard.set(periodPickerInitialUnit, forKey: DefaultKey.timeUnitForPicker)
 
             UserDefaults.standard.set(true, forKey: DefaultKey.hasLaunchedBefore)
             UserDefaults.standard.synchronize()
