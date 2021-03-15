@@ -24,12 +24,12 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Add New Inspiration" id="Mes-EJ-zxi">
-                                        <barButtonItem key="leftBarButtonItem" title="Clear" id="4cy-tO-Zyb">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="4cy-tO-Zyb">
                                             <connections>
                                                 <action selector="clearButtonPressed:" destination="cQ3-22-2wb" id="0yV-7l-WJw"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Save" id="ERD-SO-fEy">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ERD-SO-fEy">
                                             <connections>
                                                 <action selector="saveButtonPressed:" destination="cQ3-22-2wb" id="rmN-Li-7QR"/>
                                             </connections>
@@ -56,9 +56,7 @@
                                     </barButtonItem>
                                     <barButtonItem title="Search Flickr Photo" image="magnifyingglass" catalog="system" id="BvF-Gr-ETZ">
                                         <connections>
-                                            <segue destination="BbD-1a-Xaw" kind="popoverPresentation" identifier="SegueToFlickrSearch" popoverAnchorBarButtonItem="BvF-Gr-ETZ" id="gIO-Cj-8Gn">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueToFlickrSearch" id="gIO-Cj-8Gn"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="Attach File" image="rectangle.and.paperclip" catalog="system" id="ORh-5p-WNK">
@@ -128,7 +126,7 @@
                             <constraint firstItem="VPE-BZ-oOj" firstAttribute="bottom" secondItem="lAP-IG-2m3" secondAttribute="bottom" id="vEq-yn-43n"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add New" id="BYv-hb-en1"/>
+                    <tabBarItem key="tabBarItem" title="Add New" image="plus" catalog="system" id="BYv-hb-en1"/>
                     <connections>
                         <outlet property="cameraButton" destination="UkY-Tf-YTP" id="LjX-87-KR7"/>
                         <outlet property="clearButton" destination="4cy-tO-Zyb" id="zzk-mb-m7m"/>
@@ -196,7 +194,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="y8E-ol-gaA">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="NPW-G9-nU8">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="NPW-G9-nU8">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="qWg-Wr-F1a" id="4QA-Jb-s9q"/>
                             </connections>
@@ -219,7 +217,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RqA-0B-CqS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2389.8550724637685" y="34.821428571428569"/>
+            <point key="canvasLocation" x="2522" y="35"/>
         </scene>
         <!--Home-->
         <scene sceneID="otZ-Vp-vcm">
@@ -251,12 +249,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQu-zZ-9Q5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2072" y="-683"/>
+            <point key="canvasLocation" x="2361" y="-826"/>
         </scene>
-        <!--Your personal List of Glory-->
+        <!--List of Glory-->
         <scene sceneID="bEC-Ld-n1h">
             <objects>
-                <collectionViewController id="50N-dE-yFR" customClass="ListOfGloryCollectionViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="50N-dE-yFR" userLabel="List of Glory" customClass="ListOfGloryCollectionViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Tch-1o-D7T">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -346,14 +344,14 @@
                                             </barButtonItem>
                                         </leftBarButtonItems>
                                         <rightBarButtonItems>
-                                            <barButtonItem title="Delete / archive" image="trash" catalog="system" id="Nxw-jL-Ky7">
+                                            <barButtonItem systemItem="trash" id="Nxw-jL-Ky7">
                                                 <connections>
                                                     <action selector="deleteButtonPressed:" destination="A9m-Vf-l2n" id="G83-Zi-578"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="Edit Note" image="square.and.pencil" catalog="system" id="xWb-eP-Don">
+                                            <barButtonItem systemItem="edit" id="xWb-eP-Don">
                                                 <connections>
-                                                    <action selector="editButtonPressed:" destination="A9m-Vf-l2n" id="euX-qY-dCB"/>
+                                                    <segue destination="blz-JR-BZr" kind="presentation" identifier="SegueToEditNote" id="KBj-kC-4HK"/>
                                                 </connections>
                                             </barButtonItem>
                                         </rightBarButtonItems>
@@ -455,10 +453,10 @@
             </objects>
             <point key="canvasLocation" x="744.92753623188412" y="-613.39285714285711"/>
         </scene>
-        <!--Focus Inspiring-->
+        <!--Root TabBarController-->
         <scene sceneID="oK7-G9-qdN">
             <objects>
-                <tabBarController title="Focus Inspiring" id="VKB-HE-r7F" customClass="RootViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController title="Focus Inspiring" id="VKB-HE-r7F" userLabel="Root TabBarController" customClass="RootViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Y3L-du-GkG"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h0i-EG-gl0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -476,121 +474,10 @@
             </objects>
             <point key="canvasLocation" x="-112" y="121"/>
         </scene>
-        <!--Edit-->
-        <scene sceneID="BKg-e5-H06">
-            <objects>
-                <viewController id="q0D-nc-iWo" userLabel="Edit" customClass="EditNoteViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="x7c-ZO-6Yy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9cl-Hn-a7E">
-                                <rect key="frame" x="20" y="155" width="374" height="509"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AqM-j9-clm">
-                                <rect key="frame" x="20" y="672" width="374" height="180"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="vCV-TA-QwF"/>
-                                </constraints>
-                                <string key="text">THIS IS THE EDIT VIEW. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4UH-BQ-Ke1">
-                                <rect key="frame" x="20" y="112" width="374" height="35"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created on" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tiy-RH-eaz">
-                                        <rect key="frame" x="0.0" y="0.0" width="187" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="l1k-HU-6AO"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Presented on" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cf-OP-kFv">
-                                        <rect key="frame" x="187" y="0.0" width="187" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="HuK-ad-lVg"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="tiy-RH-eaz" firstAttribute="leading" secondItem="4UH-BQ-Ke1" secondAttribute="leading" id="EBc-80-cAU"/>
-                                    <constraint firstAttribute="height" constant="35" id="Eic-YE-iK8"/>
-                                    <constraint firstItem="0cf-OP-kFv" firstAttribute="leading" secondItem="4UH-BQ-Ke1" secondAttribute="centerX" id="key-5m-6WS"/>
-                                    <constraint firstAttribute="trailing" secondItem="0cf-OP-kFv" secondAttribute="trailing" id="nmw-De-mqC"/>
-                                    <constraint firstItem="0cf-OP-kFv" firstAttribute="leading" secondItem="tiy-RH-eaz" secondAttribute="trailing" id="spy-69-1J2"/>
-                                </constraints>
-                            </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="THIS IS THE EDIT VIEW CONTROLLER" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dm9-qb-5VY">
-                                <rect key="frame" x="20" y="64" width="374" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="RPd-mG-aPX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bRG-nM-nAR">
-                                <rect key="frame" x="0.0" y="852" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Z9i-O9-XjS"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ky1-9D-bvq"/>
-                                    <barButtonItem title="Select Image" id="BnY-MJ-7q4"/>
-                                    <barButtonItem title="Present on" id="bSu-Pm-owc"/>
-                                    <barButtonItem title="Save" id="hdZ-sw-XeS"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="vLa-91-vKg"/>
-                                </items>
-                            </toolbar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="QX8-Gk-RLb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="AqM-j9-clm" firstAttribute="leading" secondItem="QX8-Gk-RLb" secondAttribute="leading" constant="20" id="4Hp-er-jjD"/>
-                            <constraint firstItem="9cl-Hn-a7E" firstAttribute="leading" secondItem="QX8-Gk-RLb" secondAttribute="leading" constant="20" id="59v-YP-0cm"/>
-                            <constraint firstAttribute="bottom" secondItem="bRG-nM-nAR" secondAttribute="bottom" id="CGx-bs-vV8"/>
-                            <constraint firstItem="QX8-Gk-RLb" firstAttribute="trailing" secondItem="AqM-j9-clm" secondAttribute="trailing" constant="20" id="E0P-qu-nNA"/>
-                            <constraint firstItem="bRG-nM-nAR" firstAttribute="trailing" secondItem="QX8-Gk-RLb" secondAttribute="trailing" id="GyW-OK-vvM"/>
-                            <constraint firstItem="QX8-Gk-RLb" firstAttribute="trailing" secondItem="4UH-BQ-Ke1" secondAttribute="trailing" constant="20" id="J2Y-dD-k7I"/>
-                            <constraint firstItem="dm9-qb-5VY" firstAttribute="top" secondItem="QX8-Gk-RLb" secondAttribute="top" constant="20" id="SIL-iw-RyJ"/>
-                            <constraint firstItem="4UH-BQ-Ke1" firstAttribute="top" secondItem="dm9-qb-5VY" secondAttribute="bottom" constant="8" symbolic="YES" id="U8O-dz-1nx"/>
-                            <constraint firstItem="dm9-qb-5VY" firstAttribute="leading" secondItem="QX8-Gk-RLb" secondAttribute="leading" constant="20" id="XYH-Xn-UsT"/>
-                            <constraint firstItem="4UH-BQ-Ke1" firstAttribute="leading" secondItem="QX8-Gk-RLb" secondAttribute="leading" constant="20" id="cWp-xC-voJ"/>
-                            <constraint firstItem="9cl-Hn-a7E" firstAttribute="top" secondItem="4UH-BQ-Ke1" secondAttribute="bottom" constant="8" symbolic="YES" id="cdt-F9-Rur"/>
-                            <constraint firstItem="QX8-Gk-RLb" firstAttribute="trailing" secondItem="dm9-qb-5VY" secondAttribute="trailing" constant="20" id="cjb-aQ-0Xy"/>
-                            <constraint firstItem="AqM-j9-clm" firstAttribute="top" secondItem="9cl-Hn-a7E" secondAttribute="bottom" constant="8" symbolic="YES" id="hUn-s0-W33"/>
-                            <constraint firstItem="bRG-nM-nAR" firstAttribute="leading" secondItem="QX8-Gk-RLb" secondAttribute="leading" id="qlp-uT-6mS"/>
-                            <constraint firstItem="QX8-Gk-RLb" firstAttribute="trailing" secondItem="9cl-Hn-a7E" secondAttribute="trailing" constant="20" id="srs-a6-lfx"/>
-                            <constraint firstItem="AqM-j9-clm" firstAttribute="bottom" secondItem="bRG-nM-nAR" secondAttribute="top" symbolic="YES" id="uYQ-ly-T0h"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Daily" id="wOi-xq-V2z"/>
-                    <connections>
-                        <outlet property="creationDateLabel" destination="tiy-RH-eaz" id="lhT-EF-Nj5"/>
-                        <outlet property="imageView" destination="9cl-Hn-a7E" id="k9A-5B-EQ6"/>
-                        <outlet property="presentOnButton" destination="bSu-Pm-owc" id="PjB-42-CWY"/>
-                        <outlet property="presentingDateLabel" destination="0cf-OP-kFv" id="Jch-5W-Ue4"/>
-                        <outlet property="saveButton" destination="hdZ-sw-XeS" id="aat-fo-4Bs"/>
-                        <outlet property="selectImageButton" destination="BnY-MJ-7q4" id="Uqc-0R-DN2"/>
-                        <outlet property="textView" destination="AqM-j9-clm" id="7ji-73-yTt"/>
-                        <outlet property="titleTextField" destination="dm9-qb-5VY" id="iSD-mn-JgH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y8L-4e-GPd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3376.811594202899" y="393.75"/>
-        </scene>
-        <!--Glory-->
+        <!--Glory Navigation Controller-->
         <scene sceneID="AaJ-wg-sr0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BUL-Ib-CzD" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BUL-Ib-CzD" userLabel="Glory Navigation Controller" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Glory" id="jWP-BN-fZx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WQ2-9J-Xth">
@@ -606,10 +493,10 @@
             </objects>
             <point key="canvasLocation" x="744.92753623188412" y="695.75892857142856"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Search Navigation Controller-->
         <scene sceneID="VEK-oP-JxD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BbD-1a-Xaw" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BbD-1a-Xaw" userLabel="Search Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TH0-5e-aOr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -622,18 +509,146 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mS5-9N-bGi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1677" y="35"/>
+            <point key="canvasLocation" x="1817" y="35"/>
+        </scene>
+        <!--Edit Note-->
+        <scene sceneID="xgb-hw-7s1">
+            <objects>
+                <viewController id="blz-JR-BZr" userLabel="Edit Note" customClass="EditNoteViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s8S-uo-MiB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P51-4v-Zxj">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="gsx-Dm-da4"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Edit Inspiration" id="kMj-1M-PnX">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fHo-4B-mJJ">
+                                            <connections>
+                                                <action selector="cancelButtonPressed:" destination="blz-JR-BZr" id="C5f-Gt-K4l"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="YTM-1R-xlW">
+                                            <connections>
+                                                <action selector="doneButtonPressed:" destination="blz-JR-BZr" id="Qru-ET-hxn"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kfi-eR-1MC">
+                                <rect key="frame" x="0.0" y="764" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="WFE-R8-nQ8"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Rwc-ZK-UOo"/>
+                                    <barButtonItem title="Add Image" image="photo.on.rectangle" catalog="system" id="Whi-Ez-SpE">
+                                        <connections>
+                                            <action selector="imageButtonPressed:" destination="blz-JR-BZr" id="nxx-Vk-8wh"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Capture photo" image="camera" catalog="system" id="R7i-oU-zse">
+                                        <connections>
+                                            <action selector="cameraButtonPressed:" destination="blz-JR-BZr" id="uj5-LM-0Un"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Search Flickr Photo" image="magnifyingglass" catalog="system" id="jOw-SM-bJV">
+                                        <connections>
+                                            <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueToFlickrSearch" id="wEF-hf-NEd"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Attach File" image="rectangle.and.paperclip" catalog="system" id="bo6-85-yvO">
+                                        <connections>
+                                            <action selector="fileButtonPressed:" destination="blz-JR-BZr" id="ffQ-Q3-KMY"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0Z3-Y5-9Tx"/>
+                                </items>
+                            </toolbar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KaG-Ex-bKM">
+                                <rect key="frame" x="20" y="54" width="374" height="700"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YOJ-Q4-MDX" customClass="CustomTextField" customModule="FocusInspiring" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="iIo-kx-w2U"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hEN-bi-MC3">
+                                        <rect key="frame" x="0.0" y="40" width="374" height="660"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" allowsEditingTextAttributes="YES" translatesAutoresizingMaskIntoConstraints="NO" id="69k-Gw-9aA" customClass="CustomTextView" customModule="FocusInspiring" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="330"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                        <attributes>
+                                                            <color key="NSColor" systemColor="labelColor"/>
+                                                            <font key="NSFont" metaFont="system" size="16"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Agh-Lm-kyx">
+                                                <rect key="frame" x="0.0" y="330" width="374" height="330"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="h9h-ou-uLu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="P51-4v-Zxj" firstAttribute="trailing" secondItem="h9h-ou-uLu" secondAttribute="trailing" id="4m7-5v-QB4"/>
+                            <constraint firstItem="KaG-Ex-bKM" firstAttribute="leading" secondItem="h9h-ou-uLu" secondAttribute="leading" constant="20" id="AKY-g1-8Dm"/>
+                            <constraint firstItem="h9h-ou-uLu" firstAttribute="trailing" secondItem="KaG-Ex-bKM" secondAttribute="trailing" constant="20" id="Q4P-98-4WA"/>
+                            <constraint firstItem="Kfi-eR-1MC" firstAttribute="leading" secondItem="P51-4v-Zxj" secondAttribute="leading" id="Q7t-y2-48L"/>
+                            <constraint firstItem="Kfi-eR-1MC" firstAttribute="bottom" secondItem="h9h-ou-uLu" secondAttribute="bottom" id="UqO-x5-GTC"/>
+                            <constraint firstItem="P51-4v-Zxj" firstAttribute="leading" secondItem="h9h-ou-uLu" secondAttribute="leading" id="UrM-Qz-SBj"/>
+                            <constraint firstItem="P51-4v-Zxj" firstAttribute="top" secondItem="h9h-ou-uLu" secondAttribute="top" id="WeC-X7-sIl"/>
+                            <constraint firstItem="KaG-Ex-bKM" firstAttribute="top" secondItem="P51-4v-Zxj" secondAttribute="bottom" constant="10" id="XDw-5g-HzB"/>
+                            <constraint firstItem="Kfi-eR-1MC" firstAttribute="trailing" secondItem="P51-4v-Zxj" secondAttribute="trailing" id="cin-Rv-DfU"/>
+                            <constraint firstItem="Kfi-eR-1MC" firstAttribute="top" secondItem="KaG-Ex-bKM" secondAttribute="bottom" constant="10" id="tlg-dq-avz"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Add New" id="aqR-fe-lsO"/>
+                    <connections>
+                        <outlet property="cameraButton" destination="R7i-oU-zse" id="Dij-zj-EZ0"/>
+                        <outlet property="cancelButton" destination="fHo-4B-mJJ" id="YC3-QU-C7y"/>
+                        <outlet property="doneButton" destination="YTM-1R-xlW" id="O1C-8Q-9Ld"/>
+                        <outlet property="fileButton" destination="bo6-85-yvO" id="Ywx-eL-QYw"/>
+                        <outlet property="imageButton" destination="Whi-Ez-SpE" id="HcE-ui-aMe"/>
+                        <outlet property="imageView" destination="Agh-Lm-kyx" id="Smc-XR-mWt"/>
+                        <outlet property="searchForImageButton" destination="jOw-SM-bJV" id="lWw-vh-Yzl"/>
+                        <outlet property="textView" destination="69k-Gw-9aA" id="BtU-0Q-ltp"/>
+                        <outlet property="titleField" destination="YOJ-Q4-MDX" id="Bp0-HV-isd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vEb-GV-EqL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1451" y="-613"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wEF-hf-NEd"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="96"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="rectangle.and.paperclip" catalog="system" width="128" height="99"/>
         <image name="repeat" catalog="system" width="128" height="99"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

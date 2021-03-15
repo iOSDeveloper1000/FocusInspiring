@@ -22,6 +22,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
     // MARK: Properties
 
+    /// Completion handler that is called when an image got selected
     var returnImage: ((Data) -> Void)?
 
     private let reuseIdentifier = "FlickrSearchIdentifier"
@@ -205,7 +206,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        // Prevent access to search results array in phase of being overwritten
+        /// Prevent access to search results array in phase of being overwritten
         if searchField.isEnabled,
            let selectedImage = searchResults[indexPath.item].data {
 

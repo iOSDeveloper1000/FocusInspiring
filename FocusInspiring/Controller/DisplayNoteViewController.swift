@@ -17,6 +17,10 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     private func presentTimeMessage(_ period: String) -> String {
         return "Further cycle for: " + period + "?"
     }
+
+    /// Key used for assigning TemporaryDataItem in CoreData to this view controller
+    private let editNotekey = "EditNoteFromDisplayKey"
+
     private let emptyControllerMessage = "No more inspirational notes to display this time.\n\nFeel lucky anyway! :-)"
 
 
@@ -98,11 +102,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
             popupAlert(title: "Internal error", message: "Cannot compute future date. Try to set a different time period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
         }
     }
-    
-    @IBAction func editButtonPressed(_ sender: Any) {
-        // @todo implement edit function
-        print("Edit button pressed")
-    }
+
+    /// For editButton action see segue preparation below
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
 
@@ -118,6 +119,38 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
         let periodString = DateCalculator.getPeriodString(from: periodPickerBoard)
         representInTextField.text = presentTimeMessage(periodString)
+    }
+
+
+    // MARK: Segue
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToEditNote" {
+            let controller = segue.destination as! EditNoteViewController
+
+            /// Although editNote is saved in a managed object context it won't be used for saving between sessions
+            let editNote = TemporaryDataItem(context: dataController.backgroundContext)
+            editNote.title = displayedItem?.title ?? ""
+            editNote.attributedText = displayedItem?.attributedText ?? nil
+            editNote.image = displayedItem?.image ?? nil
+            editNote.objectKey = editNotekey
+
+            controller.temporaryNote = editNote
+            controller.completion = { (editConfirmed, edit) in
+                if editConfirmed {
+                    guard  let edit = edit else { return }
+
+                    /// Copy back edited note
+                    self.displayedItem.title = edit.title
+                    self.displayedItem.attributedText = edit.attributedText
+                    self.displayedItem.image = edit.image
+                    self.dataController.saveViewContext()
+
+                    /// Update screen
+                    self.updateNoteOnScreen()
+                }
+            }
+        }
     }
 
 
@@ -176,29 +209,24 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
         /// Set user interface
         prepareUIForNextItem(show: isItemAvailable)
 
-        if isItemAvailable {
+        /// Take next item out of queue if available
+        displayedItem = isItemAvailable ? fetchedItems.popLast() : nil
 
-            displayedItem = fetchedItems.popLast()
+        isItemAvailable ? updateNoteOnScreen() : nil
+        isItemAvailable ? removeBackgroundMessage() : setBackgroundMessage(message: emptyControllerMessage)
+    }
 
-            /// Fill in content into the view fields
-            titleLabel.text = displayedItem.title
-            creationDateLabel.text = "Created on \(dateFormatter.string(from: displayedItem.creationDate!))"
-            presentingDateLabel.text = "Displayed on \(dateFormatter.string(from: displayedItem.presentingDate!))"
-            if let imgData = displayedItem.image {
-                imageView.image = UIImage(data: imgData)
-            } else {
-                imageView.image = nil
-            }
-            textView.attributedText = displayedItem.attributedText
-
-            removeBackgroundMessage()
-
+    /// Fill in content into the controller's view fields
+    private func updateNoteOnScreen() {
+        titleLabel.text = displayedItem.title
+        creationDateLabel.text = "Created on \(dateFormatter.string(from: displayedItem.creationDate!))"
+        presentingDateLabel.text = "Displayed on \(dateFormatter.string(from: displayedItem.presentingDate!))"
+        if let imgData = displayedItem.image {
+            imageView.image = UIImage(data: imgData)
         } else {
-
-            displayedItem = nil
-
-            setBackgroundMessage(message: emptyControllerMessage)
+            imageView.image = nil
         }
+        textView.attributedText = displayedItem.attributedText
     }
 
 

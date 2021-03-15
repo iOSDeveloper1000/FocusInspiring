@@ -42,8 +42,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     // MARK: Properties
 
-    //var targetDate: Date!
-
     var temporaryNote: TemporaryDataItem!
 
     var dataController: DataController!
@@ -96,6 +94,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         pickImage(sourceType: .camera)
     }
 
+    /// For searchImageButton action see segue preparation below
+
     @IBAction func fileButtonPressed(_ sender: Any) {
         // @todo implement file attaching
         print("File attaching still to be implemented")
@@ -143,7 +143,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
                 self.imageView.image = UIImage(data: imageData)
 
-                // Save image data in temporary note
+                /// Save image data in temporary note
                 self.temporaryNote?.image = imageData
                 self.dataController.saveBackgroundContext()
             }
