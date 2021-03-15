@@ -30,6 +30,7 @@
 		E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */; };
 		E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */; };
 		E7DF981B25EE53C000026EE3 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */; };
+		E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */; };
 		E7EACE5325FE581500F3E175 /* PeriodPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EACE5225FE581500F3E175 /* PeriodPicker.swift */; };
 		E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */; };
 		E7ED60B225EFA9DC00811762 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* CustomTextView.swift */; };
@@ -61,6 +62,7 @@
 		E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpStatusResponse.swift; sourceTree = "<group>"; };
 		E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchResponse.swift; sourceTree = "<group>"; };
 		E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
+		E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringTransformer.swift; sourceTree = "<group>"; };
 		E7EACE5225FE581500F3E175 /* PeriodPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodPicker.swift; sourceTree = "<group>"; };
 		E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCollectionViewController.swift; sourceTree = "<group>"; };
 		E7ED60B125EFA9DC00811762 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				E769881025E548420020466A /* DataController.swift */,
 				E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */,
 				E772162125F2516A00867C20 /* DateCalculator.swift */,
+				E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
 				E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */,
+				E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */,
 				E7EACE5325FE581500F3E175 /* PeriodPicker.swift in Sources */,
 				E769882425E54C6C0020466A /* EditNoteViewController.swift in Sources */,
 				E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */,

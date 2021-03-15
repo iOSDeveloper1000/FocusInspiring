@@ -19,8 +19,17 @@ class CustomTextView: UITextView, UITextViewDelegate {
         static let defaultTextFontSize: CGFloat = 16
     }
 
-    // Routine set by caller of this class to save contents at certain points
+    /// Routine set by caller of this class to save contents at certain points
     var saveContentChanges: ((NSAttributedString) -> Void)?
+
+    private var attributedPlaceholder: NSAttributedString {
+        let placeholder = NSMutableAttributedString(string: TextConstant.defaultPlaceholder)
+
+        let range = NSRange(location: 0, length: placeholder.string.utf16.count)
+        placeholder.setAttributes([.font: UIFont.systemFont(ofSize: TextConstant.defaultTextFontSize)], range: range)
+
+        return placeholder
+    }
 
 
     // MARK: Public interface
@@ -31,18 +40,17 @@ class CustomTextView: UITextView, UITextViewDelegate {
         saveContentChanges = saveRoutine
         setUpKeyboardToolbar()
 
-        // Initialize textview with saved attributed text if existing, else placeholder text
+        /// Initialize textview with saved attributed text if existing, else placeholder text
         if let initText = initText {
             attributedText = initText
         } else {
-            text = TextConstant.defaultPlaceholder
-            textColor = UIColor.lightGray
+            clearTextView()
         }
     }
 
     // Set textview to placeholder text with default formatting
     public func clearTextView() {
-        attributedText = makeAttributedPlaceholder()
+        attributedText = attributedPlaceholder
         textColor = UIColor.lightGray
     }
 
@@ -51,7 +59,7 @@ class CustomTextView: UITextView, UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
 
-        // Empty placeholder text
+        /// Empty placeholder text
         if textView.textColor == UIColor.lightGray {
             textView.text = ""
             textView.textColor = UIColor.black
@@ -62,9 +70,9 @@ class CustomTextView: UITextView, UITextViewDelegate {
 
         saveContentChanges?(textView.attributedText)
 
-        // Reset to placeholder text
-        if textView.text.isEmpty {
-            textView.attributedText = makeAttributedPlaceholder()
+        /// Reset to placeholder text
+        if textView.attributedText.string.isEmpty {
+            textView.attributedText = attributedPlaceholder
             textView.textColor = UIColor.lightGray
         }
     }
@@ -122,10 +130,10 @@ class CustomTextView: UITextView, UITextViewDelegate {
         let newAttributedString = attributedText.mutableCopy() as! NSMutableAttributedString
 
         if let name = name {
-            // Add formatting
+            /// Add formatting
             newAttributedString.addAttribute(name, value: value!, range: range)
         } else {
-            // Clear formatting to app default
+            /// Clear formatting to app default
             newAttributedString.setAttributes([.font: UIFont.systemFont(ofSize: TextConstant.defaultTextFontSize)], range: range)
         }
 
@@ -135,14 +143,5 @@ class CustomTextView: UITextView, UITextViewDelegate {
         selectedTextRange = selectedTextRangeCopy
 
         saveContentChanges?(newAttributedString)
-    }
-
-    private func makeAttributedPlaceholder() -> NSAttributedString {
-        let attributedPlaceholder = NSMutableAttributedString(string: TextConstant.defaultPlaceholder)
-        let placeholderRange = NSMakeRange(0, attributedPlaceholder.length)
-
-        attributedPlaceholder.setAttributes([.font: UIFont.systemFont(ofSize: TextConstant.defaultTextFontSize)], range: placeholderRange)
-
-        return attributedPlaceholder
     }
 }
