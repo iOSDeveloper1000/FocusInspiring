@@ -453,10 +453,10 @@
             </objects>
             <point key="canvasLocation" x="744.92753623188412" y="-613.39285714285711"/>
         </scene>
-        <!--Root TabBarController-->
+        <!--Root TabBar Controller-->
         <scene sceneID="oK7-G9-qdN">
             <objects>
-                <tabBarController title="Focus Inspiring" id="VKB-HE-r7F" userLabel="Root TabBarController" customClass="RootViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController title="Focus Inspiring" id="VKB-HE-r7F" userLabel="Root TabBar Controller" customClass="RootViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Y3L-du-GkG"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h0i-EG-gl0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
