@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Grant access to your Camera if you like to take photo notes.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Grant access to your Photos Library if you like to take images from there.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

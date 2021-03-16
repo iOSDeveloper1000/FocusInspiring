@@ -227,19 +227,11 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     private func pickImage(sourceType: UIImagePickerController.SourceType) {
 
-        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
 
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = sourceType
-
-            present(imagePicker, animated: true, completion: nil)
-
-        } else {
-            let sourceTypeDescription = (sourceType == .camera) ? "Camera" : "Photo library"
-
-            popupAlert(title: "\(sourceTypeDescription) not available", message: "It seems like the requested source type cannot be used. Assert allowing usage in the settings.", alertStyle: .alert, actionTitles: ["Cancel", "Go to Settings"], actionStyles: [.cancel, .default], actions: [nil, sourceNotAvailableHandler(alertAction:)])
-        }
+        present(imagePicker, animated: true, completion: nil)
     }
 
     private func saveNewItem() {
@@ -290,11 +282,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         toggleUserInterface(enable: true)
     }
 
-    func sourceNotAvailableHandler(alertAction: UIAlertAction) {
-        print("Go to settings pressed")
-        // @todo implement Go to settings
-    }
-
 
     // MARK: User Interface
 
@@ -303,8 +290,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         textView.isUserInteractionEnabled = enable
         presentInTextField.isEnabled = enable
 
-        imageButton.isEnabled = enable
-        cameraButton.isEnabled = enable
+        imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary) ? enable : false
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera) ? enable : false
         searchButton.isEnabled = enable
 
         clearButton.isEnabled = enable
@@ -336,13 +323,12 @@ extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigatio
 
             imageView.image = uiImage
 
-            // Save image data in temporary note
+            /// Save image data in temporary note
             temporaryNote?.image = uiImage.jpegData(compressionQuality: 0.98)
             dataController.saveBackgroundContext()
 
         } else {
-            // @todo error handling
-            print("Image not found")
+            popupAlert(title: "Image not found", message: "The selected image cannot be loaded into the app.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
         }
 
         picker.dismiss(animated: true, completion: nil)
@@ -351,5 +337,4 @@ extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-
 }

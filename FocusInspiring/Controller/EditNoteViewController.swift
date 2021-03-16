@@ -41,6 +41,8 @@ class EditNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpToolbar()
+
         /// Load temporary note into view
         setUpNoteForEdit()
     }
@@ -113,24 +115,22 @@ class EditNoteViewController: UIViewController {
         }
     }
 
+    /// Set up toolbar elements
+    private func setUpToolbar() {
+        imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+
 
     // MARK: Helper
 
     private func pickImage(sourceType: UIImagePickerController.SourceType) {
 
-        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
 
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = sourceType
-
-            present(imagePicker, animated: true, completion: nil)
-
-        } else {
-            let sourceTypeDescription = (sourceType == .camera) ? "Camera" : "Photo library"
-
-            popupAlert(title: "\(sourceTypeDescription) not available", message: "It seems like the requested source type cannot be used. Assert allowing usage in the settings.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
-        }
+        present(imagePicker, animated: true, completion: nil)
     }
 
 
@@ -158,8 +158,7 @@ extension EditNoteViewController: UIImagePickerControllerDelegate, UINavigationC
             temporaryNote.image = uiImage.jpegData(compressionQuality: 0.98)
 
         } else {
-            // @todo error handling
-            print("Image not found")
+            popupAlert(title: "Image not found", message: "The selected image cannot be loaded into the app.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
         }
 
         picker.dismiss(animated: true, completion: nil)
