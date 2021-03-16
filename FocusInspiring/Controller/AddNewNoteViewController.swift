@@ -33,8 +33,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     
     @IBOutlet weak var imageButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var searchForImageButton: UIBarButtonItem!
-    @IBOutlet weak var fileButton: UIBarButtonItem!
+    @IBOutlet weak var searchButton: UIBarButtonItem!
 
     @IBOutlet weak var clearButton: UIBarButtonItem!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -94,12 +93,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         pickImage(sourceType: .camera)
     }
 
-    /// For searchImageButton action see segue preparation below
+    /// For searchButton action see segue preparation below
 
-    @IBAction func fileButtonPressed(_ sender: Any) {
-        // @todo implement file attaching
-        print("File attaching still to be implemented")
-    }
 
     @IBAction func clearButtonPressed(_ sender: Any) {
         /// Disallow user to edit during clear action
@@ -266,8 +261,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
             newItem.image = image.jpegData(compressionQuality: 0.98)
         }
 
-        // @todo store file attachments
-
         dataController.saveViewContext()
 
         /// Save period selection each time user confirms by saving a note
@@ -312,8 +305,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
         imageButton.isEnabled = enable
         cameraButton.isEnabled = enable
-        searchForImageButton.isEnabled = enable
-        fileButton.isEnabled = false // @todo file attaching to be implemented
+        searchButton.isEnabled = enable
 
         clearButton.isEnabled = enable
         saveButton.isEnabled = enable

@@ -49,19 +49,16 @@
                                             <action selector="imageButtonPressed:" destination="cQ3-22-2wb" id="0cj-sV-C07"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="Lcb-je-dad"/>
                                     <barButtonItem title="Capture photo" image="camera" catalog="system" id="UkY-Tf-YTP">
                                         <connections>
                                             <action selector="cameraButtonPressed:" destination="cQ3-22-2wb" id="Tz6-kZ-dOy"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="Yta-69-TY5"/>
                                     <barButtonItem title="Search Flickr Photo" image="magnifyingglass" catalog="system" id="BvF-Gr-ETZ">
                                         <connections>
                                             <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueToFlickrSearch" id="gIO-Cj-8Gn"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Attach File" image="rectangle.and.paperclip" catalog="system" id="ORh-5p-WNK">
-                                        <connections>
-                                            <action selector="fileButtonPressed:" destination="cQ3-22-2wb" id="hgi-sj-533"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="SMz-rK-asP"/>
@@ -130,12 +127,11 @@
                     <connections>
                         <outlet property="cameraButton" destination="UkY-Tf-YTP" id="LjX-87-KR7"/>
                         <outlet property="clearButton" destination="4cy-tO-Zyb" id="zzk-mb-m7m"/>
-                        <outlet property="fileButton" destination="ORh-5p-WNK" id="0C9-8B-pBa"/>
                         <outlet property="imageButton" destination="HK1-yf-PvI" id="Gk2-9h-ujH"/>
                         <outlet property="imageView" destination="18I-Qq-aOv" id="lFu-TR-Vka"/>
                         <outlet property="presentInTextField" destination="3jy-1q-Wva" id="Msh-lf-VC8"/>
                         <outlet property="saveButton" destination="ERD-SO-fEy" id="gf1-kp-2va"/>
-                        <outlet property="searchForImageButton" destination="BvF-Gr-ETZ" id="gZT-Uc-jKO"/>
+                        <outlet property="searchButton" destination="BvF-Gr-ETZ" id="gZT-Uc-jKO"/>
                         <outlet property="textView" destination="jut-pC-Sec" id="hy9-WE-MqL"/>
                         <outlet property="titleField" destination="jPO-Oe-yU7" id="rQY-R9-i36"/>
                     </connections>
@@ -551,19 +547,16 @@
                                             <action selector="imageButtonPressed:" destination="blz-JR-BZr" id="nxx-Vk-8wh"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="67a-Sv-Kjk"/>
                                     <barButtonItem title="Capture photo" image="camera" catalog="system" id="R7i-oU-zse">
                                         <connections>
                                             <action selector="cameraButtonPressed:" destination="blz-JR-BZr" id="uj5-LM-0Un"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="nxc-g5-7JB"/>
                                     <barButtonItem title="Search Flickr Photo" image="magnifyingglass" catalog="system" id="jOw-SM-bJV">
                                         <connections>
                                             <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueToFlickrSearch" id="wEF-hf-NEd"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Attach File" image="rectangle.and.paperclip" catalog="system" id="bo6-85-yvO">
-                                        <connections>
-                                            <action selector="fileButtonPressed:" destination="blz-JR-BZr" id="ffQ-Q3-KMY"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="0Z3-Y5-9Tx"/>
@@ -625,10 +618,9 @@
                         <outlet property="cameraButton" destination="R7i-oU-zse" id="Dij-zj-EZ0"/>
                         <outlet property="cancelButton" destination="fHo-4B-mJJ" id="YC3-QU-C7y"/>
                         <outlet property="doneButton" destination="YTM-1R-xlW" id="O1C-8Q-9Ld"/>
-                        <outlet property="fileButton" destination="bo6-85-yvO" id="Ywx-eL-QYw"/>
                         <outlet property="imageButton" destination="Whi-Ez-SpE" id="HcE-ui-aMe"/>
                         <outlet property="imageView" destination="Agh-Lm-kyx" id="Smc-XR-mWt"/>
-                        <outlet property="searchForImageButton" destination="jOw-SM-bJV" id="lWw-vh-Yzl"/>
+                        <outlet property="searchButton" destination="jOw-SM-bJV" id="lWw-vh-Yzl"/>
                         <outlet property="textView" destination="69k-Gw-9aA" id="BtU-0Q-ltp"/>
                         <outlet property="titleField" destination="YOJ-Q4-MDX" id="Bp0-HV-isd"/>
                     </connections>
@@ -639,7 +631,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wEF-hf-NEd"/>
+        <segue reference="gIO-Cj-8Gn"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
@@ -647,7 +639,6 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="96"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="rectangle.and.paperclip" catalog="system" width="128" height="99"/>
         <image name="repeat" catalog="system" width="128" height="99"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

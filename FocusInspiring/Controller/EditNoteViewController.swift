@@ -21,8 +21,7 @@ class EditNoteViewController: UIViewController {
 
     @IBOutlet weak var imageButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var searchForImageButton: UIBarButtonItem!
-    @IBOutlet weak var fileButton: UIBarButtonItem!
+    @IBOutlet weak var searchButton: UIBarButtonItem!
 
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -57,12 +56,7 @@ class EditNoteViewController: UIViewController {
         pickImage(sourceType: .camera)
     }
 
-    /// For searchImageButton action see segue preparation below
-
-    @IBAction func fileButtonPressed(_ sender: Any) {
-        // @todo implement file attaching
-        print("File attaching still to be implemented")
-    }
+    /// For searchButton action see segue preparation below
 
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
