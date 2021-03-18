@@ -11,25 +11,15 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private let periodPickerInitialCount: Int = 2 // row index 2 corresponds to natural count 3
-    private let periodPickerInitialUnit: Int = DateCalculator.DateUnit.week.rawValue
-
-    struct DefaultKey {
-        static let hasLaunchedBefore = "App has launched before"
-
-        static let timeCountForPicker = "Key for Picker Time Counter Raw Value"
-        static let timeUnitForPicker = "Key for Picker Time Unit Raw Value"
-    }
-
     func setUserDefaultsIfFirstLaunch() {
         if UserDefaults.standard.bool(forKey: DefaultKey.hasLaunchedBefore) {
             print("App FocusInspiring has launched before")
         } else {
             print("First launch of App FocusInspiring")
 
-            // Initialize user default values
-            UserDefaults.standard.set(periodPickerInitialCount, forKey: DefaultKey.timeCountForPicker)
-            UserDefaults.standard.set(periodPickerInitialUnit, forKey: DefaultKey.timeUnitForPicker)
+            /// Initialize user defaults
+            UserDefaults.standard.set(0, forKey: DefaultKey.timeCountForPicker)
+            UserDefaults.standard.set(0, forKey: DefaultKey.timeUnitForPicker)
 
             UserDefaults.standard.set(true, forKey: DefaultKey.hasLaunchedBefore)
             UserDefaults.standard.synchronize()

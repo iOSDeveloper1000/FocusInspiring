@@ -14,10 +14,6 @@ import CoreData
 
 class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
-    private func presentTimeMessage(_ period: String) -> String {
-        return "Further cycle for: " + period + "?"
-    }
-
     /// Key used for assigning TemporaryDataItem in CoreData to this view controller
     private let editNotekey = "EditNoteFromDisplayKey"
 
@@ -31,7 +27,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     @IBOutlet weak var presentingDateLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var representInTextField: UITextField!
+    @IBOutlet weak var representInTextField: PickerTextField!
     
     @IBOutlet weak var checkmarkButton: UIBarButtonItem!
     @IBOutlet weak var repeatButton: UIBarButtonItem!
@@ -54,8 +50,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
         return df
     }()
 
-    /// Pickerview presented as keyboard for representing period textfield
-    var periodPickerBoard: PeriodPicker!
+    /// Data for the presented picker integrated in representInTextField keyboard
+    var periodData: PeriodData!
 
     /// Label for displaying a message in case no more items are available
     var backgroundLabel: UILabel!
@@ -68,7 +64,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
         setupFetchedResultsController()
 
-        setUpTextFieldWithPeriodPicker()
+        setUpPickerTextField()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -96,8 +92,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
     @IBAction func repeatButtonPressed(_ sender: Any) {
 
-        if let targetDate = DateCalculator.getTargetDate(from: periodPickerBoard) {
-            popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: targetDate)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
+        if let target = getTargetDate() {
+            popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: target)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
         } else {
             popupAlert(title: "Internal error", message: "Cannot compute future date. Try to set a different time period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
         }
@@ -108,17 +104,6 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     @IBAction func deleteButtonPressed(_ sender: Any) {
 
         popupAlert(title: "Your note will be deleted permanently.", message: "", alertStyle: .actionSheet, actionTitles: ["Delete", "Cancel"], actionStyles: [.destructive, .cancel], actions: [deleteHandler(alertAction:), nil])
-    }
-
-    @IBAction func cancelPickerPressed(_ sender: UIBarButtonItem?) {
-        representInTextField.resignFirstResponder()
-    }
-
-    @IBAction func donePickerPressed(_ sender: UIBarButtonItem?) {
-        representInTextField.resignFirstResponder()
-
-        let periodString = DateCalculator.getPeriodString(from: periodPickerBoard)
-        representInTextField.text = presentTimeMessage(periodString)
     }
 
 
@@ -176,27 +161,10 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
         }
     }
 
-    private func setUpTextFieldWithPeriodPicker() {
-        periodPickerBoard = PeriodPicker()
-
-        periodPickerBoard.delegate = periodPickerBoard
-        periodPickerBoard.dataSource = periodPickerBoard
-
-        periodPickerBoard.backgroundColor = .lightGray
-        periodPickerBoard.reloadAllComponents()
-
-        /// Link textfield to the periodpicker
-        representInTextField.inputView = periodPickerBoard
-
-        /// Make toolbar for leaving the pickerview
-        let pickerAccesssory = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
-
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelPickerPressed(_:)))
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePickerPressed(_:)))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        pickerAccesssory.items = [cancelButton, flexSpace, doneButton]
-
-        representInTextField.inputAccessoryView = pickerAccesssory
+    private func setUpPickerTextField() {
+        let keys = [DefaultKey.timeCountForPicker, DefaultKey.timeUnitForPicker]
+        periodData = PeriodData(countMax: periodCounterMaxValue, saveKeys: keys, preText: "Further cycle for: ", postText: "?")
+        representInTextField.setup(with: periodData)
     }
 
 
@@ -209,8 +177,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
         /// Set user interface
         prepareUIForNextItem(show: isItemAvailable)
 
-        /// Take next item out of queue if available
-        displayedItem = isItemAvailable ? fetchedItems.popLast() : nil
+        /// Take next item out of queue if available else popLast() will return nil
+        displayedItem = fetchedItems.popLast()
 
         isItemAvailable ? updateNoteOnScreen() : nil
         isItemAvailable ? removeBackgroundMessage() : setBackgroundMessage(message: emptyControllerMessage)
@@ -227,6 +195,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
             imageView.image = nil
         }
         textView.attributedText = displayedItem.attributedText
+        representInTextField.updateText()
     }
 
 
@@ -242,11 +211,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
     func repeatHandler(alertAction: UIAlertAction) {
         /// Change date of next presentation to newly computed date
-        displayedItem.presentingDate = DateCalculator.getTargetDate(from: periodPickerBoard)
+        displayedItem.presentingDate = getTargetDate()
         dataController.saveViewContext()
-
-        /// Save period selection each time user confirms by saving a note
-        periodPickerBoard.saveSelectedRowsToUserDefaults()
 
         displayNextItem()
     }
@@ -260,7 +226,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     }
 
 
-    // MARK: User Interface
+    // MARK: Helper
 
     private func prepareUIForNextItem(show: Bool) {
 
@@ -279,13 +245,8 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
             element.isHidden = !show
         }
 
-        if show {
-            /// Enter textfield text with period specified by last user operation
-            periodPickerBoard.setRowsFromUserDefaults()
-            let periodString = DateCalculator.getPeriodString(from: periodPickerBoard)
-            representInTextField.text = presentTimeMessage(periodString)
-        }
-
+        /// Enter textfield text with period specified by last user operation
+        show ? representInTextField.updateText() : nil
     }
 
     private func setBackgroundMessage(message: String) {
@@ -304,5 +265,11 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     
     private func removeBackgroundMessage() {
         backgroundLabel?.removeFromSuperview()
+    }
+
+    private func getTargetDate() -> Date? {
+        let selection = representInTextField.inputPicker.selectedRows()
+
+        return periodData.computeTargetDateBy(selected: selection)
     }
 }
