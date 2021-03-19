@@ -12,7 +12,7 @@ import CoreData
 
 // MARK: ListOfGloryCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate
 
-class ListOfGloryCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
+class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable, NSFetchedResultsControllerDelegate {
     
     // MARK: Outlets
 
@@ -24,7 +24,12 @@ class ListOfGloryCollectionViewController: UICollectionViewController, NSFetched
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<InspirationItem>!
 
+    var backgroundLabel: UILabel?
+
     private let reuseIdentifier = "InspirationalNoteIdentifier"
+
+    private let emptyViewTitle = "List still empty"
+    private let emptyViewMessage = "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet."
 
     private struct LayoutConstant {
         static let spacing: CGFloat = 15
@@ -61,6 +66,12 @@ class ListOfGloryCollectionViewController: UICollectionViewController, NSFetched
         flowLayout?.invalidateLayout()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        updateEmptyViewLayout()
+    }
+
 
     // MARK: Setup
 
@@ -83,7 +94,7 @@ class ListOfGloryCollectionViewController: UICollectionViewController, NSFetched
     }
 
 
-    // MARK: CollectionView DataSource & Delegation
+    // MARK: CollectionView Data Source & Delegation
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
 
@@ -92,7 +103,11 @@ class ListOfGloryCollectionViewController: UICollectionViewController, NSFetched
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        let count = fetchedResultsController.sections?[section].numberOfObjects ?? 0
+
+        (count < 1) ? setEmptyViewLabel(title: emptyViewTitle, message: emptyViewMessage) : removeEmptyViewLabel()
+
+        return count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

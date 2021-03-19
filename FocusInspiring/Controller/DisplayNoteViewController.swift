@@ -12,12 +12,13 @@ import CoreData
 
 // MARK: DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDelegate
 
-class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDelegate {
+class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsControllerDelegate {
 
     /// Key used for assigning TemporaryDataItem in CoreData to this view controller
     private let editNotekey = "EditNoteFromDisplayKey"
 
-    private let emptyControllerMessage = "No more inspirational notes to display this time.\n\nFeel lucky anyway! :-)"
+    private let emptyViewTitle = "No more inspirational notes\nto display this time"
+    private let emptyViewMessage = "Feel lucky anyway! :-)"
 
 
     // MARK: Outlets
@@ -54,7 +55,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
     var periodData: PeriodData!
 
     /// Label for displaying a message in case no more items are available
-    var backgroundLabel: UILabel!
+    var backgroundLabel: UILabel?
 
 
     // MARK: Life cycle
@@ -80,6 +81,12 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
         super.viewWillDisappear(animated)
 
         fetchedResultsController = nil
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        updateEmptyViewLayout()
     }
 
 
@@ -181,7 +188,7 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
         displayedItem = fetchedItems.popLast()
 
         isItemAvailable ? updateNoteOnScreen() : nil
-        isItemAvailable ? removeBackgroundMessage() : setBackgroundMessage(message: emptyControllerMessage)
+        isItemAvailable ? removeEmptyViewLabel() : setEmptyViewLabel(title: emptyViewTitle, message: emptyViewMessage)
     }
 
     /// Fill in content into the controller's view fields
@@ -247,24 +254,6 @@ class DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDel
 
         /// Enter textfield text with period specified by last user operation
         show ? representInTextField.updateText() : nil
-    }
-
-    private func setBackgroundMessage(message: String) {
-
-        if backgroundLabel == nil {
-            backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-        }
-
-        backgroundLabel.text = message
-        backgroundLabel.textAlignment = .center
-        backgroundLabel.textColor = .gray
-        backgroundLabel.numberOfLines = 0 // Use as many lines as needed
-
-        view.addSubview(backgroundLabel)
-    }
-    
-    private func removeBackgroundMessage() {
-        backgroundLabel?.removeFromSuperview()
     }
 
     private func getTargetDate() -> Date? {

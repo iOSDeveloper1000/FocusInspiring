@@ -14,6 +14,7 @@
 		E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */; };
 		E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E732C73B25DBE11900A4CE31 /* Assets.xcassets */; };
 		E732C73F25DBE11900A4CE31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E732C73D25DBE11900A4CE31 /* LaunchScreen.storyboard */; };
+		E73C76542604FE84003BF821 /* Emptiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C76532604FE84003BF821 /* Emptiable.swift */; };
 		E769880E25E5472E0020466A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769880D25E5472E0020466A /* NetworkClient.swift */; };
 		E769881125E548420020466A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881025E548420020466A /* DataController.swift */; };
 		E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881825E54BCB0020466A /* InspirationalNoteCell.swift */; };
@@ -48,6 +49,7 @@
 		E732C73B25DBE11900A4CE31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E732C73E25DBE11900A4CE31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E732C74025DBE11900A4CE31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E73C76532604FE84003BF821 /* Emptiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emptiable.swift; sourceTree = "<group>"; };
 		E769880D25E5472E0020466A /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		E769881025E548420020466A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		E769881825E54BCB0020466A /* InspirationalNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationalNoteCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		E769881325E548E60020466A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7F8AA1D26050FFE005DE926 /* Protocols */,
 				E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */,
 				E7D7441625FCCE59007D4FB7 /* Network Query */,
 				E769881025E548420020466A /* DataController.swift */,
@@ -192,6 +195,14 @@
 			path = "Network Query";
 			sourceTree = "<group>";
 		};
+		E7F8AA1D26050FFE005DE926 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E73C76532604FE84003BF821 /* Emptiable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -263,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E73C76542604FE84003BF821 /* Emptiable.swift in Sources */,
 				E7DF981B25EE53C000026EE3 /* ViewController+Extension.swift in Sources */,
 				E769881125E548420020466A /* DataController.swift in Sources */,
 				E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */,
