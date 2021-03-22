@@ -16,4 +16,5 @@ class InspirationalNoteCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var subTitle: UILabel!
 
+
 }

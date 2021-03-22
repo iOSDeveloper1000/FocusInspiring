@@ -16,7 +16,7 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
     
     // MARK: Outlets
 
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var flowLayout: CollectionViewFlowLayout!
 
 
     // MARK: Properties
@@ -31,10 +31,10 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
     private let emptyViewTitle = "List still empty"
     private let emptyViewMessage = "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet."
 
-    private struct LayoutConstant {
+    private struct ParamFlowLayout {
         static let spacing: CGFloat = 15
-        static let itemsPerRowPortrait: CGFloat = 2
-        static let itemsPerRowLandscape: CGFloat = 3
+        static let itemsPerRowPortrait: Int = 2
+        static let itemsPerRowLandscape: Int = 3
     }
 
 
@@ -44,6 +44,8 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
         super.viewDidLoad()
 
         setUpFetchedResultsController()
+
+        flowLayout?.setLayoutParameters(spacing: ParamFlowLayout.spacing, itemsPerRowPortrait: ParamFlowLayout.itemsPerRowPortrait, itemsPerRowLandscape: ParamFlowLayout.itemsPerRowLandscape)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -117,7 +119,7 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
         let note = fetchedResultsController.object(at: indexPath)
 
         /// Equip cell with label and (default) image
-        cell.subTitle.text = note.title ?? "<no title>"
+        cell.subTitle.text = (note.title ?? "").isEmpty ? "<no title>" : note.title
 
         if let img = note.image {
             cell.imageView.image = UIImage(data: img)
@@ -131,41 +133,5 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         print("Segue to detail view not yet implemented")
-    }
-}
-
-
-// MARK: Collection View Flow Layout Delegation
-
-extension ListOfGloryCollectionViewController: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        /// Items per row shall depend on UI orientation
-        let itemsPerRow = (UIScreen.main.bounds.height > UIScreen.main.bounds.width) ? LayoutConstant.itemsPerRowPortrait : LayoutConstant.itemsPerRowLandscape
-
-        let padding = (itemsPerRow + 1) * LayoutConstant.spacing
-        let availableWidth = collectionView.bounds.width - padding
-        let cellSize = availableWidth / itemsPerRow
-
-        return CGSize(width: cellSize, height: cellSize)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        /// Use equally spaced insets
-        let inset = LayoutConstant.spacing
-
-        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-
-        return LayoutConstant.spacing
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-
-        return LayoutConstant.spacing
     }
 }

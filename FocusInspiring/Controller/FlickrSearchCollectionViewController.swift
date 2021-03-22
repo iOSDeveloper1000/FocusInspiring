@@ -17,7 +17,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var flowLayout: CollectionViewFlowLayout!
 
 
     // MARK: Properties
@@ -27,10 +27,10 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
     private let reuseIdentifier = "FlickrSearchIdentifier"
 
-    private struct LayoutConstant {
+    private struct ParamFlowLayout {
         static let spacing: CGFloat = 3
-        static let itemsPerRowPortrait: CGFloat = 3
-        static let itemsPerRowLandscape: CGFloat = 5
+        static let itemsPerRowPortrait: Int = 3
+        static let itemsPerRowLandscape: Int = 5
     }
 
     private struct SearchResult {
@@ -48,7 +48,8 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
         searchField.delegate = self
 
-        collectionView.backgroundColor = .systemOrange
+        flowLayout?.setLayoutParameters(spacing: ParamFlowLayout.spacing, itemsPerRowPortrait: ParamFlowLayout.itemsPerRowPortrait, itemsPerRowLandscape: ParamFlowLayout.itemsPerRowLandscape)
+        collectionView?.backgroundColor = .systemOrange
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -218,40 +219,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 }
 
 
-// MARK: Collection View Flow Layout Delegation
-
-extension FlickrSearchCollectionViewController: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        /// Items per row shall depend on UI orientation
-        let itemsPerRow = (UIScreen.main.bounds.height > UIScreen.main.bounds.width) ? LayoutConstant.itemsPerRowPortrait : LayoutConstant.itemsPerRowLandscape
-
-        let padding = (itemsPerRow + 1) * LayoutConstant.spacing
-        let availableWidth = collectionView.bounds.width - padding
-        let cellSize = availableWidth / itemsPerRow
-
-        return CGSize(width: cellSize, height: cellSize)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        /// Use equally spaced insets
-        let inset = LayoutConstant.spacing
-
-        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-
-        return LayoutConstant.spacing
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-
-        return LayoutConstant.spacing
-    }
-}
+// MARK: Delegation of SearchField
 
 extension FlickrSearchCollectionViewController: UITextFieldDelegate {
 
