@@ -43,7 +43,7 @@ class NetworkClient {
             do {
                 let responseBody = try decoder.decode(FlickrSearchResponse.self, from: jsonData)
 
-                // Synthesize the static photo urls
+                /// Synthesize the static photo urls
                 var photoUrls = [String]()
                 for img in responseBody.photos.photo {
                     let url = "\(Constant.staticUrl)/\(img.server)/\(img.id)_\(img.secret)_c.jpg"
@@ -55,7 +55,8 @@ class NetworkClient {
                 }
 
             } catch {
-                do { // catch HTTP Error response
+                /// Catch HTTP error response
+                do {
                     let responseBody = try decoder.decode(HttpStatusResponse.self, from: jsonData)
                     DispatchQueue.main.async {
                         completion(nil, responseBody, error)

@@ -59,7 +59,7 @@ class DataController {
 
     // MARK: Saving
 
-    // Normal saving of main managed object context
+    /// Normal saving of main managed object context
     func saveViewContext() {
         
         if viewContext.hasChanges {
@@ -75,7 +75,7 @@ class DataController {
         }
     }
 
-    // Saving of background managed object context (used for temporary user input)
+    /// Save background managed object context (used for temporary user input)
     func saveBackgroundContext() {
         if backgroundContext.hasChanges {
             do {
@@ -86,7 +86,7 @@ class DataController {
         }
     }
 
-    // Autosaving temporary user input before final save
+    /// Autosave temporary user input before final save
     private func autoSaveBackgroundContext(interval: TimeInterval = 40) {
         print("Autosaving in background (Time: \(Date()))")
 

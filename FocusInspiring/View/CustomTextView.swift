@@ -48,7 +48,7 @@ class CustomTextView: UITextView, UITextViewDelegate {
         }
     }
 
-    // Set textview to placeholder text with default formatting
+    /// Set textview to placeholder text with default formatting
     public func clearTextView() {
         attributedText = attributedPlaceholder
         textColor = UIColor.lightGray

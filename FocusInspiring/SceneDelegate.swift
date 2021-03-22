@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         dataController.load()
         
-        // Inject dependency by forwarding DataController instance
+        /// Inject dependency by forwarding DataController instance
         let tabBarController = window?.rootViewController as! RootViewController
         tabBarController.dataController = dataController
     }

@@ -13,7 +13,7 @@ import UIKit
 
 class CustomTextField: UITextField, UITextFieldDelegate {
 
-    // Routine set by caller of this class to save contents at certain points
+    /// Set by caller of this class to save contents at certain points
     var saveContentChanges: ((String) -> Void)?
 
 

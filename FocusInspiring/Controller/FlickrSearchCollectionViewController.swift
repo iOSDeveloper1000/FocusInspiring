@@ -73,7 +73,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
         if let searchTerm = getSearchTerm() {
             downloadImageUrls(searchText: searchTerm) {
-                // Completion handler
+                /// Completion handler
                 self.searchField.isEnabled = true
             }
         } else {
@@ -111,7 +111,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
             let listSize = urlList.count
 
-            // Default-initialize array of search results
+            /// Default-initialize array of search results
             self.searchResults = [SearchResult](repeating: SearchResult(data: nil), count: listSize)
 
             if listSize == 0 {
@@ -133,7 +133,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
         if let url = URL(string: urlString) {
 
-            // Query image from given url
+            /// Query image from given url
             NetworkClient.downloadImage(from: url) { imgData in
                 if let imgData = imgData {
 
@@ -143,7 +143,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
                     print("Could not download image")
                 }
 
-                // Trigger collection view to reload
+                /// Trigger collection view to reload
                 self.searchResults[arrayIndex].isPending = false
                 let indexPath = IndexPath(item: arrayIndex, section: 0)
                 self.collectionView.reloadItems(at: [indexPath])
@@ -151,7 +151,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
         } else {
             print("Invalid URL")
 
-            // Trigger to reload, i.e. stop activity indicator here
+            /// Trigger to reload, i.e. stop activity indicator here
             searchResults[arrayIndex].isPending = false
             let indexPath = IndexPath(item: arrayIndex, section: 0)
             collectionView.reloadItems(at: [indexPath])
@@ -196,7 +196,8 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
                 cell.imageView.image = UIImage(data: imgData)
 
             } else {
-                cell.imageView.image = UIImage(systemName: "photo") // placeholder
+                /// Set placeholder icon
+                cell.imageView.image = UIImage(systemName: "photo")
             }
             cell.imageView.backgroundColor = .white
         }
@@ -223,7 +224,7 @@ extension FlickrSearchCollectionViewController: UICollectionViewDelegateFlowLayo
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        // Items per row shall depend on UI orientation
+        /// Items per row shall depend on UI orientation
         let itemsPerRow = (UIScreen.main.bounds.height > UIScreen.main.bounds.width) ? LayoutConstant.itemsPerRowPortrait : LayoutConstant.itemsPerRowLandscape
 
         let padding = (itemsPerRow + 1) * LayoutConstant.spacing
@@ -235,7 +236,7 @@ extension FlickrSearchCollectionViewController: UICollectionViewDelegateFlowLayo
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-        // Use equally spaced insets
+        /// Use equally spaced insets
         let inset = LayoutConstant.spacing
 
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
@@ -256,7 +257,7 @@ extension FlickrSearchCollectionViewController: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
 
-        // Clear textfield
+        /// Clear textfield
         textField.text = ""
     }
 
@@ -268,7 +269,7 @@ extension FlickrSearchCollectionViewController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
 
-        // Check whether former search query is still running
+        /// Check whether former search query is still running
         for result in searchResults {
             if result.isPending {
                 popupAlert(title: "Former query still running", message: "Please try again in a few moments.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
@@ -276,7 +277,7 @@ extension FlickrSearchCollectionViewController: UITextFieldDelegate {
             }
         }
 
-        // Else: Start a new search
+        /// Else: Start a new search
         startSearch()
     }
 }

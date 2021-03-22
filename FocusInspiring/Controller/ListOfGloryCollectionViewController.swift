@@ -78,7 +78,7 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
     private func setUpFetchedResultsController() {
         let fetchRequest:NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
 
-        // Get all inactive items, means being in List of Glory
+        /// Fetch all inactive items, means being in List of Glory
         fetchRequest.predicate = NSPredicate(format: "active == FALSE")
 
         let sortDescriptor = NSSortDescriptor(key: "presentingDate", ascending: false)
@@ -116,7 +116,7 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
 
         let note = fetchedResultsController.object(at: indexPath)
 
-        // Equip cell with label and (default) image
+        /// Equip cell with label and (default) image
         cell.subTitle.text = note.title ?? "<no title>"
 
         if let img = note.image {
@@ -141,7 +141,7 @@ extension ListOfGloryCollectionViewController: UICollectionViewDelegateFlowLayou
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        // Items per row shall depend on UI orientation
+        /// Items per row shall depend on UI orientation
         let itemsPerRow = (UIScreen.main.bounds.height > UIScreen.main.bounds.width) ? LayoutConstant.itemsPerRowPortrait : LayoutConstant.itemsPerRowLandscape
 
         let padding = (itemsPerRow + 1) * LayoutConstant.spacing
@@ -153,7 +153,7 @@ extension ListOfGloryCollectionViewController: UICollectionViewDelegateFlowLayou
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-        // Use equally spaced insets
+        /// Use equally spaced insets
         let inset = LayoutConstant.spacing
 
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
