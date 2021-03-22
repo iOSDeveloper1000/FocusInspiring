@@ -63,7 +63,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupFetchedResultsController()
+        setUpAndPerformFetch()
 
         setUpPickerTextField()
     }
@@ -71,7 +71,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        setupFetchedResultsController()
+        setUpAndPerformFetch()
 
         /// Display first inspirational note
         displayNextItem()
@@ -148,23 +148,30 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
     // MARK: Setup
 
-    private func setupFetchedResultsController() {
-        let fetchRequest:NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
+    private func setUpAndPerformFetch() {
 
-        /// Get all items dated for today or earlier
-        let current = Date()
-        fetchRequest.predicate = NSPredicate(format: "active == TRUE AND presentingDate <= %@", current as CVarArg)
+        /// Perform fetches only if needed
+        if fetchedItems.isEmpty {
 
-        let sortDescriptor = NSSortDescriptor(key: "presentingDate", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
+            /// Clean up former fetches
+            fetchedResultsController = nil
 
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "currentActiveNotes")
-        fetchedResultsController.delegate = self
-        do {
-            try fetchedResultsController.performFetch()
-            fetchedItems = fetchedResultsController.fetchedObjects ?? []
-        } catch {
-            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+            let fetchRequest:NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
+
+            /// Get all items dated for today or earlier
+            fetchRequest.predicate = NSPredicate(format: "active == TRUE AND presentingDate <= %@", Date() as CVarArg)
+
+            let sortDescriptor = NSSortDescriptor(key: "presentingDate", ascending: false)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "currentActiveNotes")
+            fetchedResultsController.delegate = self
+            do {
+                try fetchedResultsController.performFetch()
+                fetchedItems = fetchedResultsController.fetchedObjects ?? []
+            } catch {
+                fatalError("The fetch could not be performed: \(error.localizedDescription)")
+            }
         }
     }
 
@@ -178,6 +185,9 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     // MARK: Core functionality
 
     private func displayNextItem() {
+
+        /// Try further fetch before showing empty screen
+        setUpAndPerformFetch()
 
         let isItemAvailable = !fetchedItems.isEmpty
 
@@ -193,6 +203,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
     /// Fill in content into the controller's view fields
     private func updateNoteOnScreen() {
+
         titleLabel.text = displayedItem.title
         creationDateLabel.text = "Created on \(dateFormatter.string(from: displayedItem.creationDate!))"
         presentingDateLabel.text = "Displayed on \(dateFormatter.string(from: displayedItem.presentingDate!))"
