@@ -132,6 +132,11 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        print("Segue to detail view not yet implemented")
+        /// Instantiate and push viewcontroller for presenting note in detail mode
+        let detailController = self.storyboard?.instantiateViewController(identifier: "DetailViewController") as! DetailViewController
+
+        detailController.dataController = dataController
+        detailController.note = fetchedResultsController.object(at: indexPath)
+        navigationController?.pushViewController(detailController, animated: true)
     }
 }

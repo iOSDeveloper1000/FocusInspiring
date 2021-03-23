@@ -205,8 +205,8 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     private func updateNoteOnScreen() {
 
         titleLabel.text = displayedItem.title
-        creationDateLabel.text = "Created on \(dateFormatter.string(from: displayedItem.creationDate!))"
-        presentingDateLabel.text = "Displayed on \(dateFormatter.string(from: displayedItem.presentingDate!))"
+        creationDateLabel.text = "Created: \(dateFormatter.string(from: displayedItem.creationDate!))"
+        presentingDateLabel.text = "Displayed: \(dateFormatter.string(from: displayedItem.presentingDate!))"
         if let imgData = displayedItem.image {
             imageView.image = UIImage(data: imgData)
         } else {
