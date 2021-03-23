@@ -18,6 +18,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
 
+    @IBOutlet weak var contentStackView: UIStackView!
+
     @IBOutlet weak var deleteButton: UIBarButtonItem!
 
 
@@ -37,17 +39,21 @@ class DetailViewController: UIViewController {
 
     // MARK: Life cycle
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        /// Further preparation of view
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         updateNoteOnScreen()
     }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        /// Change to horizontal axis in landscape orientation
+        contentStackView.axis = (UIScreen.main.bounds.height > UIScreen.main.bounds.width) ? .vertical : .horizontal
+    }
+
+
+    // MARK: Action
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
         guard  note != nil else {

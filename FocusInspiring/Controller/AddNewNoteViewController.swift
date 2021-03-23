@@ -242,7 +242,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     private func toggleUserInterface(enable: Bool) {
         titleField.isEnabled = enable
-        textView.isUserInteractionEnabled = enable
+        textView.isEditable = enable
         presentInTextField.isEnabled = enable
 
         imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary) ? enable : false

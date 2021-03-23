@@ -30,6 +30,8 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var representInTextField: PickerTextField!
     
+    @IBOutlet weak var contentStackView: UIStackView!
+
     @IBOutlet weak var checkmarkButton: UIBarButtonItem!
     @IBOutlet weak var repeatButton: UIBarButtonItem!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -81,6 +83,13 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         super.viewWillDisappear(animated)
 
         fetchedResultsController = nil
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        /// Change to horizontal axis in landscape orientation
+        contentStackView.axis = (UIScreen.main.bounds.height > UIScreen.main.bounds.width) ? .vertical : .horizontal
     }
 
     override func viewDidLayoutSubviews() {
@@ -253,9 +262,6 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         for barButton in barButtons {
             barButton.isEnabled = show
         }
-
-        /// Permanently disallow editing in this controller
-        textView.isUserInteractionEnabled = false
 
         /// Display/hide UI elements
         let subviews: [UIView] = [titleLabel, creationDateLabel, presentingDateLabel, imageView, textView, representInTextField]
