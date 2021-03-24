@@ -46,7 +46,7 @@ class EditNoteViewController: UIViewController {
         setUpToolbar()
 
         /// Load temporary note into view
-        setUpNoteForEdit()
+        loadNoteOnScreen()
     }
 
     override func viewWillLayoutSubviews() {
@@ -100,10 +100,25 @@ class EditNoteViewController: UIViewController {
     }
 
 
-    // MARK: Setup
+    // MARK: Handler
+
+    func cancelAlertHandler(alertAction: UIAlertAction) {
+        /// Cancel view controller without any edit
+        completion?(false, nil)
+        dismiss(animated: true, completion: nil)
+    }
+
+
+    // MARK: Helper
+
+    /// Set up toolbar elements
+    private func setUpToolbar() {
+        imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
 
     /// Fill in content into the view controller's fields for edit
-    private func setUpNoteForEdit() {
+    private func loadNoteOnScreen() {
         guard let temporaryNote = temporaryNote else {
             popupAlert(title: "Internal error", message: "Could not load the note for editing.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelAlertHandler(alertAction:)])
             return
@@ -124,15 +139,7 @@ class EditNoteViewController: UIViewController {
         }
     }
 
-    /// Set up toolbar elements
-    private func setUpToolbar() {
-        imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-    }
-
-
-    // MARK: Helper
-
+    /// Present image picker
     private func pickImage(sourceType: UIImagePickerController.SourceType) {
 
         let imagePicker = UIImagePickerController()
@@ -140,15 +147,6 @@ class EditNoteViewController: UIViewController {
         imagePicker.sourceType = sourceType
 
         present(imagePicker, animated: true, completion: nil)
-    }
-
-
-    // MARK: Handler
-
-    func cancelAlertHandler(alertAction: UIAlertAction) {
-        /// Cancel view controller without any edit
-        completion?(false, nil)
-        dismiss(animated: true, completion: nil)
     }
 }
 

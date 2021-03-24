@@ -103,10 +103,15 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         /// Disallow user to edit during save action
         toggleUserInterface(enable: false)
 
-        if let target = getTargetDate() {
-            popupAlert(title: "Your new inspirational note will be saved and presented on \(dateFormatter.string(from: target))", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
-        } else {
+        guard let target = getTargetDate() else {
             popupAlert(title: "Internal error", message: "Cannot compute future date. Try to set a different time period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
+            return
+        }
+
+        if isNoteEmpty() {
+            popupAlert(title: "Empty note", message: "It seems like you have not entered a title or some descriptional elements (like text or image).", alertStyle: .alert, actionTitles: ["Save anyway", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
+        } else {
+            popupAlert(title: "Your new inspirational note will be saved and presented on \(dateFormatter.string(from: target))", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
         }
     }
 
@@ -239,6 +244,22 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
 
     // MARK: Helper
+
+    /**
+     Check whether user-entered note is empty.
+
+     Empty note is defined here as:
+     - empty title OR
+     - NO image AND NO text note entered
+     */
+    private func isNoteEmpty() -> Bool {
+        guard let titleText = titleField.text else {
+            print("Title text could not be reached")
+            return true
+        }
+
+        return titleText.isEmpty || (imageView.image == nil && textView.isEmptyText())
+    }
 
     private func toggleUserInterface(enable: Bool) {
         titleField.isEnabled = enable

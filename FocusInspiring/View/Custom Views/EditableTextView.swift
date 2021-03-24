@@ -50,6 +50,11 @@ class EditableTextView: UITextView, UITextViewDelegate {
         textColor = UIColor.lightGray
     }
 
+    /// Returns true if textview is empty or holding placeholder, false otherwise
+    public func isEmptyText() -> Bool {
+        return text.isEmpty || (text == TextParameter.textPlaceholder)
+    }
+
 
     // MARK: TextView Delegation
 

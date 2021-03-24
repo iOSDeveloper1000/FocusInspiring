@@ -78,6 +78,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
                 self.searchField.isEnabled = true
             }
         } else {
+            /// Cancel search and wait for a new search term by user
             searchField.isEnabled = true
         }
     }
