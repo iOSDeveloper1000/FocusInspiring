@@ -1,5 +1,5 @@
 //
-//  CustomTextField.swift
+//  EditableTextField.swift
 //  FocusInspiring
 //
 //  Created by Arno Seidel on 10.03.21.
@@ -9,9 +9,9 @@
 import UIKit
 
 
-// MARK: CustomTextField: UITextField, UITextFieldDelegate
+// MARK: EditableTextField: UITextField, UITextFieldDelegate
 
-class CustomTextField: UITextField, UITextFieldDelegate {
+class EditableTextField: UITextField, UITextFieldDelegate {
 
     /// Set by caller of this class to save contents at certain points
     var saveContentChanges: ((String) -> Void)?

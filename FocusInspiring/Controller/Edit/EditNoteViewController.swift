@@ -15,8 +15,8 @@ class EditNoteViewController: UIViewController {
 
     // MARK: Outlets
 
-    @IBOutlet weak var titleField: CustomTextField!
-    @IBOutlet weak var textView: CustomTextView!
+    @IBOutlet weak var titleField: EditableTextField!
+    @IBOutlet weak var textView: EditableTextView!
     @IBOutlet weak var imageView: UIImageView!
 
     @IBOutlet weak var imageButton: UIBarButtonItem!

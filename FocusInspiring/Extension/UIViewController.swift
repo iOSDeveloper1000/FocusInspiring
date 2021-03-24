@@ -1,5 +1,5 @@
 //
-//  ViewController+Extension.swift
+//  UIViewController.swift
 //  FocusInspiring
 //
 //  Created by Arno Seidel on 02.03.21.
@@ -23,22 +23,9 @@ extension UIViewController{
             alertController.addAction(action)
         }
 
-        /// Workaround, see below
+        /// Workaround, see in Extension/UIAlertController.swift
         alertController.pruneNegativeWidthConstraints()
         
         present(alertController, animated: true)
-    }
-}
-
-
-extension UIAlertController {
-
-    /// Workaround for the enduring iOS bug with actionsheets described here: https://stackoverflow.com/a/58666480
-    func pruneNegativeWidthConstraints() {
-        for subView in self.view.subviews {
-            for constraint in subView.constraints where constraint.debugDescription.contains("width == - 16") {
-                subView.removeConstraint(constraint)
-            }
-        }
     }
 }

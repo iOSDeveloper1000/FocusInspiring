@@ -9,6 +9,8 @@
 import UIKit
 
 
+// MARK: Protocol Emptiable
+
 /// Methods for indicating an empty UIViewController
 protocol Emptiable: UIViewController {
 
@@ -21,6 +23,8 @@ protocol Emptiable: UIViewController {
     func updateEmptyViewLayout()
 }
 
+
+// MARK: Extension
 
 extension Emptiable {
 

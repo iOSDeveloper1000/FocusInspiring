@@ -20,8 +20,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     // MARK: Outlets
 
-    @IBOutlet weak var titleField: CustomTextField!
-    @IBOutlet weak var textView: CustomTextView!
+    @IBOutlet weak var titleField: EditableTextField!
+    @IBOutlet weak var textView: EditableTextView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var presentInTextField: PickerTextField!
     
@@ -176,7 +176,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
 
         let keys = [DefaultKey.timeCountForPicker, DefaultKey.timeUnitForPicker]
-        periodData = PeriodData(countMax: periodCounterMaxValue, saveKeys: keys, preText: "Will be presented in: ")
+        periodData = PeriodData(countMax: DataParameter.periodCounterMaxValue, saveKeys: keys, preText: "Will be presented in: ")
         presentInTextField.setup(with: periodData)
     }
 
@@ -202,7 +202,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         newItem.title = titleField.text
 
         /// Save text note if one was created
-        if textView.text != CustomTextView.TextConstant.defaultPlaceholder {
+        if textView.text != TextParameter.textPlaceholder {
             newItem.attributedText = textView.attributedText
         }
 

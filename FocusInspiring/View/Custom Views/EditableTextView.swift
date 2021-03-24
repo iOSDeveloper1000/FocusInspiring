@@ -1,5 +1,5 @@
 //
-//  CustomTextView.swift
+//  EditableTextView.swift
 //  FocusInspiring
 //
 //  Created by Arno Seidel on 03.03.21.
@@ -9,24 +9,20 @@
 import UIKit
 
 
-// MARK: CustomTextView: UITextView, UITextViewDelegate
+// MARK: EditableTextView: UITextView, UITextViewDelegate
 
-class CustomTextView: UITextView, UITextViewDelegate {
+class EditableTextView: UITextView, UITextViewDelegate {
 
-    struct TextConstant {
-        static let defaultPlaceholder = "Enter your text note here"
-
-        static let defaultTextFontSize: CGFloat = 16
-    }
+    // MARK: Properties
 
     /// Routine set by caller of this class to save contents at certain points
     var saveContentChanges: ((NSAttributedString) -> Void)?
 
     private var attributedPlaceholder: NSAttributedString {
-        let placeholder = NSMutableAttributedString(string: TextConstant.defaultPlaceholder)
+        let placeholder = NSMutableAttributedString(string: TextParameter.textPlaceholder)
 
         let range = NSRange(location: 0, length: placeholder.string.utf16.count)
-        placeholder.setAttributes([.font: UIFont.systemFont(ofSize: TextConstant.defaultTextFontSize)], range: range)
+        placeholder.setAttributes([.font: UIFont.systemFont(ofSize: TextParameter.textFontSize)], range: range)
 
         return placeholder
     }
@@ -81,11 +77,11 @@ class CustomTextView: UITextView, UITextViewDelegate {
     // MARK: Toolbar Actions
 
     @IBAction func boldPressed(sender: Any) {
-        addFormatAttribute(.font, value: UIFont.boldSystemFont(ofSize: TextConstant.defaultTextFontSize), in: selectedRange)
+        addFormatAttribute(.font, value: UIFont.boldSystemFont(ofSize: TextParameter.textFontSize), in: selectedRange)
     }
 
     @IBAction func italicPressed(sender: Any) {
-        addFormatAttribute(.font, value: UIFont.italicSystemFont(ofSize: TextConstant.defaultTextFontSize), in: selectedRange)
+        addFormatAttribute(.font, value: UIFont.italicSystemFont(ofSize: TextParameter.textFontSize), in: selectedRange)
     }
 
     @IBAction func underlinePressed(sender: Any) {
@@ -134,7 +130,7 @@ class CustomTextView: UITextView, UITextViewDelegate {
             newAttributedString.addAttribute(name, value: value!, range: range)
         } else {
             /// Clear formatting to app default
-            newAttributedString.setAttributes([.font: UIFont.systemFont(ofSize: TextConstant.defaultTextFontSize)], range: range)
+            newAttributedString.setAttributes([.font: UIFont.systemFont(ofSize: TextParameter.textFontSize)], range: range)
         }
 
         let selectedTextRangeCopy = selectedTextRange

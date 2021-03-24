@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */; };
-		E72EE63A25F97DE400B228C5 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EE63925F97DE400B228C5 /* CustomTextField.swift */; };
+		E72EE63A25F97DE400B228C5 /* EditableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EE63925F97DE400B228C5 /* EditableTextField.swift */; };
 		E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E732C72F25DBE11800A4CE31 /* AppDelegate.swift */; };
 		E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E732C73125DBE11800A4CE31 /* SceneDelegate.swift */; };
 		E732C73725DBE11800A4CE31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E732C73525DBE11800A4CE31 /* Main.storyboard */; };
@@ -25,25 +25,26 @@
 		E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882E25E54DD90020466A /* AddNewNoteViewController.swift */; };
 		E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */; };
 		E76BF3E825E915D400EE4992 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E725E915D400EE4992 /* RootViewController.swift */; };
-		E7AE381126029E8E00C7AE3A /* PickerView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE381026029E8E00C7AE3A /* PickerView+Extension.swift */; };
+		E77042AC260B588D00335445 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77042AB260B588D00335445 /* UIViewController.swift */; };
+		E77042C2260B8A6100335445 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77042C1260B8A6100335445 /* UIAlertController.swift */; };
+		E7AE381126029E8E00C7AE3A /* UIPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE381026029E8E00C7AE3A /* UIPickerView.swift */; };
 		E7B046D1260223070051FDA4 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B046D0260223070051FDA4 /* PickerTextField.swift */; };
 		E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B046D426026D0B0051FDA4 /* PickerData.swift */; };
 		E7B046D926026F700051FDA4 /* PeriodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B046D826026F700051FDA4 /* PeriodData.swift */; };
 		E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */; };
 		E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */; };
 		E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */; };
-		E7DF981B25EE53C000026EE3 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */; };
 		E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */; };
 		E7E29BEC25FFCFB600FF7CE7 /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */; };
 		E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */; };
-		E7ED60B225EFA9DC00811762 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* CustomTextView.swift */; };
+		E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* EditableTextView.swift */; };
 		E7F3141B2603B5100041F05C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3141A2603B5100041F05C /* Constants.swift */; };
 		E7F3835D2609FB9A002D28B9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3835C2609FB9A002D28B9 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		E72EE63925F97DE400B228C5 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		E72EE63925F97DE400B228C5 /* EditableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextField.swift; sourceTree = "<group>"; };
 		E732C72C25DBE11800A4CE31 /* FocusInspiring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusInspiring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E732C72F25DBE11800A4CE31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E732C73125DBE11800A4CE31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,18 +63,19 @@
 		E769882E25E54DD90020466A /* AddNewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteViewController.swift; sourceTree = "<group>"; };
 		E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InspirationItem+Extension.swift"; sourceTree = "<group>"; };
 		E76BF3E725E915D400EE4992 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		E7AE381026029E8E00C7AE3A /* PickerView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PickerView+Extension.swift"; sourceTree = "<group>"; };
+		E77042AB260B588D00335445 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		E77042C1260B8A6100335445 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		E7AE381026029E8E00C7AE3A /* UIPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPickerView.swift; sourceTree = "<group>"; };
 		E7B046D0260223070051FDA4 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		E7B046D426026D0B0051FDA4 /* PickerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerData.swift; sourceTree = "<group>"; };
 		E7B046D826026F700051FDA4 /* PeriodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodData.swift; sourceTree = "<group>"; };
 		E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCell.swift; sourceTree = "<group>"; };
 		E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpStatusResponse.swift; sourceTree = "<group>"; };
 		E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchResponse.swift; sourceTree = "<group>"; };
-		E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringTransformer.swift; sourceTree = "<group>"; };
 		E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
 		E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCollectionViewController.swift; sourceTree = "<group>"; };
-		E7ED60B125EFA9DC00811762 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		E7ED60B125EFA9DC00811762 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		E7F3141A2603B5100041F05C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E7F3835C2609FB9A002D28B9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,12 +112,13 @@
 			children = (
 				E732C72F25DBE11800A4CE31 /* AppDelegate.swift */,
 				E732C73125DBE11800A4CE31 /* SceneDelegate.swift */,
-				E732C74025DBE11900A4CE31 /* Info.plist */,
-				E769881525E549030020466A /* Storyboards */,
-				E769881625E549140020466A /* Assets */,
 				E769881325E548E60020466A /* Model */,
 				E769881E25E54BF80020466A /* View */,
 				E769882625E54C760020466A /* Controller */,
+				E769881525E549030020466A /* Storyboard */,
+				E77042BF260B89CE00335445 /* Extension */,
+				E732C73B25DBE11900A4CE31 /* Assets.xcassets */,
+				E732C74025DBE11900A4CE31 /* Info.plist */,
 			);
 			path = FocusInspiring;
 			sourceTree = "<group>";
@@ -123,46 +126,29 @@
 		E769881325E548E60020466A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E7F8AA1D26050FFE005DE926 /* Protocols */,
-				E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */,
-				E7D7441625FCCE59007D4FB7 /* Network Query */,
-				E769881025E548420020466A /* DataController.swift */,
-				E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */,
-				E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */,
+				E77042BE260B88B200335445 /* Custom Data */,
+				E77042AF260B85DC00335445 /* Data Model */,
+				E7D7441625FCCE59007D4FB7 /* Network */,
 				E7F3141A2603B5100041F05C /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E769881525E549030020466A /* Storyboards */ = {
+		E769881525E549030020466A /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
 				E732C73525DBE11800A4CE31 /* Main.storyboard */,
 				E732C73D25DBE11900A4CE31 /* LaunchScreen.storyboard */,
 			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		E769881625E549140020466A /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				E732C73B25DBE11900A4CE31 /* Assets.xcassets */,
-			);
-			path = Assets;
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		E769881E25E54BF80020466A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E769881825E54BCB0020466A /* InspirationalNoteCell.swift */,
-				E7ED60B125EFA9DC00811762 /* CustomTextView.swift */,
-				E72EE63925F97DE400B228C5 /* CustomTextField.swift */,
-				E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */,
-				E7B046D0260223070051FDA4 /* PickerTextField.swift */,
-				E7B046D726026F270051FDA4 /* Protocols */,
-				E7B046D826026F700051FDA4 /* PeriodData.swift */,
-				E7AE381026029E8E00C7AE3A /* PickerView+Extension.swift */,
-				E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */,
+				E77042B1260B863D00335445 /* Custom Cells */,
+				E77042BC260B884A00335445 /* Custom Views */,
+				E77042BD260B886700335445 /* Custom Layout */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,43 +156,108 @@
 		E769882625E54C760020466A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E769882025E54C220020466A /* HomeViewController.swift */,
-				E769882825E54CD60020466A /* ListOfGloryCollectionViewController.swift */,
-				E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */,
-				E769882E25E54DD90020466A /* AddNewNoteViewController.swift */,
-				E76BF3E725E915D400EE4992 /* RootViewController.swift */,
-				E7DF981A25EE53C000026EE3 /* ViewController+Extension.swift */,
-				E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */,
-				E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */,
-				E7F3835C2609FB9A002D28B9 /* DetailViewController.swift */,
+				E77042B2260B869600335445 /* Start */,
+				E77042B5260B86C900335445 /* Present */,
+				E77042B4260B86B500335445 /* Edit */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		E7B046D726026F270051FDA4 /* Protocols */ = {
+		E77042AF260B85DC00335445 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */,
+				E769881025E548420020466A /* DataController.swift */,
+				E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */,
+				E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		E77042B1260B863D00335445 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E769881825E54BCB0020466A /* InspirationalNoteCell.swift */,
+				E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */,
+			);
+			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		E77042B2260B869600335445 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				E76BF3E725E915D400EE4992 /* RootViewController.swift */,
+				E769882025E54C220020466A /* HomeViewController.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		E77042B4260B86B500335445 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				E769882E25E54DD90020466A /* AddNewNoteViewController.swift */,
+				E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */,
+				E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
+		E77042B5260B86C900335445 /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */,
+				E769882825E54CD60020466A /* ListOfGloryCollectionViewController.swift */,
+				E7F3835C2609FB9A002D28B9 /* DetailViewController.swift */,
+			);
+			path = Present;
+			sourceTree = "<group>";
+		};
+		E77042BC260B884A00335445 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7ED60B125EFA9DC00811762 /* EditableTextView.swift */,
+				E72EE63925F97DE400B228C5 /* EditableTextField.swift */,
+				E7B046D0260223070051FDA4 /* PickerTextField.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		E77042BD260B886700335445 /* Custom Layout */ = {
+			isa = PBXGroup;
+			children = (
+				E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */,
+			);
+			path = "Custom Layout";
+			sourceTree = "<group>";
+		};
+		E77042BE260B88B200335445 /* Custom Data */ = {
 			isa = PBXGroup;
 			children = (
 				E7B046D426026D0B0051FDA4 /* PickerData.swift */,
+				E7B046D826026F700051FDA4 /* PeriodData.swift */,
 			);
-			path = Protocols;
+			path = "Custom Data";
 			sourceTree = "<group>";
 		};
-		E7D7441625FCCE59007D4FB7 /* Network Query */ = {
+		E77042BF260B89CE00335445 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E77042AB260B588D00335445 /* UIViewController.swift */,
+				E73C76532604FE84003BF821 /* Emptiable.swift */,
+				E77042C1260B8A6100335445 /* UIAlertController.swift */,
+				E7AE381026029E8E00C7AE3A /* UIPickerView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		E7D7441625FCCE59007D4FB7 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				E769880D25E5472E0020466A /* NetworkClient.swift */,
 				E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */,
 				E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */,
 			);
-			path = "Network Query";
-			sourceTree = "<group>";
-		};
-		E7F8AA1D26050FFE005DE926 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				E73C76532604FE84003BF821 /* Emptiable.swift */,
-			);
-			path = Protocols;
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,16 +332,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E73C76542604FE84003BF821 /* Emptiable.swift in Sources */,
-				E7DF981B25EE53C000026EE3 /* ViewController+Extension.swift in Sources */,
 				E769881125E548420020466A /* DataController.swift in Sources */,
 				E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */,
 				E769882125E54C220020466A /* HomeViewController.swift in Sources */,
-				E72EE63A25F97DE400B228C5 /* CustomTextField.swift in Sources */,
+				E77042C2260B8A6100335445 /* UIAlertController.swift in Sources */,
+				E72EE63A25F97DE400B228C5 /* EditableTextField.swift in Sources */,
 				E7F3141B2603B5100041F05C /* Constants.swift in Sources */,
 				E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */,
 				E76BF3E825E915D400EE4992 /* RootViewController.swift in Sources */,
 				E7F3835D2609FB9A002D28B9 /* DetailViewController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
+				E77042AC260B588D00335445 /* UIViewController.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
 				E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */,
 				E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */,
@@ -302,10 +354,10 @@
 				E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */,
 				E7B046D926026F700051FDA4 /* PeriodData.swift in Sources */,
 				E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */,
-				E7AE381126029E8E00C7AE3A /* PickerView+Extension.swift in Sources */,
+				E7AE381126029E8E00C7AE3A /* UIPickerView.swift in Sources */,
 				E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */,
 				E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */,
-				E7ED60B225EFA9DC00811762 /* CustomTextView.swift in Sources */,
+				E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */,
 				E769880E25E5472E0020466A /* NetworkClient.swift in Sources */,
 				E769882925E54CD60020466A /* ListOfGloryCollectionViewController.swift in Sources */,
 				E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */,

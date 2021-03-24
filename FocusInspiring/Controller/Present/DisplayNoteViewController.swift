@@ -186,7 +186,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
     private func setUpPickerTextField() {
         let keys = [DefaultKey.timeCountForPicker, DefaultKey.timeUnitForPicker]
-        periodData = PeriodData(countMax: periodCounterMaxValue, saveKeys: keys, preText: "Further cycle for: ", postText: "?")
+        periodData = PeriodData(countMax: DataParameter.periodCounterMaxValue, saveKeys: keys, preText: "Further cycle for: ", postText: "?")
         representInTextField.setup(with: periodData)
     }
 
