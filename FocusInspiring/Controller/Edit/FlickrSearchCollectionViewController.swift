@@ -49,7 +49,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
         searchField.delegate = self
 
         flowLayout?.setLayoutParameters(spacing: ParamFlowLayout.spacing, itemsPerRowPortrait: ParamFlowLayout.itemsPerRowPortrait, itemsPerRowLandscape: ParamFlowLayout.itemsPerRowLandscape)
-        collectionView?.backgroundColor = .systemOrange
+        collectionView?.backgroundColor = .systemYellow
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

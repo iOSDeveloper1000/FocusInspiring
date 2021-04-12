@@ -51,13 +51,13 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="Lcb-je-dad"/>
-                                    <barButtonItem title="Capture photo" image="camera" catalog="system" id="UkY-Tf-YTP">
+                                    <barButtonItem systemItem="camera" id="UkY-Tf-YTP">
                                         <connections>
                                             <action selector="cameraButtonPressed:" destination="cQ3-22-2wb" id="Tz6-kZ-dOy"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="Yta-69-TY5"/>
-                                    <barButtonItem title="Search Flickr Photo" image="magnifyingglass" catalog="system" id="BvF-Gr-ETZ">
+                                    <barButtonItem systemItem="search" id="BvF-Gr-ETZ">
                                         <connections>
                                             <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueToFlickrSearch" id="gIO-Cj-8Gn"/>
                                         </connections>
@@ -124,7 +124,7 @@
                             <constraint firstItem="VPE-BZ-oOj" firstAttribute="bottom" secondItem="lAP-IG-2m3" secondAttribute="bottom" id="vEq-yn-43n"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add New" image="plus" catalog="system" id="BYv-hb-en1"/>
+                    <tabBarItem key="tabBarItem" title="Add New" image="plus.rectangle.on.rectangle" catalog="system" selectedImage="plus.rectangle.on.rectangle" id="BYv-hb-en1"/>
                     <connections>
                         <outlet property="cameraButton" destination="UkY-Tf-YTP" id="LjX-87-KR7"/>
                         <outlet property="clearButton" destination="4cy-tO-Zyb" id="zzk-mb-m7m"/>
@@ -242,7 +242,7 @@
                             <constraint firstAttribute="trailing" secondItem="Qlj-nL-br5" secondAttribute="trailing" constant="20" id="rcX-ZT-khv"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="Q3F-4i-NMZ"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house" id="Q3F-4i-NMZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQu-zZ-9Q5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -433,7 +433,7 @@
                             <constraint firstItem="jr5-c2-hyh" firstAttribute="bottom" secondItem="STV-Oc-L5d" secondAttribute="bottom" constant="10" id="wo5-dH-Nlo"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Daily" id="mda-kk-1Vi"/>
+                    <tabBarItem key="tabBarItem" title="Today" image="ellipsis.bubble" catalog="system" selectedImage="ellipsis.bubble" id="mda-kk-1Vi"/>
                     <connections>
                         <outlet property="checkmarkButton" destination="CIs-p4-EcD" id="DYF-Op-3Zo"/>
                         <outlet property="contentStackView" destination="it9-PW-Txv" id="oci-Sv-QcL"/>
@@ -477,7 +477,7 @@
         <scene sceneID="AaJ-wg-sr0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BUL-Ib-CzD" userLabel="Glory Navigation Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Glory" id="jWP-BN-fZx"/>
+                    <tabBarItem key="tabBarItem" title="Glory" image="graduationcap" catalog="system" selectedImage="graduationcap" id="jWP-BN-fZx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WQ2-9J-Xth">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -551,13 +551,13 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="67a-Sv-Kjk"/>
-                                    <barButtonItem title="Capture photo" image="camera" catalog="system" id="R7i-oU-zse">
+                                    <barButtonItem systemItem="camera" id="R7i-oU-zse">
                                         <connections>
                                             <action selector="cameraButtonPressed:" destination="blz-JR-BZr" id="uj5-LM-0Un"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="nxc-g5-7JB"/>
-                                    <barButtonItem title="Search Flickr Photo" image="magnifyingglass" catalog="system" id="jOw-SM-bJV">
+                                    <barButtonItem systemItem="search" id="jOw-SM-bJV">
                                         <connections>
                                             <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueToFlickrSearch" id="wEF-hf-NEd"/>
                                         </connections>
@@ -734,11 +734,12 @@
         <segue reference="gIO-Cj-8Gn"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="ellipsis.bubble" catalog="system" width="128" height="110"/>
+        <image name="graduationcap" catalog="system" width="128" height="106"/>
+        <image name="house" catalog="system" width="128" height="106"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="96"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.rectangle.on.rectangle" catalog="system" width="128" height="96"/>
         <image name="repeat" catalog="system" width="128" height="99"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
