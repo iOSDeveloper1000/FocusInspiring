@@ -197,7 +197,7 @@
                             </connections>
                         </barButtonItem>
                         <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for Flickr Images         " textAlignment="natural" minimumFontSize="17" id="CEf-YS-YVK" userLabel="Search for Flickr Images">
-                            <rect key="frame" x="87" y="11" width="240.5" height="34"/>
+                            <rect key="frame" x="86.5" y="11" width="241" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
@@ -224,25 +224,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome feeling inspired!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qlj-nL-br5" userLabel="Welcome Label">
-                                <rect key="frame" x="20" y="408.5" width="374" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="zlX-r1-ORQ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cme-j7-h4O">
+                                <rect key="frame" x="50" y="281" width="314" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BLV-Ul-MJd">
+                                <rect key="frame" x="20" y="328" width="374" height="475"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gIZ-uN-vcl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Qlj-nL-br5" firstAttribute="centerY" secondItem="gIZ-uN-vcl" secondAttribute="centerY" id="3rm-5X-gVe"/>
-                            <constraint firstItem="Qlj-nL-br5" firstAttribute="leading" secondItem="gIZ-uN-vcl" secondAttribute="leading" constant="20" id="RDP-5b-dCY"/>
-                            <constraint firstAttribute="trailing" secondItem="Qlj-nL-br5" secondAttribute="trailing" constant="20" id="rcX-ZT-khv"/>
+                            <constraint firstItem="Cme-j7-h4O" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gIZ-uN-vcl" secondAttribute="top" constant="10" id="7j3-81-E52"/>
+                            <constraint firstItem="BLV-Ul-MJd" firstAttribute="top" secondItem="nXp-Qi-ast" secondAttribute="bottom" multiplier="0.5" constant="-120" id="WOO-AB-TL8"/>
+                            <constraint firstItem="gIZ-uN-vcl" firstAttribute="trailing" secondItem="BLV-Ul-MJd" secondAttribute="trailing" constant="20" id="dIN-PS-7kt"/>
+                            <constraint firstItem="gIZ-uN-vcl" firstAttribute="trailing" secondItem="Cme-j7-h4O" secondAttribute="trailing" constant="50" id="gql-fK-Oat"/>
+                            <constraint firstItem="Cme-j7-h4O" firstAttribute="leading" secondItem="gIZ-uN-vcl" secondAttribute="leading" constant="50" id="kiy-kJ-hFi"/>
+                            <constraint firstItem="gIZ-uN-vcl" firstAttribute="bottom" secondItem="BLV-Ul-MJd" secondAttribute="bottom" constant="10" id="o3w-Be-KYP"/>
+                            <constraint firstItem="BLV-Ul-MJd" firstAttribute="leading" secondItem="gIZ-uN-vcl" secondAttribute="leading" constant="20" id="vC4-n7-6rO"/>
+                            <constraint firstItem="Cme-j7-h4O" firstAttribute="bottom" secondItem="BLV-Ul-MJd" secondAttribute="top" multiplier="0.95" constant="-10" id="ws2-pT-3Um"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house" id="Q3F-4i-NMZ"/>
+                    <connections>
+                        <outlet property="imageView" destination="BLV-Ul-MJd" id="Q8x-eJ-ZcT"/>
+                        <outlet property="welcomeLabel" destination="Cme-j7-h4O" id="QPg-LA-boz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQu-zZ-9Q5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

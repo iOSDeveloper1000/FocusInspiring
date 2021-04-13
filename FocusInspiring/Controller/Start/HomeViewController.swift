@@ -13,23 +13,28 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    // MARK: Outlets
+
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+
+
     // MARK: Life cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // @todo
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // @todo
+        imageView.image = UIImage(named: "2021-04_LampIcon")
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
 
-        // @todo
+        let isLandscapeMode = (UIScreen.main.bounds.height < UIScreen.main.bounds.width)
+
+        /// Set layout depending on device orientation
+        welcomeLabel.text = isLandscapeMode ? "WELCOME  FEELING  INSPIRED" : "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED"
+        welcomeLabel.font = .systemFont(ofSize: isLandscapeMode ? 30.0 : 35.0)
+        welcomeLabel.textAlignment = .center
     }
 }
