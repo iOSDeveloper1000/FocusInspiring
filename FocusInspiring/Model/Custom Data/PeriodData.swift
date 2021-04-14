@@ -22,8 +22,8 @@ class PeriodData: NSObject, PickerData {
         case month
         case year
 
-        case second     // @todo - only for easier testing
-        case minute     // @todo - only for easier testing
+        case second     /* Just for facilitating tests */
+        case minute     /* Just for facilitating tests */
 
         var toString: String {
             switch self {

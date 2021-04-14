@@ -42,7 +42,6 @@ class DataController {
             self.backgroundContext = self.persistentContainer.newBackgroundContext()
 
             self.configureContexts()
-            //self.autoSaveBackgroundContext()
             
             completion?()
         }
@@ -61,16 +60,11 @@ class DataController {
 
     /// Normal saving of main managed object context
     func saveViewContext() {
-        
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
-            
-                print("Successfully saved")
             } catch {
-                print("Could not save viewContext: \(error.localizedDescription)")
-                
-                // @todo
+                fatalError("Could not save viewContext: \(error.localizedDescription)")
             }
         }
     }
@@ -81,26 +75,8 @@ class DataController {
             do {
                 try backgroundContext.save()
             } catch {
-                print("Could not save in background: \(error.localizedDescription)")
+                fatalError("Could not save in background: \(error.localizedDescription)")
             }
-        }
-    }
-
-    /// Autosave temporary user input before final save
-    private func autoSaveBackgroundContext(interval: TimeInterval = 40) {
-        print("Autosaving in background (Time: \(Date()))")
-
-        guard interval > 0 else {
-            print("Autosave interval must be positive")
-            return
-        }
-
-        if backgroundContext.hasChanges {
-            try? backgroundContext.save()
-        }
-
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + interval) {
-            self.autoSaveBackgroundContext()
         }
     }
 }
