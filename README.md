@@ -42,7 +42,24 @@ Feel free to play around and use it according to your needs.
 
 ### User Interface
 
-**todo**
+Here, you see some example screenshots explained below:
+
+![WelcomeScreen](/Docs/00_Home.PNG)
+![TodayScreen](/Docs/01_Today.PNG)
+![AddNewScreen](/Docs/02_AddNew.PNG)
+![GloryScreen](/Docs/03_Glory.PNG)
+
+#### _Welcome Screen_
+Initial screen - just showing the app icon and some welcome text.
+
+#### _Today Screen_
+In the _Today_ tab, you get presented all the due inspirational note items starting with the due first note. By tapping on the corresponding button item in the navigation bar, you can then decide to add the displayed note to the _List of Glory_ (checkmark button), go for a further iteration (repeat button), edit the note (opens a separate editing view) or delete it from the app (trash button).
+
+#### _Add New Screen_
+In the _Add New_ tab, you can create and save a new idea coming up to your mind. With the toolbar at the bottom you can add an image from your photo library, take a new photo or search for an image from Flickr (in a separate view). When you are done, you save the note with the button in the navigation bar. Tapping the trash button clears the current entries.
+
+#### _Glory Screen_
+In the _List of Glory_ tab, you see all your successfully implemented ideas as a collection. Tapping an entry opens a note in detail view where you can also delete it.
 
 
 ### How to Build and Run
@@ -50,9 +67,9 @@ Feel free to play around and use it according to your needs.
 
 1. Download or clone the project on your desktop.
 
-2. Provide an API Key for Flickr in the file [NetworkClient.swift](../main/FocusInspiring/Model/Network/NetworkClient.swift)
+1. Provide an API Key for Flickr in the file [NetworkClient.swift](../main/FocusInspiring/Model/Network/NetworkClient.swift)
 
-3. Open the project, build and run the app.
+1. Open the project, build and run the app.
 
 ### Testing the app
 
