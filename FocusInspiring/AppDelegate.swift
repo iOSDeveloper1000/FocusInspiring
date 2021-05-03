@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setUserDefaultsIfFirstLaunch()
 
+        /// Delegate methods implemented in extension
+        UNUserNotificationCenter.current().delegate = self
+
         return true
     }
 
@@ -92,6 +95,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
 
+
+// MARK: UNUserNotificationCenter Delegation
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
+    /// Handle tapped notification when app is closed or in background
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+        let id = response.notification.request.identifier
+        print("Received notification with ID = \(id) when closed")
+
+        // @todo HANDLE APP START FROM NOTIFICATION
+
+        completionHandler()
+    }
+
+    /// Handle notification when app is running
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        let id = notification.request.identifier
+        print("Received notification with ID = \(id) while running")
+
+        // @todo HANDLE NOTIFICATION WHILE APP IS RUNNING
+
+        completionHandler([.banner, .list, .sound])
+    }
+}

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */; };
 		E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FA9F426498E0000D6BE56 /* DevTracking.swift */; };
+		E7202E4E263AE54000715A7F /* LocalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */; };
+		E7202E53263AF0AF00715A7F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7202E52263AF0AF00715A7F /* Notification.swift */; };
 		E72EE63A25F97DE400B228C5 /* EditableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EE63925F97DE400B228C5 /* EditableTextField.swift */; };
 		E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E732C72F25DBE11800A4CE31 /* AppDelegate.swift */; };
 		E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E732C73125DBE11800A4CE31 /* SceneDelegate.swift */; };
@@ -46,6 +48,8 @@
 /* Begin PBXFileReference section */
 		E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		E70FA9F426498E0000D6BE56 /* DevTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevTracking.swift; sourceTree = "<group>"; };
+		E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHandler.swift; sourceTree = "<group>"; };
+		E7202E52263AF0AF00715A7F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E72EE63925F97DE400B228C5 /* EditableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextField.swift; sourceTree = "<group>"; };
 		E732C72C25DBE11800A4CE31 /* FocusInspiring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusInspiring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E732C72F25DBE11800A4CE31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				E77042AF260B85DC00335445 /* Data Model */,
 				E7D7441625FCCE59007D4FB7 /* Network */,
 				E7F3141A2603B5100041F05C /* Constants.swift */,
+				E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */,
+				E7202E52263AF0AF00715A7F /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,6 +360,7 @@
 				E76BF3E825E915D400EE4992 /* RootViewController.swift in Sources */,
 				E7F3835D2609FB9A002D28B9 /* DetailViewController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
+				E7202E4E263AE54000715A7F /* LocalNotificationHandler.swift in Sources */,
 				E77042AC260B588D00335445 /* UIViewController.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
 				E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */,
@@ -362,6 +369,7 @@
 				E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */,
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
 				E7B046D1260223070051FDA4 /* PickerTextField.swift in Sources */,
+				E7202E53263AF0AF00715A7F /* Notification.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
 				E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */,
 				E7B046D926026F700051FDA4 /* PeriodData.swift in Sources */,

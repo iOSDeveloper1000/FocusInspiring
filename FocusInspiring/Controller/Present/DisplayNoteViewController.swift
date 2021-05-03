@@ -233,6 +233,8 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         displayedItem.active = false
         dataController.saveViewContext()
 
+        // @todo DELETE SCHEDULED NOTIFICATION IF APPLICABLE
+
         displayNextItem()
     }
 
@@ -241,6 +243,8 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         displayedItem.presentingDate = getTargetDate()
         dataController.saveViewContext()
 
+        // @todo UPDATE AND SCHEDULE NOTIFICATION
+
         displayNextItem()
     }
 
@@ -248,6 +252,8 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         /// Delete currently displayed note
         dataController.viewContext.delete(displayedItem)
         dataController.saveViewContext()
+
+        // @todo DELETE SCHEDULED NOTIFICATION IF APPLICABLE
 
         displayNextItem()
     }

@@ -237,6 +237,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     func saveHandler(alertAction: UIAlertAction) {
         saveNewItem()
 
+        // @todo ADD AND SCHEDULE NOTIFICATION
+
         /// Clear and reenable user interface for a further note
         clearUserInterface()
         toggleUserInterface(enable: true)
@@ -246,7 +248,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     // MARK: Helper
 
     /**
-     Check whether user-entered note is empty.
+     Check whether user-entered note is empty
 
      Empty note is defined here as:
      - empty title OR
