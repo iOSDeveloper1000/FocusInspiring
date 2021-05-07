@@ -15,18 +15,18 @@ import UserNotifications
  ```
  var handler = LocalNotificationHandler.shared
  let note = Notification(
-     id: "ID_x",
-     title: "Short Reminder",
+     id: UUID,
+     body: "Short Reminder",
      datetime: DateComponents(/* initializers */))
  handler.addNewNotification(note)
  handler.schedule()
 
  // If notification no longer valid
- handler.clearNotification(id: "ID_x")
+ handler.removePendingNotification(id: UUID)
  ```
  Inspired by https://learnappmaking.com/local-notifications-scheduling-swift/
 */
-struct LocalNotificationHandler {
+class LocalNotificationHandler {
 
     // MARK: Properties
 
@@ -44,7 +44,7 @@ struct LocalNotificationHandler {
 
      A notification with an existing ID will remove the former entry.
     */
-    mutating func addNewNotification(_ notification: Notification) {
+    func addNewNotification(_ notification: Notification) {
         notifications = notifications.filter({ $0.id != notification.id })
         notifications.append(notification)
     }
@@ -55,7 +55,7 @@ struct LocalNotificationHandler {
      This also includes added notifcations that have not yet been scheduled.
      A non-existing ID won't have an effect.
     */
-    mutating func removePendingNotification(id: String) {
+    func removePendingNotification(id: String) {
         /// Remove from unscheduled notifications
         notifications = notifications.filter({ $0.id != id })
 
@@ -104,19 +104,26 @@ struct LocalNotificationHandler {
     private func scheduleNotifications() {
 
         for notification in notifications {
+
+            /// Content of notification
             let content = UNMutableNotificationContent()
-            content.title = notification.title
-            //content.subtitle = xy
+            content.body = notification.body ?? "See one of your inspirational notes"
+            // @todo USE LOCALIZED STRINGS: Delays loading of strings till delivery.
+            // content.body = NSString.localizedUserNotificationStringForKey("Hello_message_body", arguments: nil)
+
+            /// Configuration of notification
+            content.badge = 1 // @todo COMPUTE CORRECT NUMBER
             content.sound = .default
 
-            let trigger = UNCalendarNotificationTrigger(dateMatching: notification.datetime, repeats: false)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: notification.dateTime, repeats: false)
 
             let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
 
             UNUserNotificationCenter.current().add(request) { (error) in
-                guard error == nil else { return }
-
-                print("Notification scheduled! --- ID = \(notification.id)")
+                guard error == nil else {
+                    track("Trying to schedule notification: \(error?.localizedDescription as String?)")
+                    return
+                }
             }
         }
     }

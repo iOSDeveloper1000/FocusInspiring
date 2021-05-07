@@ -229,31 +229,53 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     // MARK: Handler
 
     func checkmarkHandler(alertAction: UIAlertAction) {
+        guard let uuid = displayedItem.uuid else {
+            track("GUARD FAILED")
+            return
+        }
+
+        /// Remove scheduled notification if applicable
+        LocalNotificationHandler.shared.removePendingNotification(id: uuid)
+
         /// Set this item to inactive, i.e. put it to List of Glory
         displayedItem.active = false
         dataController.saveViewContext()
-
-        // @todo DELETE SCHEDULED NOTIFICATION IF APPLICABLE
 
         displayNextItem()
     }
 
     func repeatHandler(alertAction: UIAlertAction) {
+        guard let uuid = displayedItem.uuid else {
+            track("GUARD FAILED")
+            return
+        }
+
         /// Change date of next presentation to newly computed date
         displayedItem.presentingDate = getTargetDate()
         dataController.saveViewContext()
 
-        // @todo UPDATE AND SCHEDULE NOTIFICATION
+        /// Update and reschedule user notification
+        // @todo REFACTOR REDUNDANT CODE
+        let notifHandler = LocalNotificationHandler.shared
+        let notice = Notification(id: uuid, body: "You get notified over following note: " + displayedItem.title!, dateTime: DateComponents(calendar: Calendar.autoupdatingCurrent, second: 7)) // @todo SET CORRECT DATETIME
+        notifHandler.addNewNotification(notice)
+        notifHandler.schedule()
 
         displayNextItem()
     }
 
     func deleteHandler(alertAction: UIAlertAction) {
-        /// Delete currently displayed note
+        guard let uuid = displayedItem.uuid else {
+            track("GUARD FAILED")
+            return
+        }
+
+        /// Remove scheduled notification if applicable
+        LocalNotificationHandler.shared.removePendingNotification(id: uuid)
+
+        /// Delete displayed note
         dataController.viewContext.delete(displayedItem)
         dataController.saveViewContext()
-
-        // @todo DELETE SCHEDULED NOTIFICATION IF APPLICABLE
 
         displayNextItem()
     }

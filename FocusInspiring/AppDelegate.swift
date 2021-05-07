@@ -13,9 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setUserDefaultsIfFirstLaunch() {
         if UserDefaults.standard.bool(forKey: DefaultKey.hasLaunchedBefore) {
-            print("App FocusInspiring has launched before")
+            print("App launched before")
         } else {
-            print("First launch of App FocusInspiring")
+            print("First app launch")
 
             /// Initialize user defaults
             UserDefaults.standard.set(0, forKey: DefaultKey.timeCountForPicker)
@@ -102,18 +102,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
-    /// Handle tapped notification when app is closed or in background
+    /// Process user's response to a notification that was delivered in background or closed state
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 
         let id = response.notification.request.identifier
         print("Received notification with ID = \(id) when closed")
 
-        // @todo HANDLE APP START FROM NOTIFICATION
+        // @todo  HANDLE APP START FROM NOTIFICATION
+
+        LocalNotificationHandler.shared.removePendingNotification(id: id)
 
         completionHandler()
     }
 
-    /// Handle notification when app is running
+    /// Handle notification when app is running in foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
         let id = notification.request.identifier
@@ -121,6 +123,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         // @todo HANDLE NOTIFICATION WHILE APP IS RUNNING
 
-        completionHandler([.banner, .list, .sound])
+        LocalNotificationHandler.shared.removePendingNotification(id: id)
+
+        /// Possible UNNotificationPresentationOptions in iOS 14.0: badge, banner, list, sound
+        completionHandler([.banner, .sound])
     }
 }

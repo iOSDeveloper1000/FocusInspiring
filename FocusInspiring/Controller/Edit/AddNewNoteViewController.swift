@@ -197,12 +197,12 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         present(imagePicker, animated: true, completion: nil)
     }
 
-    private func saveNewItem() {
+    private func saveNewItem() -> InspirationItem {
 
         let newItem = InspirationItem(context: dataController.viewContext)
 
         newItem.active = true
-        newItem.creationDate = Date()
+        //newItem.creationDate = Date()
         newItem.presentingDate = getTargetDate()
         newItem.title = titleField.text
 
@@ -217,6 +217,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
 
         dataController.saveViewContext()
+
+        return newItem
     }
 
 
@@ -235,9 +237,19 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
     func saveHandler(alertAction: UIAlertAction) {
-        saveNewItem()
+        let newItem = saveNewItem()
 
-        // @todo ADD AND SCHEDULE NOTIFICATION
+        guard let uuid = newItem.uuid else {
+            track("GUARD FAILED")
+            return
+        }
+
+        /// Add and schedule new user notification
+        // @todo REFACTOR REDUNDANT CODE
+        let notifHandler = LocalNotificationHandler.shared
+        let notice = Notification(id: uuid, body: "You get notified over following note: " + newItem.title!, dateTime: DateComponents(calendar: Calendar.autoupdatingCurrent, second: 7)) // @todo SET CORRECT DATETIME
+        notifHandler.addNewNotification(notice)
+        notifHandler.schedule()
 
         /// Clear and reenable user interface for a further note
         clearUserInterface()

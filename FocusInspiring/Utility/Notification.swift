@@ -12,6 +12,12 @@ import Foundation
 struct Notification {
 
     var id: String
-    var title: String
-    var datetime: DateComponents
+    var body: String?
+    var dateTime: DateComponents
+
+    init(id: String, body: String? = nil, dateTime: DateComponents) {
+        self.id = id
+        self.body = body
+        self.dateTime = dateTime
+    }
 }

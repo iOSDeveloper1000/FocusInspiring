@@ -101,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				E70FA9F426498E0000D6BE56 /* DevTracking.swift */,
+				E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */,
+				E7202E52263AF0AF00715A7F /* Notification.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -141,12 +143,10 @@
 		E769881325E548E60020466A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7F3141A2603B5100041F05C /* Constants.swift */,
 				E77042BE260B88B200335445 /* Custom Data */,
 				E77042AF260B85DC00335445 /* Data Model */,
 				E7D7441625FCCE59007D4FB7 /* Network */,
-				E7F3141A2603B5100041F05C /* Constants.swift */,
-				E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */,
-				E7202E52263AF0AF00715A7F /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

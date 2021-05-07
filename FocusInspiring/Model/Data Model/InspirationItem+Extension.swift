@@ -12,9 +12,10 @@ import CoreData
 
 extension InspirationItem {
     
-    public override func awakeFromInsert() {
+    override public func awakeFromInsert() {
         super.awakeFromInsert()
-        
-        creationDate = Date()
+
+        setPrimitiveValue(Date(), forKey: "creationDate")
+        setPrimitiveValue(UUID().uuidString, forKey: "uuid")
     }
 }
