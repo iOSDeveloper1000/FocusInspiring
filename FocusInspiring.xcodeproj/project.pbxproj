@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */; };
+		E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FA9F426498E0000D6BE56 /* DevTracking.swift */; };
 		E72EE63A25F97DE400B228C5 /* EditableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EE63925F97DE400B228C5 /* EditableTextField.swift */; };
 		E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E732C72F25DBE11800A4CE31 /* AppDelegate.swift */; };
 		E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E732C73125DBE11800A4CE31 /* SceneDelegate.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		E70FA9F426498E0000D6BE56 /* DevTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevTracking.swift; sourceTree = "<group>"; };
 		E72EE63925F97DE400B228C5 /* EditableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextField.swift; sourceTree = "<group>"; };
 		E732C72C25DBE11800A4CE31 /* FocusInspiring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusInspiring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E732C72F25DBE11800A4CE31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E70FA9F626498E0E00D6BE56 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				E70FA9F426498E0000D6BE56 /* DevTracking.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		E732C72325DBE11800A4CE31 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 				E769881E25E54BF80020466A /* View */,
 				E769882625E54C760020466A /* Controller */,
 				E769881525E549030020466A /* Storyboard */,
+				E70FA9F626498E0E00D6BE56 /* Utility */,
 				E77042BF260B89CE00335445 /* Extension */,
 				E732C73B25DBE11900A4CE31 /* Assets.xcassets */,
 				E732C74025DBE11900A4CE31 /* Info.plist */,
@@ -337,6 +348,7 @@
 				E769882125E54C220020466A /* HomeViewController.swift in Sources */,
 				E77042C2260B8A6100335445 /* UIAlertController.swift in Sources */,
 				E72EE63A25F97DE400B228C5 /* EditableTextField.swift in Sources */,
+				E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */,
 				E7F3141B2603B5100041F05C /* Constants.swift in Sources */,
 				E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */,
 				E76BF3E825E915D400EE4992 /* RootViewController.swift in Sources */,
