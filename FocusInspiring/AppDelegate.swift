@@ -102,30 +102,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
-    /// Process user's response to a notification that was delivered in background or closed state
+    /// Called when user taps on a delivered notification no matter whether app is in foreground, background or closed
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 
         let id = response.notification.request.identifier
-        print("Received notification with ID = \(id) when closed")
 
-        // @todo  HANDLE APP START FROM NOTIFICATION
+        /// Determine the user action - Default Action i.e. user tapped on notification
+        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+                track("GUARD FAILED: Scene Delegate not found")
+                return
+            }
+
+            guard let tabBarController = sceneDelegate.window?.rootViewController as? UITabBarController else {
+                track("GUARD FAILED: Root view controller not found")
+                return
+            }
+
+            /// Set tabbar to item Display Note VC
+            tabBarController.selectedIndex = InternalConstant.indexOfDisplayVCInTabBar
+
+        } else if response.actionIdentifier != UNNotificationDismissActionIdentifier {
+            track("Unknown user action after notification was sent")
+        }
 
         LocalNotificationHandler.shared.removePendingNotification(id: id)
 
         completionHandler()
     }
 
-    /// Handle notification when app is running in foreground
+    /// Called when a notification arrives while app is running in foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
         let id = notification.request.identifier
-        print("Received notification with ID = \(id) while running")
-
-        // @todo HANDLE NOTIFICATION WHILE APP IS RUNNING
-
         LocalNotificationHandler.shared.removePendingNotification(id: id)
 
         /// Possible UNNotificationPresentationOptions in iOS 14.0: badge, banner, list, sound
-        completionHandler([.banner, .sound])
+        completionHandler([.banner, .list])
     }
 }
