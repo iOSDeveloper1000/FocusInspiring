@@ -235,7 +235,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
 
         /// Remove scheduled notification if applicable
-        LocalNotificationHandler.shared.removePendingNotification(id: uuid)
+        LocalNotificationHandler.shared.removePendingNotification(uuid: uuid)
 
         /// Set this item to inactive, i.e. put it to List of Glory
         displayedItem.active = false
@@ -255,11 +255,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         dataController.saveViewContext()
 
         /// Update and reschedule user notification
-        // @todo REFACTOR REDUNDANT CODE
-        let notifHandler = LocalNotificationHandler.shared
-        let notice = Notification(id: uuid, body: "You get notified over following note: " + displayedItem.title!, dateTime: DateComponents(calendar: Calendar.autoupdatingCurrent, second: 7)) // @todo SET CORRECT DATETIME
-        notifHandler.addNewNotification(notice)
-        notifHandler.schedule()
+        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: DateComponents(calendar: Calendar.autoupdatingCurrent, second: 7)) // @todo SET CORRECT DATETIME
 
         displayNextItem()
     }
@@ -271,7 +267,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
 
         /// Remove scheduled notification if applicable
-        LocalNotificationHandler.shared.removePendingNotification(id: uuid)
+        LocalNotificationHandler.shared.removePendingNotification(uuid: uuid)
 
         /// Delete displayed note
         dataController.viewContext.delete(displayedItem)

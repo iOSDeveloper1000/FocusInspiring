@@ -245,11 +245,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
 
         /// Add and schedule new user notification
-        // @todo REFACTOR REDUNDANT CODE
-        let notifHandler = LocalNotificationHandler.shared
-        let notice = Notification(id: uuid, body: "You get notified over following note: " + newItem.title!, dateTime: DateComponents(calendar: Calendar.autoupdatingCurrent, second: 7)) // @todo SET CORRECT DATETIME
-        notifHandler.addNewNotification(notice)
-        notifHandler.schedule()
+        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: DateComponents(calendar: Calendar.autoupdatingCurrent, second: 7)) // @todo SET CORRECT DATETIME
 
         /// Clear and reenable user interface for a further note
         clearUserInterface()

@@ -126,7 +126,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             track("Unknown user action after notification was sent")
         }
 
-        LocalNotificationHandler.shared.removePendingNotification(id: id)
+        LocalNotificationHandler.shared.removePendingNotification(uuid: id)
 
         completionHandler()
     }
@@ -135,7 +135,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
         let id = notification.request.identifier
-        LocalNotificationHandler.shared.removePendingNotification(id: id)
+        LocalNotificationHandler.shared.removePendingNotification(uuid: id)
 
         /// Possible UNNotificationPresentationOptions in iOS 14.0: badge, banner, list, sound
         completionHandler([.banner, .list])

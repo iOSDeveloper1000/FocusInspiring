@@ -13,18 +13,17 @@ import UserNotifications
 
  Normal usage is as described in following example:
  ```
- var handler = LocalNotificationHandler.shared
- let note = Notification(
-     id: UUID,
-     body: "Short Reminder",
-     datetime: DateComponents(/* initializers */))
- handler.addNewNotification(note)
- handler.schedule()
+ let handler = LocalNotificationHandler.shared
+
+ // (Re)Schedule a notification based on an ID system
+ handler.convenienceSchedule(
+    uuid: UUID,
+    body: "Short Reminder",
+    dateTime: DateComponents(/*initializers*/))
 
  // If notification no longer valid
  handler.removePendingNotification(id: UUID)
  ```
- Inspired by https://learnappmaking.com/local-notifications-scheduling-swift/
 */
 class LocalNotificationHandler {
 
@@ -38,6 +37,23 @@ class LocalNotificationHandler {
 
 
     // MARK: Public API
+
+    /**
+     Conveniently schedule a new notification or reschedule an existing notification
+
+     Constructs a notification object from the given arguments and (re)schedules it. Using an existing uuid will overwrite a formerly scheduled notification.
+     - Parameter uuid: The UUID to identify a notification.
+     - Parameter body: The body string to be used for the notification.
+     - Parameter dateTime: DateComponents to use as a trigger condition.
+     */
+    func convenienceSchedule(uuid: String, body: String, dateTime: DateComponents) {
+
+        let notification = Notification(id: uuid, body: body, dateTime: dateTime)
+
+        addNewNotification(notification)
+
+        schedule()
+    }
 
     /**
      Add a notification to the handler singleton
@@ -54,13 +70,14 @@ class LocalNotificationHandler {
 
      This also includes added notifcations that have not yet been scheduled.
      A non-existing ID won't have an effect.
+     - Parameter uuid: The UUID to identify the notification to be removed.
     */
-    func removePendingNotification(id: String) {
+    func removePendingNotification(uuid: String) {
         /// Remove from unscheduled notifications
-        notifications = notifications.filter({ $0.id != id })
+        notifications = notifications.filter({ $0.id != uuid })
 
         /// Remove from pending notification requests
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [uuid])
     }
 
     /// List all the scheduled notifications
@@ -107,9 +124,7 @@ class LocalNotificationHandler {
 
             /// Content of notification
             let content = UNMutableNotificationContent()
-            content.body = notification.body ?? "See one of your inspirational notes"
-            // @todo USE LOCALIZED STRINGS: Delays loading of strings till delivery.
-            // content.body = NSString.localizedUserNotificationStringForKey("Hello_message_body", arguments: nil)
+            content.body = notification.body
 
             /// Configuration of notification
             content.badge = 1 // @todo COMPUTE CORRECT NUMBER
