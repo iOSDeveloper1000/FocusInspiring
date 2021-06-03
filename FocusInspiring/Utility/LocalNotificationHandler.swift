@@ -122,12 +122,10 @@ class LocalNotificationHandler {
 
         for notification in notifications {
 
-            /// Content of notification
+            /// Content and configuration of notification
             let content = UNMutableNotificationContent()
             content.body = notification.body
-
-            /// Configuration of notification
-            content.badge = 1 // @todo COMPUTE CORRECT NUMBER
+            content.badge = 1 // @opt-todo INCREASE BADGE NUMBER FOR SUCCESSIVE NOTIFICATIONS
             content.sound = .default
 
             let trigger = UNCalendarNotificationTrigger(dateMatching: notification.dateTime, repeats: false)
