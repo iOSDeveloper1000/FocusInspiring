@@ -46,12 +46,19 @@ class SettingsViewController: UITableViewController {
 
         if checkmarkCellIdentifiers.contains(identifier) {
 
-            /// Toggle accessory type
+            /// Handling cells that toggle checkmark accesssory on tap
+
             let selectedRow = tableView.cellForRow(at: indexPath)
 
             selectedRow?.accessoryType = (selectedRow?.accessoryType == UITableViewCell.AccessoryType.none) ? .checkmark : .none
 
             // @todo Save changed setting programmatically and in persistency
+
+        } else if identifier == "RecommendationCell" {
+
+            /// Handling cell that presents acitivity view controller on tap
+
+            shareAppWithFriends()
         }
 
         return indexPath
@@ -65,9 +72,6 @@ class SettingsViewController: UITableViewController {
         /// Choose segue according to tapped cell
         switch segue.identifier {
 
-        case "ShareWithFriendsSegue":
-            print("@todo Share with Friends")
-
         case "BuyCoffeeSegue":
             print("@todo Buy me a Coffee")
 
@@ -77,5 +81,27 @@ class SettingsViewController: UITableViewController {
         default:
             track("Settings: Segue not found")
         }
+    }
+
+
+    // MARK: Own methods
+
+    private func shareAppWithFriends() {
+        // @todo set correct app id and url: "https://apps.apple.com/us/app/idxxxxxxxxxx"
+        guard let urlStr = URL(string: "https://github.com/iOSDeveloper1000/FocusInspiring" ) else {
+            track("GUARD FAILED: App url not convertible")
+            return
+        }
+
+        let activityVC = UIActivityViewController(activityItems: [urlStr], applicationActivities: nil)
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            if let popup = activityVC.popoverPresentationController {
+                popup.sourceView = self.view
+                popup.sourceRect = CGRect(x: self.view.frame.size.width / 2, y: self.view.frame.size.height / 4, width: 0, height: 0)
+            }
+        }
+
+        present(activityVC, animated: true, completion: nil)
     }
 }
