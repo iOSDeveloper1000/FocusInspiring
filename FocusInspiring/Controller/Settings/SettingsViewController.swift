@@ -13,11 +13,10 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
-    private let VERSION_NUMBER = "0.1" // @todo Move to Constants file + Naming convention check
-
-
     // MARK: Outlets
 
+    @IBOutlet weak var reduceConfirmationsCell: UITableViewCell!
+    @IBOutlet weak var enableTestingCell: UITableViewCell!
     @IBOutlet weak var versionCell: UITableViewCell!
 
 
@@ -26,9 +25,10 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        versionCell.detailTextLabel?.text = VERSION_NUMBER
+        versionCell.detailTextLabel?.text = AppParameter.versionNumber
 
-        // @todo Load user settings from persistency
+        reduceConfirmationsCell.accessoryType = UserDefaults.standard.bool(forKey: DefaultKey.reduceConfirmations) ? .checkmark : .none
+        enableTestingCell.accessoryType = UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode) ? .checkmark : .none
     }
 
 
@@ -42,23 +42,21 @@ class SettingsViewController: UITableViewController {
             return indexPath
         }
 
-        let checkmarkCellIdentifiers: [String] = ["ReduceConfirmationsCell", "EnableTestingCell"]
+        switch identifier {
+        case "ReduceConfirmationsCell":
+            handleAccessoryTypeAndPersistency(for: reduceConfirmationsCell, withKey: DefaultKey.reduceConfirmations)
 
-        if checkmarkCellIdentifiers.contains(identifier) {
+        case "EnableTestingCell":
+            handleAccessoryTypeAndPersistency(for: enableTestingCell, withKey: DefaultKey.enableTestingMode)
 
-            /// Handling cells that toggle checkmark accesssory on tap
-
-            let selectedRow = tableView.cellForRow(at: indexPath)
-
-            selectedRow?.accessoryType = (selectedRow?.accessoryType == UITableViewCell.AccessoryType.none) ? .checkmark : .none
-
-            // @todo Save changed setting programmatically and in persistency
-
-        } else if identifier == "RecommendationCell" {
-
-            /// Handling cell that presents acitivity view controller on tap
-
+        case "RecommendationCell":
             shareAppWithFriends()
+
+        case "VersionCell", "CoffeeButtonCell", "AboutAppCell":
+            break
+
+        default:
+            track("UNKNOWN DEFAULT: Reuse identifier in Settings table")
         }
 
         return indexPath
@@ -79,17 +77,16 @@ class SettingsViewController: UITableViewController {
             print("@todo About this App")
 
         default:
-            track("Settings: Segue not found")
+            track("UNKNOWN DEFAULT: Segue in Settings")
         }
     }
 
 
-    // MARK: Own methods
+    // MARK: Helper
 
     private func shareAppWithFriends() {
-        // @todo set correct app id and url: "https://apps.apple.com/us/app/idxxxxxxxxxx"
-        guard let urlStr = URL(string: "https://github.com/iOSDeveloper1000/FocusInspiring" ) else {
-            track("GUARD FAILED: App url not convertible")
+        guard let urlStr = URL(string: AppParameter.appUrl ) else {
+            track("GUARD FAILED: App url could not be converted")
             return
         }
 
@@ -103,5 +100,13 @@ class SettingsViewController: UITableViewController {
         }
 
         present(activityVC, animated: true, completion: nil)
+    }
+
+    private func handleAccessoryTypeAndPersistency(for cell: UITableViewCell, withKey key: String) {
+
+        let isNoneAccessoryType = (cell.accessoryType == .none)
+
+        cell.accessoryType = isNoneAccessoryType ? .checkmark : .none
+        UserDefaults.standard.setValue(isNoneAccessoryType, forKey: key)
     }
 }

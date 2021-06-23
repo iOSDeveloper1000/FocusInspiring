@@ -463,6 +463,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="NYR-E5-tml"/>
                     <connections>
+                        <outlet property="enableTestingCell" destination="pAE-mG-MJH" id="8W3-1c-wKp"/>
+                        <outlet property="reduceConfirmationsCell" destination="wgu-12-kBO" id="PQx-Hr-ePT"/>
                         <outlet property="versionCell" destination="gDr-qX-XfV" id="8NR-i5-5QU"/>
                     </connections>
                 </tableViewController>

@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(0, forKey: DefaultKey.timeCountForPicker)
             UserDefaults.standard.set(0, forKey: DefaultKey.timeUnitForPicker)
 
+            UserDefaults.standard.setValue(false, forKey: DefaultKey.reduceConfirmations)
+            UserDefaults.standard.setValue(false, forKey: DefaultKey.enableTestingMode)
+
             UserDefaults.standard.set(true, forKey: DefaultKey.hasLaunchedBefore)
             UserDefaults.standard.synchronize()
         }
