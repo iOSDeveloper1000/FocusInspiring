@@ -16,7 +16,7 @@ class PeriodData: NSObject, PickerData {
 
     // MARK: Internal Type for Time Periods
 
-    private enum DateUnit: Int, CaseIterable {
+    enum DateUnit: Int, CaseIterable {
         case day = 0
         case week
         case month
@@ -31,6 +31,7 @@ class PeriodData: NSObject, PickerData {
             case .week: return "week"
             case .month: return "month"
             case .year: return "year"
+
             case .second: return "second"
             case .minute: return "minute"
             }
@@ -53,14 +54,10 @@ class PeriodData: NSObject, PickerData {
     var postText: String
 
 
+    // @todo separate specialized things to own method(s)
     init(countMax: Int, saveKeys: [String?]? = nil, preText: String = "", postText: String = "") {
-        data = [[], []]
 
-        /// First component represents the count values
-        data[0] = (1...countMax).map { String($0) }
-
-        /// Second component represents the time units: day, week, month, ...
-        data[1] = DateUnit.allCases.compactMap { $0.toString + "(s)" }
+        data = setupPickerTitles()
 
         if let keys = saveKeys {
             self.saveKeys = keys
@@ -121,12 +118,13 @@ class PeriodData: NSObject, PickerData {
         var components = DateComponents()
 
         switch unit {
-        case .second: components.second = count
-        case .minute: components.minute = count
         case .day: components.day = count
         case .week: components.weekOfYear = count
         case .month: components.month = count
         case .year: components.year = count
+
+        case .second: components.second = count
+        case .minute: components.minute = count
         }
 
         return Calendar.autoupdatingCurrent.date(byAdding: components, to: Date())
@@ -152,4 +150,26 @@ class PeriodData: NSObject, PickerData {
 
         return data[component][row]
     }
+}
+
+
+// MARK: Fileprivate helper
+
+fileprivate func setupPickerTitles() -> [[String]] {
+
+    /// pickerTitles[0] represents the count values; pickerTitles[1] the date units like day, week, month and so on
+    var pickerTitles: [[String]] = [[], []]
+
+    var selectedDateUnits = PeriodData.DateUnit.allCases
+
+    /// Do not use units second and minute in normal user mode (no testing)
+    if !(UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode)) {
+
+        selectedDateUnits.removeAll { return ($0 == .second || $0 == .minute) }
+    }
+
+    pickerTitles[0] = (1...DataParameter.periodCounterMaxValue).map { String($0) }
+    pickerTitles[1] = selectedDateUnits.compactMap { $0.toString + "(s)" }
+
+    return pickerTitles
 }

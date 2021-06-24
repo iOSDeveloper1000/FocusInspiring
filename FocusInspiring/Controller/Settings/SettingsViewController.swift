@@ -48,6 +48,7 @@ class SettingsViewController: UITableViewController {
 
         case "EnableTestingCell":
             handleAccessoryTypeAndPersistency(for: enableTestingCell, withKey: DefaultKey.enableTestingMode)
+            alertUserWhenChangingSettings()
 
         case "RecommendationCell":
             shareAppWithFriends()
@@ -108,5 +109,10 @@ class SettingsViewController: UITableViewController {
 
         cell.accessoryType = isNoneAccessoryType ? .checkmark : .none
         UserDefaults.standard.setValue(isNoneAccessoryType, forKey: key)
+    }
+
+    private func alertUserWhenChangingSettings() {
+
+        popupAlert(title: "Please close and restart app for modified settings becoming active.", message: "", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
     }
 }
