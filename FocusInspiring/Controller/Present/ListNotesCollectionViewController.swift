@@ -1,8 +1,8 @@
 //
-//  ListOfGloryCollectionViewController.swift
+//  ListNotesCollectionViewController.swift
 //  FocusInspiring
 //
-//  Created by Arno Seidel on 23.02.21.
+//  Created by Arno Seidel on 25.06.21.
 //  Copyright © 2021 Arno Seidel. All rights reserved.
 //
 
@@ -10,14 +10,9 @@ import UIKit
 import CoreData
 
 
-// MARK: ListOfGloryCollectionViewController: UICollectionViewController, NSFetchedResultsControllerDelegate
+// MARK: ListNotesCollectionViewController: UIViewController
 
-class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable, NSFetchedResultsControllerDelegate {
-    
-    // MARK: Outlets
-
-    @IBOutlet weak var flowLayout: CollectionViewFlowLayout!
-
+class ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate, Emptiable {
 
     // MARK: Properties
 
@@ -26,26 +21,27 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
 
     var backgroundLabel: UILabel?
 
-    private let reuseIdentifier = "InspirationalNoteIdentifier"
 
-    private let emptyViewTitle = "List still empty"
-    private let emptyViewMessage = "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet."
+    // MARK: Outlets
 
-    private struct ParamFlowLayout {
-        static let spacing: CGFloat = 15
-        static let itemsPerRowPortrait: Int = 2
-        static let itemsPerRowLandscape: Int = 3
-    }
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var flowLayout: CollectionViewFlowLayout!
 
 
-    // MARK: Life cycle
+    // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpFetchedResultsController()
 
-        flowLayout?.setLayoutParameters(spacing: ParamFlowLayout.spacing, itemsPerRowPortrait: ParamFlowLayout.itemsPerRowPortrait, itemsPerRowLandscape: ParamFlowLayout.itemsPerRowLandscape)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
+        let layoutParam = LayoutParameter.ListNotesCollectionView.self
+        flowLayout.setLayoutParameters(lineSpacing: layoutParam.lineSpacing, interitemSpacing: layoutParam.interitemSpacing, itemsPerRowPortrait: layoutParam.itemsPerRowPortrait, itemsPerRowLandscape: layoutParam.itemsPerRowLandscape)
+
+        collectionView.collectionViewLayout = flowLayout
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +50,7 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
         setUpFetchedResultsController()
 
         collectionView.reloadData()
+        flowLayout?.invalidateLayout()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,35 +88,38 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
         do {
             try fetchedResultsController.performFetch()
         } catch {
+            // @todo INFORM USER WITH A POP-UP
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
     }
 
 
-    // MARK: CollectionView Data Source & Delegation
+    // MARK: Data Source & Delegation
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
 
         return fetchedResultsController.sections?.count ?? 1
     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         let count = fetchedResultsController.sections?[section].numberOfObjects ?? 0
 
-        (count < 1) ? setEmptyViewLabel(title: emptyViewTitle, message: emptyViewMessage) : removeEmptyViewLabel()
+        /// Show or hide a background label that appears when list is empty
+        let emptyLabel = EmptyViewLabel.ListNotesCollectionView.self
+        (count < 1) ? setEmptyViewLabel(title: emptyLabel.title, message: emptyLabel.message) : removeEmptyViewLabel()
 
         return count
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InspirationalNoteCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.inspirationalNoteCell, for: indexPath) as! InspirationalNoteCell
 
         let note = fetchedResultsController.object(at: indexPath)
 
         /// Equip cell with label and (default) image
-        cell.subTitle.text = (note.title ?? "").isEmpty ? "<no title>" : note.title
+        cell.subtitle.text = (note.title ?? "").isEmpty ? "<no title>" : note.title
 
         if let img = note.image {
             cell.imageView.image = UIImage(data: img)
@@ -127,16 +127,22 @@ class ListOfGloryCollectionViewController: UICollectionViewController, Emptiable
             cell.imageView.image = UIImage(systemName: "photo")
         }
 
+        cell.layoutIfNeeded()
+
         return cell
     }
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         /// Instantiate and push viewcontroller for presenting note in detail mode
-        let detailController = self.storyboard?.instantiateViewController(identifier: "DetailViewController") as! DetailViewController
+        let detailNoteVC = self.storyboard?.instantiateViewController(identifier: ReuseIdentifier.detailNoteViewController) as! DetailNoteViewController
 
-        detailController.dataController = dataController
-        detailController.note = fetchedResultsController.object(at: indexPath)
-        navigationController?.pushViewController(detailController, animated: true)
+        detailNoteVC.dataController = dataController
+        detailNoteVC.note = fetchedResultsController.object(at: indexPath)
+        navigationController?.pushViewController(detailNoteVC, animated: true)
     }
+
+    /*func collectionView(UICollectionView, contextMenuConfigurationForItemAt: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        // @opt-todo IMPLEMENT CONTEXT MENU
+    }*/
 }

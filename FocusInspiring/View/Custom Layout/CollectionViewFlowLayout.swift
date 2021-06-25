@@ -13,8 +13,9 @@ import UIKit
 
 class CollectionViewFlowLayout: UICollectionViewFlowLayout {
 
-    // MARK: Properties (with defaults)
+    // MARK: Properties
 
+    /* Initially filled with default values */
     var lineSpacing: CGFloat = 20
     var interitemSpacing: CGFloat = 10
     var itemsPerRowPortrait: CGFloat = 3
@@ -26,9 +27,14 @@ class CollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepare() {
         super.prepare()
 
-        guard let collectionView = collectionView else { return }
+        guard let collectionView = collectionView else {
+            track("GUARD FAILED: Collection view in custom flow layout not found")
+            return
+        }
+
 
         // Item size
+
         /// Items per row shall depend on UI orientation
         let itemsPerRow = UIScreen.isDeviceOrientationPortrait() ? itemsPerRowPortrait : itemsPerRowLandscape
 
@@ -38,21 +44,23 @@ class CollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         itemSize = CGSize(width: cellSize, height: cellSize)
 
+
         // Edge insets
-        /// Use equally spaced insets
+
         let inset = lineSpacing
 
+        /// Use equally spaced insets
         sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+
 
         // Spacing
 
         minimumLineSpacing = lineSpacing
-
         minimumInteritemSpacing = interitemSpacing
     }
 
 
-    // MARK: Setting parameters
+    // MARK: Set Parameters
 
     func setLayoutParameters(spacing: CGFloat, itemsPerRowPortrait: Int, itemsPerRowLandscape: Int) {
         setLayoutParameters(lineSpacing: spacing, interitemSpacing: spacing, itemsPerRowPortrait: itemsPerRowPortrait, itemsPerRowLandscape: itemsPerRowLandscape)

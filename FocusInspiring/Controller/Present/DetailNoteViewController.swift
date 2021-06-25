@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  DetailNoteViewController.swift
 //  FocusInspiring
 //
 //  Created by Arno Seidel on 23.03.21.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailNoteViewController: UIViewController {
 
     // MARK: Outlets
 
@@ -69,7 +69,8 @@ class DetailViewController: UIViewController {
     /// Fill in content into the view elements
     private func updateNoteOnScreen() {
         guard  let note = note else {
-            fatalError("Note for detail mode presentation not found")
+            track("GUARD FAILED: Note not found")
+            return
         }
 
         titleLabel.text = note.title

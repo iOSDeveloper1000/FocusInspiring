@@ -34,6 +34,28 @@ struct TextParameter {
     static let titleFontSize: CGFloat = 21
 }
 
+struct LayoutParameter {
+    /// Layout parameters for ListNotesCollectionViewController
+    struct ListNotesCollectionView {
+        static let itemsPerRowPortrait: Int = 3
+        static let itemsPerRowLandscape: Int = 4
+        static let lineSpacing: CGFloat = 1.0
+        static let interitemSpacing: CGFloat = 4.0
+    }
+
+    // Add layout parameters for further views here.
+}
+
+struct EmptyViewLabel {
+    /// Label text for ListNotesCollectionViewController
+    struct ListNotesCollectionView {
+        static let title = "List still empty"
+        static let message = "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet."
+    }
+
+    // Add further empty view label text here.
+}
+
 
 // MARK: Internal Keys and Parameters
 
@@ -51,4 +73,14 @@ struct DefaultKey {
     /// User Settings
     static let reduceConfirmations = "Key for Reducing Number of Confirmations"
     static let enableTestingMode = "Key for Enabling Easier Testing"
+}
+
+/// Reuse Identifiers used across the app
+struct ReuseIdentifier {
+
+    // Identifiers for cells
+    static let inspirationalNoteCell = "InspirationalNoteCellIdentifier"
+
+    // Identifiers for view controllers
+    static let detailNoteViewController = "DetailNoteViewControllerIdentifier"
 }

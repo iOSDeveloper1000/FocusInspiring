@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */; };
+		E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */; };
 		E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FA9F426498E0000D6BE56 /* DevTracking.swift */; };
 		E7202E4E263AE54000715A7F /* LocalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */; };
 		E7202E53263AF0AF00715A7F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7202E52263AF0AF00715A7F /* Notification.swift */; };
@@ -24,7 +25,6 @@
 		E769881125E548420020466A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881025E548420020466A /* DataController.swift */; };
 		E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881825E54BCB0020466A /* InspirationalNoteCell.swift */; };
 		E769882125E54C220020466A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882025E54C220020466A /* HomeViewController.swift */; };
-		E769882925E54CD60020466A /* ListOfGloryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882825E54CD60020466A /* ListOfGloryCollectionViewController.swift */; };
 		E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */; };
 		E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882E25E54DD90020466A /* AddNewNoteViewController.swift */; };
 		E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */; };
@@ -45,11 +45,12 @@
 		E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */; };
 		E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* EditableTextView.swift */; };
 		E7F3141B2603B5100041F05C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3141A2603B5100041F05C /* Constants.swift */; };
-		E7F3835D2609FB9A002D28B9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3835C2609FB9A002D28B9 /* DetailViewController.swift */; };
+		E7F3835D2609FB9A002D28B9 /* DetailNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3835C2609FB9A002D28B9 /* DetailNoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNotesCollectionViewController.swift; sourceTree = "<group>"; };
 		E70FA9F426498E0000D6BE56 /* DevTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevTracking.swift; sourceTree = "<group>"; };
 		E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHandler.swift; sourceTree = "<group>"; };
 		E7202E52263AF0AF00715A7F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -68,7 +69,6 @@
 		E769881025E548420020466A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		E769881825E54BCB0020466A /* InspirationalNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationalNoteCell.swift; sourceTree = "<group>"; };
 		E769882025E54C220020466A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		E769882825E54CD60020466A /* ListOfGloryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfGloryCollectionViewController.swift; sourceTree = "<group>"; };
 		E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNoteViewController.swift; sourceTree = "<group>"; };
 		E769882E25E54DD90020466A /* AddNewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteViewController.swift; sourceTree = "<group>"; };
 		E76BF3E425E90B0700EE4992 /* InspirationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InspirationItem+Extension.swift"; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCollectionViewController.swift; sourceTree = "<group>"; };
 		E7ED60B125EFA9DC00811762 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		E7F3141A2603B5100041F05C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		E7F3835C2609FB9A002D28B9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E7F3835C2609FB9A002D28B9 /* DetailNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,8 +239,8 @@
 			isa = PBXGroup;
 			children = (
 				E769882B25E54D2E0020466A /* DisplayNoteViewController.swift */,
-				E769882825E54CD60020466A /* ListOfGloryCollectionViewController.swift */,
-				E7F3835C2609FB9A002D28B9 /* DetailViewController.swift */,
+				E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */,
+				E7F3835C2609FB9A002D28B9 /* DetailNoteViewController.swift */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -376,9 +376,10 @@
 				E7F3141B2603B5100041F05C /* Constants.swift in Sources */,
 				E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */,
 				E76BF3E825E915D400EE4992 /* RootViewController.swift in Sources */,
-				E7F3835D2609FB9A002D28B9 /* DetailViewController.swift in Sources */,
+				E7F3835D2609FB9A002D28B9 /* DetailNoteViewController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
 				E7202E4E263AE54000715A7F /* LocalNotificationHandler.swift in Sources */,
+				E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */,
 				E77042AC260B588D00335445 /* UIViewController.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
 				E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */,
@@ -398,7 +399,6 @@
 				E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */,
 				E735C0692693598600B27ECE /* UIScreen.swift in Sources */,
 				E769880E25E5472E0020466A /* NetworkClient.swift in Sources */,
-				E769882925E54CD60020466A /* ListOfGloryCollectionViewController.swift in Sources */,
 				E7E12E9E267BA42700057EC7 /* SettingsDetailViewController.swift in Sources */,
 				E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */,
 			);
