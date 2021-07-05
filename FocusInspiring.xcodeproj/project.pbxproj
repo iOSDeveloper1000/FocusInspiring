@@ -10,6 +10,7 @@
 		E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */; };
 		E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */; };
 		E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FA9F426498E0000D6BE56 /* DevTracking.swift */; };
+		E71C96A026934A1600935D06 /* BasicDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71C969F26934A1600935D06 /* BasicDataTypes.swift */; };
 		E7202E4E263AE54000715A7F /* LocalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */; };
 		E7202E53263AF0AF00715A7F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7202E52263AF0AF00715A7F /* Notification.swift */; };
 		E72EE63A25F97DE400B228C5 /* EditableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72EE63925F97DE400B228C5 /* EditableTextField.swift */; };
@@ -52,6 +53,7 @@
 		E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNotesCollectionViewController.swift; sourceTree = "<group>"; };
 		E70FA9F426498E0000D6BE56 /* DevTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevTracking.swift; sourceTree = "<group>"; };
+		E71C969F26934A1600935D06 /* BasicDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDataTypes.swift; sourceTree = "<group>"; };
 		E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHandler.swift; sourceTree = "<group>"; };
 		E7202E52263AF0AF00715A7F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E72EE63925F97DE400B228C5 /* EditableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextField.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				E77042C1260B8A6100335445 /* UIAlertController.swift */,
 				E7AE381026029E8E00C7AE3A /* UIPickerView.swift */,
 				E735C0682693598600B27ECE /* UIScreen.swift */,
+				E71C969F26934A1600935D06 /* BasicDataTypes.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */,
 				E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */,
 				E7E29BEC25FFCFB600FF7CE7 /* EditNoteViewController.swift in Sources */,
+				E71C96A026934A1600935D06 /* BasicDataTypes.swift in Sources */,
 				E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */,
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
 				E7B046D1260223070051FDA4 /* PickerTextField.swift in Sources */,

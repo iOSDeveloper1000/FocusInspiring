@@ -406,7 +406,7 @@
             </objects>
             <point key="canvasLocation" x="1451" y="1381"/>
         </scene>
-        <!--List Collection-->
+        <!--List of Glory-->
         <scene sceneID="p3b-9u-CJt">
             <objects>
                 <viewController id="42o-RE-Bv1" customClass="ListNotesCollectionViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
@@ -414,8 +414,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gdQ-c6-hsh">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gdQ-c6-hsh">
+                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1X5-Ub-4Ls" customClass="CollectionViewFlowLayout" customModule="FocusInspiring" customModuleProvider="target">
                                     <size key="itemSize" width="128" height="128"/>
@@ -462,20 +462,38 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rAA-L8-guZ">
+                                <rect key="frame" x="132" y="98" width="150" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="8JJ-5S-xV4"/>
+                                    <constraint firstAttribute="height" constant="30" id="KYB-Ge-vSB"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Success"/>
+                                    <segment title="Active"/>
+                                </segments>
+                                <connections>
+                                    <action selector="listControlIndexChanged:" destination="42o-RE-Bv1" eventType="valueChanged" id="ZgG-EL-KAb"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JUE-cn-Xqs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="gdQ-c6-hsh" firstAttribute="top" secondItem="JUE-cn-Xqs" secondAttribute="top" id="3TH-JB-d7z"/>
+                            <constraint firstItem="gdQ-c6-hsh" firstAttribute="top" secondItem="JUE-cn-Xqs" secondAttribute="top" constant="50" id="3TH-JB-d7z"/>
+                            <constraint firstItem="rAA-L8-guZ" firstAttribute="top" secondItem="JUE-cn-Xqs" secondAttribute="top" constant="10" id="DUg-er-icq"/>
                             <constraint firstItem="JUE-cn-Xqs" firstAttribute="bottom" secondItem="gdQ-c6-hsh" secondAttribute="bottom" id="ETf-DI-3wl"/>
                             <constraint firstItem="gdQ-c6-hsh" firstAttribute="leading" secondItem="JUE-cn-Xqs" secondAttribute="leading" id="S0K-QZ-cfF"/>
                             <constraint firstItem="JUE-cn-Xqs" firstAttribute="trailing" secondItem="gdQ-c6-hsh" secondAttribute="trailing" id="izz-wu-QkN"/>
+                            <constraint firstItem="rAA-L8-guZ" firstAttribute="centerX" secondItem="JUE-cn-Xqs" secondAttribute="centerX" id="mu0-R4-Lou"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="List Collection" id="ZT9-C8-qNy"/>
+                    <navigationItem key="navigationItem" title="List of Glory" id="ZT9-C8-qNy"/>
                     <connections>
                         <outlet property="collectionView" destination="gdQ-c6-hsh" id="wQH-SL-Hjc"/>
+                        <outlet property="collectionViewTopLayoutConstraint" destination="3TH-JB-d7z" id="I2E-jd-bce"/>
                         <outlet property="flowLayout" destination="1X5-Ub-4Ls" id="EO5-pi-hyN"/>
+                        <outlet property="listControl" destination="rAA-L8-guZ" id="Keg-8f-xfz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FZ9-MK-5N6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

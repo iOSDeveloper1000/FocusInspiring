@@ -28,6 +28,10 @@ struct DataParameter {
 // MARK: View and Layout Parameters
 
 struct TextParameter {
+    struct Title {
+        static let listOfSuccess = "List of Glory"
+        static let listOfActiveNotes = "List of Active Notes"
+    }
     static let textPlaceholder = "Enter your text note here"
 
     static let textFontSize: CGFloat = 16
@@ -47,13 +51,11 @@ struct LayoutParameter {
 }
 
 struct EmptyViewLabel {
-    /// Label text for ListNotesCollectionViewController
-    struct ListNotesCollectionView {
-        static let title = "List still empty"
-        static let message = "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet."
-    }
+    static let successList = EmptyViewLabelMessage(title: "List still empty", message: "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet.")
 
-    // Add further empty view label text here.
+    static let activeNotesList = EmptyViewLabelMessage(title: "List currently empty", message: "It seems like you have currently\nno open ideas. Enjoy the day!")
+
+    // Add further empty view label texts here.
 }
 
 

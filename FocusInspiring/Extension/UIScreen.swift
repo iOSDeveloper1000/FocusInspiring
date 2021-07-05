@@ -11,9 +11,19 @@ import UIKit
 
 extension UIScreen {
 
-    /// Returns true if device orientation is portrait otherwise false.
-    public static func isDeviceOrientationPortrait() -> Bool {
+    /**
+     Return true if device orientation is portrait otherwise false
 
-        return main.bounds.height > main.bounds.width
+     In default case, uses current main UIScreen for determination.
+     - Parameter for: If not nil uses this parameter for determining orientation.
+     - Returns: Boolean value true if device is in portrait mode otherwise false.
+     */
+    public static func isDeviceOrientationPortrait(for screenSize: CGSize? = nil) -> Bool {
+
+        if let screenSize = screenSize {
+            return screenSize.height > screenSize.width
+        } else {
+            return main.bounds.height > main.bounds.width
+        }
     }
 }

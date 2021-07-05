@@ -16,6 +16,8 @@ protocol Emptiable: UIViewController {
 
     var backgroundLabel: UILabel? { get set }
 
+    func handleEmptyViewLabel(msg: EmptyViewLabelMessage?)
+
     func setEmptyViewLabel(title: String, message: String)
 
     func removeEmptyViewLabel()
@@ -23,10 +25,33 @@ protocol Emptiable: UIViewController {
     func updateEmptyViewLayout()
 }
 
+// MARK: Typedef
+
+/// Type for a message indicating an empty view
+internal struct EmptyViewLabelMessage {
+    let title: String
+    let message: String
+}
+
 
 // MARK: Extension
 
 extension Emptiable {
+
+    /**
+     Handle background label for emptiable views
+
+     - Parameter msg: message to be displayed, message will be removed if nil
+    */
+    func handleEmptyViewLabel(msg: EmptyViewLabelMessage?) {
+
+        // @todo REFACTOR: INTEGRATE CALLS TO THIS METHOD IN SEPARATE COMMIT
+        if let msg = msg {
+            setEmptyViewLabel(title: msg.title, message: msg.message)
+        } else {
+            removeEmptyViewLabel()
+        }
+    }
 
     /// Sets a background label with the specified text indicating an empty screen
     func setEmptyViewLabel(title: String, message: String) {
