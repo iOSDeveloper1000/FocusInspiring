@@ -18,6 +18,7 @@
 		E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E732C73825DBE11800A4CE31 /* FocusInspiring.xcdatamodeld */; };
 		E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E732C73B25DBE11900A4CE31 /* Assets.xcassets */; };
 		E732C73F25DBE11900A4CE31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E732C73D25DBE11900A4CE31 /* LaunchScreen.storyboard */; };
+		E735C0692693598600B27ECE /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E735C0682693598600B27ECE /* UIScreen.swift */; };
 		E73C76542604FE84003BF821 /* Emptiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C76532604FE84003BF821 /* Emptiable.swift */; };
 		E769880E25E5472E0020466A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769880D25E5472E0020466A /* NetworkClient.swift */; };
 		E769881125E548420020466A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881025E548420020466A /* DataController.swift */; };
@@ -61,6 +62,7 @@
 		E732C73B25DBE11900A4CE31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E732C73E25DBE11900A4CE31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E732C74025DBE11900A4CE31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E735C0682693598600B27ECE /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		E73C76532604FE84003BF821 /* Emptiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emptiable.swift; sourceTree = "<group>"; };
 		E769880D25E5472E0020466A /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		E769881025E548420020466A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				E73C76532604FE84003BF821 /* Emptiable.swift */,
 				E77042C1260B8A6100335445 /* UIAlertController.swift */,
 				E7AE381026029E8E00C7AE3A /* UIPickerView.swift */,
+				E735C0682693598600B27ECE /* UIScreen.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */,
 				E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */,
 				E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */,
+				E735C0692693598600B27ECE /* UIScreen.swift in Sources */,
 				E769880E25E5472E0020466A /* NetworkClient.swift in Sources */,
 				E769882925E54CD60020466A /* ListOfGloryCollectionViewController.swift in Sources */,
 				E7E12E9E267BA42700057EC7 /* SettingsDetailViewController.swift in Sources */,

@@ -53,7 +53,7 @@ class EditNoteViewController: UIViewController {
         super.viewWillLayoutSubviews()
 
         /// Change to horizontal axis in landscape orientation
-        contentStackView.axis = (UIScreen.main.bounds.height > UIScreen.main.bounds.width) ? .vertical : .horizontal
+        contentStackView.axis = UIScreen.isDeviceOrientationPortrait() ? .vertical : .horizontal
     }
 
 

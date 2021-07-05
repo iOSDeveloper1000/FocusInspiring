@@ -30,7 +30,7 @@ class CollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         // Item size
         /// Items per row shall depend on UI orientation
-        let itemsPerRow = (UIScreen.main.bounds.height > UIScreen.main.bounds.width) ? itemsPerRowPortrait : itemsPerRowLandscape
+        let itemsPerRow = UIScreen.isDeviceOrientationPortrait() ? itemsPerRowPortrait : itemsPerRowLandscape
 
         let padding = 2 * lineSpacing + (itemsPerRow - 1) * interitemSpacing
         let availableWidth = collectionView.bounds.width - padding

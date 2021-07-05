@@ -30,11 +30,11 @@ class HomeViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        let isLandscapeMode = (UIScreen.main.bounds.height < UIScreen.main.bounds.width)
+        let isPortraitMode = UIScreen.isDeviceOrientationPortrait()
 
-        /// Set layout depending on device orientation
-        welcomeLabel.text = isLandscapeMode ? "WELCOME  FEELING  INSPIRED" : "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED"
-        welcomeLabel.font = .systemFont(ofSize: isLandscapeMode ? 30.0 : 35.0)
+        /// Layout shall depend on device orientation
+        welcomeLabel.text = isPortraitMode ? "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED" : "WELCOME  FEELING  INSPIRED"
+        welcomeLabel.font = .systemFont(ofSize: isPortraitMode ? 35 : 30)
         welcomeLabel.textAlignment = .center
     }
 }
