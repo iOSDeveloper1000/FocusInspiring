@@ -8,20 +8,10 @@
 
 import UIKit
 
+
+// MARK: DetailNoteViewController: UIViewController
+
 class DetailNoteViewController: UIViewController {
-
-    // MARK: Outlets
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var creationDateLabel: UILabel!
-    @IBOutlet weak var presentingDateLabel: UILabel!
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var imageView: UIImageView!
-
-    @IBOutlet weak var contentStackView: UIStackView!
-
-    @IBOutlet weak var deleteButton: UIBarButtonItem!
-
 
     // MARK: Properties
 
@@ -37,7 +27,20 @@ class DetailNoteViewController: UIViewController {
     }()
 
 
-    // MARK: Life cycle
+    // MARK: Outlets
+
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var creationDateLabel: UILabel!
+    @IBOutlet weak var presentingDateLabel: UILabel!
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var imageView: UIImageView!
+
+    @IBOutlet weak var contentStackView: UIStackView!
+
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+
+
+    // MARK: Life Cycle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -64,7 +67,15 @@ class DetailNoteViewController: UIViewController {
     }
 
 
-    // MARK: Helper
+    // MARK: Helpers
+
+    func deleteHandler(alertAction: UIAlertAction) {
+        /// Delete displayed note
+        dataController?.viewContext.delete(note!)
+        dataController?.saveViewContext()
+
+        navigationController?.popViewController(animated: true)
+    }
 
     /// Fill in content into the view elements
     private func updateNoteOnScreen() {
@@ -82,16 +93,5 @@ class DetailNoteViewController: UIViewController {
             imageView.image = nil
         }
         textView.attributedText = note.attributedText
-    }
-
-
-    // MARK: Handler
-
-    func deleteHandler(alertAction: UIAlertAction) {
-        /// Delete displayed note
-        dataController?.viewContext.delete(note!)
-        dataController?.saveViewContext()
-
-        navigationController?.popViewController(animated: true)
     }
 }

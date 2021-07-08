@@ -22,7 +22,7 @@ class CollectionViewFlowLayout: UICollectionViewFlowLayout {
     var itemsPerRowLandscape: CGFloat = 5
 
 
-    // MARK: Life cycle
+    // MARK: Life Cycle
 
     override func prepare() {
         super.prepare()
@@ -61,6 +61,7 @@ class CollectionViewFlowLayout: UICollectionViewFlowLayout {
 
 
     // MARK: Set Parameters
+    // @todo REFACTOR BY USE OF CUSTOM STRUCT
 
     func setLayoutParameters(spacing: CGFloat, itemsPerRowPortrait: Int, itemsPerRowLandscape: Int) {
         setLayoutParameters(lineSpacing: spacing, interitemSpacing: spacing, itemsPerRowPortrait: itemsPerRowPortrait, itemsPerRowLandscape: itemsPerRowLandscape)

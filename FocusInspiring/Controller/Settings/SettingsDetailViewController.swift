@@ -13,7 +13,7 @@ import UIKit
 
 class SettingsDetailViewController: UIViewController {
 
-    // MARK: Life cycle
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()

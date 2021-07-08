@@ -13,13 +13,6 @@ import UIKit
 
 class FlickrSearchCollectionViewController: UICollectionViewController {
 
-    // MARK: Outlets
-
-    @IBOutlet weak var searchField: UITextField!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
-    @IBOutlet weak var flowLayout: CollectionViewFlowLayout!
-
-
     // MARK: Properties
 
     /// Completion handler that is called when an image got selected
@@ -41,7 +34,14 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
     private var searchResults: [SearchResult] = []
 
 
-    // MARK: Life cycle
+    // MARK: Outlets
+
+    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var flowLayout: CollectionViewFlowLayout!
+
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,14 +59,14 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
     }
 
 
-    // MARK: Actions
+    // MARK: Action
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
 
-    // MARK: Core functionality
+    // MARK: Core private API
 
     private func startSearch() {
 
@@ -220,7 +220,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 }
 
 
-// MARK: Delegation of SearchField
+// MARK: Extension for SearchField Delegation
 
 extension FlickrSearchCollectionViewController: UITextFieldDelegate {
 

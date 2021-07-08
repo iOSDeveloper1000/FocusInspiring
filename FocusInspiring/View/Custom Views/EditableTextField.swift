@@ -17,7 +17,7 @@ class EditableTextField: UITextField, UITextFieldDelegate {
     var saveContentChanges: ((String) -> Void)?
 
 
-    // MARK: Public interface
+    // MARK: Public Interface
 
     public func setUpCustomTextField(with initText: String?, saveRoutine: ((String) -> Void)?) {
         delegate = self

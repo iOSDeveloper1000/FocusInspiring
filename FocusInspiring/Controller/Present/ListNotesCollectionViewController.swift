@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-// MARK: ListNotesCollectionViewController: UIViewController
+// MARK: ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, Emptiable
 
 class ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, Emptiable {
 
@@ -34,7 +34,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var collectionViewTopLayoutConstraint: NSLayoutConstraint!
 
 
-    // MARK: Lifecycle
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +91,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     }
 
 
-    // MARK: Actions
+    // MARK: Action
 
     @IBAction func listControlIndexChanged(_ sender: Any) {
 
@@ -131,7 +131,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     }
 
 
-    // MARK: Data Source & Delegation
+    // MARK: CollectionView Data Source & Delegation
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         guard let countSections = fetchedResultsController.sections?.count else {

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-// MARK: DisplayNoteViewController: UIViewController, NSFetchedResultsControllerDelegate
+// MARK: DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsControllerDelegate
 
 class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsControllerDelegate {
 
@@ -19,23 +19,6 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
     private let emptyViewTitle = "No more inspirational notes\nto display this time"
     private let emptyViewMessage = "Feel lucky anyway! :-)"
-
-
-    // MARK: Outlets
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var creationDateLabel: UILabel!
-    @IBOutlet weak var presentingDateLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var representInTextField: PickerTextField!
-    
-    @IBOutlet weak var contentStackView: UIStackView!
-
-    @IBOutlet weak var checkmarkButton: UIBarButtonItem!
-    @IBOutlet weak var repeatButton: UIBarButtonItem!
-    @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var deleteButton: UIBarButtonItem!
 
 
     // MARK: Properties
@@ -60,7 +43,24 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     var backgroundLabel: UILabel?
 
 
-    // MARK: Life cycle
+    // MARK: Outlets
+
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var creationDateLabel: UILabel!
+    @IBOutlet weak var presentingDateLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var representInTextField: PickerTextField!
+
+    @IBOutlet weak var contentStackView: UIStackView!
+
+    @IBOutlet weak var checkmarkButton: UIBarButtonItem!
+    @IBOutlet weak var repeatButton: UIBarButtonItem!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,7 +123,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }
 
 
-    // MARK: Segue
+    // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToEditNote" {
@@ -191,7 +191,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }
 
 
-    // MARK: Core functionality
+    // MARK: Core private API
 
     private func displayNextItem() {
 

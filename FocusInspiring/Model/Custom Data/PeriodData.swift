@@ -153,7 +153,7 @@ class PeriodData: NSObject, PickerData {
 }
 
 
-// MARK: Fileprivate helper
+// MARK: Helper
 
 fileprivate func setupPickerTitles() -> [[String]] {
 

@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
 
 
-    // MARK: Life cycle
+    // MARK: Life Cycle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

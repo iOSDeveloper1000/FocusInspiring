@@ -18,21 +18,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     private let addNewNoteKey: String = "AddNewNoteKey"
 
 
-    // MARK: Outlets
-
-    @IBOutlet weak var titleField: EditableTextField!
-    @IBOutlet weak var textView: EditableTextView!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var presentInTextField: PickerTextField!
-    
-    @IBOutlet weak var imageButton: UIBarButtonItem!
-    @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var searchButton: UIBarButtonItem!
-
-    @IBOutlet weak var clearButton: UIBarButtonItem!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-
-
     // MARK: Properties
 
     var temporaryNote: TemporaryDataItem!
@@ -51,7 +36,22 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     var periodData: PeriodData!
 
 
-    // MARK: Life cycle
+    // MARK: Outlets
+
+    @IBOutlet weak var titleField: EditableTextField!
+    @IBOutlet weak var textView: EditableTextView!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var presentInTextField: PickerTextField!
+
+    @IBOutlet weak var imageButton: UIBarButtonItem!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var searchButton: UIBarButtonItem!
+
+    @IBOutlet weak var clearButton: UIBarButtonItem!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+
+
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,7 +116,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Segue
+    // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToFlickrSearch" {
@@ -186,7 +186,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Core functionality
+    // MARK: Core private API
 
     private func pickImage(sourceType: UIImagePickerController.SourceType) {
 
@@ -222,7 +222,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Handler
+    // MARK: Handlers
 
     func clearHandler(alertAction: UIAlertAction) {
         clearUserInterface()
@@ -253,7 +253,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Helper
+    // MARK: Helpers
 
     /**
      Check whether user-entered note is empty
@@ -305,7 +305,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 }
 
 
-// MARK: UIImagePickerController Delegation
+// MARK: Extension for UIImagePickerController Delegation
 
 extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 

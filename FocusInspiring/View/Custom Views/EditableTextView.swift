@@ -28,7 +28,7 @@ class EditableTextView: UITextView, UITextViewDelegate {
     }
 
 
-    // MARK: Public interface
+    // MARK: Public Interface
 
     public func setUpCustomTextView(with initText: NSAttributedString?, saveRoutine: ((NSAttributedString) -> Void)?) {
         delegate = self

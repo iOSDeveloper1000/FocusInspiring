@@ -9,7 +9,7 @@
 import UIKit
 
 
-// MARK: Protocol Emptiable
+// MARK: Protocol Emptiable: UIViewController
 
 /// Methods for indicating an empty UIViewController
 protocol Emptiable: UIViewController {
@@ -25,7 +25,7 @@ protocol Emptiable: UIViewController {
     func updateEmptyViewLayout()
 }
 
-// MARK: Typedef
+// MARK: Type Definition
 
 /// Type for a message indicating an empty view
 internal struct EmptyViewLabelMessage {
@@ -34,7 +34,7 @@ internal struct EmptyViewLabelMessage {
 }
 
 
-// MARK: Extension
+// MARK: Extension for Implementation
 
 extension Emptiable {
 

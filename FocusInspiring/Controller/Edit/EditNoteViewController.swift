@@ -13,6 +13,15 @@ import UIKit
 
 class EditNoteViewController: UIViewController {
 
+    // MARK: Properties
+
+    /// Temporary note holding all edits - calling view controller reads from this object afterwards if user saves his edit
+    var temporaryNote: TemporaryDataItem!
+
+    /// Pass back result of editing with state confirmed (--> 'Done') or canceled
+    var completion: ((_ editConfirmed: Bool, _ edit: TemporaryDataItem?) -> Void)?
+
+
     // MARK: Outlets
 
     @IBOutlet weak var titleField: EditableTextField!
@@ -29,16 +38,7 @@ class EditNoteViewController: UIViewController {
     @IBOutlet weak var doneButton: UIBarButtonItem!
 
 
-    // MARK: Properties
-
-    /// Temporary note holding all edits - calling view controller reads from this object afterwards if user saves his edit
-    var temporaryNote: TemporaryDataItem!
-
-    /// Pass back result of editing with state confirmed (--> 'Done') or canceled
-    var completion: ((_ editConfirmed: Bool, _ edit: TemporaryDataItem?) -> Void)?
-
-
-    // MARK: Life cycle
+    // MARK: Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +83,7 @@ class EditNoteViewController: UIViewController {
     }
 
 
-    // MARK: Segue
+    // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueToFlickrSearch" {
@@ -100,7 +100,7 @@ class EditNoteViewController: UIViewController {
     }
 
 
-    // MARK: Handler
+    // MARK: Helpers
 
     func cancelAlertHandler(alertAction: UIAlertAction) {
         /// Cancel view controller without any edit
@@ -108,8 +108,6 @@ class EditNoteViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-
-    // MARK: Helper
 
     /// Set up toolbar elements
     private func setUpToolbar() {
@@ -151,7 +149,7 @@ class EditNoteViewController: UIViewController {
 }
 
 
-// MARK: UIImagePickerController Delegation
+// MARK: Extension for UIImagePickerController Delegation
 
 extension EditNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 

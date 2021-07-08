@@ -32,7 +32,7 @@ class SettingsViewController: UITableViewController {
     }
 
 
-    // MARK: Delegate
+    // MARK: TableView Delegation
 
     /// Toggle accessory type to '.checkmark' when trying to select rows for this use
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

@@ -13,12 +13,12 @@ import UIKit
 
 class RootViewController: UITabBarController {
     
-    // MARK: Properties
+    // MARK: Property
     
     var dataController: DataController!
     
     
-    // MARK: Life cycle
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
