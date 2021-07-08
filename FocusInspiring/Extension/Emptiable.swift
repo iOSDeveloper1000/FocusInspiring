@@ -14,21 +14,24 @@ import UIKit
 /// Methods for indicating an empty UIViewController
 protocol Emptiable: UIViewController {
 
+    // @todo REFACTOR -- SUBCLASS UILABEL ?
     var backgroundLabel: UILabel? { get set }
 
+    /**
+     Handle background label for emptiable views
+
+     - Parameter msg: message to be displayed, message will be removed if nil
+    */
     func handleEmptyViewLabel(msg: EmptyViewLabelMessage?)
 
-    func setEmptyViewLabel(title: String, message: String)
-
-    func removeEmptyViewLabel()
-
+    /// Update layout of background label -- to be used in viewDidLayoutSubviews()
     func updateEmptyViewLayout()
 }
 
 // MARK: Type Definition
 
-/// Type for a message indicating an empty view
-internal struct EmptyViewLabelMessage {
+/// Type for a message that indicates an empty view
+struct EmptyViewLabelMessage {
     let title: String
     let message: String
 }
@@ -38,30 +41,34 @@ internal struct EmptyViewLabelMessage {
 
 extension Emptiable {
 
-    /**
-     Handle background label for emptiable views
-
-     - Parameter msg: message to be displayed, message will be removed if nil
-    */
     func handleEmptyViewLabel(msg: EmptyViewLabelMessage?) {
 
-        // @todo REFACTOR: INTEGRATE CALLS TO THIS METHOD IN SEPARATE COMMIT
         if let msg = msg {
-            setEmptyViewLabel(title: msg.title, message: msg.message)
+
+            setupBackgroundLabel(msg: msg)
+
         } else {
-            removeEmptyViewLabel()
+
+            /// Remove background label -- in case of non-empty screen
+            backgroundLabel?.removeFromSuperview()
         }
     }
 
-    /// Sets a background label with the specified text indicating an empty screen
-    func setEmptyViewLabel(title: String, message: String) {
+    func updateEmptyViewLayout() {
 
-        let titleRange = NSMakeRange(0, title.count)
+        backgroundLabel?.center = view.center
+    }
 
-        let attributedLabel = NSMutableAttributedString(string: "\(title)\n\n\(message)")
+    /// Setup background label with given message components
+    private func setupBackgroundLabel(msg: EmptyViewLabelMessage) {
+
+        let titleRange = NSMakeRange(0, msg.title.count)
+
+        let attributedLabel = NSMutableAttributedString(string: "\(msg.title)\n\n\(msg.message)")
         attributedLabel.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 21), range: titleRange)
 
         if backgroundLabel == nil {
+            /// Initialize label for the first time
             backgroundLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         }
 
@@ -75,16 +82,5 @@ extension Emptiable {
         backgroundLabel?.textColor = .lightGray
 
         view.addSubview(backgroundLabel!)
-    }
-
-    /// Removes background label indicating an empty screen
-    func removeEmptyViewLabel() {
-        backgroundLabel?.removeFromSuperview()
-    }
-
-    /// Updates layout of background label -- to be used in viewDidLayoutSubviews()
-    func updateEmptyViewLayout() {
-
-        backgroundLabel?.center = view.center
     }
 }

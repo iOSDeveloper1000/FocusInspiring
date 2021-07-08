@@ -51,11 +51,11 @@ struct LayoutParameter {
 }
 
 struct EmptyViewLabel {
+    static let displayNoteStack = EmptyViewLabelMessage(title: "No more inspirational\nnotes for today", message: "Feel lucky anyway! :-)")
+
     static let successList = EmptyViewLabelMessage(title: "List still empty", message: "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet.")
 
     static let activeNotesList = EmptyViewLabelMessage(title: "List currently empty", message: "It seems like you have currently\nno open ideas. Enjoy the day!")
-
-    // Add further empty view label texts here.
 }
 
 

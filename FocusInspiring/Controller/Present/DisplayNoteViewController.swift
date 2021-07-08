@@ -17,9 +17,6 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     /// Key used for assigning TemporaryDataItem in CoreData to this view controller
     private let editNotekey = "EditNoteFromDisplayKey"
 
-    private let emptyViewTitle = "No more inspirational notes\nto display this time"
-    private let emptyViewMessage = "Feel lucky anyway! :-)"
-
 
     // MARK: Properties
 
@@ -206,8 +203,17 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         /// Take next item out of queue if available else popLast() will return nil
         displayedItem = fetchedItems.popLast()
 
-        isItemAvailable ? updateNoteOnScreen() : nil
-        isItemAvailable ? removeEmptyViewLabel() : setEmptyViewLabel(title: emptyViewTitle, message: emptyViewMessage)
+        var emptyMessage: EmptyViewLabelMessage? = nil /// nil means 'remove background label'
+
+        if isItemAvailable {
+            updateNoteOnScreen()
+        } else {
+            /// Display message in background -- indicating empty stack
+            emptyMessage = EmptyViewLabel.displayNoteStack
+        }
+
+        /// Handle background label
+        handleEmptyViewLabel(msg: emptyMessage)
     }
 
     /// Fill in content into the controller's view fields
