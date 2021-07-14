@@ -16,12 +16,24 @@ extension UIPickerView {
         return (0..<numberOfComponents).map { selectedRow(inComponent: $0) }
     }
 
-    /// Select rows given array of indices
-    func selectRows(_ rows: [Int?]) {
-        zip(rows, rows.indices).forEach {
-            if let row = $0 {
-                selectRow(row, inComponent: $1, animated: false)
-            }
-        }
+
+    // @opt-todo REFACTOR: MAKE GENERAL PROTOCOL AND IMPLEMENTATION FOR PICKER WITH SAVED PICKER SELECTION
+
+    /// Select rows from saved selection in UserDefaults
+    func collectSelection() {
+        let countRow = UserDefaults.standard.integer(forKey: UserKey.periodPickerCount)
+        let unitRow = UserDefaults.standard.integer(forKey: UserKey.periodPickerUnit)
+
+        selectRow(countRow, inComponent: 0, animated: false)
+        selectRow(unitRow, inComponent: 1, animated: false)
+    }
+
+    /// Save selected rows to UserDefaults
+    func saveSelection() {
+        let countRow = selectedRow(inComponent: 0)
+        let unitRow = selectedRow(inComponent: 1)
+
+        UserDefaults.standard.set(countRow, forKey: UserKey.periodPickerCount)
+        UserDefaults.standard.set(unitRow, forKey: UserKey.periodPickerUnit)
     }
 }

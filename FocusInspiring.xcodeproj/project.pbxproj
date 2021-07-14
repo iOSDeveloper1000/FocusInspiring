@@ -33,8 +33,10 @@
 		E76D2EE82672110C00E78FB5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76D2EE72672110C00E78FB5 /* SettingsViewController.swift */; };
 		E77042AC260B588D00335445 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77042AB260B588D00335445 /* UIViewController.swift */; };
 		E77042C2260B8A6100335445 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77042C1260B8A6100335445 /* UIAlertController.swift */; };
+		E7901D02269F281C0093B10A /* ASCustomValueSetterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */; };
+		E7901D04269F28280093B10A /* ASCustomValueSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */; };
+		E7901D06269F29A80093B10A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D05269F29A80093B10A /* UIView.swift */; };
 		E7AE381126029E8E00C7AE3A /* UIPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE381026029E8E00C7AE3A /* UIPickerView.swift */; };
-		E7B046D1260223070051FDA4 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B046D0260223070051FDA4 /* PickerTextField.swift */; };
 		E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B046D426026D0B0051FDA4 /* PickerData.swift */; };
 		E7B046D926026F700051FDA4 /* PeriodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B046D826026F700051FDA4 /* PeriodData.swift */; };
 		E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */; };
@@ -78,8 +80,10 @@
 		E76D2EE72672110C00E78FB5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E77042AB260B588D00335445 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		E77042C1260B8A6100335445 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASCustomValueSetterView.xib; sourceTree = "<group>"; };
+		E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASCustomValueSetterView.swift; sourceTree = "<group>"; };
+		E7901D05269F29A80093B10A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		E7AE381026029E8E00C7AE3A /* UIPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPickerView.swift; sourceTree = "<group>"; };
-		E7B046D0260223070051FDA4 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		E7B046D426026D0B0051FDA4 /* PickerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerData.swift; sourceTree = "<group>"; };
 		E7B046D826026F700051FDA4 /* PeriodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodData.swift; sourceTree = "<group>"; };
 		E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCell.swift; sourceTree = "<group>"; };
@@ -250,9 +254,10 @@
 		E77042BC260B884A00335445 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */,
+				E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */,
 				E7ED60B125EFA9DC00811762 /* EditableTextView.swift */,
 				E72EE63925F97DE400B228C5 /* EditableTextField.swift */,
-				E7B046D0260223070051FDA4 /* PickerTextField.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 				E7AE381026029E8E00C7AE3A /* UIPickerView.swift */,
 				E735C0682693598600B27ECE /* UIScreen.swift */,
 				E71C969F26934A1600935D06 /* BasicDataTypes.swift */,
+				E7901D05269F29A80093B10A /* UIView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -357,6 +363,7 @@
 			files = (
 				E732C73F25DBE11900A4CE31 /* LaunchScreen.storyboard in Resources */,
 				E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */,
+				E7901D02269F281C0093B10A /* ASCustomValueSetterView.xib in Resources */,
 				E732C73725DBE11800A4CE31 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,9 +388,11 @@
 				E76BF3E825E915D400EE4992 /* RootViewController.swift in Sources */,
 				E7F3835D2609FB9A002D28B9 /* DetailNoteViewController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
+				E7901D06269F29A80093B10A /* UIView.swift in Sources */,
 				E7202E4E263AE54000715A7F /* LocalNotificationHandler.swift in Sources */,
 				E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */,
 				E77042AC260B588D00335445 /* UIViewController.swift in Sources */,
+				E7901D04269F28280093B10A /* ASCustomValueSetterView.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
 				E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */,
 				E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */,
@@ -391,7 +400,6 @@
 				E71C96A026934A1600935D06 /* BasicDataTypes.swift in Sources */,
 				E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */,
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
-				E7B046D1260223070051FDA4 /* PickerTextField.swift in Sources */,
 				E7202E53263AF0AF00715A7F /* Notification.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
 				E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */,

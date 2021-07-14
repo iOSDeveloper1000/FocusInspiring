@@ -35,6 +35,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
     /// Data for the presented picker integrated in representInTextField keyboard
     var periodData: PeriodData!
+    let pickerInputView = UIPickerView()
 
     /// Label for displaying a message in case no more items are available
     var backgroundLabel: UILabel?
@@ -47,8 +48,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     @IBOutlet weak var presentingDateLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var representInTextField: PickerTextField!
-
+    @IBOutlet weak var periodSetterView: ASCustomValueSetterView!
     @IBOutlet weak var contentStackView: UIStackView!
 
     @IBOutlet weak var checkmarkButton: UIBarButtonItem!
@@ -64,16 +64,13 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
         setUpAndPerformFetch()
 
-        setUpPickerTextField()
+        setupPeriodSetterView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        setUpAndPerformFetch()
-
-        /// Display first inspirational note
-        displayNextItem()
+        displayNextItem() // next = first after (re)appear
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -181,10 +178,14 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
     }
 
-    private func setUpPickerTextField() {
-        let keys = [DefaultKey.timeCountForPicker, DefaultKey.timeUnitForPicker]
-        periodData = PeriodData(countMax: DataParameter.periodCounterMaxValue, saveKeys: keys, preText: "Further cycle for: ", postText: "?")
-        representInTextField.setup(with: periodData)
+    private func setupPeriodSetterView() {
+
+        periodData = PeriodData(countMax: DataParameter.periodCounterMaxValue)
+        pickerInputView.delegate = periodData
+        pickerInputView.dataSource = periodData
+        pickerInputView.collectSelection() // Initialize picker from stored values
+
+        periodSetterView.setupWith(inputView: pickerInputView, preLabelText: "Further cycle for: ", postLabelText: "?")
     }
 
 
@@ -228,7 +229,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
             imageView.image = nil
         }
         textView.attributedText = displayedItem.attributedText
-        representInTextField.updateText()
+        periodSetterView.updateButtonText()
     }
 
 
@@ -294,17 +295,14 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
 
         /// Display/hide UI elements
-        let subviews: [UIView] = [titleLabel, creationDateLabel, presentingDateLabel, imageView, textView, representInTextField]
+        let subviews: [UIView] = [titleLabel, creationDateLabel, presentingDateLabel, imageView, textView, periodSetterView]
         for element in subviews {
             element.isHidden = !show
         }
-
-        /// Enter textfield text with period specified by last user operation
-        show ? representInTextField.updateText() : nil
     }
 
     private func getTargetDate() -> Date? {
-        let selection = representInTextField.inputPicker.selectedRows()
+        let selection = pickerInputView.selectedRows()
 
         return periodData.computeTargetDateBy(selected: selection)
     }

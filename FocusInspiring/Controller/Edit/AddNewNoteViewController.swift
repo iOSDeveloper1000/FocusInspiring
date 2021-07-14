@@ -33,7 +33,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }()
 
     /// Data for the presented picker integrated in presentInTextField keyboard
-    var periodData: PeriodData!
+    var periodData: PeriodData! // @todo REFACTOR: MAKE FUNCTION LOCAL VARIABLE ?
+    let pickerInputView = UIPickerView() // @todo REFACTOR IN THE LONG RUN
 
 
     // MARK: Outlets
@@ -41,7 +42,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     @IBOutlet weak var titleField: EditableTextField!
     @IBOutlet weak var textView: EditableTextView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var presentInTextField: PickerTextField!
+    @IBOutlet weak var periodSetterView: ASCustomValueSetterView!
 
     @IBOutlet weak var imageButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -68,7 +69,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         setUpFetchedResultsController()
 
         toggleUserInterface(enable: true)
-        presentInTextField.updateText()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -180,9 +180,13 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
             imageView.image = UIImage(data: imgData)
         }
 
-        let keys = [DefaultKey.timeCountForPicker, DefaultKey.timeUnitForPicker]
-        periodData = PeriodData(countMax: DataParameter.periodCounterMaxValue, saveKeys: keys, preText: "Will be presented in: ")
-        presentInTextField.setup(with: periodData)
+        // Setup period setter with its input view
+        periodData = PeriodData(countMax: DataParameter.periodCounterMaxValue)
+        pickerInputView.delegate = periodData
+        pickerInputView.dataSource = periodData
+        pickerInputView.collectSelection() // Initialize picker from stored values
+
+        periodSetterView.setupWith(inputView: pickerInputView, preLabelText: "Will be presented in: ", postLabelText: ".")
     }
 
 
@@ -202,9 +206,11 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         let newItem = InspirationItem(context: dataController.viewContext)
 
         newItem.active = true
-        //newItem.creationDate = Date()
-        newItem.presentingDate = getTargetDate()
         newItem.title = titleField.text
+
+        // .uuid and .creationDate are set automatically
+        newItem.presentingDate = getTargetDate()
+
 
         /// Save text note if one was created
         if textView.text != TextParameter.textPlaceholder {
@@ -240,7 +246,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         let newItem = saveNewItem()
 
         guard let uuid = newItem.uuid else {
-            track("GUARD FAILED")
+            track("GUARD FAILED: UUID not set")
             return
         }
 
@@ -264,7 +270,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
      */
     private func isNoteEmpty() -> Bool {
         guard let titleText = titleField.text else {
-            print("Title text could not be reached")
+            track("GUARD FAILED: Title text is nil")
             return true
         }
 
@@ -274,12 +280,18 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     private func toggleUserInterface(enable: Bool) {
         titleField.isEnabled = enable
         textView.isEditable = enable
-        presentInTextField.isEnabled = enable
+        periodSetterView.isUserInteractionEnabled = enable
 
+        if enable {
+            periodSetterView.updateButtonText()
+        }
+
+        // Toolbar button items
         imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary) ? enable : false
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera) ? enable : false
         searchButton.isEnabled = enable
 
+        // Navigation bar button items
         clearButton.isEnabled = enable
         saveButton.isEnabled = enable
     }
@@ -298,7 +310,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
     private func getTargetDate() -> Date? {
-        let selection = presentInTextField.inputPicker.selectedRows()
+        let selection = pickerInputView.selectedRows()
 
         return periodData.computeTargetDateBy(selected: selection)
     }

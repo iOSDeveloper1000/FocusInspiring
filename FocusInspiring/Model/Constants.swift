@@ -24,6 +24,13 @@ struct DataParameter {
     static let periodCounterMaxValue = 30
 }
 
+// MARK: Default and User Keys
+
+struct UserKey {
+    static let periodPickerCount = "UserKey: Period Picker Count"
+    static let periodPickerUnit = "UserKey: Period Picker Unit"
+}
+
 
 // MARK: View and Layout Parameters
 
@@ -68,9 +75,6 @@ struct InternalConstant {
 /// Keys for saving in UserDefaults
 struct DefaultKey {
     static let hasLaunchedBefore = "App has launched before"
-
-    static let timeCountForPicker = "Key for Picker Time Counter Raw Value"
-    static let timeUnitForPicker = "Key for Picker Time Unit Raw Value"
 
     /// User Settings
     static let reduceConfirmations = "Key for Reducing Number of Confirmations"

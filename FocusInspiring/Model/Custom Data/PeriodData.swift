@@ -41,74 +41,48 @@ class PeriodData: NSObject, PickerData {
 
     // MARK: Properties
 
-    /// Array keeping text entries for the picker row titles
-    var data: [[String]]
+    var rowTitles: [[String]]
 
-    /// Keys for saving in UserDefaults - nil entries prevent saving associated component
-    let saveKeys: [String?]
+    var textualRepresentation: String? {
+        get {
+            var text = ""
+            var textAppend = ""
 
-    /// String being used in front of the period declaration
-    var preText: String
+            for (component, row) in currentSelection.enumerated() {
+                if let row = row {
+                    textAppend = rowTitles[component][row]
+                } else {
+                    textAppend = "???"
+                }
 
-    /// String being used behind the period declaration
-    var postText: String
-
-
-    // @todo separate specialized things to own method(s)
-    init(countMax: Int, saveKeys: [String?]? = nil, preText: String = "", postText: String = "") {
-
-        data = setupPickerTitles()
-
-        if let keys = saveKeys {
-            self.saveKeys = keys
-        } else {
-            self.saveKeys = [String?](repeating: nil, count: data.count)
+                text = (text.isEmpty) ? textAppend : text + " \(textAppend)"
+            }
+            return text
         }
+    }
 
-        self.preText = preText
-        self.postText = postText
+    /// Current selection of the picker -- each entry represents one column of the picker
+    private var currentSelection: [Int?]
+
+
+    // @todo REFACTOR: SEPARATE AND TIDY UP
+    init(countMax: Int) {
+
+        rowTitles = setupPickerTitles()
+
+        // @todo READ SELECTION WITH EACH VIEW APPEAR
+        // Collect picker selection from peristently stored values
+        let countRow = UserDefaults.standard.integer(forKey: UserKey.periodPickerCount)
+        let unitRow = UserDefaults.standard.integer(forKey: UserKey.periodPickerUnit)
+        currentSelection = [countRow, unitRow]
 
         super.init()
     }
 
 
-    // MARK: PickerData Implementation
-
-    /// Save selected row indices to UserDefaults
-    func saveSelection(given rows: [Int]) {
-        zip(rows.indices, rows).forEach {
-            if let key = saveKeys[$0] {
-                UserDefaults.standard.set($1, forKey: key)
-            }
-        }
-    }
-
-    /// Retrieve row selection from UserDefaults
-    func retrieveSelection() -> [Int?] {
-        return saveKeys.map {
-            if let key = $0 {
-                return UserDefaults.standard.integer(forKey: key)
-            } else {
-                return nil
-            }
-        }
-    }
-
-    func textBy(selected rows: [Int]) -> String {
-        guard rows[0] < data[0].count else { return "???" }
-        guard let unitStr = DateUnit.init(rawValue: rows[1])?.toString else { return "???" }
-
-        let countStr = data[0][rows[0]]
-
-        /// Append plural 's' for any number greater than 1
-        let periodStr = countStr + " " + unitStr + ((rows[0] > 0) ? "s" : "")
-
-        return preText + periodStr + postText
-    }
-
-
     // MARK: Specific Methods
 
+    // @todo REFACTOR: USE CUSTOMIZED UTILITY FUNCTION
     func computeTargetDateBy(selected rows: [Int]) -> Date? {
 
         /// Convert raw values into internally used time values
@@ -131,24 +105,32 @@ class PeriodData: NSObject, PickerData {
     }
 
 
-    // MARK: PickerView Data Source and Delegation
+    // MARK: Data Source and Delegation
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
 
-        return data.count
+        return rowTitles.count
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard component < data.count else { return 0 }
+        guard component < rowTitles.count else { return 0 }
 
-        return data[component].count
+        return rowTitles[component].count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard component < data.count else { return nil }
-        guard row < data[component].count else { return nil }
+        guard component < rowTitles.count else { return nil }
+        guard row < rowTitles[component].count else { return nil }
 
-        return data[component][row]
+        return rowTitles[component][row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard component < currentSelection.count else { return }
+
+        currentSelection[component] = row
+
+        // @opt-todo CHANGE PLURAL S IN DATA ARRAY HERE
     }
 }
 
@@ -165,7 +147,7 @@ fileprivate func setupPickerTitles() -> [[String]] {
     /// Do not use units second and minute in normal user mode (no testing)
     if !(UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode)) {
 
-        selectedDateUnits.removeAll { return ($0 == .second || $0 == .minute) }
+        selectedDateUnits.removeAll { ($0 == .second) || ($0 == .minute) }
     }
 
     pickerTitles[0] = (1...DataParameter.periodCounterMaxValue).map { String($0) }

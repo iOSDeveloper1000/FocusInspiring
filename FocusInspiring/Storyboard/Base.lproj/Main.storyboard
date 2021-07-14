@@ -77,10 +77,10 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="74Z-hi-Fpd">
-                                        <rect key="frame" x="0.0" y="48" width="374" height="575"/>
+                                        <rect key="frame" x="0.0" y="48" width="374" height="570"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" allowsEditingTextAttributes="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jut-pC-Sec" customClass="EditableTextView" customModule="FocusInspiring" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="283.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="281"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
@@ -94,18 +94,17 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="18I-Qq-aOv">
-                                                <rect key="frame" x="0.0" y="291.5" width="374" height="283.5"/>
+                                                <rect key="frame" x="0.0" y="289" width="374" height="281"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Present in:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3jy-1q-Wva" customClass="PickerTextField" customModule="FocusInspiring" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="631" width="374" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obt-0B-CqR" customClass="ASCustomValueSetterView" customModule="FocusInspiring" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="626" width="374" height="35"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Xc0-dm-cJL"/>
+                                            <constraint firstAttribute="height" constant="35" id="vdJ-4v-Ci0"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -130,7 +129,7 @@
                         <outlet property="clearButton" destination="4cy-tO-Zyb" id="zzk-mb-m7m"/>
                         <outlet property="imageButton" destination="HK1-yf-PvI" id="Gk2-9h-ujH"/>
                         <outlet property="imageView" destination="18I-Qq-aOv" id="lFu-TR-Vka"/>
-                        <outlet property="presentInTextField" destination="3jy-1q-Wva" id="Msh-lf-VC8"/>
+                        <outlet property="periodSetterView" destination="obt-0B-CqR" id="iSh-K9-jUw"/>
                         <outlet property="saveButton" destination="ERD-SO-fEy" id="gf1-kp-2va"/>
                         <outlet property="searchButton" destination="BvF-Gr-ETZ" id="gZT-Uc-jKO"/>
                         <outlet property="textView" destination="jut-pC-Sec" id="hy9-WE-MqL"/>
@@ -608,13 +607,13 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="it9-PW-Txv" userLabel="Content Stack View">
-                                        <rect key="frame" x="0.0" y="86" width="374" height="581"/>
+                                        <rect key="frame" x="0.0" y="86" width="374" height="576"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8i1-nZ-goM">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="286.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="284"/>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eT1-Wt-hey">
-                                                <rect key="frame" x="0.0" y="294.5" width="374" height="286.5"/>
+                                                <rect key="frame" x="0.0" y="292" width="374" height="284"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
@@ -629,14 +628,13 @@
                                             </textView>
                                         </subviews>
                                     </stackView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Present again in:   " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n5D-8Q-2gp" customClass="PickerTextField" customModule="FocusInspiring" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="675" width="374" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0r9-cD-ccI" customClass="ASCustomValueSetterView" customModule="FocusInspiring" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="670" width="374" height="35"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="qMw-Cu-YCs"/>
+                                            <constraint firstAttribute="height" constant="35" id="J0z-G2-qmL"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -660,9 +658,9 @@
                         <outlet property="deleteButton" destination="Nxw-jL-Ky7" id="yIK-ox-jBo"/>
                         <outlet property="editButton" destination="xWb-eP-Don" id="NKs-eI-fFP"/>
                         <outlet property="imageView" destination="8i1-nZ-goM" id="UfT-EL-Gfk"/>
+                        <outlet property="periodSetterView" destination="0r9-cD-ccI" id="iHi-Mf-o81"/>
                         <outlet property="presentingDateLabel" destination="x24-zf-p5R" id="0my-Yh-7h6"/>
                         <outlet property="repeatButton" destination="y9o-9E-rPg" id="l5C-i5-lXQ"/>
-                        <outlet property="representInTextField" destination="n5D-8Q-2gp" id="2d1-kk-QVz"/>
                         <outlet property="textView" destination="eT1-Wt-hey" id="YJS-t6-NP6"/>
                         <outlet property="titleLabel" destination="uIW-Nv-RTg" id="9GK-zp-pHz"/>
                     </connections>
@@ -951,7 +949,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wEF-hf-NEd"/>
+        <segue reference="gIO-Cj-8Gn"/>
         <segue reference="dcw-EF-8Gx"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -11,15 +11,12 @@ import UIKit
 
 protocol PickerData: UIPickerViewDelegate, UIPickerViewDataSource {
 
-    var data: [[String]] { get set }
+    // MARK: Properties
 
-    /// Save selected row indices to the used store
-    func saveSelection(given rows: [Int])
+    /// Row titles for the picker -- each (sub)array represents one component.
+    var rowTitles: [[String]] { get set }
 
-    /// Retrieve row indices from the used store
-    func retrieveSelection() -> [Int?]
-
-    /// Convert selected row indices to a printable string
-    func textBy(selected rows: [Int]) -> String
+    /// Representation of the current selection as a string
+    var textualRepresentation: String? { get }
 
 }

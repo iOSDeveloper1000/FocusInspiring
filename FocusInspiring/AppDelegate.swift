@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             print("First app launch")
 
-            /// Initialize user defaults
-            UserDefaults.standard.set(0, forKey: DefaultKey.timeCountForPicker)
-            UserDefaults.standard.set(0, forKey: DefaultKey.timeUnitForPicker)
+            // Initialize UserDefaults values
+            UserDefaults.standard.set(2, forKey: UserKey.periodPickerCount) /// "3"
+            UserDefaults.standard.set(1, forKey: UserKey.periodPickerUnit) /// "weeks"
 
             UserDefaults.standard.setValue(false, forKey: DefaultKey.reduceConfirmations)
             UserDefaults.standard.setValue(false, forKey: DefaultKey.enableTestingMode)
