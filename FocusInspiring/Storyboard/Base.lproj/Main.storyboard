@@ -129,7 +129,7 @@
                         <outlet property="clearButton" destination="4cy-tO-Zyb" id="zzk-mb-m7m"/>
                         <outlet property="imageButton" destination="HK1-yf-PvI" id="Gk2-9h-ujH"/>
                         <outlet property="imageView" destination="18I-Qq-aOv" id="lFu-TR-Vka"/>
-                        <outlet property="periodSetterView" destination="obt-0B-CqR" id="iSh-K9-jUw"/>
+                        <outlet property="periodSetterView" destination="obt-0B-CqR" id="wGL-rE-FcF"/>
                         <outlet property="saveButton" destination="ERD-SO-fEy" id="gf1-kp-2va"/>
                         <outlet property="searchButton" destination="BvF-Gr-ETZ" id="gZT-Uc-jKO"/>
                         <outlet property="textView" destination="jut-pC-Sec" id="hy9-WE-MqL"/>

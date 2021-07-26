@@ -86,7 +86,7 @@ class DetailNoteViewController: UIViewController {
 
         titleLabel.text = note.title
         creationDateLabel.text = "Created: \(dateFormatter.string(from: note.creationDate!))"
-        presentingDateLabel.text = "Displayed: \(dateFormatter.string(from: note.presentingDate!))"
+        presentingDateLabel.text = "Displayed: \(dateFormatter.string(from: note.presentingDate!))" // @todo PREVENT CRASHES FROM FORCE-UNWRAPPING
         if let imgData = note.image {
             imageView.image = UIImage(data: imgData)
         } else {

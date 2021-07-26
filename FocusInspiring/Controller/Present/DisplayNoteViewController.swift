@@ -34,10 +34,22 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }()
 
     /// Data for the presented picker integrated in representInTextField keyboard
-    var periodData: PeriodData!
-    let pickerInputView = UIPickerView()
+    //var periodData: PeriodData!
+    //let pickerInputView = UIPickerView()
 
-    /// Label for displaying a message in case no more items are available
+
+    let responsiveSelectorView = ResponsiveSelectorView(frame: CGRect(origin: .zero, size: CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)))
+
+    var selectedPeriod: ConvertibleTimeComponent? // Written by closure
+
+    /// Date for displaying the note in future again
+    var targetDate: Date? {
+        guard let selectedPeriod = selectedPeriod else { return nil }
+
+        return Calendar.autoupdatingCurrent.date(byAdding: selectedPeriod.dateComponent, to: Date())
+    }
+
+    /// Displays a message in case no more items are available
     var backgroundLabel: UILabel?
 
 
@@ -102,10 +114,10 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
     @IBAction func repeatButtonPressed(_ sender: Any) {
 
-        if let target = getTargetDate() {
-            popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: target)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
+        if let targetDate = targetDate {
+            popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: targetDate)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
         } else {
-            popupAlert(title: "Internal error", message: "Cannot compute future date. Try to set a different time period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+            popupAlert(title: "Period not set", message: "It seems like you have not entered a time duration for the note becoming visible again. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
         }
     }
 
@@ -178,14 +190,11 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
     }
 
+    /// Setup period setter view and initialize button text with user default value if available
     private func setupPeriodSetterView() {
 
-        periodData = PeriodData(countMax: DataParameter.periodCounterMaxValue)
-        pickerInputView.delegate = periodData
-        pickerInputView.dataSource = periodData
-        pickerInputView.collectSelection() // Initialize picker from stored values
-
-        periodSetterView.setupWith(inputView: pickerInputView, preLabelText: "Further cycle for: ", postLabelText: "?")
+        periodSetterView.setup(inputView: responsiveSelectorView, preLabelText: "Further cycle for ", postLabelText: "?") { self.selectedPeriod = $0 }
+        periodSetterView.buttonText = collectDefaultPeriod()
     }
 
 
@@ -229,7 +238,6 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
             imageView.image = nil
         }
         textView.attributedText = displayedItem.attributedText
-        periodSetterView.updateButtonText()
     }
 
 
@@ -258,7 +266,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
 
         /// Change date of next presentation to newly computed date
-        displayedItem.presentingDate = getTargetDate()
+        displayedItem.presentingDate = targetDate
         dataController.saveViewContext()
 
         /// Update and reschedule user notification
@@ -301,9 +309,13 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
     }
 
-    private func getTargetDate() -> Date? {
-        let selection = pickerInputView.selectedRows()
+    /// Retrieve user's default period setting
+    private func collectDefaultPeriod() -> String? {
+        let countValue = UserDefaults.standard.integer(forKey: UserKey.periodPickerCount)
+        let unitIntValue = UserDefaults.standard.integer(forKey: UserKey.periodPickerUnit)
 
-        return periodData.computeTargetDateBy(selected: selection)
+        selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
+
+        return selectedPeriod?.description
     }
 }

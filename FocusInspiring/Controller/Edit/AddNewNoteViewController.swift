@@ -32,9 +32,16 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         return df
     }()
 
-    /// Data for the presented picker integrated in presentInTextField keyboard
-    var periodData: PeriodData! // @todo REFACTOR: MAKE FUNCTION LOCAL VARIABLE ?
-    let pickerInputView = UIPickerView() // @todo REFACTOR IN THE LONG RUN
+    let responsiveSelectorView = ResponsiveSelectorView(frame: CGRect(origin: .zero, size: CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)))
+
+    var selectedPeriod: ConvertibleTimeComponent? // Written by closure
+
+    /// Date for displaying the note in future
+    var targetDate: Date? {
+        guard let selectedPeriod = selectedPeriod else { return nil }
+
+        return Calendar.autoupdatingCurrent.date(byAdding: selectedPeriod.dateComponent, to: Date())
+    }
 
 
     // MARK: Outlets
@@ -103,15 +110,15 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         /// Disallow user to edit during save action
         toggleUserInterface(enable: false)
 
-        guard let target = getTargetDate() else {
-            popupAlert(title: "Internal error", message: "Cannot compute future date. Try to set a different time period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
+        guard let targetDate = targetDate else {
+            popupAlert(title: "Period not set", message: "It seems like you have not entered a time duration for this note becoming visible. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
             return
         }
 
         if isNoteEmpty() {
             popupAlert(title: "Empty note", message: "It seems like you have not entered a title or some descriptional elements (like text or image).", alertStyle: .alert, actionTitles: ["Save anyway", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
         } else {
-            popupAlert(title: "Your new inspirational note will be saved and presented on \(dateFormatter.string(from: target))", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
+            popupAlert(title: "Your new inspirational note will be saved and presented on \(dateFormatter.string(from: targetDate))", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
         }
     }
 
@@ -165,28 +172,26 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
     private func setUpUserInterface() {
-
+        // Setup title field
         titleField.setUpCustomTextField(with: temporaryNote?.title, saveRoutine: { (titleString) in
             self.temporaryNote?.title = titleString
             self.dataController.saveBackgroundContext()
         })
 
+        // Setup text view
         textView.setUpCustomTextView(with: temporaryNote?.attributedText, saveRoutine: { (attributedString) in
             self.temporaryNote?.attributedText = attributedString
             self.dataController.saveBackgroundContext()
         })
 
+        // Setup image view
         if let imgData = temporaryNote?.image {
             imageView.image = UIImage(data: imgData)
         }
 
-        // Setup period setter with its input view
-        periodData = PeriodData(countMax: DataParameter.periodCounterMaxValue)
-        pickerInputView.delegate = periodData
-        pickerInputView.dataSource = periodData
-        pickerInputView.collectSelection() // Initialize picker from stored values
-
-        periodSetterView.setupWith(inputView: pickerInputView, preLabelText: "Will be presented in: ", postLabelText: ".")
+        // Setup period setter view and initialize button with user default value
+        periodSetterView.setup(inputView: responsiveSelectorView, preLabelText: "Will be presented in ", postLabelText: ".") { self.selectedPeriod = $0 }
+        periodSetterView.buttonText = collectDefaultPeriod()
     }
 
 
@@ -201,7 +206,11 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         present(imagePicker, animated: true, completion: nil)
     }
 
-    private func saveNewItem() -> InspirationItem {
+    private func saveNewItem() -> InspirationItem? {
+        guard let targetDate = targetDate else {
+            track("GUARD FAILED: Saving was unsuccessful")
+            return nil
+        }
 
         let newItem = InspirationItem(context: dataController.viewContext)
 
@@ -209,8 +218,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         newItem.title = titleField.text
 
         // .uuid and .creationDate are set automatically
-        newItem.presentingDate = getTargetDate()
-
+        newItem.presentingDate = targetDate
 
         /// Save text note if one was created
         if textView.text != TextParameter.textPlaceholder {
@@ -245,7 +253,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     func saveHandler(alertAction: UIAlertAction) {
         let newItem = saveNewItem()
 
-        guard let uuid = newItem.uuid else {
+        guard let uuid = newItem?.uuid else {
             track("GUARD FAILED: UUID not set")
             return
         }
@@ -282,10 +290,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         textView.isEditable = enable
         periodSetterView.isUserInteractionEnabled = enable
 
-        if enable {
-            periodSetterView.updateButtonText()
-        }
-
         // Toolbar button items
         imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary) ? enable : false
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera) ? enable : false
@@ -309,15 +313,19 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         dataController.saveBackgroundContext()
     }
 
-    private func getTargetDate() -> Date? {
-        let selection = pickerInputView.selectedRows()
+    /// Retrieve user's default period setting
+    private func collectDefaultPeriod() -> String? {
+        let countValue = UserDefaults.standard.integer(forKey: UserKey.periodPickerCount)
+        let unitIntValue = UserDefaults.standard.integer(forKey: UserKey.periodPickerUnit)
 
-        return periodData.computeTargetDateBy(selected: selection)
+        selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
+
+        return selectedPeriod?.description
     }
 }
 
 
-// MARK: Extension for UIImagePickerController Delegation
+// MARK: - extension: UIImagePickerControllerDelegate
 
 extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 

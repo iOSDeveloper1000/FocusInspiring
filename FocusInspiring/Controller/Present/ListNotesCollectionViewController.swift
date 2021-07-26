@@ -75,11 +75,12 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        guard tabBarController?.selectedIndex == 3 else { return }
 
         /// Hide segmented control in landscape orientation
         let isOrientationPortrait = UIScreen.isDeviceOrientationPortrait(for: size)
-        collectionViewTopLayoutConstraint.constant = isOrientationPortrait ? 60 : 0
-        listControl.isHidden = !isOrientationPortrait
+        collectionViewTopLayoutConstraint?.constant = isOrientationPortrait ? 60 : 0
+        listControl?.isHidden = !isOrientationPortrait
 
         flowLayout?.invalidateLayout()
     }

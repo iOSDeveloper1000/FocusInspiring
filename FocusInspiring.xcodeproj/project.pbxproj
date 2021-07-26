@@ -10,6 +10,9 @@
 		E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */; };
 		E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */; };
 		E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FA9F426498E0000D6BE56 /* DevTracking.swift */; };
+		E715F43026AF012500930E36 /* ResponsiveSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */; };
+		E715F43126AF012500930E36 /* ResponsiveSelectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E715F42F26AF012500930E36 /* ResponsiveSelectorView.xib */; };
+		E715F43326AF07F100930E36 /* ResponsiveInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715F43226AF07F000930E36 /* ResponsiveInputView.swift */; };
 		E71C96A026934A1600935D06 /* BasicDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71C969F26934A1600935D06 /* BasicDataTypes.swift */; };
 		E7202E4E263AE54000715A7F /* LocalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */; };
 		E7202E53263AF0AF00715A7F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7202E52263AF0AF00715A7F /* Notification.swift */; };
@@ -36,9 +39,6 @@
 		E7901D02269F281C0093B10A /* ASCustomValueSetterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */; };
 		E7901D04269F28280093B10A /* ASCustomValueSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */; };
 		E7901D06269F29A80093B10A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D05269F29A80093B10A /* UIView.swift */; };
-		E7AE381126029E8E00C7AE3A /* UIPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE381026029E8E00C7AE3A /* UIPickerView.swift */; };
-		E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B046D426026D0B0051FDA4 /* PickerData.swift */; };
-		E7B046D926026F700051FDA4 /* PeriodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B046D826026F700051FDA4 /* PeriodData.swift */; };
 		E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */; };
 		E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */; };
 		E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */; };
@@ -46,6 +46,7 @@
 		E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */; };
 		E7E29BEC25FFCFB600FF7CE7 /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */; };
 		E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */; };
+		E7EC899926B1A8990009BEC2 /* ConvertibleTimeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EC899826B1A8990009BEC2 /* ConvertibleTimeComponent.swift */; };
 		E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* EditableTextView.swift */; };
 		E7F3141B2603B5100041F05C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3141A2603B5100041F05C /* Constants.swift */; };
 		E7F3835D2609FB9A002D28B9 /* DetailNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3835C2609FB9A002D28B9 /* DetailNoteViewController.swift */; };
@@ -55,6 +56,9 @@
 		E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNotesCollectionViewController.swift; sourceTree = "<group>"; };
 		E70FA9F426498E0000D6BE56 /* DevTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevTracking.swift; sourceTree = "<group>"; };
+		E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsiveSelectorView.swift; sourceTree = "<group>"; };
+		E715F42F26AF012500930E36 /* ResponsiveSelectorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResponsiveSelectorView.xib; sourceTree = "<group>"; };
+		E715F43226AF07F000930E36 /* ResponsiveInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveInputView.swift; sourceTree = "<group>"; };
 		E71C969F26934A1600935D06 /* BasicDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDataTypes.swift; sourceTree = "<group>"; };
 		E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHandler.swift; sourceTree = "<group>"; };
 		E7202E52263AF0AF00715A7F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -83,9 +87,6 @@
 		E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASCustomValueSetterView.xib; sourceTree = "<group>"; };
 		E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASCustomValueSetterView.swift; sourceTree = "<group>"; };
 		E7901D05269F29A80093B10A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		E7AE381026029E8E00C7AE3A /* UIPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPickerView.swift; sourceTree = "<group>"; };
-		E7B046D426026D0B0051FDA4 /* PickerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerData.swift; sourceTree = "<group>"; };
-		E7B046D826026F700051FDA4 /* PeriodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodData.swift; sourceTree = "<group>"; };
 		E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCell.swift; sourceTree = "<group>"; };
 		E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpStatusResponse.swift; sourceTree = "<group>"; };
 		E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchResponse.swift; sourceTree = "<group>"; };
@@ -93,6 +94,7 @@
 		E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringTransformer.swift; sourceTree = "<group>"; };
 		E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
 		E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCollectionViewController.swift; sourceTree = "<group>"; };
+		E7EC899826B1A8990009BEC2 /* ConvertibleTimeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertibleTimeComponent.swift; sourceTree = "<group>"; };
 		E7ED60B125EFA9DC00811762 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		E7F3141A2603B5100041F05C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E7F3835C2609FB9A002D28B9 /* DetailNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoteViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				E70FA9F426498E0000D6BE56 /* DevTracking.swift */,
 				E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */,
 				E7202E52263AF0AF00715A7F /* Notification.swift */,
+				E7EC899826B1A8990009BEC2 /* ConvertibleTimeComponent.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -156,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				E7F3141A2603B5100041F05C /* Constants.swift */,
-				E77042BE260B88B200335445 /* Custom Data */,
 				E77042AF260B85DC00335445 /* Data Model */,
 				E7D7441625FCCE59007D4FB7 /* Network */,
 			);
@@ -254,10 +256,13 @@
 		E77042BC260B884A00335445 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */,
+				E715F42F26AF012500930E36 /* ResponsiveSelectorView.xib */,
 				E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */,
 				E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */,
 				E7ED60B125EFA9DC00811762 /* EditableTextView.swift */,
 				E72EE63925F97DE400B228C5 /* EditableTextField.swift */,
+				E715F43226AF07F000930E36 /* ResponsiveInputView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -270,22 +275,12 @@
 			path = "Custom Layout";
 			sourceTree = "<group>";
 		};
-		E77042BE260B88B200335445 /* Custom Data */ = {
-			isa = PBXGroup;
-			children = (
-				E7B046D426026D0B0051FDA4 /* PickerData.swift */,
-				E7B046D826026F700051FDA4 /* PeriodData.swift */,
-			);
-			path = "Custom Data";
-			sourceTree = "<group>";
-		};
 		E77042BF260B89CE00335445 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				E77042AB260B588D00335445 /* UIViewController.swift */,
 				E73C76532604FE84003BF821 /* Emptiable.swift */,
 				E77042C1260B8A6100335445 /* UIAlertController.swift */,
-				E7AE381026029E8E00C7AE3A /* UIPickerView.swift */,
 				E735C0682693598600B27ECE /* UIScreen.swift */,
 				E71C969F26934A1600935D06 /* BasicDataTypes.swift */,
 				E7901D05269F29A80093B10A /* UIView.swift */,
@@ -365,6 +360,7 @@
 				E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */,
 				E7901D02269F281C0093B10A /* ASCustomValueSetterView.xib in Resources */,
 				E732C73725DBE11800A4CE31 /* Main.storyboard in Resources */,
+				E715F43126AF012500930E36 /* ResponsiveSelectorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,18 +390,18 @@
 				E77042AC260B588D00335445 /* UIViewController.swift in Sources */,
 				E7901D04269F28280093B10A /* ASCustomValueSetterView.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
-				E7B046D526026D0B0051FDA4 /* PickerData.swift in Sources */,
 				E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */,
+				E715F43326AF07F100930E36 /* ResponsiveInputView.swift in Sources */,
+				E715F43026AF012500930E36 /* ResponsiveSelectorView.swift in Sources */,
 				E7E29BEC25FFCFB600FF7CE7 /* EditNoteViewController.swift in Sources */,
+				E7EC899926B1A8990009BEC2 /* ConvertibleTimeComponent.swift in Sources */,
 				E71C96A026934A1600935D06 /* BasicDataTypes.swift in Sources */,
 				E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */,
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
 				E7202E53263AF0AF00715A7F /* Notification.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
 				E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */,
-				E7B046D926026F700051FDA4 /* PeriodData.swift in Sources */,
 				E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */,
-				E7AE381126029E8E00C7AE3A /* UIPickerView.swift in Sources */,
 				E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */,
 				E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */,
 				E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */,

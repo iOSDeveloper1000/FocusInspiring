@@ -14,17 +14,17 @@ import UIKit
 @IBDesignable
 class ASCustomValueSetterView: UIView {
 
-    // MARK: Input Properties
+    // MARK: - Input Properties
 
-    // @todo REFACTOR: USE GENERIC INPUT VIEW -- CURRENTLY SPECIFIC TO EXTENDED UIPICKERVIEW
-    private var pickerInput: UIPickerView?
+    /// Used as customized input view
+    private var responsiveInputView: ResponsiveSelectorView?
 
     /// Used as input accessory view
     private var accessoryToolBar: UIToolbar?
 
     override var inputView: UIView? {
-        get { pickerInput }
-        set { pickerInput = newValue as? UIPickerView }
+        get { responsiveInputView }
+        set { responsiveInputView = newValue as? ResponsiveSelectorView }
     }
 
     override var inputAccessoryView: UIToolbar? {
@@ -34,8 +34,10 @@ class ASCustomValueSetterView: UIView {
 
     override var canBecomeFirstResponder: Bool { true }
 
+    var onValueConfirm: ((ConvertibleTimeComponent?) -> Void)?
 
-    // MARK: View Properties
+
+    // MARK: - View Properties
 
     /// The text of the valueButton label.
     var buttonText: String? {
@@ -81,7 +83,7 @@ class ASCustomValueSetterView: UIView {
     }
 
 
-    // MARK: Outlets
+    // MARK: - Outlets
 
     @IBOutlet var contentView: UIView!
 
@@ -92,7 +94,7 @@ class ASCustomValueSetterView: UIView {
     @IBOutlet weak var postLabel: UILabel!
 
 
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -118,11 +120,10 @@ class ASCustomValueSetterView: UIView {
     }
 
 
-    // MARK: Actions
+    // MARK: - Actions
 
     @IBAction func valueButtonTapped(_ sender: Any) {
-        // Update row selection of picker
-        pickerInput?.collectSelection()
+        responsiveInputView?.clearInput()
 
         becomeFirstResponder()
     }
@@ -130,11 +131,9 @@ class ASCustomValueSetterView: UIView {
     @IBAction func inputConfirmed(_ sender: UIBarButtonItem?) {
         resignFirstResponder()
 
-        // Update button and persistent values
-        let picker = inputView as? UIPickerView
-        picker?.saveSelection()
+        buttonText = responsiveInputView?.printedUserInput
 
-        updateButtonText()
+        onValueConfirm?(responsiveInputView?.convertedData)
     }
 
     @IBAction func inputCancelled(_ sender: UIBarButtonItem?) {
@@ -142,35 +141,33 @@ class ASCustomValueSetterView: UIView {
     }
 
 
-    // MARK: Public
+    // MARK: - Public
 
     /**
-     Setup method for specifying underlaid input view and label texts
+     Setup method for specifying underlaid input view and label texts.
 
-     - Parameter inputView: View that becomes the first responder when button is tapped -- specialized to UIPickerView
-     - Parameter preLabelText: String to be presented before the button text
-     - Parameter postLabelText: String to be presented after the button text
+     - Parameter inputView: View that becomes the first responder when button is tapped -- specialized to ResponsiveSelectorView for now
+     - Parameter preLabelText: String to be presented before the button
+     - Parameter postLabelText: String to be presented after the button
+     - Parameter callbackOnConfirm: Function will be called when user confirms his input
      */
-    func setupWith(inputView: UIPickerView, preLabelText: String? = nil, postLabelText: String? = nil) {
+    func setup(inputView: ResponsiveSelectorView, preLabelText: String? = nil, postLabelText: String? = nil, callbackOnConfirm: ((ConvertibleTimeComponent?) -> Void)? = nil) {
         self.inputView = inputView
         inputAccessoryView = createAccessoryView()
+
+        onValueConfirm = callbackOnConfirm
 
         // Update label texts
         preLabel.text = preLabelText
         postLabel.text = postLabelText
 
-        buttonText = "???" // Value is to be set later via viewWillAppear
-    }
-
-    /// Update label text of button object with values from picker data source.
-    func updateButtonText() {
-        let dataSource = pickerInput?.dataSource as? PeriodData
-        buttonText = dataSource?.textualRepresentation ?? "???"
+        buttonText = "???" // Indicates unset button
     }
 
 
-    // MARK: Helper
+    // MARK: - Helper
 
+    // @todo REFACTOR: OVERWRITE INPUTACCESSORYVIEW
     /**
      Create a toolbar with a cancel and done button that can be used as accessory view.
      */
@@ -180,6 +177,7 @@ class ASCustomValueSetterView: UIView {
 
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(inputCancelled(_:)))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(inputConfirmed(_:)))
+        //let textFieldItem = UIBarButtonItem(customView: UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 0))) @todo REDESIGN VIEW
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         accessory.items = [cancelButton, flexSpace, doneButton]
