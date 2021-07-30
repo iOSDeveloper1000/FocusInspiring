@@ -15,7 +15,7 @@ class CollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     // MARK: Properties
 
-    /* Initially filled with default values */
+    // Initially filled with default values
     var lineSpacing: CGFloat = 20
     var interitemSpacing: CGFloat = 10
     var itemsPerRowPortrait: CGFloat = 3

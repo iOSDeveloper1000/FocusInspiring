@@ -16,7 +16,7 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
     // MARK: - Properties
 
     override var intrinsicContentSize: CGSize {
-        let targetWidth: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height, 320) // maximum width of 320pts
+        let targetWidth: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
 
         // For textfield space, height shall be greater than width of view.
         return CGSize(width: targetWidth, height: targetWidth + 44)

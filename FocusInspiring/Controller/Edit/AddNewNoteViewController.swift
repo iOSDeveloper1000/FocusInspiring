@@ -38,9 +38,10 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     /// Date for displaying the note in future
     var targetDate: Date? {
-        guard let selectedPeriod = selectedPeriod else { return nil }
+        guard let selectedPeriod = selectedPeriod,
+              let periodComponent = selectedPeriod.dateComponent else { return nil }
 
-        return Calendar.autoupdatingCurrent.date(byAdding: selectedPeriod.dateComponent, to: Date())
+        return Calendar.autoupdatingCurrent.date(byAdding: periodComponent, to: Date())
     }
 
 
@@ -315,8 +316,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     /// Retrieve user's default period setting
     private func collectDefaultPeriod() -> String? {
-        let countValue = UserDefaults.standard.integer(forKey: UserKey.periodPickerCount)
-        let unitIntValue = UserDefaults.standard.integer(forKey: UserKey.periodPickerUnit)
+        let countValue = UserDefaults.standard.integer(forKey: UserKey.addNewNoteDefaultPeriod.count)
+        let unitIntValue = UserDefaults.standard.integer(forKey: UserKey.addNewNoteDefaultPeriod.unit)
 
         selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 

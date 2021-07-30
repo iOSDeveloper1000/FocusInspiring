@@ -33,20 +33,16 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         return df
     }()
 
-    /// Data for the presented picker integrated in representInTextField keyboard
-    //var periodData: PeriodData!
-    //let pickerInputView = UIPickerView()
-
-
     let responsiveSelectorView = ResponsiveSelectorView(frame: CGRect(origin: .zero, size: CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)))
 
     var selectedPeriod: ConvertibleTimeComponent? // Written by closure
 
     /// Date for displaying the note in future again
     var targetDate: Date? {
-        guard let selectedPeriod = selectedPeriod else { return nil }
+        guard let selectedPeriod = selectedPeriod,
+              let periodComponent = selectedPeriod.dateComponent else { return nil }
 
-        return Calendar.autoupdatingCurrent.date(byAdding: selectedPeriod.dateComponent, to: Date())
+        return Calendar.autoupdatingCurrent.date(byAdding: periodComponent, to: Date())
     }
 
     /// Displays a message in case no more items are available
@@ -311,8 +307,8 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
     /// Retrieve user's default period setting
     private func collectDefaultPeriod() -> String? {
-        let countValue = UserDefaults.standard.integer(forKey: UserKey.periodPickerCount)
-        let unitIntValue = UserDefaults.standard.integer(forKey: UserKey.periodPickerUnit)
+        let countValue = UserDefaults.standard.integer(forKey: UserKey.repeatNoteDefaultPeriod.count)
+        let unitIntValue = UserDefaults.standard.integer(forKey: UserKey.repeatNoteDefaultPeriod.unit)
 
         selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 

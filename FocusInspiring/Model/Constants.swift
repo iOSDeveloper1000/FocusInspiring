@@ -27,8 +27,19 @@ struct DataParameter {
 // MARK: Default and User Keys
 
 struct UserKey {
-    static let periodPickerCount = "UserKey: Period Picker Count"
-    static let periodPickerUnit = "UserKey: Period Picker Unit"
+    struct PeriodValueKeyType {
+        let count: String
+        let unit: String
+    }
+
+    static let addNewNoteDefaultPeriod = PeriodValueKeyType(
+        count: "UserKey: Default Period Count in AddNewVC",
+        unit: "UserKey: Default Period Unit in AddNewVC"
+    )
+    static let repeatNoteDefaultPeriod = PeriodValueKeyType(
+        count: "UserKey: Default Period Count for Repetition",
+        unit: "UserKey: Default Period Unit for Repetition"
+    )
 }
 
 
@@ -66,10 +77,12 @@ struct EmptyViewLabel {
 }
 
 
-// MARK: Internal Keys and Parameters
+// MARK: - Internal Identifiers
 
-struct InternalConstant {
-    static let indexOfDisplayVCInTabBar = 1
+struct ViewControllerIdentifier {
+
+    static let displayNoteVC: Int = 1
+    static let addNewNoteVC: Int = 2
 }
 
 /// Keys for saving in UserDefaults
@@ -83,8 +96,16 @@ struct DefaultKey {
 
 /// Reuse Identifiers used across the app
 struct ReuseIdentifier {
+    struct ForViewController {
+        /* @todo FILL */
+    }
 
-    // Identifiers for cells
+    struct ForTableViewCell {
+        static let addNewDefaultPeriodSetting = "AddNewDefaultPeriodCellIdentifier"
+        static let repeatDefaultPeriodSetting = "RepeatDefaultPeriodCellIdentifier"
+    }
+
+    // Identifiers for cells (old structure!) @todo
     static let inspirationalNoteCell = "InspirationalNoteCellIdentifier"
 
     // Identifiers for view controllers

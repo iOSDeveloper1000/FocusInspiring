@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol ResponsiveInputView {
-    associatedtype ReturnValue//: CustomStringConvertible @todo !!!
+    associatedtype ReturnValue: CustomStringConvertible
 
     /// String that describes the user input
     var printedUserInput: String? { get }

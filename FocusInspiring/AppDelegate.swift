@@ -12,19 +12,16 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setUserDefaultsIfFirstLaunch() {
+        // @opt-todo USE UserDefaults.standard.register method
         if UserDefaults.standard.bool(forKey: DefaultKey.hasLaunchedBefore) {
             print("App launched before")
         } else {
             print("First app launch")
 
-            // Initialize UserDefaults values
-            UserDefaults.standard.set(2, forKey: UserKey.periodPickerCount) /// "3"
-            UserDefaults.standard.set(1, forKey: UserKey.periodPickerUnit) /// "weeks"
-
-            UserDefaults.standard.setValue(false, forKey: DefaultKey.reduceConfirmations)
-            UserDefaults.standard.setValue(false, forKey: DefaultKey.enableTestingMode)
-
             UserDefaults.standard.set(true, forKey: DefaultKey.hasLaunchedBefore)
+
+            // Other used keys are used with normal defaults (0/false) in first launch
+
             UserDefaults.standard.synchronize()
         }
     }
@@ -34,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setUserDefaultsIfFirstLaunch()
 
-        /// Delegate methods implemented in extension
+        // Delegate methods implemented in extension
         UNUserNotificationCenter.current().delegate = self
 
         return true
@@ -122,8 +119,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 return
             }
 
-            /// Set tabbar to item Display Note VC
-            tabBarController.selectedIndex = InternalConstant.indexOfDisplayVCInTabBar
+            // Set tabbar index to DisplayNoteVC
+            tabBarController.selectedIndex = ViewControllerIdentifier.displayNoteVC
 
         } else if response.actionIdentifier != UNNotificationDismissActionIdentifier {
             track("Unknown user action after notification was sent")

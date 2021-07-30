@@ -39,6 +39,7 @@
 		E7901D02269F281C0093B10A /* ASCustomValueSetterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */; };
 		E7901D04269F28280093B10A /* ASCustomValueSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */; };
 		E7901D06269F29A80093B10A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D05269F29A80093B10A /* UIView.swift */; };
+		E7AAF49E26B4402D005197A1 /* EditablePeriodLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */; };
 		E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */; };
 		E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */; };
 		E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */; };
@@ -87,6 +88,7 @@
 		E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASCustomValueSetterView.xib; sourceTree = "<group>"; };
 		E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASCustomValueSetterView.swift; sourceTree = "<group>"; };
 		E7901D05269F29A80093B10A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePeriodLabel.swift; sourceTree = "<group>"; };
 		E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCell.swift; sourceTree = "<group>"; };
 		E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpStatusResponse.swift; sourceTree = "<group>"; };
 		E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchResponse.swift; sourceTree = "<group>"; };
@@ -256,13 +258,14 @@
 		E77042BC260B884A00335445 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				E715F43226AF07F000930E36 /* ResponsiveInputView.swift */,
 				E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */,
 				E715F42F26AF012500930E36 /* ResponsiveSelectorView.xib */,
 				E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */,
 				E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */,
 				E7ED60B125EFA9DC00811762 /* EditableTextView.swift */,
 				E72EE63925F97DE400B228C5 /* EditableTextField.swift */,
-				E715F43226AF07F000930E36 /* ResponsiveInputView.swift */,
+				E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				E715F43326AF07F100930E36 /* ResponsiveInputView.swift in Sources */,
 				E715F43026AF012500930E36 /* ResponsiveSelectorView.swift in Sources */,
 				E7E29BEC25FFCFB600FF7CE7 /* EditNoteViewController.swift in Sources */,
+				E7AAF49E26B4402D005197A1 /* EditablePeriodLabel.swift in Sources */,
 				E7EC899926B1A8990009BEC2 /* ConvertibleTimeComponent.swift in Sources */,
 				E71C96A026934A1600935D06 /* BasicDataTypes.swift in Sources */,
 				E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */,

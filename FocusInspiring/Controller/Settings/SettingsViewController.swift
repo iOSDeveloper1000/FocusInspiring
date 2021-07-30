@@ -13,34 +13,53 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
-    // MARK: Outlets
+    // MARK: - Outlets
 
     @IBOutlet weak var reduceConfirmationsCell: UITableViewCell!
     @IBOutlet weak var enableTestingCell: UITableViewCell!
-    @IBOutlet weak var versionCell: UITableViewCell!
 
+    @IBOutlet weak var addNewDefaultPeriodLabel: EditablePeriodLabel!
+    @IBOutlet weak var repeatDefaultPeriodLabel: EditablePeriodLabel!
 
-    // MARK: Life Cycle
+    @IBOutlet weak var versionLabel: UILabel!
+    
+
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        versionCell.detailTextLabel?.text = AppParameter.versionNumber
+        versionLabel.text = AppParameter.versionNumber
 
+        // Retrieve user settings
         reduceConfirmationsCell.accessoryType = UserDefaults.standard.bool(forKey: DefaultKey.reduceConfirmations) ? .checkmark : .none
         enableTestingCell.accessoryType = UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode) ? .checkmark : .none
+
+        // Setup labels for user default periods
+        addNewDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.addNewNoteDefaultPeriod)
+        repeatDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.repeatNoteDefaultPeriod)
+
+        addNewDefaultPeriodLabel.onValueConfirm = {
+            self.updateUserDefaultPeriod(with: $0, for: UserKey.addNewNoteDefaultPeriod)
+            self.alertUserWhenChangingSettings()
+        }
+        repeatDefaultPeriodLabel.onValueConfirm = {
+            self.updateUserDefaultPeriod(with: $0, for: UserKey.repeatNoteDefaultPeriod)
+            self.alertUserWhenChangingSettings()
+        }
     }
 
 
-    // MARK: TableView Delegation
+    // MARK: - TableView Delegation
 
     /// Toggle accessory type to '.checkmark' when trying to select rows for this use
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-
         guard let identifier = tableView.cellForRow(at: indexPath)?.reuseIdentifier else {
             track("GUARD FAILED: Selected cell not found or has no reuse identifier")
             return indexPath
         }
+
+        let cellReuseIdentifier = ReuseIdentifier.ForTableViewCell.self
 
         switch identifier {
         case "ReduceConfirmationsCell":
@@ -49,6 +68,14 @@ class SettingsViewController: UITableViewController {
         case "EnableTestingCell":
             handleAccessoryTypeAndPersistency(for: enableTestingCell, withKey: DefaultKey.enableTestingMode)
             alertUserWhenChangingSettings()
+
+        case cellReuseIdentifier.addNewDefaultPeriodSetting:
+            addNewDefaultPeriodLabel.clearInputField()
+            addNewDefaultPeriodLabel.becomeFirstResponder()
+
+        case cellReuseIdentifier.repeatDefaultPeriodSetting:
+            repeatDefaultPeriodLabel.clearInputField()
+            repeatDefaultPeriodLabel.becomeFirstResponder()
 
         case "RecommendationCell":
             shareAppWithFriends()
@@ -64,7 +91,7 @@ class SettingsViewController: UITableViewController {
     }
 
 
-    // MARK: Navigation
+    // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
@@ -83,7 +110,7 @@ class SettingsViewController: UITableViewController {
     }
 
 
-    // MARK: Helper
+    // MARK: - Helpers
 
     private func shareAppWithFriends() {
         guard let urlStr = URL(string: AppParameter.appUrl ) else {
@@ -105,14 +132,35 @@ class SettingsViewController: UITableViewController {
 
     private func handleAccessoryTypeAndPersistency(for cell: UITableViewCell, withKey key: String) {
 
-        let isNoneAccessoryType = (cell.accessoryType == .none)
+        let isAccessoryTypeNone = (cell.accessoryType == .none)
 
-        cell.accessoryType = isNoneAccessoryType ? .checkmark : .none
-        UserDefaults.standard.setValue(isNoneAccessoryType, forKey: key)
+        cell.accessoryType = isAccessoryTypeNone ? .checkmark : .none
+        UserDefaults.standard.setValue(isAccessoryTypeNone, forKey: key)
+    }
+
+    private func collectUserDefaultPeriod(for userKey: UserKey.PeriodValueKeyType) -> String {
+
+        let countValue = UserDefaults.standard.integer(forKey: userKey.count)
+        let unitIntValue = UserDefaults.standard.integer(forKey: userKey.unit)
+
+        let defaultPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
+
+        return defaultPeriod.description
+    }
+
+    private func updateUserDefaultPeriod(with value: ConvertibleTimeComponent?, for userKey: UserKey.PeriodValueKeyType) {
+        guard let value = value else {
+            track("GUARD FAILED: Selected default period is nil")
+            return
+        }
+
+        // Store user selected values persistently in UserDefaults
+        UserDefaults.standard.set(value.count, forKey: userKey.count)
+        UserDefaults.standard.set(value.component.rawValue, forKey: userKey.unit)
     }
 
     private func alertUserWhenChangingSettings() {
 
-        popupAlert(title: "Please close and restart app for modified settings becoming active.", message: "", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+        popupAlert(title: "Changed settings may become active only after restart of app.", message: "", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
     }
 }

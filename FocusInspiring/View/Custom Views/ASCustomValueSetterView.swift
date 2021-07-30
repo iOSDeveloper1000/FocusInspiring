@@ -172,7 +172,7 @@ class ASCustomValueSetterView: UIView {
      Create a toolbar with a cancel and done button that can be used as accessory view.
      */
     private func createAccessoryView() -> UIToolbar {
-        /// Make toolbar for leaving the pickerview
+        /// Make toolbar for resigning from input mode
         let accessory = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
 
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(inputCancelled(_:)))

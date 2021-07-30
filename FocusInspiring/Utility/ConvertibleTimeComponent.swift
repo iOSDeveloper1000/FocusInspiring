@@ -46,25 +46,28 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
         default: unitString = "?"
         }
 
-        let rawString = "\(count) \(unitString)"
+        let rawString = (count > 0) ? "\(count) \(unitString)" : "none"
 
         // Append plural 's
         return (count > 1 && component != .none) ? "\(rawString)s" : rawString
     }
 
     /// Conversion to DateComponents object
-    var dateComponent: DateComponents {
+    var dateComponent: DateComponents? {
+        var result: DateComponents?
+
         switch component {
-        case .sec: return DateComponents(second: count)
-        case .min: return DateComponents(minute: count)
-        case .day: return DateComponents(day: count)
-        case .week: return DateComponents(weekOfYear: count)
-        case .month: return DateComponents(month: count)
-        case .year: return DateComponents(year: count)
+        case .sec: result = DateComponents(second: count)
+        case .min: result = DateComponents(minute: count)
+        case .day: result = DateComponents(day: count)
+        case .week: result = DateComponents(weekOfYear: count)
+        case .month: result = DateComponents(month: count)
+        case .year: result = DateComponents(year: count)
+
         default: break
         }
 
-        return DateComponents() // zero value
+        return result
     }
 
 
@@ -76,18 +79,21 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
     }
 
     init(count: Int, calendarComponent: Calendar.Component) {
-        self.count = count
+        guard count > 0 else {
+            self.init(count: 0, component: .none)
+            return
+        }
 
         switch calendarComponent {
-        case .second: component = .sec
-        case .minute: component = .min
-        case .day: component = .day
-        case .weekOfYear: component = .week
-        case .month: component = .month
-        case .year: component = .year
+        case .second: self.init(count: count, component: .sec)
+        case .minute: self.init(count: count, component: .min)
+        case .day: self.init(count: count, component: .day)
+        case .weekOfYear: self.init(count: count, component: .week)
+        case .month: self.init(count: count, component: .month)
+        case .year: self.init(count: count, component: .year)
 
         // other values of type Calendar.Component not used
-        default: component = .none
+        default: self.init(count: 0, component: .none)
         }
     }
 
