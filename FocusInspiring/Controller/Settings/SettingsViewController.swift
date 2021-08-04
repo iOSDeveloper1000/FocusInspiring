@@ -29,7 +29,7 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        versionLabel.text = AppParameter.versionNumber
+        versionLabel.text = AppParameter.versionString
 
         // Retrieve user settings
         reduceConfirmationsCell.accessoryType = UserDefaults.standard.bool(forKey: DefaultKey.reduceConfirmations) ? .checkmark : .none

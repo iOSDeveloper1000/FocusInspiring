@@ -14,7 +14,7 @@ import UIKit
 // MARK: General App Parameters
 
 struct AppParameter {
-    static let versionNumber = "0.1" // @todo Update with every publishing
+    static let versionString = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 
     // @todo set correct app id and url: "https://apps.apple.com/us/app/idxxxxxxxxxx"
     static let appUrl = "https://github.com/iOSDeveloper1000/FocusInspiring"
