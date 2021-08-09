@@ -134,7 +134,7 @@ class LocalNotificationHandler {
 
             UNUserNotificationCenter.current().add(request) { (error) in
                 guard error == nil else {
-                    track("Trying to schedule notification: \(error?.localizedDescription as String?)")
+                    track("ERROR: Trying to schedule notification: \(error?.localizedDescription as String?)")
                     return
                 }
             }

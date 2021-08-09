@@ -11,27 +11,17 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    func setUserDefaultsIfFirstLaunch() {
-        // @opt-todo USE UserDefaults.standard.register method
-        if UserDefaults.standard.bool(forKey: DefaultKey.hasLaunchedBefore) {
-            print("App launched before")
-        } else {
-            print("First app launch")
-
-            UserDefaults.standard.set(true, forKey: DefaultKey.hasLaunchedBefore)
-
-            // Other used keys are used with normal defaults (0/false) in first launch
-
-            UserDefaults.standard.synchronize()
-        }
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        setUserDefaultsIfFirstLaunch()
+        // Setup parameter values in first app launch
+        // @opt-todo USE UserDefaults.standard.register method
+        if !(UserDefaults.standard.bool(forKey: UserKey.appLaunchedBefore)) {
+            print("App has not launched before")
 
-        // Delegate methods implemented in extension
+            UserKey.setupUserDefaults()
+        }
+
         UNUserNotificationCenter.current().delegate = self
 
         return true

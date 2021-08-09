@@ -29,7 +29,10 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     /// Date formatter for the displayed dates
     let dateFormatter: DateFormatter = {
         let df = DateFormatter()
-        df.dateStyle = .medium
+        df.dateStyle = .full
+        if UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode) {
+            df.timeStyle = .medium
+        }
         return df
     }()
 
@@ -37,12 +40,15 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
     var selectedPeriod: ConvertibleTimeComponent? // Written by closure
 
-    /// Date for displaying the note in future again
-    var targetDate: Date? {
-        guard let selectedPeriod = selectedPeriod,
-              let periodComponent = selectedPeriod.dateComponent else { return nil }
+    /// Target date for future display of note in DateComponents
+    var target: DateComponents?
 
-        return Calendar.autoupdatingCurrent.date(byAdding: periodComponent, to: Date())
+    /// Target date for future display of note
+    var targetDate: Date? {
+        guard let target = target else {
+            return nil
+        }
+        return Calendar.current.date(from: target)
     }
 
     /// Displays a message in case no more items are available
@@ -109,12 +115,20 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }
 
     @IBAction func repeatButtonPressed(_ sender: Any) {
-
-        if let targetDate = targetDate {
-            popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: targetDate)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
-        } else {
-            popupAlert(title: "Period not set", message: "It seems like you have not entered a time duration for the note becoming visible again. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+        guard let selectedPeriod = selectedPeriod else {
+            popupAlert(title: "Period not set", message: "It seems like you have not entered a time duration for this note becoming visible again. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+            return
         }
+
+        // Compute target date by selected period
+        target = selectedPeriod.addSelf(to: Date())
+
+        guard let targetDate = targetDate else {
+            popupAlert(title: "Internal error", message: "Could not convert the given target date. Try to set a different period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+            return
+        }
+
+        popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: targetDate)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
     }
 
     /// For editButton action see segue preparation below
@@ -258,6 +272,13 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     func repeatHandler(alertAction: UIAlertAction) {
         guard let uuid = displayedItem.uuid else {
             track("GUARD FAILED")
+            // @todo INFORM USER
+            return
+        }
+        guard let target = target,
+              let targetDate = targetDate else {
+            track("GUARD FAILED: Target date not computed")
+            // @todo INFORM USER
             return
         }
 
@@ -266,7 +287,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         dataController.saveViewContext()
 
         /// Update and reschedule user notification
-        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: DateComponents(calendar: Calendar.autoupdatingCurrent, second: 7)) // @todo SET CORRECT DATETIME
+        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: target)
 
         displayNextItem()
     }

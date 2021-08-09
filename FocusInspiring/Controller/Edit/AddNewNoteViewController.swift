@@ -28,7 +28,10 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     /// Date formatter for the displayed dates
     let dateFormatter: DateFormatter = {
         let df = DateFormatter()
-        df.dateStyle = .medium
+        df.dateStyle = .full
+        if UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode) {
+            df.timeStyle = .medium
+        }
         return df
     }()
 
@@ -36,12 +39,15 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     var selectedPeriod: ConvertibleTimeComponent? // Written by closure
 
-    /// Date for displaying the note in future
-    var targetDate: Date? {
-        guard let selectedPeriod = selectedPeriod,
-              let periodComponent = selectedPeriod.dateComponent else { return nil }
+    /// Target date for future display of note in DateComponents
+    var target: DateComponents?
 
-        return Calendar.autoupdatingCurrent.date(byAdding: periodComponent, to: Date())
+    /// Target date for future display of note
+    var targetDate: Date? {
+        guard let target = target else {
+            return nil
+        }
+        return Calendar.current.date(from: target)
     }
 
 
@@ -111,8 +117,16 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         /// Disallow user to edit during save action
         toggleUserInterface(enable: false)
 
-        guard let targetDate = targetDate else {
+        guard selectedPeriod != nil else {
             popupAlert(title: "Period not set", message: "It seems like you have not entered a time duration for this note becoming visible. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
+            return
+        }
+
+        // Compute target date by selected period
+        target = selectedPeriod?.addSelf(to: Date())
+
+        guard let targetDate = targetDate else {
+            track("GUARD FAILED: Target date unset")
             return
         }
 
@@ -209,7 +223,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     private func saveNewItem() -> InspirationItem? {
         guard let targetDate = targetDate else {
-            track("GUARD FAILED: Saving was unsuccessful")
+            track("GUARD FAILED: Target date not computed")
             return nil
         }
 
@@ -258,11 +272,15 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
             track("GUARD FAILED: UUID not set")
             return
         }
+        guard let target = target else {
+            track("GUARD FAILED: Target in DateComponents not set")
+            return
+        }
 
-        /// Add and schedule new user notification
-        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: DateComponents(calendar: Calendar.autoupdatingCurrent, second: 7)) // @todo SET CORRECT DATETIME
+        // Add and schedule local notification
+        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: target)
 
-        /// Clear and reenable user interface for a further note
+        // Clear and reenable user interface for a further note
         clearUserInterface()
         toggleUserInterface(enable: true)
     }

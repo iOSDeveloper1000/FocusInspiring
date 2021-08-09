@@ -27,6 +27,8 @@ struct DataParameter {
 // MARK: Default and User Keys
 
 struct UserKey {
+    static let appLaunchedBefore = "User Key: App has launched before"
+
     struct PeriodValueKeyType {
         let count: String
         let unit: String
@@ -40,6 +42,20 @@ struct UserKey {
         count: "UserKey: Default Period Count for Repetition",
         unit: "UserKey: Default Period Unit for Repetition"
     )
+
+    /**
+     Reset stored parameter values in UserDefaults -- for first app launch
+     */
+    static func setupUserDefaults() {
+        UserDefaults.standard.set(true, forKey: appLaunchedBefore)
+
+        UserDefaults.standard.set(0 /* unset */, forKey: addNewNoteDefaultPeriod.count)
+        UserDefaults.standard.set(99 /* unset */, forKey: addNewNoteDefaultPeriod.unit)
+        UserDefaults.standard.set(0 /* unset */, forKey: repeatNoteDefaultPeriod.count)
+        UserDefaults.standard.set(99 /* unset */, forKey: repeatNoteDefaultPeriod.unit)
+
+        UserDefaults.standard.synchronize()
+    }
 }
 
 
