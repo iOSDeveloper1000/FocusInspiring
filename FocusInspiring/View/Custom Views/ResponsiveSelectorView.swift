@@ -99,7 +99,7 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
         }
 
         // Disable "SEC" and "MIN" button in normal (non-testing) mode
-        if !(UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode)) {
+        if !(UserDefaults.standard.bool(forKey: UserKey.enableTestMode)) {
             button_sec.isUserInteractionEnabled = false
             button_min.isUserInteractionEnabled = false
             button_sec.setTitle("", for: .normal)

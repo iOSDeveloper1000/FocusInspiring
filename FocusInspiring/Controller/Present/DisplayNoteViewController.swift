@@ -14,10 +14,6 @@ import CoreData
 
 class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsControllerDelegate {
 
-    /// Key used for assigning TemporaryDataItem in CoreData to this view controller
-    private let editNotekey = "EditNoteFromDisplayKey"
-
-
     // MARK: Properties
 
     var displayedItem: InspirationItem!
@@ -30,7 +26,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .full
-        if UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode) {
+        if UserDefaults.standard.bool(forKey: UserKey.enableTestMode) {
             df.timeStyle = .medium
         }
         return df
@@ -142,7 +138,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SegueToEditNote" {
+        if segue.identifier == ReuseIdentifier.forSegue.displayNoteToEditNote {
             let controller = segue.destination as! EditNoteViewController
 
             /// Although editNote is saved in a managed object context it won't be used for saving between sessions
@@ -150,12 +146,12 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
             editNote.title = displayedItem?.title ?? ""
             editNote.attributedText = displayedItem?.attributedText ?? nil
             editNote.image = displayedItem?.image ?? nil
-            editNote.objectKey = editNotekey
+            editNote.objectKey = ReuseIdentifier.forObjectKey.editingNote
 
             controller.temporaryNote = editNote
             controller.completion = { (editConfirmed, edit) in
                 if editConfirmed {
-                    guard  let edit = edit else { return }
+                    guard let edit = edit else { return }
 
                     /// Copy back edited note
                     self.displayedItem.title = edit.title

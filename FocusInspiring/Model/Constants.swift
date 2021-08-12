@@ -9,9 +9,9 @@
 import UIKit
 
 
-// Definition of Constants for FocusInspiring App
+// Definition of Constants and Strings for App FocusInspiring
 
-// MARK: General App Parameters
+// MARK: - General App Parameters
 
 struct AppParameter {
     static let versionString = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -20,14 +20,15 @@ struct AppParameter {
     static let appUrl = "https://github.com/iOSDeveloper1000/FocusInspiring"
 }
 
-struct DataParameter {
-    static let periodCounterMaxValue = 30
-}
 
-// MARK: Default and User Keys
+// MARK: - Keys for UserDefaults
 
 struct UserKey {
     static let appLaunchedBefore = "User Key: App has launched before"
+
+    static let reduceUserQueries = "User Key: Reduce number of Queries to the User"
+    static let enableTestMode = "User Key: Enable Test Mode"
+
 
     struct PeriodValueKeyType {
         let count: String
@@ -59,7 +60,7 @@ struct UserKey {
 }
 
 
-// MARK: View and Layout Parameters
+// MARK: - View and Layout Parameters
 
 struct TextParameter {
     struct Title {
@@ -96,34 +97,38 @@ struct EmptyViewLabel {
 // MARK: - Internal Identifiers
 
 struct ViewControllerIdentifier {
-
     static let displayNoteVC: Int = 1
     static let addNewNoteVC: Int = 2
 }
 
-/// Keys for saving in UserDefaults
-struct DefaultKey {
-    static let hasLaunchedBefore = "App has launched before"
-
-    /// User Settings
-    static let reduceConfirmations = "Key for Reducing Number of Confirmations"
-    static let enableTestingMode = "Key for Enabling Easier Testing"
-}
-
-/// Reuse Identifiers used across the app
+/// Store for reuse identifiers used across the app
 struct ReuseIdentifier {
-    struct ForViewController {
-        /* @todo FILL */
+    struct forViewController {
+        static let detailNote = "DetailNoteViewControllerIdentifier"
     }
 
-    struct ForTableViewCell {
+    struct forCollectionViewCell {
+        static let inspirationalNote = "InspirationalNoteCellIdentifier"
+        static let imageSearchResult = "ImageSearchResultCellIdentifier"
+    }
+
+    struct forTableViewCell {
+        static let reduceUserQueriesSetting = "ReduceUserQueriesCellIdentifier"
+        static let enableTestModeSetting = "EnableTestModeCellIdentifier"
         static let addNewDefaultPeriodSetting = "AddNewDefaultPeriodCellIdentifier"
         static let repeatDefaultPeriodSetting = "RepeatDefaultPeriodCellIdentifier"
+
+        static let recommendationInfo = "RecommendationCellIdentifier"
     }
 
-    // Identifiers for cells (old structure!) @todo
-    static let inspirationalNoteCell = "InspirationalNoteCellIdentifier"
+    struct forSegue {
+        static let displayNoteToEditNote = "SegueDisplayNoteToEditNote"
+        static let addNewNoteToImageSearch = "SegueAddNewNoteToImageSearch"
+        static let editNoteToImageSearch = "SegueEditNoteToImageSearch"
+    }
 
-    // Identifiers for view controllers
-    static let detailNoteViewController = "DetailNoteViewControllerIdentifier"
+    struct forObjectKey {
+        static let editingNote = "EditingNoteIdentifier"
+        static let addingNewNote = "AddingNewNoteIdentifier"
+    }
 }

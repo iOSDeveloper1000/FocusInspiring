@@ -14,10 +14,6 @@ import CoreData
 
 class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
-    /// Key used for assigning TemporaryDataItem in CoreData to this view controller
-    private let addNewNoteKey: String = "AddNewNoteKey"
-
-
     // MARK: Properties
 
     var temporaryNote: TemporaryDataItem!
@@ -29,7 +25,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .full
-        if UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode) {
+        if UserDefaults.standard.bool(forKey: UserKey.enableTestMode) {
             df.timeStyle = .medium
         }
         return df
@@ -141,7 +137,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SegueToFlickrSearch" {
+        if segue.identifier == ReuseIdentifier.forSegue.addNewNoteToImageSearch {
             let navigationController = segue.destination as! UINavigationController
             let flickrController = navigationController.topViewController as! FlickrSearchCollectionViewController
 
@@ -162,7 +158,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     private func setUpFetchedResultsController() {
         let fetchRequest:NSFetchRequest<TemporaryDataItem> = TemporaryDataItem.fetchRequest()
 
-        fetchRequest.predicate = NSPredicate(format: "objectKey == %@", addNewNoteKey)
+        let objectIdentifier = ReuseIdentifier.forObjectKey.addingNewNote
+        fetchRequest.predicate = NSPredicate(format: "objectKey == %@", objectIdentifier)
         fetchRequest.sortDescriptors = []
 
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.backgroundContext, sectionNameKeyPath: nil, cacheName: "temporaryNote")
@@ -174,7 +171,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
             case 0:
                 /// Instantiate new data item since none was found
                 temporaryNote = TemporaryDataItem(context: dataController.backgroundContext)
-                temporaryNote.objectKey = addNewNoteKey
+                temporaryNote.objectKey = objectIdentifier
                 dataController.saveBackgroundContext()
             case 1:
                 temporaryNote = fetchedResultsController.fetchedObjects![0]

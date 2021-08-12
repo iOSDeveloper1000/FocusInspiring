@@ -59,7 +59,7 @@
                                     <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="Yta-69-TY5"/>
                                     <barButtonItem systemItem="search" id="BvF-Gr-ETZ">
                                         <connections>
-                                            <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueToFlickrSearch" id="gIO-Cj-8Gn"/>
+                                            <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueAddNewNoteToImageSearch" id="gIO-Cj-8Gn"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="SMz-rK-asP"/>
@@ -155,7 +155,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlickrSearchIdentifier" id="8wR-C6-wsE" userLabel="FlickrSearchCell" customClass="FlickrSearchCell" customModule="FocusInspiring" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageSearchResultCellIdentifier" id="8wR-C6-wsE" userLabel="FlickrSearchCell" customClass="FlickrSearchCell" customModule="FocusInspiring" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CDA-j4-bPB">
@@ -267,7 +267,7 @@
                         <sections>
                             <tableViewSection headerTitle="USER SETTINGS" id="OOV-GX-2qt" userLabel="USER">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReduceConfirmationsCell" textLabel="v7z-FB-iWr" style="IBUITableViewCellStyleDefault" id="wgu-12-kBO" userLabel="Confirmations Setting">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReduceUserQueriesCellIdentifier" textLabel="v7z-FB-iWr" style="IBUITableViewCellStyleDefault" id="wgu-12-kBO" userLabel="Confirmations Setting">
                                         <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wgu-12-kBO" id="tEg-5u-OQ5">
@@ -284,7 +284,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EnableTestingCell" textLabel="xPE-Dc-Snx" style="IBUITableViewCellStyleDefault" id="pAE-mG-MJH" userLabel="Test Mode Setting">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EnableTestModeCellIdentifier" textLabel="xPE-Dc-Snx" style="IBUITableViewCellStyleDefault" id="pAE-mG-MJH" userLabel="Test Mode Setting">
                                         <rect key="frame" x="0.0" y="93" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pAE-mG-MJH" id="tK0-0U-FLq">
@@ -377,7 +377,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecommendationCell" textLabel="9sx-wv-WtW" style="IBUITableViewCellStyleDefault" id="GkM-Lb-5Td" userLabel="Recommendation Button">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecommendationCellIdentifier" textLabel="9sx-wv-WtW" style="IBUITableViewCellStyleDefault" id="GkM-Lb-5Td" userLabel="Share Button">
                                         <rect key="frame" x="0.0" y="317" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GkM-Lb-5Td" id="ujl-lY-sox">
@@ -617,7 +617,7 @@
                                             </barButtonItem>
                                             <barButtonItem systemItem="edit" id="xWb-eP-Don">
                                                 <connections>
-                                                    <segue destination="blz-JR-BZr" kind="presentation" identifier="SegueToEditNote" id="KBj-kC-4HK"/>
+                                                    <segue destination="blz-JR-BZr" kind="presentation" identifier="SegueDisplayNoteToEditNote" id="KBj-kC-4HK"/>
                                                 </connections>
                                             </barButtonItem>
                                         </rightBarButtonItems>
@@ -827,7 +827,7 @@
                                     <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="nxc-g5-7JB"/>
                                     <barButtonItem systemItem="search" id="jOw-SM-bJV">
                                         <connections>
-                                            <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueToFlickrSearch" id="wEF-hf-NEd"/>
+                                            <segue destination="BbD-1a-Xaw" kind="presentation" identifier="SegueEditNoteToImageSearch" id="wEF-hf-NEd"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="0Z3-Y5-9Tx"/>
@@ -999,7 +999,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="gIO-Cj-8Gn"/>
+        <segue reference="wEF-hf-NEd"/>
         <segue reference="dcw-EF-8Gx"/>
     </inferredMetricsTieBreakers>
     <resources>

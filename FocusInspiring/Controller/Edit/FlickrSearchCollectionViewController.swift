@@ -18,8 +18,6 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
     /// Completion handler that is called when an image got selected
     var returnImage: ((Data) -> Void)?
 
-    private let reuseIdentifier = "FlickrSearchIdentifier"
-
     private struct ParamFlowLayout {
         static let spacing: CGFloat = 3
         static let itemsPerRowPortrait: Int = 3
@@ -181,7 +179,7 @@ class FlickrSearchCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FlickrSearchCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.forCollectionViewCell.imageSearchResult, for: indexPath) as! FlickrSearchCell
 
         if searchResults[indexPath.item].isPending {
 

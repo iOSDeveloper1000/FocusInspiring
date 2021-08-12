@@ -53,6 +53,9 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
         self.component = Calendar.Component(rawValue: componentRawValue) ?? .calendar // .calender = "unset"
     }
 
+
+    // MARK: - Public
+
     func addSelf(to refDate: Date) -> DateComponents? {
         guard let targetDate = Calendar.current.date(byAdding: component, value: count, to: refDate) else {
             return nil
@@ -63,7 +66,7 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
         // @todo append hour-minute-second in cases user selected clock time for notifications
         // @todo ... add selection in settings vc
 
-        if UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode) {
+        if UserDefaults.standard.bool(forKey: UserKey.enableTestMode) {
             // Take all calendar components up to seconds
             units = [.year, .month, .day, .hour, .minute, .second]
         } else {
@@ -76,6 +79,7 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
 }
 
 
+// MARK: - extension Calendar.Component
 /**
  Use Calendar.Component values with integer raw values
  */

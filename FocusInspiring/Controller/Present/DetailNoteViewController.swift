@@ -59,7 +59,8 @@ class DetailNoteViewController: UIViewController {
     // MARK: Action
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
-        guard  note != nil else {
+        guard note != nil else {
+            // @todo AVOID CRASH WHEN ERROR OCCURS
             fatalError("Note for deletion not found")
         }
 

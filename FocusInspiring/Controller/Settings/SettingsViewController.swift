@@ -32,8 +32,8 @@ class SettingsViewController: UITableViewController {
         versionLabel.text = AppParameter.versionString
 
         // Retrieve user settings
-        reduceConfirmationsCell.accessoryType = UserDefaults.standard.bool(forKey: DefaultKey.reduceConfirmations) ? .checkmark : .none
-        enableTestingCell.accessoryType = UserDefaults.standard.bool(forKey: DefaultKey.enableTestingMode) ? .checkmark : .none
+        reduceConfirmationsCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.reduceUserQueries) ? .checkmark : .none
+        enableTestingCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.enableTestMode) ? .checkmark : .none
 
         // Setup labels for user default periods
         addNewDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.addNewNoteDefaultPeriod)
@@ -52,21 +52,21 @@ class SettingsViewController: UITableViewController {
 
     // MARK: - TableView Delegation
 
-    /// Toggle accessory type to '.checkmark' when trying to select rows for this use
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         guard let identifier = tableView.cellForRow(at: indexPath)?.reuseIdentifier else {
             track("GUARD FAILED: Selected cell not found or has no reuse identifier")
             return indexPath
         }
 
-        let cellReuseIdentifier = ReuseIdentifier.ForTableViewCell.self
+        let cellReuseIdentifier = ReuseIdentifier.forTableViewCell.self
 
+        // Handle user interaction according to selected cell
         switch identifier {
-        case "ReduceConfirmationsCell":
-            handleAccessoryTypeAndPersistency(for: reduceConfirmationsCell, withKey: DefaultKey.reduceConfirmations)
+        case cellReuseIdentifier.reduceUserQueriesSetting:
+            handleAccessoryTypeAndPersistency(for: reduceConfirmationsCell, withKey: UserKey.reduceUserQueries)
 
-        case "EnableTestingCell":
-            handleAccessoryTypeAndPersistency(for: enableTestingCell, withKey: DefaultKey.enableTestingMode)
+        case cellReuseIdentifier.enableTestModeSetting:
+            handleAccessoryTypeAndPersistency(for: enableTestingCell, withKey: UserKey.enableTestMode)
             alertUserWhenChangingSettings()
 
         case cellReuseIdentifier.addNewDefaultPeriodSetting:
@@ -77,7 +77,7 @@ class SettingsViewController: UITableViewController {
             repeatDefaultPeriodLabel.clearInputField()
             repeatDefaultPeriodLabel.becomeFirstResponder()
 
-        case "RecommendationCell":
+        case cellReuseIdentifier.recommendationInfo:
             shareAppWithFriends()
 
         case "VersionCell", "CoffeeButtonCell", "AboutAppCell":
@@ -85,6 +85,7 @@ class SettingsViewController: UITableViewController {
 
         default:
             track("UNKNOWN DEFAULT: Reuse identifier in Settings table")
+            break
         }
 
         return indexPath

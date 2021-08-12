@@ -199,7 +199,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.inspirationalNoteCell, for: indexPath) as! InspirationalNoteCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.forCollectionViewCell.inspirationalNote, for: indexPath) as! InspirationalNoteCell
 
         let note = fetchedResultsController.object(at: indexPath)
 
@@ -226,7 +226,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         /// Instantiate and push viewcontroller for presenting note in detail mode
-        let detailNoteVC = self.storyboard?.instantiateViewController(identifier: ReuseIdentifier.detailNoteViewController) as! DetailNoteViewController
+        let detailNoteVC = self.storyboard?.instantiateViewController(identifier: ReuseIdentifier.forViewController.detailNote) as! DetailNoteViewController
 
         detailNoteVC.dataController = dataController
         detailNoteVC.note = fetchedResultsController.object(at: indexPath)

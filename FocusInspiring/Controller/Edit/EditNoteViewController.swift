@@ -67,7 +67,7 @@ class EditNoteViewController: UIViewController {
         pickImage(sourceType: .camera)
     }
 
-    /// For searchButton action see segue preparation below
+    // For searchButton action see segue preparation below
 
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -86,7 +86,7 @@ class EditNoteViewController: UIViewController {
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SegueToFlickrSearch" {
+        if segue.identifier == ReuseIdentifier.forSegue.editNoteToImageSearch {
             let navigationController = segue.destination as! UINavigationController
             let flickrController = navigationController.topViewController as! FlickrSearchCollectionViewController
 
