@@ -19,17 +19,23 @@ class ASCustomValueSetterView: UIView {
     /// Used as customized input view
     private var responsiveInputView: ResponsiveSelectorView?
 
-    /// Used as input accessory view
-    private var accessoryToolBar: UIToolbar?
-
     override var inputView: UIView? {
         get { responsiveInputView }
         set { responsiveInputView = newValue as? ResponsiveSelectorView }
     }
 
     override var inputAccessoryView: UIToolbar? {
-        get { accessoryToolBar }
-        set { accessoryToolBar = newValue }
+        // Make toolbar for resigning from first responder
+        let accessory = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
+
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(inputCancelled(_:)))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(inputConfirmed(_:)))
+        // @todo REDESIGN VIEW: INTEGRATE TEXTFIELD INTO ACCESSORY
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        accessory.items = [cancelButton, flexSpace, doneButton]
+
+        return accessory
     }
 
     override var canBecomeFirstResponder: Bool { true }
@@ -153,7 +159,6 @@ class ASCustomValueSetterView: UIView {
      */
     func setup(inputView: ResponsiveSelectorView, preLabelText: String? = nil, postLabelText: String? = nil, callbackOnConfirm: ((ConvertibleTimeComponent?) -> Void)? = nil) {
         self.inputView = inputView
-        inputAccessoryView = createAccessoryView()
 
         onValueConfirm = callbackOnConfirm
 
@@ -161,27 +166,6 @@ class ASCustomValueSetterView: UIView {
         preLabel.text = preLabelText
         postLabel.text = postLabelText
 
-        buttonText = "???" // Indicates unset button
-    }
-
-
-    // MARK: - Helper
-
-    // @todo REFACTOR: OVERWRITE INPUTACCESSORYVIEW
-    /**
-     Create a toolbar with a cancel and done button that can be used as accessory view.
-     */
-    private func createAccessoryView() -> UIToolbar {
-        /// Make toolbar for resigning from input mode
-        let accessory = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
-
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(inputCancelled(_:)))
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(inputConfirmed(_:)))
-        //let textFieldItem = UIBarButtonItem(customView: UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 0))) @todo REDESIGN VIEW
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        accessory.items = [cancelButton, flexSpace, doneButton]
-
-        return accessory
+        buttonText = "???" // Unset button label -- to be set from view controller
     }
 }

@@ -149,15 +149,15 @@ class SettingsViewController: UITableViewController {
         return defaultPeriod.description
     }
 
-    private func updateUserDefaultPeriod(with value: ConvertibleTimeComponent?, for userKey: UserKey.PeriodValueKeyType) {
-        guard let value = value else {
+    private func updateUserDefaultPeriod(with timeValue: ConvertibleTimeComponent?, for userKey: UserKey.PeriodValueKeyType) {
+        guard let timeValue = timeValue else {
             track("GUARD FAILED: Selected default period is nil")
             return
         }
 
         // Store user selected values persistently in UserDefaults
-        UserDefaults.standard.set(value.count, forKey: userKey.count)
-        UserDefaults.standard.set(value.component.rawValue, forKey: userKey.unit)
+        UserDefaults.standard.set(timeValue.count, forKey: userKey.count)
+        UserDefaults.standard.set(timeValue.component.rawValue, forKey: userKey.unit)
     }
 
     private func alertUserWhenChangingSettings() {
