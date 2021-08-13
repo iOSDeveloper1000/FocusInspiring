@@ -132,7 +132,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
 
         // Compute target date by selected period
-        target = selectedPeriod.addSelf(to: Date())
+        target = selectedPeriod.computeDeliveryDate(given: Date())
 
         guard let targetDate = targetDate else {
             popupAlert(title: "Internal error", message: "Could not convert the given target date. Try to set a different period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])

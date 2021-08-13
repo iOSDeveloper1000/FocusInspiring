@@ -119,7 +119,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
 
         // Compute target date by selected period
-        target = selectedPeriod?.addSelf(to: Date())
+        target = selectedPeriod?.computeDeliveryDate(given: Date())
 
         guard let targetDate = targetDate else {
             track("GUARD FAILED: Target date unset")

@@ -30,6 +30,9 @@ struct UserKey {
     static let reduceUserQueries = "User Key: Reduce number of Queries to the User"
     static let enableTestMode = "User Key: Enable Test Mode"
 
+    static let deliverAtSaveTime = "User Key: Deliver Notes at Save Time"
+    static let customDeliveryTime = "User Key: Custom Delivery Time"
+
 
     struct PeriodValueKeyType {
         let count: String
@@ -55,6 +58,8 @@ struct UserKey {
         UserDefaults.standard.set(99 /* unset */, forKey: addNewNoteDefaultPeriod.unit)
         UserDefaults.standard.set(0 /* unset */, forKey: repeatNoteDefaultPeriod.count)
         UserDefaults.standard.set(99 /* unset */, forKey: repeatNoteDefaultPeriod.unit)
+
+        UserDefaults.standard.set(true, forKey: deliverAtSaveTime)
 
         UserDefaults.standard.synchronize()
     }
@@ -130,6 +135,9 @@ struct ReuseIdentifier {
         static let displayNoteToEditNote = "SegueDisplayNoteToEditNote"
         static let addNewNoteToImageSearch = "SegueAddNewNoteToImageSearch"
         static let editNoteToImageSearch = "SegueEditNoteToImageSearch"
+
+        static let buyCoffeeSettingToDetail = "SegueBuyCoffeeSettingToDetail"
+        static let aboutInfoToDetail = "SegueAboutAppInfoToDetail"
     }
 
     struct forObjectKey {

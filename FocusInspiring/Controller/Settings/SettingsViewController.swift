@@ -13,6 +13,23 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
+    // MARK: - Definition
+
+    private enum AlertUserForChangedSetting {
+        case afterRestart
+        case forFutureActions
+
+        var messageString: String {
+            switch self {
+            case .afterRestart:
+                return "Changed setting will become active after restart of app."
+            case .forFutureActions:
+                return "Changed setting will be used for all notes saved in future."
+            }
+        }
+    }
+
+
     // MARK: - Outlets
 
     @IBOutlet weak var reduceConfirmationsCell: UITableViewCell!
@@ -21,32 +38,41 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var addNewDefaultPeriodLabel: EditablePeriodLabel!
     @IBOutlet weak var repeatDefaultPeriodLabel: EditablePeriodLabel!
 
+    @IBOutlet weak var deliveryModeSwitch: UISwitch!
+
+    @IBOutlet weak var deliverAtCustomTimeCell: UITableViewCell!
+    @IBOutlet weak var deliverAtCustomTimeLabel: UILabel!
+    @IBOutlet weak var customTimePicker: UIDatePicker!
+
     @IBOutlet weak var versionLabel: UILabel!
-    
+
 
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupUserSettingsSection()
+        setupUserNotificationsSection()
+
         versionLabel.text = AppParameter.versionString
+        // @todo COMPLETE INFO SECTION SETUP
+    }
 
-        // Retrieve user settings
-        reduceConfirmationsCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.reduceUserQueries) ? .checkmark : .none
-        enableTestingCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.enableTestMode) ? .checkmark : .none
 
-        // Setup labels for user default periods
-        addNewDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.addNewNoteDefaultPeriod)
-        repeatDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.repeatNoteDefaultPeriod)
+    // MARK: - Actions
 
-        addNewDefaultPeriodLabel.onValueConfirm = {
-            self.updateUserDefaultPeriod(with: $0, for: UserKey.addNewNoteDefaultPeriod)
-            self.alertUserWhenChangingSettings()
-        }
-        repeatDefaultPeriodLabel.onValueConfirm = {
-            self.updateUserDefaultPeriod(with: $0, for: UserKey.repeatNoteDefaultPeriod)
-            self.alertUserWhenChangingSettings()
-        }
+    @IBAction func deliveryModeSwitchValueChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserKey.deliverAtSaveTime)
+        UserDefaults.standard.set(customTimePicker.date, forKey: UserKey.customDeliveryTime)
+
+        // Disable custom time picker cell
+        handleCustomTimePickerCell(enable: !sender.isOn)
+        alertUserForChangedSetting(with: .forFutureActions)
+    }
+
+    @IBAction func customTimePickerValueChanged(sender: UIDatePicker) {
+        UserDefaults.standard.set(sender.date, forKey: UserKey.customDeliveryTime)
     }
 
 
@@ -58,29 +84,33 @@ class SettingsViewController: UITableViewController {
             return indexPath
         }
 
-        let cellReuseIdentifier = ReuseIdentifier.forTableViewCell.self
+        let cellIdentifier = ReuseIdentifier.forTableViewCell.self
 
         // Handle user interaction according to selected cell
         switch identifier {
-        case cellReuseIdentifier.reduceUserQueriesSetting:
+        case cellIdentifier.reduceUserQueriesSetting:
             handleAccessoryTypeAndPersistency(for: reduceConfirmationsCell, withKey: UserKey.reduceUserQueries)
 
-        case cellReuseIdentifier.enableTestModeSetting:
+        case cellIdentifier.enableTestModeSetting:
             handleAccessoryTypeAndPersistency(for: enableTestingCell, withKey: UserKey.enableTestMode)
-            alertUserWhenChangingSettings()
+            alertUserForChangedSetting(with: .afterRestart)
 
-        case cellReuseIdentifier.addNewDefaultPeriodSetting:
+        case cellIdentifier.addNewDefaultPeriodSetting:
             addNewDefaultPeriodLabel.clearInputField()
             addNewDefaultPeriodLabel.becomeFirstResponder()
 
-        case cellReuseIdentifier.repeatDefaultPeriodSetting:
+        case cellIdentifier.repeatDefaultPeriodSetting:
             repeatDefaultPeriodLabel.clearInputField()
             repeatDefaultPeriodLabel.becomeFirstResponder()
 
-        case cellReuseIdentifier.recommendationInfo:
+        case cellIdentifier.recommendationInfo:
             shareAppWithFriends()
 
         case "VersionCell", "CoffeeButtonCell", "AboutAppCell":
+            // @todo IMPLEMENT
+            break
+
+        case "NonSelectableCell":
             break
 
         default:
@@ -95,18 +125,51 @@ class SettingsViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let segueIdentifier = ReuseIdentifier.forSegue.self
 
-        /// Choose segue according to tapped cell
         switch segue.identifier {
 
-        case "BuyCoffeeSegue":
+        case segueIdentifier.buyCoffeeSettingToDetail:
             print("@todo Buy me a Coffee")
 
-        case "AboutAppSegue":
+        case segueIdentifier.aboutInfoToDetail:
             print("@todo About this App")
 
         default:
             track("UNKNOWN DEFAULT: Segue in Settings")
+        }
+    }
+
+
+    // MARK: - Setup Helpers
+
+    private func setupUserSettingsSection() {
+        // Retrieve user settings
+        reduceConfirmationsCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.reduceUserQueries) ? .checkmark : .none
+        enableTestingCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.enableTestMode) ? .checkmark : .none
+
+        // Setup labels for user default periods
+        addNewDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.addNewNoteDefaultPeriod)
+        repeatDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.repeatNoteDefaultPeriod)
+
+        addNewDefaultPeriodLabel.onValueConfirm = {
+            self.updateUserDefaultPeriod(with: $0, for: UserKey.addNewNoteDefaultPeriod)
+            self.alertUserForChangedSetting(with: .afterRestart)
+        }
+        repeatDefaultPeriodLabel.onValueConfirm = {
+            self.updateUserDefaultPeriod(with: $0, for: UserKey.repeatNoteDefaultPeriod)
+            self.alertUserForChangedSetting(with: .afterRestart)
+        }
+    }
+
+    private func setupUserNotificationsSection() {
+        let deliverAtSaveTime = UserDefaults.standard.bool(forKey: UserKey.deliverAtSaveTime)
+
+        deliveryModeSwitch.isOn = deliverAtSaveTime
+        handleCustomTimePickerCell(enable: !deliverAtSaveTime)
+
+        if let storedTime = UserDefaults.standard.object(forKey: UserKey.customDeliveryTime) as? Date {
+            customTimePicker.date = storedTime
         }
     }
 
@@ -160,8 +223,15 @@ class SettingsViewController: UITableViewController {
         UserDefaults.standard.set(timeValue.component.rawValue, forKey: userKey.unit)
     }
 
-    private func alertUserWhenChangingSettings() {
+    private func handleCustomTimePickerCell(enable: Bool) {
 
-        popupAlert(title: "Changed settings may become active only after restart of app.", message: "", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+        deliverAtCustomTimeCell.isUserInteractionEnabled = enable
+        deliverAtCustomTimeLabel.isEnabled = enable
+        customTimePicker.isEnabled = enable
+    }
+
+    private func alertUserForChangedSetting(with useCase: AlertUserForChangedSetting) {
+
+        popupAlert(title: useCase.messageString, message: "", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
     }
 }

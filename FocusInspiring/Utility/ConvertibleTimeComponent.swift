@@ -56,30 +56,46 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
 
     // MARK: - Public
 
-    func addSelf(to refDate: Date) -> DateComponents? {
-        guard let targetDate = Calendar.current.date(byAdding: component, value: count, to: refDate) else {
+    /**
+     Compute future date (with exact time) by adding self to given reference date.
+
+     It decides to use the exact time of the reference date or a user specified time. For test calendar components (seconds and minutes), it will not do any further processing.
+     - Parameter given: Reference date
+     */
+    func computeDeliveryDate(given refDate: Date) -> DateComponents? {
+        guard let targetRawDate = Calendar.current.date(byAdding: component, value: count, to: refDate) else {
             return nil
         }
 
-        let units: Array<Calendar.Component>
+        var targetDateComponents: DateComponents?
 
-        // @todo append hour-minute-second in cases user selected clock time for notifications
-        // @todo ... add selection in settings vc
+        let isTestComponent: Bool = (component == .second || component == .minute)
+        let useOriginalTime: Bool = UserDefaults.standard.bool(forKey: UserKey.deliverAtSaveTime)
 
-        if UserDefaults.standard.bool(forKey: UserKey.enableTestMode) {
-            // Take all calendar components up to seconds
-            units = [.year, .month, .day, .hour, .minute, .second]
+        if isTestComponent || useOriginalTime {
+
+            // Use all components as given down to seconds
+            targetDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: targetRawDate)
         } else {
-            // Crop date components beyond days
-            units = [.year, .month, .day]
+
+            // Use settings specified time
+            guard let customNotifyTime = UserDefaults.standard.object(forKey: UserKey.customDeliveryTime) as? Date else { return nil }
+
+            let customNotifyHourMinute = Calendar.current.dateComponents([.hour, .minute], from: customNotifyTime)
+
+            targetDateComponents = Calendar.current
+                .dateComponents([.year, .month, .day], from: targetRawDate)
+            targetDateComponents?.setValue(customNotifyHourMinute.hour, for: .hour)
+            targetDateComponents?.setValue(customNotifyHourMinute.minute, for: .minute)
         }
 
-        return Calendar.current.dateComponents(Set(units), from: targetDate)
+        return targetDateComponents
     }
 }
 
 
 // MARK: - extension Calendar.Component
+
 /**
  Use Calendar.Component values with integer raw values
  */
