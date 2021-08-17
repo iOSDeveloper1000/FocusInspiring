@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
+    // MARK: - UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
@@ -97,7 +97,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         let id = response.notification.request.identifier
 
-        /// Determine the user action - Default Action i.e. user tapped on notification
+        // Determine the user action: DefaultAction = user tapped on notification
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
                 track("GUARD FAILED: Scene Delegate not found")
@@ -127,7 +127,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let id = notification.request.identifier
         LocalNotificationHandler.shared.removePendingNotification(uuid: id)
 
-        /// Possible UNNotificationPresentationOptions in iOS 14.0: badge, banner, list, sound
+        // Possible UNNotificationPresentationOptions in iOS 14: badge, banner, list, sound
         completionHandler([.banner, .list])
     }
 }

@@ -7,24 +7,34 @@
 
 import UIKit
 
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    var rootViewController: RootViewController? {
+        window?.rootViewController as? RootViewController
+    }
+
     let dataController = DataController(modelName: "FocusInspiring")
-    
+
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
-        
+
+        guard let rootViewController = rootViewController else { return }
+
+        // Load Core Data Stack
         dataController.load()
-        
-        /// Inject dependency by forwarding DataController instance
-        let tabBarController = window?.rootViewController as! RootViewController
-        tabBarController.dataController = dataController
+
+        // Inject dependency by forwarding DataController object
+        rootViewController.dataController = dataController
+
+        // Present Today Tab initially
+        rootViewController.selectedIndex = ViewControllerIdentifier.displayNoteVC
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -38,7 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
 
-        /// Reset app icon badge number in each case where the app becomes active
+        // Reset app icon badge number in each case where the app becomes active
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
 

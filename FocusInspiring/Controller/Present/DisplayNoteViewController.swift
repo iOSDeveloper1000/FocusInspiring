@@ -22,6 +22,9 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<InspirationItem>!
 
+    /// Flag indicates to present FirstViewController once (presented modally)
+    var presentOverlayViewInitially: Bool = true
+
     /// Date formatter for the displayed dates
     let dateFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -72,8 +75,11 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpAndPerformFetch()
+        if UserDefaults.standard.bool(forKey: UserKey.doNotShowInitialViewAgain) {
+            presentOverlayViewInitially = false
+        }
 
+        setUpAndPerformFetch()
         setupPeriodSetterView()
     }
 
@@ -81,6 +87,15 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         super.viewWillAppear(animated)
 
         displayNextItem() // next = first after (re)appear
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if presentOverlayViewInitially {
+            performSegue(withIdentifier: ReuseIdentifier.forSegue.initialDisplayNoteToFirst, sender: nil)
+            presentOverlayViewInitially = false // present only once per app launch
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -138,28 +153,40 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ReuseIdentifier.forSegue.displayNoteToEditNote {
-            let controller = segue.destination as! EditNoteViewController
 
-            /// Although editNote is saved in a managed object context it won't be used for saving between sessions
+        if segue.identifier == ReuseIdentifier.forSegue.initialDisplayNoteToFirst {
+            guard let vc = segue.destination as? FirstViewController else { return }
+
+            vc.onDismiss = { (selectedTabItem) in
+                guard let tabBarController = self.tabBarController else {
+                    track("GUARD FAILED: TabBarController not found")
+                    return
+                }
+                tabBarController.selectedIndex = selectedTabItem
+            }
+
+        } else if segue.identifier == ReuseIdentifier.forSegue.displayNoteToEditNote {
+            guard let vc = segue.destination as? EditNoteViewController else { return }
+
+            /// Although editNote is saved in a managed object context it won't be used for saving between sessions yet
             let editNote = TemporaryDataItem(context: dataController.backgroundContext)
             editNote.title = displayedItem?.title ?? ""
             editNote.attributedText = displayedItem?.attributedText ?? nil
             editNote.image = displayedItem?.image ?? nil
             editNote.objectKey = ReuseIdentifier.forObjectKey.editingNote
 
-            controller.temporaryNote = editNote
-            controller.completion = { (editConfirmed, edit) in
+            vc.temporaryNote = editNote
+            vc.completion = { (editConfirmed, edit) in
                 if editConfirmed {
                     guard let edit = edit else { return }
 
-                    /// Copy back edited note
+                    // Copy back edited note
                     self.displayedItem.title = edit.title
                     self.displayedItem.attributedText = edit.attributedText
                     self.displayedItem.image = edit.image
                     self.dataController.saveViewContext()
 
-                    /// Update screen
+                    // Update screen
                     self.updateNoteOnScreen()
                 }
             }

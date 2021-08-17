@@ -25,6 +25,7 @@ struct AppParameter {
 
 struct UserKey {
     static let appLaunchedBefore = "User Key: App has launched before"
+    static let doNotShowInitialViewAgain = "User Key: Do not show initial screen again"
 
     static let reduceUserQueries = "User Key: Reduce number of Queries to the User"
     static let enableTestMode = "User Key: Enable Test Mode"
@@ -97,8 +98,11 @@ struct EmptyViewLabel {
 // MARK: - Internal Identifiers
 
 struct ViewControllerIdentifier {
-    static let displayNoteVC: Int = 1
-    static let addNewNoteVC: Int = 2
+    // to be synchronized with Main.storyboard when changed !
+    static let displayNoteVC: Int = 0
+    static let addNewNoteVC: Int = 1
+    static let listNotesVC: Int = 2
+    static let settingsVC: Int = 3
 }
 
 /// Store for reuse identifiers used across the app
@@ -122,6 +126,7 @@ struct ReuseIdentifier {
     }
 
     struct forSegue {
+        static let initialDisplayNoteToFirst = "SegueInitiallyToFirstVC"
         static let displayNoteToEditNote = "SegueDisplayNoteToEditNote"
         static let addNewNoteToImageSearch = "SegueAddNewNoteToImageSearch"
         static let editNoteToImageSearch = "SegueEditNoteToImageSearch"

@@ -26,15 +26,15 @@ class RootViewController: UITabBarController {
         setUpChildViewControllers()
     }
 
-    
+
     // MARK: Setup
-    
+
     private func setUpChildViewControllers() {
 
         guard let viewControllers = viewControllers else {
             fatalError("No view controller found")
         }
-        
+
         for controller in viewControllers {
 
             switch controller {
