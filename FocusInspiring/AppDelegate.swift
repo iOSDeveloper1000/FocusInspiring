@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-// MARK: UNUserNotificationCenter Delegation
+// MARK: - UNUserNotificationCenter Delegate
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
 

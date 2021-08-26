@@ -10,16 +10,17 @@ import UIKit
 import CoreData
 
 
-// MARK: ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, Emptiable
+// MARK: ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 
-class ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, Emptiable {
+class ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     // MARK: Properties
 
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<InspirationItem>!
 
-    var backgroundLabel: UILabel?
+    /// Label presented when collection view section  is empty
+    var emptyViewLabel: BackgroundLabel?
 
     var successNotesSectionIndex: Int? /// Section index of successful terminated notes in FRC
     var activeNotesSectionIndex: Int? /// Section index of ongoing active notes in FRC
@@ -41,6 +42,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
 
         setUpFetchedResultsController()
 
+        // @todo REFACTOR TO SEPARATE METHOD
         collectionView.delegate = self
         collectionView.dataSource = self
 
@@ -48,6 +50,9 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
         flowLayout.setLayoutParameters(lineSpacing: layoutParam.lineSpacing, interitemSpacing: layoutParam.interitemSpacing, itemsPerRowPortrait: layoutParam.itemsPerRowPortrait, itemsPerRowLandscape: layoutParam.itemsPerRowLandscape)
 
         collectionView.collectionViewLayout = flowLayout
+
+        // Setup background label - message will be set in delegate method
+        emptyViewLabel = addBackgroundLabel(message: Message(title: "", body: ""))
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +95,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        updateEmptyViewLayout()
+        emptyViewLabel?.centerInSuperview()
     }
 
 
@@ -116,7 +121,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     private func setUpFetchedResultsController() {
         let fetchRequest:NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
 
-        /// No predicate used since all notes shall be loaded
+        // No predicate used since all notes shall be loaded
 
         let sectionSortDescriptor = NSSortDescriptor(key: "active", ascending: true)
         let presentingSortDescriptor = NSSortDescriptor(key: "presentingDate", ascending: false)
@@ -143,44 +148,51 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
         }
 
         let selectedSegment = listControl.selectedSegmentIndex
-        var emptyMessage: EmptyViewLabelMessage? = (selectedSegment == 1) ? EmptyViewLabel.activeNotesList : EmptyViewLabel.successList
 
+        // Message to be displayed or nil if none shall be presented
+        var emptyViewMsg: Message? = (selectedSegment == 1) ? LabelText.EmptyView.activeNotesList : LabelText.EmptyView.successList
 
-        /// Reset section indices
+        // Reset section indices
         successNotesSectionIndex = nil /// nil = empty section for success entries
         activeNotesSectionIndex = nil /// nil = empty section for active entries
 
         switch countSections {
         case 0:
-            /// emptyMessage according to selected segment will be presented
+            // emptyViewMsg according to selected segment will be presented
             break
 
         case 1:
-            let sectionValue = fetchedResultsController.sections?[0].name /// Value for key 'active'
+            let sectionValue = fetchedResultsController.sections?[0].name // Value for key 'active'
             let isActiveNotesSectionNonEmpty: Bool = (sectionValue == "1")
 
-            /// Set section index of displayed section
+            // Set section index of displayed section
             isActiveNotesSectionNonEmpty ? (activeNotesSectionIndex = 0) : (successNotesSectionIndex = 0)
 
             if isActiveNotesSectionNonEmpty ^ (selectedSegment == 0) {
-                emptyMessage = nil
+                emptyViewMsg = nil
             }
 
         case 2:
-            /// Successful notes as well as active notes are existing.
+            // Successful notes as well as active notes are existing
             successNotesSectionIndex = 0
             activeNotesSectionIndex = 1
 
-            /// Remove empty view label
-            emptyMessage = nil
+            // Remove empty view label
+            emptyViewMsg = nil
 
         default:
-            emptyMessage = nil
+            emptyViewMsg = nil
             track("UNKNOWN DEFAULT: More than two sections in FRC found")
             break
         }
 
-        handleEmptyViewLabel(msg: emptyMessage)
+        // Handle background message
+        if let emptyViewMsg = emptyViewMsg {
+            emptyViewLabel?.updateText(with: emptyViewMsg)
+            emptyViewLabel?.isHidden = false
+        } else {
+            emptyViewLabel?.isHidden = true
+        }
 
         return countSections
     }

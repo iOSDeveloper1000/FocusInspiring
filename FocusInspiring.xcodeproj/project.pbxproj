@@ -10,6 +10,8 @@
 		E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */; };
 		E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */; };
 		E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FA9F426498E0000D6BE56 /* DevTracking.swift */; };
+		E7117BE626D7D2D7002A0C78 /* CustomTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7117BE526D7D2D7002A0C78 /* CustomTypes.swift */; };
+		E7117BE826D7D857002A0C78 /* BackgroundLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7117BE726D7D857002A0C78 /* BackgroundLabel.swift */; };
 		E715F43026AF012500930E36 /* ResponsiveSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */; };
 		E715F43126AF012500930E36 /* ResponsiveSelectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E715F42F26AF012500930E36 /* ResponsiveSelectorView.xib */; };
 		E715F43326AF07F100930E36 /* ResponsiveInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715F43226AF07F000930E36 /* ResponsiveInputView.swift */; };
@@ -24,7 +26,6 @@
 		E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E732C73B25DBE11900A4CE31 /* Assets.xcassets */; };
 		E732C73F25DBE11900A4CE31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E732C73D25DBE11900A4CE31 /* LaunchScreen.storyboard */; };
 		E735C0692693598600B27ECE /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E735C0682693598600B27ECE /* UIScreen.swift */; };
-		E73C76542604FE84003BF821 /* Emptiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73C76532604FE84003BF821 /* Emptiable.swift */; };
 		E769880E25E5472E0020466A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769880D25E5472E0020466A /* NetworkClient.swift */; };
 		E769881125E548420020466A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881025E548420020466A /* DataController.swift */; };
 		E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881825E54BCB0020466A /* InspirationalNoteCell.swift */; };
@@ -57,6 +58,8 @@
 		E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNotesCollectionViewController.swift; sourceTree = "<group>"; };
 		E70FA9F426498E0000D6BE56 /* DevTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevTracking.swift; sourceTree = "<group>"; };
+		E7117BE526D7D2D7002A0C78 /* CustomTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTypes.swift; sourceTree = "<group>"; };
+		E7117BE726D7D857002A0C78 /* BackgroundLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLabel.swift; sourceTree = "<group>"; };
 		E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsiveSelectorView.swift; sourceTree = "<group>"; };
 		E715F42F26AF012500930E36 /* ResponsiveSelectorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResponsiveSelectorView.xib; sourceTree = "<group>"; };
 		E715F43226AF07F000930E36 /* ResponsiveInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveInputView.swift; sourceTree = "<group>"; };
@@ -73,7 +76,6 @@
 		E732C73E25DBE11900A4CE31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E732C74025DBE11900A4CE31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E735C0682693598600B27ECE /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
-		E73C76532604FE84003BF821 /* Emptiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emptiable.swift; sourceTree = "<group>"; };
 		E769880D25E5472E0020466A /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		E769881025E548420020466A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		E769881825E54BCB0020466A /* InspirationalNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationalNoteCell.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		E70FA9F626498E0E00D6BE56 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				E7117BE526D7D2D7002A0C78 /* CustomTypes.swift */,
 				E70FA9F426498E0000D6BE56 /* DevTracking.swift */,
 				E7202E4D263AE54000715A7F /* LocalNotificationHandler.swift */,
 				E7202E52263AF0AF00715A7F /* Notification.swift */,
@@ -258,14 +261,15 @@
 		E77042BC260B884A00335445 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7117BE726D7D857002A0C78 /* BackgroundLabel.swift */,
+				E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */,
 				E715F43226AF07F000930E36 /* ResponsiveInputView.swift */,
 				E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */,
 				E715F42F26AF012500930E36 /* ResponsiveSelectorView.xib */,
 				E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */,
 				E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */,
-				E7ED60B125EFA9DC00811762 /* EditableTextView.swift */,
 				E72EE63925F97DE400B228C5 /* EditableTextField.swift */,
-				E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */,
+				E7ED60B125EFA9DC00811762 /* EditableTextView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -281,12 +285,11 @@
 		E77042BF260B89CE00335445 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E77042AB260B588D00335445 /* UIViewController.swift */,
-				E73C76532604FE84003BF821 /* Emptiable.swift */,
-				E77042C1260B8A6100335445 /* UIAlertController.swift */,
-				E735C0682693598600B27ECE /* UIScreen.swift */,
 				E71C969F26934A1600935D06 /* BasicDataTypes.swift */,
 				E7901D05269F29A80093B10A /* UIView.swift */,
+				E77042AB260B588D00335445 /* UIViewController.swift */,
+				E77042C1260B8A6100335445 /* UIAlertController.swift */,
+				E735C0682693598600B27ECE /* UIScreen.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -374,7 +377,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E73C76542604FE84003BF821 /* Emptiable.swift in Sources */,
 				E769881125E548420020466A /* DataController.swift in Sources */,
 				E76BF3E525E90B0700EE4992 /* InspirationItem+Extension.swift in Sources */,
 				E769882125E54C220020466A /* FirstViewController.swift in Sources */,
@@ -390,6 +392,7 @@
 				E7901D06269F29A80093B10A /* UIView.swift in Sources */,
 				E7202E4E263AE54000715A7F /* LocalNotificationHandler.swift in Sources */,
 				E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */,
+				E7117BE826D7D857002A0C78 /* BackgroundLabel.swift in Sources */,
 				E77042AC260B588D00335445 /* UIViewController.swift in Sources */,
 				E7901D04269F28280093B10A /* ASCustomValueSetterView.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
@@ -404,6 +407,7 @@
 				E732C73225DBE11800A4CE31 /* SceneDelegate.swift in Sources */,
 				E7202E53263AF0AF00715A7F /* Notification.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
+				E7117BE626D7D2D7002A0C78 /* CustomTypes.swift in Sources */,
 				E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */,
 				E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */,
 				E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */,

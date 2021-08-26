@@ -14,6 +14,7 @@ import UIKit
 // MARK: - General App Parameters
 
 struct AppParameter {
+
     static let versionString = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 
     // @todo set correct app id and url: "https://apps.apple.com/us/app/idxxxxxxxxxx"
@@ -69,6 +70,7 @@ struct UserKey {
 // MARK: - View and Layout Parameters
 
 struct TextParameter {
+
     struct Title {
         static let listOfSuccess = "List of Glory"
         static let listOfActiveNotes = "List of Active Notes"
@@ -79,8 +81,20 @@ struct TextParameter {
     static let titleFontSize: CGFloat = 21
 }
 
+/**
+ Structure containing strings for label texts across the app.
+ */
+struct LabelText {
+
+    struct EmptyView {
+        static let displayNoteStack = Message(title: "No more Inspirational\nNotes for Today", body: "Feel lucky anyway :-)")
+        static let successList = Message(title: "List still empty", body: "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet.")
+        static let activeNotesList = Message(title: "List currently empty", body: "It seems like you have currently\nno open ideas. Enjoy the day :-)")
+    }
+}
+
 struct LayoutParameter {
-    /// Layout parameters for ListNotesCollectionViewController
+
     struct ListNotesCollectionView {
         static let itemsPerRowPortrait: Int = 3
         static let itemsPerRowLandscape: Int = 4
@@ -89,14 +103,6 @@ struct LayoutParameter {
     }
 
     // Add layout parameters for further views here.
-}
-
-struct EmptyViewLabel {
-    static let displayNoteStack = EmptyViewLabelMessage(title: "No more inspirational\nnotes for today", message: "Feel lucky anyway! :-)")
-
-    static let successList = EmptyViewLabelMessage(title: "List still empty", message: "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet.")
-
-    static let activeNotesList = EmptyViewLabelMessage(title: "List currently empty", message: "It seems like you have currently\nno open ideas. Enjoy the day!")
 }
 
 
@@ -110,8 +116,11 @@ struct ViewControllerIdentifier {
     static let settingsVC: Int = 3
 }
 
-/// Store for reuse identifiers used across the app
+/**
+ Structure containing reuse identifiers used across the app.
+ */
 struct ReuseIdentifier {
+
     struct forViewController {
         static let detailNote = "DetailNoteViewControllerIdentifier"
     }

@@ -10,11 +10,11 @@ import UIKit
 import CoreData
 
 
-// MARK: DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsControllerDelegate
+// MARK: DisplayNoteViewController: UIViewController
 
-class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsControllerDelegate {
+class DisplayNoteViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
 
     var displayedItem: InspirationItem!
     var fetchedItems: [InspirationItem] = []
@@ -50,11 +50,11 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         return Calendar.current.date(from: target)
     }
 
-    /// Displays a message in case no more items are available
-    var backgroundLabel: UILabel?
+    /// Label presented when no more notes are available
+    var emptyViewLabel: BackgroundLabel?
 
 
-    // MARK: Outlets
+    // MARK: - Outlets
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var creationDateLabel: UILabel!
@@ -70,7 +70,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     @IBOutlet weak var deleteButton: UIBarButtonItem!
 
 
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +81,9 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
 
         setUpAndPerformFetch()
         setupPeriodSetterView()
+
+        // Setup background label
+        emptyViewLabel = addBackgroundLabel(message: LabelText.EmptyView.displayNoteStack)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -107,18 +110,18 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        /// Change to horizontal axis in landscape orientation
+        // Switch to horizontal axis in landscape orientation
         contentStackView.axis = UIScreen.isDeviceOrientationPortrait() ? .vertical : .horizontal
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        updateEmptyViewLayout()
+        emptyViewLabel?.centerInSuperview()
     }
 
 
-    // MARK: Actions
+    // MARK: - Actions
 
     @IBAction func checkmarkButtonPressed(_ sender: Any) {
 
@@ -142,7 +145,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: targetDate)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
     }
 
-    /// For editButton action see segue preparation below
+    // For editButton action see segue preparation below
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
 
@@ -150,7 +153,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }
 
 
-    // MARK: Navigation
+    // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
@@ -194,13 +197,19 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }
 
 
-    // MARK: Setup
+    // MARK: - Setup
 
+    /**
+     Instantiates fetched results controller and performs fetch.
+
+     Does only peform a new fetch if there are no more items from a former fetch.
+     */
     private func setUpAndPerformFetch() {
 
-        /// Perform fetches only if needed
+        // Perform a new fetch only if needed
         if fetchedItems.isEmpty {
 
+            // @todo CHECK WHETHER CAN BE OPTIMIZED IN PERFORMANCE
             /// Clean up former fetches
             fetchedResultsController = nil
 
@@ -213,7 +222,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
             fetchRequest.sortDescriptors = [sortDescriptor]
 
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "currentActiveNotes")
-            fetchedResultsController.delegate = self
+
             do {
                 try fetchedResultsController.performFetch()
                 fetchedItems = fetchedResultsController.fetchedObjects ?? []
@@ -223,7 +232,9 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
         }
     }
 
-    /// Setup period setter view and initialize button text with user default value if available
+    /**
+    Setup period setter view and initialize button text.
+     */
     private func setupPeriodSetterView() {
 
         periodSetterView.setup(inputView: responsiveSelectorView, preLabelText: "Further cycle for ", postLabelText: "?") { self.selectedPeriod = $0 }
@@ -231,38 +242,33 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }
 
 
-    // MARK: Core private API
+    // MARK: - Private Core API
 
     private func displayNextItem() {
 
-        /// Try further fetch before showing empty screen
+        // Try further fetch for due active notes if none available
         setUpAndPerformFetch()
 
-        let isItemAvailable = !fetchedItems.isEmpty
+        let isStackNonEmpty: Bool = !fetchedItems.isEmpty
 
-        /// Set user interface
-        prepareUIForNextItem(show: isItemAvailable)
+        // Show or hide UI elements
+        switchVisibilityOfUI(enable: isStackNonEmpty)
 
-        /// Take next item out of queue if available else popLast() will return nil
+        // Will be nil if no more items are in queue
         displayedItem = fetchedItems.popLast()
 
-        var emptyMessage: EmptyViewLabelMessage? = nil /// nil means 'remove background label'
-
-        if isItemAvailable {
+        if isStackNonEmpty {
             updateNoteOnScreen()
-        } else {
-            /// Display message in background -- indicating empty stack
-            emptyMessage = EmptyViewLabel.displayNoteStack
         }
-
-        /// Handle background label
-        handleEmptyViewLabel(msg: emptyMessage)
     }
 
-    /// Fill in content into the controller's view fields
+    /**
+     Updates UI elements with content of a new note.
+     */
     private func updateNoteOnScreen() {
 
         titleLabel.text = displayedItem.title
+        // @todo ADAPT DATEFORMATTER TO NEEDS
         creationDateLabel.text = "Created: \(dateFormatter.string(from: displayedItem.creationDate!))"
         presentingDateLabel.text = "Displayed: \(dateFormatter.string(from: displayedItem.presentingDate!))"
         if let imgData = displayedItem.image {
@@ -274,7 +280,7 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }
 
 
-    // MARK: Handler
+    // MARK: - Handler
 
     func checkmarkHandler(alertAction: UIAlertAction) {
         guard let uuid = displayedItem.uuid else {
@@ -282,10 +288,10 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
             return
         }
 
-        /// Remove scheduled notification if applicable
+        // Remove scheduled notification if applicable
         LocalNotificationHandler.shared.removePendingNotification(uuid: uuid)
 
-        /// Set this item to inactive, i.e. put it to List of Glory
+        // Set this item to inactive, i.e. put it to success list
         displayedItem.active = false
         dataController.saveViewContext()
 
@@ -332,25 +338,31 @@ class DisplayNoteViewController: UIViewController, Emptiable, NSFetchedResultsCo
     }
 
 
-    // MARK: Helper
+    // MARK: - Helper
 
-    private func prepareUIForNextItem(show: Bool) {
+    private func switchVisibilityOfUI(enable: Bool) {
 
-        /// Enable/Disable navigationbar items
+        // Enable or disable items in navigation bar
         let barButtons: [UIBarButtonItem] = [checkmarkButton, repeatButton, editButton, deleteButton]
         for barButton in barButtons {
-            barButton.isEnabled = show
+            barButton.isEnabled = enable
         }
 
-        /// Display/hide UI elements
+        // Display or hide UI elements
         let subviews: [UIView] = [titleLabel, creationDateLabel, presentingDateLabel, imageView, textView, periodSetterView]
         for element in subviews {
-            element.isHidden = !show
+            element.isHidden = !enable
         }
+
+        // Display background label only if stack is empty
+        emptyViewLabel?.isHidden = enable
     }
 
-    /// Retrieve user's default period setting
+    /**
+     Retrieve user's default period setting
+     */
     private func collectDefaultPeriod() -> String? {
+
         let countValue = UserDefaults.standard.integer(forKey: UserKey.repeatNoteDefaultPeriod.count)
         let unitIntValue = UserDefaults.standard.integer(forKey: UserKey.repeatNoteDefaultPeriod.unit)
 
