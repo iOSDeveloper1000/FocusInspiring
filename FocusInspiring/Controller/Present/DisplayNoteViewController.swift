@@ -25,16 +25,6 @@ class DisplayNoteViewController: UIViewController {
     /// Flag indicates to present FirstViewController once (presented modally)
     var presentOverlayViewInitially: Bool = true
 
-    /// Date formatter for the displayed dates
-    let dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateStyle = .full
-        if UserDefaults.standard.bool(forKey: UserKey.enableTestMode) {
-            df.timeStyle = .medium
-        }
-        return df
-    }()
-
     let responsiveSelectorView = ResponsiveSelectorView(frame: CGRect(origin: .zero, size: CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)))
 
     var selectedPeriod: ConvertibleTimeComponent? // Written by closure
@@ -57,7 +47,7 @@ class DisplayNoteViewController: UIViewController {
     // MARK: - Outlets
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var creationDateLabel: UILabel!
+    @IBOutlet weak var creatingDateLabel: UILabel!
     @IBOutlet weak var presentingDateLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
@@ -142,7 +132,8 @@ class DisplayNoteViewController: UIViewController {
             return
         }
 
-        popupAlert(title: "Your inspirational note will be presented again on \(dateFormatter.string(from: targetDate)).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
+        let dateStr = DateFormatting.declarationFormat.string(from: targetDate)
+        popupAlert(title: "Your inspirational note will be presented again on \(dateStr).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
     }
 
     // For editButton action see segue preparation below
@@ -267,15 +258,35 @@ class DisplayNoteViewController: UIViewController {
      */
     private func updateNoteOnScreen() {
 
-        titleLabel.text = displayedItem.title
-        // @todo ADAPT DATEFORMATTER TO NEEDS
-        creationDateLabel.text = "Created: \(dateFormatter.string(from: displayedItem.creationDate!))"
-        presentingDateLabel.text = "Displayed: \(dateFormatter.string(from: displayedItem.presentingDate!))"
-        if let imgData = displayedItem.image {
-            imageView.image = UIImage(data: imgData)
+        // Header part
+        let creatingDateStr: String
+        let presentingDateStr: String
+
+        if let creatingDate = displayedItem.creationDate {
+            creatingDateStr = DateFormatting.headerFormat.string(from: creatingDate)
         } else {
-            imageView.image = nil
+            creatingDateStr = "???"
         }
+        if let presentingDate = displayedItem.presentingDate {
+            presentingDateStr = DateFormatting.headerFormat.string(from: presentingDate)
+        } else {
+            presentingDateStr = "???"
+        }
+
+        titleLabel.text = displayedItem.title
+        creatingDateLabel.text = "Created on: \(creatingDateStr)"
+        presentingDateLabel.text = "Displayed on: \(presentingDateStr)"
+
+        // Main part
+        let imageToDisplay: UIImage?
+
+        if let imageData = displayedItem.image {
+            imageToDisplay = UIImage(data: imageData)
+        } else {
+            imageToDisplay = nil
+        }
+
+        imageView.image = imageToDisplay
         textView.attributedText = displayedItem.attributedText
     }
 
@@ -349,7 +360,7 @@ class DisplayNoteViewController: UIViewController {
         }
 
         // Display or hide UI elements
-        let subviews: [UIView] = [titleLabel, creationDateLabel, presentingDateLabel, imageView, textView, periodSetterView]
+        let subviews: [UIView] = [titleLabel, creatingDateLabel, presentingDateLabel, imageView, textView, periodSetterView]
         for element in subviews {
             element.isHidden = !enable
         }

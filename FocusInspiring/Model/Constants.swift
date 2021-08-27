@@ -105,6 +105,31 @@ struct LayoutParameter {
     // Add layout parameters for further views here.
 }
 
+/**
+ Structure containing date formatting objects for different purposes.
+ */
+struct DateFormatting {
+    /**
+     DateFormatter used for reporting dates in full date style mode.
+     */
+    static let declarationFormat: DateFormatter = {
+        let df = DateFormatter()
+        df.dateStyle = .full
+        if UserDefaults.standard.bool(forKey: UserKey.enableTestMode) {
+            df.timeStyle = .medium
+        }
+        return df
+    }()
+    /**
+     DateFormatter used for formatting dates within header and footer sections.
+     */
+    static let headerFormat: DateFormatter = {
+        let df = DateFormatter()
+        df.dateStyle = .short
+        return df
+    }()
+}
+
 
 // MARK: - Internal Identifiers
 

@@ -14,22 +14,12 @@ import CoreData
 
 class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
-    // MARK: Properties
+    // MARK: - Properties
 
     var temporaryNote: TemporaryDataItem!
 
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<TemporaryDataItem>!
-
-    /// Date formatter for the displayed dates
-    let dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateStyle = .full
-        if UserDefaults.standard.bool(forKey: UserKey.enableTestMode) {
-            df.timeStyle = .medium
-        }
-        return df
-    }()
 
     let responsiveSelectorView = ResponsiveSelectorView(frame: CGRect(origin: .zero, size: CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)))
 
@@ -47,7 +37,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Outlets
+    // MARK: - Outlets
 
     @IBOutlet weak var titleField: EditableTextField!
     @IBOutlet weak var textView: EditableTextView!
@@ -62,7 +52,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     @IBOutlet weak var saveButton: UIBarButtonItem!
 
 
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +78,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Actions
+    // MARK: - Actions
 
     @IBAction func imageButtonPressed(_ sender: Any) {
         pickImage(sourceType: .photoLibrary)
@@ -98,7 +88,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         pickImage(sourceType: .camera)
     }
 
-    /// For searchButton action see segue preparation below
+    // For searchButton action see segue preparation below
 
 
     @IBAction func clearButtonPressed(_ sender: Any) {
@@ -110,7 +100,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
     @IBAction func saveButtonPressed(_ sender: Any) {
-        /// Disallow user to edit during save action
+        // Disallow user to edit during save action
         toggleUserInterface(enable: false)
 
         guard selectedPeriod != nil else {
@@ -129,12 +119,13 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         if isNoteEmpty() {
             popupAlert(title: "Empty note", message: "It seems like you have not entered a title or some descriptional elements (like text or image).", alertStyle: .alert, actionTitles: ["Save anyway", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
         } else {
-            popupAlert(title: "Your new inspirational note will be saved and presented on \(dateFormatter.string(from: targetDate))", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
+            let dateStr = DateFormatting.declarationFormat.string(from: targetDate)
+            popupAlert(title: "Your new inspirational note will be saved and presented on \(dateStr)", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
         }
     }
 
 
-    // MARK: Navigation
+    // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ReuseIdentifier.forSegue.addNewNoteToImageSearch {
@@ -153,7 +144,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Setup
+    // MARK: - Setup
 
     private func setUpFetchedResultsController() {
         let fetchRequest:NSFetchRequest<TemporaryDataItem> = TemporaryDataItem.fetchRequest()
@@ -207,7 +198,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Core private API
+    // MARK: - Private Core API
 
     private func pickImage(sourceType: UIImagePickerController.SourceType) {
 
@@ -248,7 +239,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Handlers
+    // MARK: - Handler
 
     func clearHandler(alertAction: UIAlertAction) {
         clearUserInterface()
@@ -283,7 +274,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
 
-    // MARK: Helpers
+    // MARK: - Helper
 
     /**
      Check whether user-entered note is empty
@@ -341,7 +332,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 }
 
 
-// MARK: - extension: UIImagePickerControllerDelegate
+// MARK: - UIImagePickerController Delegate
 
 extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 

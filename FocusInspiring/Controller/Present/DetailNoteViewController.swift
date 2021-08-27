@@ -13,24 +13,17 @@ import UIKit
 
 class DetailNoteViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
 
     var note: InspirationItem?
 
     var dataController: DataController?
 
-    /// Date formatter for the displayed dates
-    let dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateStyle = .medium
-        return df
-    }()
 
-
-    // MARK: Outlets
+    // MARK: - Outlets
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var creationDateLabel: UILabel!
+    @IBOutlet weak var creatingDateLabel: UILabel!
     @IBOutlet weak var presentingDateLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
@@ -40,7 +33,7 @@ class DetailNoteViewController: UIViewController {
     @IBOutlet weak var deleteButton: UIBarButtonItem!
 
 
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,12 +44,12 @@ class DetailNoteViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        /// Change to horizontal axis in landscape orientation
+        // Change to horizontal axis in landscape orientation
         contentStackView.axis = UIScreen.isDeviceOrientationPortrait() ? .vertical : .horizontal
     }
 
 
-    // MARK: Action
+    // MARK: - Action
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
         guard note != nil else {
@@ -68,31 +61,54 @@ class DetailNoteViewController: UIViewController {
     }
 
 
-    // MARK: Helpers
+    // MARK: - Handler
 
     func deleteHandler(alertAction: UIAlertAction) {
-        /// Delete displayed note
+
         dataController?.viewContext.delete(note!)
         dataController?.saveViewContext()
 
         navigationController?.popViewController(animated: true)
     }
 
-    /// Fill in content into the view elements
+
+    // MARK: - Helper
+
+    /**
+     Updates UI elements with content of the note.
+     */
     private func updateNoteOnScreen() {
-        guard  let note = note else {
-            track("GUARD FAILED: Note not found")
-            return
+        guard  let note = note else { return }
+
+        // Header part
+        let creatingDateStr: String
+        let presentingDateStr: String
+
+        if let creatingDate = note.creationDate {
+            creatingDateStr = DateFormatting.headerFormat.string(from: creatingDate)
+        } else {
+            creatingDateStr = "???"
+        }
+        if let presentingDate = note.presentingDate {
+            presentingDateStr = DateFormatting.headerFormat.string(from: presentingDate)
+        } else {
+            presentingDateStr = "???"
         }
 
         titleLabel.text = note.title
-        creationDateLabel.text = "Created: \(dateFormatter.string(from: note.creationDate!))"
-        presentingDateLabel.text = "Displayed: \(dateFormatter.string(from: note.presentingDate!))" // @todo PREVENT CRASHES FROM FORCE-UNWRAPPING
-        if let imgData = note.image {
-            imageView.image = UIImage(data: imgData)
+        creatingDateLabel.text = "Created on: \(creatingDateStr)"
+        presentingDateLabel.text = "Displayed on: \(presentingDateStr)"
+
+        // Main part
+        let imageToDisplay: UIImage?
+
+        if let imageData = note.image {
+            imageToDisplay = UIImage(data: imageData)
         } else {
-            imageView.image = nil
+            imageToDisplay = nil
         }
+
+        imageView.image = imageToDisplay
         textView.attributedText = note.attributedText
     }
 }
