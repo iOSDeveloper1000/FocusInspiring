@@ -37,12 +37,14 @@ class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
         // Layout of welcome text
-        welcomeLabel.text = "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED"
+        welcomeLabel.text = TextParameter.welcomeSlogan
         welcomeLabel.textAlignment = .center
-        welcomeLabel.font = .systemFont(ofSize: 32)
+
+        welcomeLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        welcomeLabel.adjustsFontForContentSizeCategory = true
 
         // Layout of icon image
-        iconImageView.image = UIImage(named: "2021-04_LampIcon") // @todo layout / size
+        iconImageView.image = UIImage(named: ResourceIdentifier.uiImageSrc.appIcon)
     }
 
     override func viewWillLayoutSubviews() {

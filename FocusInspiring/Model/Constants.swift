@@ -75,6 +75,9 @@ struct TextParameter {
         static let listOfSuccess = "List of Glory"
         static let listOfActiveNotes = "List of Active Notes"
     }
+
+    static let welcomeSlogan = "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED"
+
     static let textPlaceholder = "Enter your text note here"
 
     static let textFontSize: CGFloat = 16
@@ -132,6 +135,16 @@ struct DateFormatting {
 
 
 // MARK: - Internal Identifiers
+
+/**
+ Structure containing identifiers for resource objects.
+ */
+struct ResourceIdentifier {
+
+    struct uiImageSrc {
+        static let appIcon = "2021_AppIcon"
+    }
+}
 
 struct ViewControllerIdentifier {
     // to be synchronized with Main.storyboard when changed !

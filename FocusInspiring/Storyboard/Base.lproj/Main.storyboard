@@ -243,56 +243,63 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MKG-C2-GZP" userLabel="Navigation Stack View">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="MKG-C2-GZP" userLabel="User Interface Stack View">
                                         <rect key="frame" x="0.0" y="369.5" width="374" height="369.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrv-Jr-Mgm" userLabel="Top Empty Space - Dummy Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="61.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enm-pe-9cb" userLabel="Navigate To Today Tab Button">
-                                                <rect key="frame" x="0.0" y="61.5" width="374" height="61.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="Manage your Notes for today."/>
-                                                <connections>
-                                                    <action selector="navigateToTodayTab:" destination="73u-z9-P7E" eventType="touchUpInside" id="wwq-dZ-Z9P"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPN-HA-T0j" userLabel="Navigate To Add New Tab Button">
-                                                <rect key="frame" x="0.0" y="123" width="374" height="62"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="Add a new Note of Inspiration."/>
-                                                <connections>
-                                                    <action selector="navigateToAddNewTab:" destination="73u-z9-P7E" eventType="touchUpInside" id="62B-0m-vrp"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSe-OL-5HP" userLabel="Navigate To Success List Tab Button">
-                                                <rect key="frame" x="0.0" y="185" width="374" height="61.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="See your personal Story of Success."/>
-                                                <connections>
-                                                    <action selector="navigateToSuccessListTab:" destination="73u-z9-P7E" eventType="touchUpInside" id="e0k-TI-RSC"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3j-iu-nQH" userLabel="Bottom Empty Space - Dummy Label">
-                                                <rect key="frame" x="0.0" y="246.5" width="374" height="61.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Kt7-Sn-Fxk" userLabel="Filler View Top">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="60" id="QIr-u2-7qU"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="m5f-8o-4x4" userLabel="Core Navigation Stack View">
+                                                <rect key="frame" x="0.0" y="68" width="374" height="115"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enm-pe-9cb" userLabel="Navigate To Today Tab Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="33"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <state key="normal" title="Manage your Notes for today."/>
+                                                        <connections>
+                                                            <action selector="navigateToTodayTab:" destination="73u-z9-P7E" eventType="touchUpInside" id="wwq-dZ-Z9P"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPN-HA-T0j" userLabel="Navigate To Add New Tab Button">
+                                                        <rect key="frame" x="0.0" y="41" width="229" height="33"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <state key="normal" title="Add a new Note of Inspiration."/>
+                                                        <connections>
+                                                            <action selector="navigateToAddNewTab:" destination="73u-z9-P7E" eventType="touchUpInside" id="62B-0m-vrp"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSe-OL-5HP" userLabel="Navigate To Success List Tab Button">
+                                                        <rect key="frame" x="0.0" y="82" width="275" height="33"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <state key="normal" title="See your personal Story of Success."/>
+                                                        <connections>
+                                                            <action selector="navigateToSuccessListTab:" destination="73u-z9-P7E" eventType="touchUpInside" id="e0k-TI-RSC"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FZa-fn-iF6" userLabel="Filler View Bottom">
+                                                <rect key="frame" x="0.0" y="191" width="374" height="60"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="60" id="wqe-Nd-p4y"/>
+                                                </constraints>
+                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="amj-Av-exE" userLabel="Escape from Initial Screen Stack View">
-                                                <rect key="frame" x="0.0" y="308" width="374" height="61.5"/>
+                                                <rect key="frame" x="0.0" y="259" width="374" height="110.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not show this screen again." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-5O-eW5">
-                                                        <rect key="frame" x="0.0" y="21.5" width="325" height="18"/>
+                                                        <rect key="frame" x="0.0" y="46.5" width="325" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WpC-wO-1RH">
-                                                        <rect key="frame" x="325" y="15" width="51" height="31"/>
+                                                        <rect key="frame" x="325" y="40" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="notShowAgainSwitchChanged:" destination="73u-z9-P7E" eventType="valueChanged" id="TWc-ey-Tdc"/>
                                                         </connections>
