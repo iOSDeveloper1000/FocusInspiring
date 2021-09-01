@@ -520,7 +520,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="INFO" id="Gct-Jc-6Um">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="VersionCell" textLabel="QvM-zD-0xR" detailTextLabel="chh-fX-WVy" style="IBUITableViewCellStyleValue1" id="osY-vY-i5g" userLabel="Version Entry">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NonSelectableCell" textLabel="QvM-zD-0xR" detailTextLabel="chh-fX-WVy" style="IBUITableViewCellStyleValue1" id="osY-vY-i5g" userLabel="Version Entry">
                                         <rect key="frame" x="20" y="454.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="osY-vY-i5g" id="I3G-XU-bj6">
@@ -561,7 +561,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CoffeeButtonCell" textLabel="o8A-Dg-RHb" style="IBUITableViewCellStyleDefault" id="p6W-j2-fXh" userLabel="Coffee Button">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SegueCell" textLabel="o8A-Dg-RHb" style="IBUITableViewCellStyleDefault" id="p6W-j2-fXh" userLabel="Coffee Button">
                                         <rect key="frame" x="20" y="541.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p6W-j2-fXh" id="tG6-cC-caM">
@@ -581,14 +581,14 @@
                                             <segue destination="23Y-45-PAV" kind="show" identifier="SegueBuyCoffeeSettingToDetail" id="TEh-Od-7A2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AboutAppCell" textLabel="KhQ-JS-EIm" style="IBUITableViewCellStyleDefault" id="f5P-IR-OW8" userLabel="Legal Notice">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SegueCell" textLabel="KhQ-JS-EIm" style="IBUITableViewCellStyleDefault" id="f5P-IR-OW8" userLabel="Legal Notice">
                                         <rect key="frame" x="20" y="585" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f5P-IR-OW8" id="g9c-hd-W2U">
                                             <rect key="frame" x="0.0" y="0.0" width="344.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="About (tbd)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KhQ-JS-EIm">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KhQ-JS-EIm">
                                                     <rect key="frame" x="20" y="0.0" width="316.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -727,14 +727,33 @@
                     <view key="view" contentMode="scaleToFill" id="L2g-PG-Dgi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpF-uz-pXt">
+                                <rect key="frame" x="20" y="88" width="374" height="725"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="XpW-wc-Wx8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XpW-wc-Wx8" firstAttribute="trailing" secondItem="jpF-uz-pXt" secondAttribute="trailing" constant="20" id="7rE-FE-kRl"/>
+                            <constraint firstItem="jpF-uz-pXt" firstAttribute="leading" secondItem="XpW-wc-Wx8" secondAttribute="leading" constant="20" id="Dnm-lV-h0J"/>
+                            <constraint firstItem="jpF-uz-pXt" firstAttribute="top" secondItem="XpW-wc-Wx8" secondAttribute="top" id="Qca-gR-e71"/>
+                            <constraint firstItem="jpF-uz-pXt" firstAttribute="bottom" secondItem="XpW-wc-Wx8" secondAttribute="bottom" id="vx2-dI-sCZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NBj-dz-e3d"/>
+                    <connections>
+                        <outlet property="webView" destination="jpF-uz-pXt" id="efd-Jh-90T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6nD-Um-Rnm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2213" y="1381"/>
+            <point key="canvasLocation" x="2211.594202898551" y="1380.8035714285713"/>
         </scene>
         <!--Settings-->
         <scene sceneID="8xi-Jb-H3y">
@@ -1171,7 +1190,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="wEF-hf-NEd"/>
-        <segue reference="TEh-Od-7A2"/>
+        <segue reference="N1C-jD-clZ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>

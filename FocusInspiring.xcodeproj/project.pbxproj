@@ -10,6 +10,8 @@
 		E704571C2608A363003FA55F /* CollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */; };
 		E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */; };
 		E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70FA9F426498E0000D6BE56 /* DevTracking.swift */; };
+		E710FF3626DF72470074DA05 /* 2021-09-01_LegalNotice_dt_raw.html in Resources */ = {isa = PBXBuildFile; fileRef = E710FF3426DF72470074DA05 /* 2021-09-01_LegalNotice_dt_raw.html */; };
+		E710FF3A26DFD7E40074DA05 /* 2021-09-01_LegalNotice_en_raw.html in Resources */ = {isa = PBXBuildFile; fileRef = E710FF3926DFD7E40074DA05 /* 2021-09-01_LegalNotice_en_raw.html */; };
 		E7117BE626D7D2D7002A0C78 /* CustomTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7117BE526D7D2D7002A0C78 /* CustomTypes.swift */; };
 		E7117BE826D7D857002A0C78 /* BackgroundLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7117BE726D7D857002A0C78 /* BackgroundLabel.swift */; };
 		E715F43026AF012500930E36 /* ResponsiveSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */; };
@@ -58,6 +60,8 @@
 		E704571B2608A363003FA55F /* CollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		E70A3F6B26862A5200895FBB /* ListNotesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNotesCollectionViewController.swift; sourceTree = "<group>"; };
 		E70FA9F426498E0000D6BE56 /* DevTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevTracking.swift; sourceTree = "<group>"; };
+		E710FF3426DF72470074DA05 /* 2021-09-01_LegalNotice_dt_raw.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "2021-09-01_LegalNotice_dt_raw.html"; sourceTree = "<group>"; };
+		E710FF3926DFD7E40074DA05 /* 2021-09-01_LegalNotice_en_raw.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "2021-09-01_LegalNotice_en_raw.html"; sourceTree = "<group>"; };
 		E7117BE526D7D2D7002A0C78 /* CustomTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTypes.swift; sourceTree = "<group>"; };
 		E7117BE726D7D857002A0C78 /* BackgroundLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLabel.swift; sourceTree = "<group>"; };
 		E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsiveSelectorView.swift; sourceTree = "<group>"; };
@@ -127,6 +131,15 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		E710FF3826DF726D0074DA05 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E710FF3426DF72470074DA05 /* 2021-09-01_LegalNotice_dt_raw.html */,
+				E710FF3926DFD7E40074DA05 /* 2021-09-01_LegalNotice_en_raw.html */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E732C72325DBE11800A4CE31 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +169,7 @@
 				E77042BF260B89CE00335445 /* Extension */,
 				E732C73B25DBE11900A4CE31 /* Assets.xcassets */,
 				E732C74025DBE11900A4CE31 /* Info.plist */,
+				E710FF3826DF726D0074DA05 /* Resources */,
 			);
 			path = FocusInspiring;
 			sourceTree = "<group>";
@@ -365,7 +379,9 @@
 				E732C73F25DBE11900A4CE31 /* LaunchScreen.storyboard in Resources */,
 				E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */,
 				E7901D02269F281C0093B10A /* ASCustomValueSetterView.xib in Resources */,
+				E710FF3A26DFD7E40074DA05 /* 2021-09-01_LegalNotice_en_raw.html in Resources */,
 				E732C73725DBE11800A4CE31 /* Main.storyboard in Resources */,
+				E710FF3626DF72470074DA05 /* 2021-09-01_LegalNotice_dt_raw.html in Resources */,
 				E715F43126AF012500930E36 /* ResponsiveSelectorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,7 +13,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
-    // MARK: - Definition
+    // MARK: - Type Definition
 
     private enum AlertUserForChangedSetting {
         case afterRestart
@@ -56,7 +56,6 @@ class SettingsViewController: UITableViewController {
         setupUserNotificationsSection()
 
         versionLabel.text = AppParameter.versionString
-        // @todo COMPLETE INFO SECTION SETUP
     }
 
 
@@ -76,7 +75,7 @@ class SettingsViewController: UITableViewController {
     }
 
 
-    // MARK: - TableView Delegation
+    // MARK: - TableView Delegate
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         guard let identifier = tableView.cellForRow(at: indexPath)?.reuseIdentifier else {
@@ -106,11 +105,8 @@ class SettingsViewController: UITableViewController {
         case cellIdentifier.recommendationInfo:
             shareAppWithFriends()
 
-        case "VersionCell", "CoffeeButtonCell", "AboutAppCell":
-            // @todo IMPLEMENT
-            break
-
-        case "NonSelectableCell":
+        case "SegueCell", "NonSelectableCell":
+            // Processed with Action or Navigation method
             break
 
         default:
@@ -125,15 +121,16 @@ class SettingsViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc = segue.destination as? SettingsDetailViewController else { return }
+
         let segueIdentifier = ReuseIdentifier.forSegue.self
 
         switch segue.identifier {
-
         case segueIdentifier.buyCoffeeSettingToDetail:
-            print("@todo Buy me a Coffee")
+            vc.requestedPage = "Contribution"
 
         case segueIdentifier.aboutInfoToDetail:
-            print("@todo About this App")
+            vc.requestedPage = "About"
 
         default:
             track("UNKNOWN DEFAULT: Segue in Settings")
@@ -141,7 +138,7 @@ class SettingsViewController: UITableViewController {
     }
 
 
-    // MARK: - Setup Helpers
+    // MARK: - Setup
 
     private func setupUserSettingsSection() {
         // Retrieve user settings
