@@ -105,7 +105,7 @@ class EditNoteViewController: UIViewController {
      */
     private func loadNoteOnScreen() {
         guard let temporaryNote = temporaryNote else {
-            popupAlert(title: "Internal error", message: "Could not load the note for editing.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelAlertHandler(alertAction:)])
+            popupAlert(title: "alert-title-note-unloadable"~, message: "alert-message-note-unloadable"~, alertStyle: .alert, actionTitles: ["action-quick-confirm"~], actionStyles: [.default], actions: [cancelAlertHandler(alertAction:)])
             return
         }
 
@@ -129,7 +129,7 @@ class EditNoteViewController: UIViewController {
     private func replaceImage(sourceType: UIImagePickerController.SourceType) {
 
         if imageView.image != nil {
-            popupAlert(title: "New image will overwrite former one", message: "Are you sure you want to pick a new image overwriting the currently chosen one?", alertStyle: .alert, actionTitles: ["Overwrite", "Cancel"], actionStyles: [.destructive, .cancel], actions: [{ _ in self.pickNewImage(sourceType: sourceType) }, nil]
+            popupAlert(title: "alert-title-replace-image"~, message: "alert-message-replace-image"~, alertStyle: .alert, actionTitles: ["action-overwrite-image"~, "action-cancel"~], actionStyles: [.destructive, .cancel], actions: [{ _ in self.pickNewImage(sourceType: sourceType) }, nil]
             )
         } else {
             pickNewImage(sourceType: sourceType)
@@ -165,7 +165,7 @@ extension EditNoteViewController: UIImagePickerControllerDelegate, UINavigationC
             temporaryNote.image = uiImage.jpegData(compressionQuality: 0.98)
 
         } else {
-            popupAlert(title: "Image not found", message: "The selected image cannot be loaded into the app.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+            popupAlert(title: "alert-title-missing-image-data"~, message: "alert-message-missing-image-data"~, alertStyle: .alert, actionTitles: ["action-quick-confirm"~], actionStyles: [.default], actions: [nil])
         }
 
         picker.dismiss(animated: true, completion: nil)

@@ -1,0 +1,91 @@
+//
+//  Localizable.strings (de)
+//  FocusInspiring
+//
+//  Created by Arno Seidel on 04.11.21.
+//  Copyright © 2021 Arno Seidel. All rights reserved.
+//
+
+
+/// MARK: - General
+
+"action-cancel" = "Abbrechen";
+"action-quick-confirm" = "OK";
+
+"action-save-confirm" = "Speichern";
+"action-delete-confirm" = "Löschen";
+
+
+// MARK: - Notes (in general)
+
+"label-note-creation-date" = "Erstellt am %@";
+"label-note-presenting-date" = "Angezeigt am %@";
+
+//"label-empty-title" = "<no title>";
+
+"placeholder-text-period" = " Tippe um eine Frist auszuwählen.  ";
+
+"notification-message-general" = "Eine Notiz der Inspiration erwartet von dir erneut gesehen zu werden...";
+
+
+// MARK: - Welcome VC
+
+"welcome-slogan" = "FÜHL DICH\t\t\t\t\t\nRUNDUM\n\t\t\t\tINSPIRIERT";
+
+
+// MARK: - Display Note VC
+
+"action-title-when-done" = "Großartig!";
+"action-add-to-success-list" = "Füge es deiner Erfolgsstory hinzu";
+
+"alert-title-period-incomplete" = "Unvollständige Fristangabe";
+"alert-message-period-incomplete" = "Es scheint, als hättest du noch keine gültige Frist für die erneute Anzeige dieser Notiz angegeben. Versuche eine neue Frist zu setzen.";
+
+"alert-title-period-conversion-failed" = "Interner Fehler";
+"alert-message-period-conversion-failed" = "Die Frist konnte nicht in ein Datum konvertiert werden. Versuche eine andere Frist zu setzen.";
+
+"action-title-repeat-note" = "Die Notiz wird am %@ wieder angezeigt.";
+"action-repeat-note" = "Präsentiere an dem Tag erneut";
+
+"action-title-delete-note" = "Diese Notiz dauerhaft löschen.";
+
+"label-extending-note" = "Verlängere die Notiz um ";
+
+
+// MARK: - Add New VC
+
+"alert-title-delete-temporary-note" = "Die Notiz wurde noch nicht gespeichert. Fortfahren wird sie dauerhaft löschen.";
+
+"alert-title-note-incomplete" = "Unvollständige Notiz";
+"alert-message-note-incomplete" = "Es scheint, als hättest noch keinen Titel oder Beschreibung (Text, Bild, ...) hinzugefügt.";
+"action-save-note-incomplete" = "Trotzdem speichern";
+
+"action-title-save-note" = "Deine Notiz wird gespeichert und am %@ angezeigt.";
+
+"label-present-note" = "Präsentiere die Notiz in ";
+
+"alert-title-replace-image" = "Ein neues Bild wird das vorige überschreiben.";
+"alert-message-replace-image" = "Bist du dir sicher, ein neues Bild auszuwählen und das vorige damit zu überschreiben?";
+"action-overwrite-image" = "Überschreiben";
+
+"alert-title-missing-image-data" = "Bild nicht gefunden";
+"alert-message-missing-image-data" = "Das ausgewählte Bild kann nicht in die App geladen werden.";
+
+
+// MARK: - Edit Note VC
+
+"alert-title-note-unloadable" = "Interner Fehler";
+"alert-message-note-unloadable" = "Die Notiz konnte nicht zum Bearbeiten geladen werden. Versuche es bitte erneut oder kopiere die Inhalte in eine neue Notiz.";
+
+
+// MARK: - Detail Note VC
+
+"alert-title-delete-complete-note" = "Soll die Notiz dauerhaft gelöscht werden?";
+
+
+// MARK: - Settings & Detail VC
+
+"hint-changed-setting-after-restart" = "Die geänderte Einstellung wird nach einem Neustart der App aktiv.";
+"hint-changed-setting-for-future-actions" = "Die geänderte Einstellung wird für alle zukünftig gespeicherten Notizen verwendet werden.";
+
+"resource-title-about-page" = "2021-09-01_LegalNotice_de_raw";

@@ -37,7 +37,7 @@ class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
         // Layout of welcome text
-        welcomeLabel.text = TextParameter.welcomeSlogan
+        welcomeLabel.text = "welcome-slogan"~
         welcomeLabel.textAlignment = .center
 
         welcomeLabel.font = LayoutParameter.Font.largeTitle

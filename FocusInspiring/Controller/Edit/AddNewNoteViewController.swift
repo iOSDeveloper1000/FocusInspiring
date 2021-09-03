@@ -88,7 +88,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         toggleUserInterface(enable: false)
 
         // Get confirmation by user for clearing unsaved contents
-        popupAlert(title: "Your unsaved note will be deleted permanently.", message: "", alertStyle: .actionSheet, actionTitles: ["Clear", "Cancel"], actionStyles: [.destructive, .cancel], actions: [clearHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
+        popupAlert(title: "alert-title-delete-temporary-note"~, message: "", alertStyle: .actionSheet, actionTitles: ["action-delete-confirm"~, "action-cancel"], actionStyles: [.destructive, .cancel], actions: [clearHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
     }
 
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
@@ -97,7 +97,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
         guard let selectedPeriod = selectedPeriod,
               selectedPeriod.isValid() else {
-            popupAlert(title: "Period incomplete or unset", message: "It seems like you have not entered a valid time duration for this note to come back into focus. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
+            popupAlert(title: "alert-title-period-incomplete"~, message: "alert-message-period-incomplete"~, alertStyle: .alert, actionTitles: ["action-quick-confirm"~], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
             return
         }
 
@@ -110,10 +110,10 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
 
         if isNoteEmpty() {
-            popupAlert(title: "Empty note", message: "It seems like you have not entered a title or some descriptional elements (like text or image).", alertStyle: .alert, actionTitles: ["Save anyway", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
+            popupAlert(title: "alert-title-note-incomplete"~, message: "alert-message-note-incomplete"~, alertStyle: .alert, actionTitles: ["action-save-note-incomplete"~, "action-cancel"~], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
         } else {
-            let dateStr = DateFormatting.declarationFormat.string(from: targetDate)
-            popupAlert(title: "Your new inspirational note will be saved and presented on \(dateStr)", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
+            let dateString = DateFormatting.declarationFormat.string(from: targetDate)
+            popupAlert(title: "action-title-save-note"~dateString, message: "", alertStyle: .actionSheet, actionTitles: ["action-save-confirm"~, "action-cancel"~], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
         }
     }
 
@@ -171,7 +171,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
 
         // Setup period setter view and initialize button with user default value
-        periodSetterView.setup(preLabelText: "Will be presented in ", postLabelText: ".") { self.selectedPeriod = $0 }
+        periodSetterView.setup(preLabelText: "label-present-note"~, postLabelText: ".") { self.selectedPeriod = $0 }
         periodSetterView.buttonText = collectDefaultPeriod()
     }
 
@@ -181,7 +181,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     private func replaceImage(sourceType: UIImagePickerController.SourceType) {
 
         if imageView.image != nil {
-            popupAlert(title: "New image will overwrite former one", message: "Are you sure you want to pick a new image overwriting the currently chosen one?", alertStyle: .alert, actionTitles: ["Overwrite", "Cancel"], actionStyles: [.destructive, .cancel], actions: [{ _ in self.pickNewImage(sourceType: sourceType) }, nil]
+            popupAlert(title: "alert-title-replace-image"~, message: "alert-message-replace-image"~, alertStyle: .alert, actionTitles: ["action-overwrite-image"~, "action-cancel"~], actionStyles: [.destructive, .cancel], actions: [{ _ in self.pickNewImage(sourceType: sourceType) }, nil]
             )
         } else {
             pickNewImage(sourceType: sourceType)
@@ -216,7 +216,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
             newItem.attributedText = textView.attributedText
         }
 
-        /// Save image if one was selected
+        // Save image if one was selected
         if let image = imageView.image {
             newItem.image = image.jpegData(compressionQuality: 0.98)
         }
@@ -254,7 +254,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
 
         // Add and schedule local notification
-        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: target)
+        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "notification-message-general"~, dateTime: target)
 
         // Clear and reenable user interface for a further note
         clearUserInterface()
@@ -339,7 +339,7 @@ extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigatio
             dataController.saveBackgroundContext()
 
         } else {
-            popupAlert(title: "Image not found", message: "The selected image cannot be loaded into the app.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+            popupAlert(title: "alert-title-missing-image-data"~, message: "alert-message-missing-image-data"~, alertStyle: .alert, actionTitles: ["action-quick-confirm"~], actionStyles: [.default], actions: [nil])
         }
 
         picker.dismiss(animated: true, completion: nil)

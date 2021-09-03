@@ -1,0 +1,91 @@
+//
+//  Localizable.strings (en)
+//  FocusInspiring
+//
+//  Created by Arno Seidel on 04.11.21.
+//  Copyright © 2021 Arno Seidel. All rights reserved.
+//
+
+
+// MARK: - General
+
+"action-cancel" = "Cancel";
+"action-quick-confirm" = "OK";
+
+"action-save-confirm" = "Save";
+"action-delete-confirm" = "Delete";
+
+
+// MARK: - Notes (in general)
+
+"label-note-creation-date" = "Created on %@";
+"label-note-presenting-date" = "Displayed on %@";
+
+"label-empty-title" = "<no title>";
+
+"placeholder-text-period" = " Tap to select a time period.  ";
+
+"notification-message-general" = "An note of inspiration awaits you to be seen again...";
+
+
+// MARK: - Welcome VC
+
+"welcome-slogan" = "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED";
+
+
+// MARK: - Display Note VC
+
+"action-title-when-done" = "Great job!";
+"action-add-to-success-list" = "Add to your List of Success";
+
+"alert-title-period-incomplete" = "Incomplete period";
+"alert-message-period-incomplete" = "It seems like you have not entered a valid time duration for this note to come back into focus. Try to set a new period.";
+
+"alert-title-period-conversion-failed" = "Internal error";
+"alert-message-period-conversion-failed" = "Could not convert the period to a target date. Try to set a different period.";
+
+"action-title-repeat-note" = "The note will be presented on %@ again.";
+"action-repeat-note" = "Re-present then";
+
+"action-title-delete-note" = "This note will be deleted permanently.";
+
+"label-extending-note" = "Extend the note by ";
+
+
+// MARK: - Add New VC
+
+"alert-title-delete-temporary-note" = "The note has not been saved yet. Continuing will delete it permanently.";
+
+"alert-title-note-incomplete" = "Incomplete note";
+"alert-message-note-incomplete" = "It seems like you have not entered a title or some descriptional elements like text or an image.";
+"action-save-note-incomplete" = "Save anyway";
+
+"action-title-save-note" = "Your note will be saved and presented on %@.";
+
+"label-present-note" = "Present the note in ";
+
+"alert-title-replace-image" = "A new image will overwrite the former one.";
+"alert-message-replace-image" = "Are you sure you want to pick a new image overwriting the currently chosen one?";
+"action-overwrite-image" = "Overwrite";
+
+"alert-title-missing-image-data" = "Image not found";
+"alert-message-missing-image-data" = "The selected image cannot be loaded into the app.";
+
+
+// MARK: - Edit Note VC
+
+"alert-title-note-unloadable" = "Internal error";
+"alert-message-note-unloadable" = "Could not load the note for editing. Please try again or copy to a new note.";
+
+
+// MARK: - Detail Note VC
+
+"alert-title-delete-complete-note" = "Are you sure you want to delete this note permanently?";
+
+
+// MARK: - Settings & Detail VC
+
+"hint-changed-setting-after-restart" = "Changed setting will become active after restart of app.";
+"hint-changed-setting-for-future-actions" = "Changed setting will be used for all notes saved in future.";
+
+"resource-title-about-page" = "2021-09-01_LegalNotice_en_raw";

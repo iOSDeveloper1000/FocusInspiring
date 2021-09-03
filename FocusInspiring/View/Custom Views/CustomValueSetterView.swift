@@ -39,7 +39,7 @@ class CustomValueSetterView: UIView {
             accessoryTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 35))
             accessoryTextField.adjustsFontForContentSizeCategory = true
             accessoryTextField.textAlignment = .center
-            accessoryTextField.placeholder = " Tap to select a time period.  "
+            accessoryTextField.placeholder = "placeholder-text-period"~
             accessoryTextField.borderStyle = .none
             accessoryTextField.backgroundColor = .systemBackground
         }

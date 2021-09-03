@@ -26,6 +26,7 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
     var description: String {
         let unitStr: String
 
+        // @todo LOCALIZE TIME UNITS - NOTE PLURAL FORMS
         switch component {
         case .second: unitStr = "sec"
         case .minute: unitStr = "min"

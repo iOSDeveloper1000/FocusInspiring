@@ -1,0 +1,148 @@
+//
+//  Main.strings (en)
+//  FocusInspiring
+//
+//  Created by Arno Seidel on 04.11.21.
+//  Copyright © 2021 Arno Seidel. All rights reserved.
+//
+
+
+// MARK: - Tab Bar Interface
+
+/* Class = "UITabBarItem"; title = "TODAY"; ObjectID = "mda-kk-1Vi"; */
+"mda-kk-1Vi.title" = "Today";
+
+/* Class = "UITabBarItem"; title = "ADD NEW"; ObjectID = "BYv-hb-en1"; */
+"BYv-hb-en1.title" = "Add New";
+
+/* Class = "UITabBarItem"; title = "LIST"; ObjectID = "jWP-BN-fZx"; */
+"jWP-BN-fZx.title" = "List";
+
+/* Class = "UITabBarItem"; title = "SETTINGS"; ObjectID = "kna-Eb-piW"; */
+"kna-Eb-piW.title" = "Settings";
+
+
+// MARK: - Welcome VC
+
+/* Class = "UILabel"; text = "WELCOME TEXT"; ObjectID = "Cme-j7-h4O"; */
+"Cme-j7-h4O.text" = "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED";
+
+/* Class = "UIButton"; normalTitle = "NAVIGATE TO TODAY TAB"; ObjectID = "enm-pe-9cb"; */
+"enm-pe-9cb.normalTitle" = "Manage your current notes.";
+
+/* Class = "UIButton"; normalTitle = "NAVIGATE TO ADD NEW TAB"; ObjectID = "bPN-HA-T0j"; */
+"bPN-HA-T0j.normalTitle" = "Capture what inspires you right now.";
+
+/* Class = "UIButton"; normalTitle = "NAVIGATE TO LIST TAB"; ObjectID = "HSe-OL-5HP"; */
+"HSe-OL-5HP.normalTitle" = "See your personal Story of Success.";
+
+/* Class = "UILabel"; text = "OMIT INITIAL VC PERMANENTLY"; ObjectID = "Tel-5O-eW5"; */
+"Tel-5O-eW5.text" = "Hide this window on future launches.";
+
+
+// MARK: - Display Note VC
+
+/* Class = "UINavigationItem"; title = "DISPLAY NOTE HEADING"; ObjectID = "CNq-pu-e85"; */
+"CNq-pu-e85.title" = "Manage your Notes";
+
+/* Class = "UILabel"; text = "<unused here>"; ObjectID = "uIW-Nv-RTg"; */
+"uIW-Nv-RTg.text" = "<note-title-large>";
+
+/* Class = "UILabel"; text = "<unused here>"; ObjectID = "wBe-d0-mpp"; */
+"wBe-d0-mpp.text" = "<creation-date-label>";
+
+/* Class = "UILabel"; text = "<unused here>"; ObjectID = "x24-zf-p5R"; */
+"x24-zf-p5R.text" = "<presenting-date-label>";
+
+
+// MARK: - Add New VC
+
+/* Class = "UINavigationItem"; title = "ADD NEW HEADING"; ObjectID = "Mes-EJ-zxi"; */
+"Mes-EJ-zxi.title" = "Add a new Note";
+
+/* Class = "UITextField"; placeholder = "TITLE PLACEHOLDER"; ObjectID = "jPO-Oe-yU7"; */
+"jPO-Oe-yU7.placeholder" = "Enter a title";
+
+
+// MARK: - Edit Note VC
+
+/* Class = "UINavigationItem"; title = "EDIT NOTE HEADING"; ObjectID = "kMj-1M-PnX"; */
+"kMj-1M-PnX.title" = "Edit your Note";
+
+/* Class = "UITextField"; placeholder = "TITLE PLACEHOLDER"; ObjectID = "YOJ-Q4-MDX"; */
+"YOJ-Q4-MDX.placeholder" = "Enter a title";
+
+
+// MARK: - List VC
+
+/* Class = "UINavigationItem"; title = "SUCCESS LIST HEADING"; ObjectID = "ZT9-C8-qNy"; */
+"ZT9-C8-qNy.title" = "Success Story";
+
+/* Class = "UISegmentedControl"; rAA-L8-guZ.segmentTitles[0] = "Success"; ObjectID = "rAA-L8-guZ"; */
+"rAA-L8-guZ.segmentTitles[0]" = "Success";
+
+/* Class = "UISegmentedControl"; rAA-L8-guZ.segmentTitles[1] = "Active"; ObjectID = "rAA-L8-guZ"; */
+"rAA-L8-guZ.segmentTitles[1]" = "Active";
+
+/* Class = "UILabel"; text = "<unused here>"; ObjectID = "MPS-rK-rBe"; */
+"MPS-rK-rBe.text" = "<note-title-small>";
+
+
+// MARK: - Detail Note VC
+
+/* Class = "UINavigationItem"; title = "DETAIL NOTE HEADING"; ObjectID = "j8f-Ox-Aa4"; */
+"j8f-Ox-Aa4.title" = "Detail View";
+
+/* Class = "UILabel"; text = "<unused here>"; ObjectID = "Iwk-ad-SVt"; */
+"Iwk-ad-SVt.text" = "<note-title-large>"
+
+/* Class = "UILabel"; text = "<unused here>"; ObjectID = "kBv-9W-ktz"; */
+"kBv-9W-ktz.text" = "<creation-date-label>";
+
+/* Class = "UILabel"; text = "<unused here>"; ObjectID = "ZGQ-Qf-fiG"; */
+"ZGQ-Qf-fiG.text" = "<presenting-date-label>";
+
+
+// MARK: - Settings VC
+
+/* Class = "UINavigationItem"; title = "SETTINGS HEADING"; ObjectID = "NYR-E5-tml"; */
+"NYR-E5-tml.title" = "Settings";
+
+
+/* Class = "UITableViewSection"; headerTitle = "USER SETTINGS"; ObjectID = "OOV-GX-2qt"; */
+"OOV-GX-2qt.headerTitle" = "USER SETTINGS";
+
+/* Class = "UILabel"; text = "ENABLE TEST MODE LABEL"; ObjectID = "xPE-Dc-Snx"; */
+"xPE-Dc-Snx.text" = "Enable Test Mode";
+
+/* Class = "UILabel"; text = "DEFAULT PERIOD NEW LABEL"; ObjectID = "NQ1-cp-OaP"; */
+"NQ1-cp-OaP.text" = "Default Period (new note)";
+
+/* Class = "UILabel"; text = "DEFAULT PERIOD REPEAT LABEL"; ObjectID = "0hC-KB-s0y"; */
+"0hC-KB-s0y.text" = "Default Period (for renewing)";
+
+
+/* Class = "UITableViewSection"; headerTitle = "NOTIFICATIONS"; ObjectID = "u9y-15-Eak"; */
+"u9y-15-Eak.headerTitle" = "NOTIFICATIONS";
+
+/* Class = "UILabel"; text = "DELIVER NOTES LABEL"; ObjectID = "hvN-gI-d9g"; */
+"hvN-gI-d9g.text" = "Deliver notes...";
+
+/* Class = "UILabel"; text = "SAVE TIME OPTION LABEL"; ObjectID = "9dI-tY-DAi"; */
+"zgI-Mt-sz4.text" = "at time of saving the note:";
+
+/* Class = "UILabel"; text = "CUSTOM TIME OPTION LABEL"; ObjectID = "DhA-Kj-5Pj"; */
+"DhA-Kj-5Pj.text" = "at custom time of day:";
+
+
+/* Class = "UITableViewSection"; headerTitle = "INFO"; ObjectID = "Gct-Jc-6Um"; */
+"Gct-Jc-6Um.headerTitle" = "INFO";
+
+/* Class = "UILabel"; text = "VERSION INFO LABEL"; ObjectID = "QvM-zD-0xR"; */
+"QvM-zD-0xR.text" = "Version";
+
+/* Class = "UILabel"; text = "SHARE BUTTON LABEL"; ObjectID = "d5F-r7-unU"; */
+"d5F-r7-unU.text" = "Share with your Friends";
+
+/* Class = "UILabel"; text = "ABOUT BUTTON LABEL"; ObjectID = "KhQ-JS-EIm"; */
+"KhQ-JS-EIm.text" = "About";

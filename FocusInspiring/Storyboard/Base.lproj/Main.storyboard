@@ -46,7 +46,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="2Vd-BW-G7E"/>
-                                    <barButtonItem title="Add Image" image="photo.on.rectangle" catalog="system" id="HK1-yf-PvI">
+                                    <barButtonItem image="photo.on.rectangle" catalog="system" id="HK1-yf-PvI">
                                         <connections>
                                             <action selector="imageButtonPressed:" destination="cQ3-22-2wb" id="0cj-sV-C07"/>
                                         </connections>
@@ -63,7 +63,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8G1-R4-jOS">
                                 <rect key="frame" x="20" y="98" width="374" height="661"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="jPO-Oe-yU7" customClass="EditableTextField" customModule="FocusInspiring" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="jPO-Oe-yU7" customClass="EditableTextField" customModule="FocusInspiring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="VkN-Ej-d4A"/>
@@ -148,7 +148,7 @@
                                     <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EKr-nS-q3o" userLabel="Welcome Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="386.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Label (set programmatically)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cme-j7-h4O">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Welcome Label&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cme-j7-h4O">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="193.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
@@ -243,7 +243,6 @@
                             <constraint firstItem="gIZ-uN-vcl" firstAttribute="trailing" secondItem="BmW-0V-Ei8" secondAttribute="trailing" constant="20" id="tfl-j8-9nO"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house" id="Q3F-4i-NMZ"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -267,25 +266,8 @@
                         <sections>
                             <tableViewSection headerTitle="USER SETTINGS" id="OOV-GX-2qt" userLabel="USER">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EnableTestModeCellIdentifier" textLabel="xPE-Dc-Snx" style="IBUITableViewCellStyleDefault" id="pAE-mG-MJH" userLabel="Test Mode Setting">
-                                        <rect key="frame" x="20" y="49.5" width="374" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pAE-mG-MJH" id="tK0-0U-FLq">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Enable Test Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xPE-Dc-Snx">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddNewDefaultPeriodCellIdentifier" textLabel="NQ1-cp-OaP" detailTextLabel="vty-Ow-vis" style="IBUITableViewCellStyleValue1" id="8QN-0J-fRF" userLabel="AddNewVC Default Period Setting">
-                                        <rect key="frame" x="20" y="93.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="49.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8QN-0J-fRF" id="yOI-Q4-LoR">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -298,8 +280,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="42 days" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vty-Ow-vis" customClass="EditablePeriodLabel" customModule="FocusInspiring" customModuleProvider="target">
-                                                    <rect key="frame" x="306" y="15" width="48" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="&lt;42 days&gt;" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vty-Ow-vis" customClass="EditablePeriodLabel" customModule="FocusInspiring" customModuleProvider="target">
+                                                    <rect key="frame" x="289.5" y="15" width="64.5" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                     <color key="textColor" systemColor="linkColor"/>
@@ -309,7 +291,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RepeatDefaultPeriodCellIdentifier" textLabel="0hC-KB-s0y" detailTextLabel="JSA-3i-wq2" style="IBUITableViewCellStyleValue1" id="9Gj-xE-yIy" userLabel="DisplayVC Default Period Setting">
-                                        <rect key="frame" x="20" y="137.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="93.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Gj-xE-yIy" id="ueP-Zf-ugc">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -322,11 +304,28 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="none" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JSA-3i-wq2" customClass="EditablePeriodLabel" customModule="FocusInspiring" customModuleProvider="target">
-                                                    <rect key="frame" x="324" y="15" width="30" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="&lt;none&gt;" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JSA-3i-wq2" customClass="EditablePeriodLabel" customModule="FocusInspiring" customModuleProvider="target">
+                                                    <rect key="frame" x="307.5" y="15" width="46.5" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                     <color key="textColor" systemColor="linkColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EnableTestModeCellIdentifier" textLabel="xPE-Dc-Snx" style="IBUITableViewCellStyleDefault" id="pAE-mG-MJH" userLabel="Test Mode Setting">
+                                        <rect key="frame" x="20" y="137.5" width="374" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pAE-mG-MJH" id="tK0-0U-FLq">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Enable Test Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xPE-Dc-Snx">
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -495,7 +494,7 @@
             </objects>
             <point key="canvasLocation" x="1450.7246376811595" y="1380.8035714285713"/>
         </scene>
-        <!--List of Glory-->
+        <!--<List of Success>-->
         <scene sceneID="p3b-9u-CJt">
             <objects>
                 <viewController id="42o-RE-Bv1" customClass="ListNotesCollectionViewController" customModule="FocusInspiring" customModuleProvider="target" sceneMemberID="viewController">
@@ -523,7 +522,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rcw-ew-sc6">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="86"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPS-rK-rBe">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPS-rK-rBe">
                                                     <rect key="frame" x="0.0" y="86" width="128" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="TC1-yd-v88"/>
@@ -577,7 +576,7 @@
                             <constraint firstItem="rAA-L8-guZ" firstAttribute="centerX" secondItem="JUE-cn-Xqs" secondAttribute="centerX" id="mu0-R4-Lou"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="List of Glory" id="ZT9-C8-qNy"/>
+                    <navigationItem key="navigationItem" title="&lt;List of Success&gt;" id="ZT9-C8-qNy"/>
                     <connections>
                         <outlet property="collectionView" destination="gdQ-c6-hsh" id="wQH-SL-Hjc"/>
                         <outlet property="collectionViewTopLayoutConstraint" destination="3TH-JB-d7z" id="I2E-jd-bce"/>
@@ -660,12 +659,12 @@
                                 <items>
                                     <navigationItem title="Your Inspiration" id="CNq-pu-e85" userLabel="NavBar Title">
                                         <leftBarButtonItems>
-                                            <barButtonItem title="Success" image="checkmark.circle" catalog="system" id="CIs-p4-EcD">
+                                            <barButtonItem image="checkmark.circle" catalog="system" id="CIs-p4-EcD">
                                                 <connections>
                                                     <action selector="checkmarkButtonPressed:" destination="A9m-Vf-l2n" id="z0Y-r2-eL4"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="Again" image="repeat" catalog="system" id="y9o-9E-rPg">
+                                            <barButtonItem image="repeat" catalog="system" id="y9o-9E-rPg">
                                                 <connections>
                                                     <action selector="repeatButtonPressed:" destination="A9m-Vf-l2n" id="n9y-WX-VgC"/>
                                                 </connections>
@@ -689,7 +688,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="STV-Oc-L5d" userLabel="Global Stack View">
                                 <rect key="frame" x="20" y="98" width="374" height="705"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIW-Nv-RTg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIW-Nv-RTg">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="sBW-VF-dCD"/>
@@ -701,13 +700,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xcI-Ad-OvF" userLabel="MetaData Stack View">
                                         <rect key="frame" x="0.0" y="48" width="374" height="30"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBe-d0-mpp" userLabel="Creation Date">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creation Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBe-d0-mpp" userLabel="Creation Date">
                                                 <rect key="frame" x="0.0" y="0.0" width="177" height="30"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x24-zf-p5R" userLabel="Presenting Date">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Presenting Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x24-zf-p5R" userLabel="Presenting Date">
                                                 <rect key="frame" x="197" y="0.0" width="177" height="30"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
@@ -863,7 +862,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Rwc-ZK-UOo"/>
-                                    <barButtonItem title="Add Image" image="photo.on.rectangle" catalog="system" id="Whi-Ez-SpE">
+                                    <barButtonItem image="photo.on.rectangle" catalog="system" id="Whi-Ez-SpE">
                                         <connections>
                                             <action selector="imageButtonPressed:" destination="blz-JR-BZr" id="nxx-Vk-8wh"/>
                                         </connections>
@@ -954,7 +953,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IYg-cz-EyF" userLabel="Global Stack View">
                                 <rect key="frame" x="20" y="54" width="374" height="798"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwk-ad-SVt">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Title&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwk-ad-SVt">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="y6m-Oc-f4F"/>
@@ -966,13 +965,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VwH-JP-nZY" userLabel="MetaData Stack View">
                                         <rect key="frame" x="0.0" y="48" width="374" height="20"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBv-9W-ktz" userLabel="Creation Date">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Creation Date&gt;" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBv-9W-ktz" userLabel="Creation Date">
                                                 <rect key="frame" x="0.0" y="0.0" width="177" height="20"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGQ-Qf-fiG" userLabel="Presenting Date">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Presenting Date&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGQ-Qf-fiG" userLabel="Presenting Date">
                                                 <rect key="frame" x="197" y="0.0" width="177" height="20"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
@@ -1045,7 +1044,6 @@
         <image name="ellipsis.bubble" catalog="system" width="128" height="110"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="graduationcap" catalog="system" width="128" height="106"/>
-        <image name="house" catalog="system" width="128" height="106"/>
         <image name="photo.on.rectangle" catalog="system" width="128" height="97"/>
         <image name="plus.rectangle.on.rectangle" catalog="system" width="128" height="97"/>
         <image name="repeat" catalog="system" width="128" height="98"/>

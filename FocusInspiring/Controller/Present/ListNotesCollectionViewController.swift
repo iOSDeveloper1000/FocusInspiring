@@ -223,7 +223,7 @@ extension ListNotesCollectionViewController: UICollectionViewDelegate, UICollect
         let shadeThisItem: Bool = note.active
 
         // Equip cell with label and (default) image
-        cell.subtitle.text = (note.title ?? "").isEmpty ? "<no title>" : note.title
+        cell.subtitle.text = (note.title ?? "").isEmpty ? "label-empty-title"~ : note.title
         cell.subtitle.textColor = shadeThisItem ? LayoutParameter.TextColor.placeholder : LayoutParameter.TextColor.standard
 
         if let img = note.image {

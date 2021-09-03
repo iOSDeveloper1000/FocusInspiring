@@ -113,14 +113,14 @@ class DisplayNoteViewController: UIViewController {
 
     @IBAction func checkmarkButtonPressed(_ sender: Any) {
 
-        popupAlert(title: "Congratulations!", message: "Your inspiration will be added to your personal List of Glory.", alertStyle: .actionSheet, actionTitles: ["Add to List of Glory", "Cancel"], actionStyles: [.default, .cancel], actions: [checkmarkHandler(alertAction:), nil])
+        popupAlert(title: "action-title-when-done"~, message: "", alertStyle: .actionSheet, actionTitles: ["action-add-to-success-list"~, "action-cancel"~], actionStyles: [.default, .cancel], actions: [checkmarkHandler(alertAction:), nil])
     }
 
     @IBAction func repeatButtonPressed(_ sender: Any) {
 
         guard let selectedPeriod = selectedPeriod,
               selectedPeriod.isValid() else {
-            popupAlert(title: "Period incomplete or unset", message: "It seems like you have not entered a valid time duration for this note to come back into focus. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+            popupAlert(title: "alert-title-period-incomplete"~, message: "alert-message-period-incomplete"~, alertStyle: .alert, actionTitles: ["action-quick-confirm"~], actionStyles: [.default], actions: [nil])
             return
         }
 
@@ -128,19 +128,20 @@ class DisplayNoteViewController: UIViewController {
         target = selectedPeriod.computeDeliveryDate(given: Date())
 
         guard let targetDate = targetDate else {
-            popupAlert(title: "Internal error", message: "Could not convert the given target date. Try to set a different period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+            popupAlert(title: "alert-title-period-conversion-failed"~, message: "alert-message-period-conversion-failed"~, alertStyle: .alert, actionTitles: ["action-quick-confirm"~], actionStyles: [.default], actions: [nil])
             return
         }
 
-        let dateStr = DateFormatting.declarationFormat.string(from: targetDate)
-        popupAlert(title: "Your inspirational note will be presented again on \(dateStr).", message: "", alertStyle: .actionSheet, actionTitles: ["Present again", "Cancel"], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
+        let dateString = DateFormatting.declarationFormat.string(from: targetDate)
+
+        popupAlert(title: "action-title-repeat-note"~dateString, message: "", alertStyle: .actionSheet, actionTitles: ["action-repeat-note"~, "action-cancel"~], actionStyles: [.default, .cancel], actions: [repeatHandler(alertAction:), nil])
     }
 
     // For editButton action see segue preparation below
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
 
-        popupAlert(title: "Your note will be deleted permanently.", message: "", alertStyle: .actionSheet, actionTitles: ["Delete", "Cancel"], actionStyles: [.destructive, .cancel], actions: [deleteHandler(alertAction:), nil])
+        popupAlert(title: "action-title-delete-note"~, message: "", alertStyle: .actionSheet, actionTitles: ["action-delete-confirm"~, "action-cancel"~], actionStyles: [.destructive, .cancel], actions: [deleteHandler(alertAction:), nil])
     }
 
 
@@ -235,7 +236,7 @@ class DisplayNoteViewController: UIViewController {
      */
     private func setupPeriodSetterView() {
 
-        periodSetterView.setup(preLabelText: "Further cycle for ", postLabelText: "?") { self.selectedPeriod = $0 }
+        periodSetterView.setup(preLabelText: "label-extending-note"~, postLabelText: "?") { self.selectedPeriod = $0 }
         periodSetterView.buttonText = collectDefaultPeriod()
     }
 
@@ -310,8 +311,8 @@ class DisplayNoteViewController: UIViewController {
         }
 
         titleLabel.text = displayedItem.title
-        creatingDateLabel.text = "Created on: \(creatingDateStr)"
-        presentingDateLabel.text = "Displayed on: \(presentingDateStr)"
+        creatingDateLabel.text = "label-note-creation-date"~creatingDateStr
+        presentingDateLabel.text = "label-note-presenting-date"~presentingDateStr
 
 
         // Main part
@@ -359,12 +360,12 @@ class DisplayNoteViewController: UIViewController {
             return
         }
 
-        /// Change date of next presentation to newly computed date
+        // Update date of re-presentation
         displayedItem.presentingDate = targetDate
         dataController.saveViewContext()
 
-        /// Update and reschedule user notification
-        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: target)
+        // Update and reschedule user notification
+        LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "notification-message-general"~, dateTime: target)
 
         loadNextNote(dropCurrentNote: true)
     }
@@ -375,10 +376,10 @@ class DisplayNoteViewController: UIViewController {
             return
         }
 
-        /// Remove scheduled notification if applicable
+        // Remove scheduled notification if applicable
         LocalNotificationHandler.shared.removePendingNotification(uuid: uuid)
 
-        /// Delete displayed note
+        // Delete displayed note
         dataController.viewContext.delete(displayedItem)
         dataController.saveViewContext()
 

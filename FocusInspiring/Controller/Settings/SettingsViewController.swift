@@ -22,9 +22,9 @@ class SettingsViewController: UITableViewController {
         var messageString: String {
             switch self {
             case .afterRestart:
-                return "Changed setting will become active after restart of app."
+                return "hint-changed-setting-after-restart"~
             case .forFutureActions:
-                return "Changed setting will be used for all notes saved in future."
+                return "hint-changed-setting-for-future-actions"~
             }
         }
     }
@@ -234,6 +234,6 @@ class SettingsViewController: UITableViewController {
 
     private func alertUserForChangedSetting(with useCase: AlertUserForChangedSetting) {
 
-        popupAlert(title: useCase.messageString, message: "", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+        popupAlert(title: useCase.messageString, message: "", alertStyle: .alert, actionTitles: ["action-quick-confirm"~], actionStyles: [.default], actions: [nil])
     }
 }

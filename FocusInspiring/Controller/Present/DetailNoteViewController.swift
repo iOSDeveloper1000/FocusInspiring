@@ -57,13 +57,15 @@ class DetailNoteViewController: UIViewController {
             fatalError("Note for deletion not found")
         }
 
-        popupAlert(title: "Do you really want to delete your note of success permanently?", message: "", alertStyle: .alert, actionTitles: ["Delete", "Cancel"], actionStyles: [.destructive, .cancel], actions: [deleteHandler(alertAction:), nil])
+        popupAlert(title: "alert-title-delete-complete-note"~, message: "", alertStyle: .alert, actionTitles: ["action-delete-confirm"~, "action-cancel"~], actionStyles: [.destructive, .cancel], actions: [deleteHandler(alertAction:), nil])
     }
 
 
     // MARK: - Handler
 
     func deleteHandler(alertAction: UIAlertAction) {
+
+        // @todo DELETE ALSO NOTIFICATION
 
         dataController?.viewContext.delete(note!)
         dataController?.saveViewContext()
@@ -97,8 +99,8 @@ class DetailNoteViewController: UIViewController {
         }
 
         titleLabel.text = note.title
-        creatingDateLabel.text = "Created on: \(creatingDateStr)"
-        presentingDateLabel.text = "Displayed on: \(presentingDateStr)"
+        creatingDateLabel.text = "label-note-creation-date"~creatingDateStr
+        presentingDateLabel.text = "label-note-presenting-date"~presentingDateStr
 
 
         // Main part

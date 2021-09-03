@@ -28,7 +28,7 @@ class SettingsDetailViewController: UIViewController {
 
         // Open requested resource
         if requestedPage == "About" {
-            guard let urlPath = Bundle.main.url(forResource: "2021-09-01_LegalNotice_en_raw", withExtension: "html") else {
+            guard let urlPath = Bundle.main.url(forResource: "resource-title-about-page"~, withExtension: "html") else {
                 track("GUARD FAILED: Local URL not found")
                 return
             }
