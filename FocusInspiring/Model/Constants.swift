@@ -79,9 +79,6 @@ struct TextParameter {
     static let welcomeSlogan = "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED"
 
     static let textPlaceholder = "Enter your text note here"
-
-    static let textFontSize: CGFloat = 16
-    static let titleFontSize: CGFloat = 21
 }
 
 /**

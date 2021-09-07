@@ -21,9 +21,10 @@ public class BackgroundLabel: UILabel {
         let titleRange = NSMakeRange(0, msg.title.count)
 
         let attributedLabel = NSMutableAttributedString(string: "\(msg.title)\n\n\(msg.body)")
-        attributedLabel.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 21), range: titleRange)
+        attributedLabel.addAttribute(.font, value: UIFont.preferredFont(forTextStyle: .title2), range: titleRange)
 
         attributedText = attributedLabel
+        adjustsFontForContentSizeCategory = true
     }
 
     /**

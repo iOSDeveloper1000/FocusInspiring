@@ -13,7 +13,7 @@ import UIKit
 
 class EditableTextView: UITextView, UITextViewDelegate {
 
-    // MARK: Properties
+    // MARK: - Properties
 
     /// Routine set by caller of this class to save contents at certain points
     var saveContentChanges: ((NSAttributedString) -> Void)?
@@ -22,13 +22,13 @@ class EditableTextView: UITextView, UITextViewDelegate {
         let placeholder = NSMutableAttributedString(string: TextParameter.textPlaceholder)
 
         let range = NSRange(location: 0, length: placeholder.string.utf16.count)
-        placeholder.setAttributes([.font: UIFont.systemFont(ofSize: TextParameter.textFontSize)], range: range)
+        placeholder.setAttributes([.font: UIFont.preferredFont(forTextStyle: .subheadline)], range: range)
 
         return placeholder
     }
 
 
-    // MARK: Public Interface
+    // MARK: - Public
 
     public func setUpCustomTextView(with initText: NSAttributedString?, saveRoutine: ((NSAttributedString) -> Void)?) {
         delegate = self
@@ -47,6 +47,7 @@ class EditableTextView: UITextView, UITextViewDelegate {
     /// Set textview to placeholder text with default formatting
     public func clearTextView() {
         attributedText = attributedPlaceholder
+        adjustsFontForContentSizeCategory = true
         textColor = UIColor.lightGray
     }
 
@@ -56,7 +57,7 @@ class EditableTextView: UITextView, UITextViewDelegate {
     }
 
 
-    // MARK: TextView Delegation
+    // MARK: - TextView Delegate
 
     func textViewDidBeginEditing(_ textView: UITextView) {
 
@@ -74,39 +75,46 @@ class EditableTextView: UITextView, UITextViewDelegate {
         /// Reset to placeholder text
         if textView.attributedText.string.isEmpty {
             textView.attributedText = attributedPlaceholder
+            textView.adjustsFontForContentSizeCategory = true
             textView.textColor = UIColor.lightGray
         }
     }
 
 
-    // MARK: Toolbar Actions
+    // MARK: - Toolbar Actions
 
-    @IBAction func boldPressed(sender: Any) {
-        addFormatAttribute(.font, value: UIFont.boldSystemFont(ofSize: TextParameter.textFontSize), in: selectedRange)
+    @IBAction func boldPressed(sender: UIBarButtonItem) {
+        let boldSystemFont = UIFont.boldSystemFont(ofSize: 17)
+        let font = UIFontMetrics(forTextStyle: .body).scaledFont(for: boldSystemFont)
+
+        addFormatAttribute(.font, value: font, in: selectedRange)
     }
 
-    @IBAction func italicPressed(sender: Any) {
-        addFormatAttribute(.font, value: UIFont.italicSystemFont(ofSize: TextParameter.textFontSize), in: selectedRange)
+    @IBAction func italicPressed(sender: UIBarButtonItem) {
+        let italicSystemFont = UIFont.italicSystemFont(ofSize: 17)
+        let font = UIFontMetrics(forTextStyle: .body).scaledFont(for: italicSystemFont)
+
+        addFormatAttribute(.font, value: font, in: selectedRange)
     }
 
-    @IBAction func underlinePressed(sender: Any) {
+    @IBAction func underlinePressed(sender: UIBarButtonItem) {
         addFormatAttribute(.underlineStyle, value: 1, in: selectedRange)
     }
 
-    @IBAction func highlightPressed(sender: Any) {
+    @IBAction func highlightPressed(sender: UIBarButtonItem) {
         addFormatAttribute(.backgroundColor, value: UIColor.yellow, in: selectedRange)
     }
 
-    @IBAction func clearFormattingPressed(sender: Any) {
-        addFormatAttribute(nil, value: nil, in: selectedRange)
+    @IBAction func clearFormattingPressed(sender: UIBarButtonItem) {
+        addFormatAttribute(nil, value: 0, in: selectedRange)
     }
 
-    @IBAction func donePressed(sender: Any) {
+    @IBAction func donePressed(sender: UIBarButtonItem) {
         resignFirstResponder()
     }
 
 
-    // MARK: Helper
+    // MARK: - Helper
 
     private func setUpKeyboardToolbar() {
 
@@ -127,21 +135,22 @@ class EditableTextView: UITextView, UITextViewDelegate {
         inputAccessoryView = toolbar
     }
 
-    private func addFormatAttribute(_ name: NSAttributedString.Key?, value: Any?, in range: NSRange) {
+    private func addFormatAttribute(_ name: NSAttributedString.Key?, value: Any, in range: NSRange) {
         let newAttributedString = attributedText.mutableCopy() as! NSMutableAttributedString
 
         if let name = name {
-            /// Add formatting
-            newAttributedString.addAttribute(name, value: value!, range: range)
+            // Add formatting
+            newAttributedString.addAttribute(name, value: value, range: range)
         } else {
-            /// Clear formatting to app default
-            newAttributedString.setAttributes([.font: UIFont.systemFont(ofSize: TextParameter.textFontSize)], range: range)
+            // Clear formatting to app default
+            newAttributedString.setAttributes([.font: UIFont.preferredFont(forTextStyle: .body)], range: range)
         }
 
         let selectedTextRangeCopy = selectedTextRange
 
         attributedText = newAttributedString
         selectedTextRange = selectedTextRangeCopy
+        adjustsFontForContentSizeCategory = true
 
         saveContentChanges?(newAttributedString)
     }
