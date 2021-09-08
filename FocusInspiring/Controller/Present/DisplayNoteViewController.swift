@@ -191,36 +191,44 @@ class DisplayNoteViewController: UIViewController {
     // MARK: - Setup
 
     /**
-     Instantiates fetched results controller and performs fetch.
+     Instantiates fetched results controller and checks for due items.
 
-     Does only peform a new fetch if there are no more items from a former fetch.
+     Only performs a new fetch if due items are available but have not been fetched yet.
+     - Returns: The number of due notes currently on stack.
      */
-    private func setUpAndPerformFetch() {
+    @discardableResult
+    private func setUpAndPerformFetch() -> Int {
 
-        // Perform a new fetch only if needed
-        if fetchedItems.isEmpty {
+        // @todo CHECK WHETHER CAN BE OPTIMIZED IN PERFORMANCE
+        // Clean up former fetches
+        fetchedResultsController = nil
 
-            // @todo CHECK WHETHER CAN BE OPTIMIZED IN PERFORMANCE
-            /// Clean up former fetches
-            fetchedResultsController = nil
+        let fetchRequest: NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
 
-            let fetchRequest:NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
+        // Get all items dated for today or earlier
+        fetchRequest.predicate = NSPredicate(format: "active == TRUE AND presentingDate <= %@", Date() as CVarArg)
 
-            /// Get all items dated for today or earlier
-            fetchRequest.predicate = NSPredicate(format: "active == TRUE AND presentingDate <= %@", Date() as CVarArg)
+        let sortDescriptor = NSSortDescriptor(key: "presentingDate", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
 
-            let sortDescriptor = NSSortDescriptor(key: "presentingDate", ascending: false)
-            fetchRequest.sortDescriptors = [sortDescriptor]
+        /// Count of currently due notes -- used as return value.
+        let count: Int
+
+        do {
+            count = try dataController.viewContext.count(for: fetchRequest)
 
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "currentActiveNotes")
 
-            do {
+            // Only perform a fetch if necessary
+            if fetchedItems.isEmpty && count > 0 {
                 try fetchedResultsController.performFetch()
                 fetchedItems = fetchedResultsController.fetchedObjects ?? []
-            } catch {
-                fatalError("The fetch could not be performed: \(error.localizedDescription)")
             }
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
+
+        return count
     }
 
     /**
@@ -249,9 +257,10 @@ class DisplayNoteViewController: UIViewController {
         }
 
         // Try further fetch for due active notes if none available
-        setUpAndPerformFetch()
+        let dueNotesCount = setUpAndPerformFetch()
 
-        let dueNotesCount = fetchedItems.count
+        // Update badge value count in tab bar
+        setTabBarBadgeValue(count: dueNotesCount)
 
         // Show or hide UI elements
         switchVisibilityOfUI(enable: dueNotesCount > 0)
@@ -391,5 +400,14 @@ class DisplayNoteViewController: UIViewController {
         selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 
         return selectedPeriod?.description
+    }
+
+    private func setTabBarBadgeValue(count: Int) {
+        guard let tabBarItems = tabBarController?.tabBar.items else { return }
+
+        let thisTabItem = tabBarItems[ViewControllerIdentifier.displayNoteVC]
+
+        thisTabItem.badgeValue = (count > 0) ? String(count) : nil
+        thisTabItem.badgeColor = UIColor(named: "MelonYellow")
     }
 }

@@ -127,6 +127,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let id = notification.request.identifier
         LocalNotificationHandler.shared.removePendingNotification(uuid: id)
 
+        // @todo COUNT DUE NOTES FOR TABBAR BADGE - MAYBE REFACTOR FRC WITH VCs
+
         // Possible UNNotificationPresentationOptions in iOS 14: badge, banner, list, sound
         completionHandler([.banner, .list])
     }
