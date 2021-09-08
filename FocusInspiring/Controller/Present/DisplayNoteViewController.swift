@@ -79,7 +79,7 @@ class DisplayNoteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        displayNextItem() // next = first after (re)appear
+        loadNextNote(dropCurrentNote: false) // next = first after (re)appear
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -235,20 +235,31 @@ class DisplayNoteViewController: UIViewController {
 
     // MARK: - Private Core API
 
-    private func displayNextItem() {
+    /**
+     Load next note and make visible on screen.
+
+     If necessary, the currenly displayed note will be removed from locally.
+     - Parameter dropCurrentNote: Tries to remove current note from local array, if _true_.
+     */
+    private func loadNextNote(dropCurrentNote: Bool) {
+
+        if dropCurrentNote, fetchedItems.count > 0 {
+            // Update array of fetched notes to be in sync with managed object store
+            fetchedItems.removeLast()
+        }
 
         // Try further fetch for due active notes if none available
         setUpAndPerformFetch()
 
-        let isStackNonEmpty: Bool = !fetchedItems.isEmpty
+        let dueNotesCount = fetchedItems.count
 
         // Show or hide UI elements
-        switchVisibilityOfUI(enable: isStackNonEmpty)
+        switchVisibilityOfUI(enable: dueNotesCount > 0)
 
         // Will be nil if no more items are in queue
-        displayedItem = fetchedItems.popLast()
+        displayedItem = fetchedItems.last
 
-        if isStackNonEmpty {
+        if dueNotesCount > 0 {
             updateNoteOnScreen()
         }
     }
@@ -306,7 +317,7 @@ class DisplayNoteViewController: UIViewController {
         displayedItem.active = false
         dataController.saveViewContext()
 
-        displayNextItem()
+        loadNextNote(dropCurrentNote: true)
     }
 
     func repeatHandler(alertAction: UIAlertAction) {
@@ -329,7 +340,7 @@ class DisplayNoteViewController: UIViewController {
         /// Update and reschedule user notification
         LocalNotificationHandler.shared.convenienceSchedule(uuid: uuid, body: "You have an open inspiration to be managed. See what it is...", dateTime: target)
 
-        displayNextItem()
+        loadNextNote(dropCurrentNote: true)
     }
 
     func deleteHandler(alertAction: UIAlertAction) {
@@ -345,7 +356,7 @@ class DisplayNoteViewController: UIViewController {
         dataController.viewContext.delete(displayedItem)
         dataController.saveViewContext()
 
-        displayNextItem()
+        loadNextNote(dropCurrentNote: true)
     }
 
 
