@@ -13,10 +13,10 @@ protocol ResponsiveInputView {
     associatedtype ReturnValue: CustomStringConvertible
 
     /// String that describes the user input
-    var printedUserInput: String? { get }
+    var printedRawInput: String { get }
 
     /// Formatted user specified value that can be fetched by calling instances
-    var convertedData: ReturnValue? { get }
+    var convertedData: ReturnValue { get }
 
     /// Clear former input from any output medium (like textField or textView).
     func clearInput()

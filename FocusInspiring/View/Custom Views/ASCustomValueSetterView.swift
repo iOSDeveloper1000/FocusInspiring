@@ -40,7 +40,7 @@ class ASCustomValueSetterView: UIView {
 
     override var canBecomeFirstResponder: Bool { true }
 
-    var onValueConfirm: ((ConvertibleTimeComponent?) -> Void)?
+    var onValueConfirm: ((ConvertibleTimeComponent) -> Void)?
 
 
     // MARK: - View Properties
@@ -137,9 +137,16 @@ class ASCustomValueSetterView: UIView {
     @IBAction func inputConfirmed(_ sender: UIBarButtonItem?) {
         resignFirstResponder()
 
-        buttonText = responsiveInputView?.printedUserInput
+        onValueConfirm?(responsiveInputView?.convertedData ?? ConvertibleTimeComponent())
 
-        onValueConfirm?(responsiveInputView?.convertedData)
+        buttonText = responsiveInputView?.printedRawInput
+
+        if let rawString = responsiveInputView?.printedRawInput,
+           !(rawString.contains("?")) {
+            buttonText = rawString
+        } else {
+            buttonText = TextParameter.nilPeriod
+        }
     }
 
     @IBAction func inputCancelled(_ sender: UIBarButtonItem?) {
@@ -157,7 +164,7 @@ class ASCustomValueSetterView: UIView {
      - Parameter postLabelText: String to be presented after the button
      - Parameter callbackOnConfirm: Function will be called when user confirms his input
      */
-    func setup(inputView: ResponsiveSelectorView, preLabelText: String? = nil, postLabelText: String? = nil, callbackOnConfirm: ((ConvertibleTimeComponent?) -> Void)? = nil) {
+    func setup(inputView: ResponsiveSelectorView, preLabelText: String? = nil, postLabelText: String? = nil, callbackOnConfirm: ((ConvertibleTimeComponent) -> Void)? = nil) {
         self.inputView = inputView
 
         onValueConfirm = callbackOnConfirm

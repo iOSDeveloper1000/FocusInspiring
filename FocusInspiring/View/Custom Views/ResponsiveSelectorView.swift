@@ -22,13 +22,20 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
         return CGSize(width: targetWidth, height: targetWidth + 44)
     }
 
-    var printedUserInput: String? {
-        updateInputFormatting()
-        return formattedPeriod?.description
+    /**
+     User input converted to a readable string.
+     */
+    var printedRawInput: String {
+        updateInput()
+
+        return formattedPeriod.description
     }
 
-    var convertedData: ConvertibleTimeComponent? {
-        updateInputFormatting()
+    /**
+     User input converted to a computable value object.
+     */
+    var convertedData: ConvertibleTimeComponent {
+        updateInput()
         return formattedPeriod
     }
 
@@ -37,7 +44,7 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
     private var lastDigitEntered: Int?
     private var timeComponentEntered: Calendar.Component?
 
-    private var formattedPeriod: ConvertibleTimeComponent?
+    private var formattedPeriod = ConvertibleTimeComponent()
 
 
     // MARK: - Outlets
@@ -118,7 +125,7 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
         beforeLastDigitEntered = lastDigitEntered
         lastDigitEntered = digit
 
-        textField.text = printedUserInput
+        textField.text = printedRawInput
     }
 
     @IBAction func secondButtonPressed(_ sender: UIButton) {
@@ -143,6 +150,9 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
 
     // MARK: - Methods
 
+    /**
+     Clears the complete user input to the input form.
+     */
     func clearInput() {
         textField.text = ""
 
@@ -154,12 +164,17 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
     private func updateComponentSelection(by component: Calendar.Component) {
         timeComponentEntered = component
 
-        textField.text = printedUserInput
+        textField.text = printedRawInput
     }
 
-    private func updateInputFormatting() {
-        let twoDigitsNumber = 10 * (beforeLastDigitEntered ?? 0) + (lastDigitEntered ?? 0)
+    /**
+     Process the previously tapped keys in order to update the internal value.
 
-        formattedPeriod = ConvertibleTimeComponent(count: twoDigitsNumber, calendarComponent: timeComponentEntered ?? .calendar /*dummy value*/)
+     The unit is always defined by the last unit key press. The counting number is defined by the last two number key presses, zero otherwise.
+     */
+    private func updateInput() {
+        let doubleDigit = 10 * (beforeLastDigitEntered ?? 0) + (lastDigitEntered ?? 0)
+
+        formattedPeriod = ConvertibleTimeComponent(count: doubleDigit, calendarComponent: timeComponentEntered)
     }
 }

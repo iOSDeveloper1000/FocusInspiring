@@ -30,9 +30,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     /// Target date for future display of note
     var targetDate: Date? {
-        guard let target = target else {
-            return nil
-        }
+        guard let target = target else { return nil }
+
         return Calendar.current.date(from: target)
     }
 
@@ -57,7 +56,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /// Fetch object with temporary note
+        // Fetch temporary note object
         setUpFetchedResultsController()
 
         setUpUserInterface()
@@ -103,13 +102,14 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         // Disallow user to edit during save action
         toggleUserInterface(enable: false)
 
-        guard selectedPeriod != nil else {
-            popupAlert(title: "Period not set", message: "It seems like you have not entered a time duration for this note becoming visible. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
+        guard let selectedPeriod = selectedPeriod,
+              selectedPeriod.isValid() else {
+            popupAlert(title: "Period incomplete or unset", message: "It seems like you have not entered a valid time duration for this note to come back into focus. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelActionSheetHandler(alertAction:)])
             return
         }
 
         // Compute target date by selected period
-        target = selectedPeriod?.computeDeliveryDate(given: Date())
+        target = selectedPeriod.computeDeliveryDate(given: Date())
 
         guard let targetDate = targetDate else {
             track("GUARD FAILED: Target date unset")
@@ -249,7 +249,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
     func cancelActionSheetHandler(alertAction: UIAlertAction) {
-        /// Reenable user interface for further editing
+        // Reenable user interface for further editing
         toggleUserInterface(enable: true)
     }
 
@@ -327,7 +327,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
         selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 
-        return selectedPeriod?.description
+        return selectedPeriod!.isValid() ? selectedPeriod!.description : TextParameter.nilPeriod
     }
 }
 

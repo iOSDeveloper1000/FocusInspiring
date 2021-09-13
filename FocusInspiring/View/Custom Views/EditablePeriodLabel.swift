@@ -38,8 +38,12 @@ class EditablePeriodLabel: UILabel {
 
     override var canBecomeFirstResponder: Bool { true }
 
-    /// Called when user confirms his input; set by viewcontroller.
-    var onValueConfirm: ((ConvertibleTimeComponent?) -> Void)?
+    /**
+     Callback method called with user confirming his input.
+
+     To be set by the view controller in the setup process.
+     */
+    var onValueConfirm: ((ConvertibleTimeComponent) -> Void)?
 
 
     // MARK: - Actions
@@ -49,7 +53,9 @@ class EditablePeriodLabel: UILabel {
 
         onValueConfirm?(responsiveInputView.convertedData)
 
-        text = responsiveInputView.printedUserInput
+        let rawString = responsiveInputView.printedRawInput
+
+        text = rawString.contains("?") ? TextParameter.nilPeriod : rawString
     }
 
     @IBAction func inputCancelled(_ sender: UIBarButtonItem?) {

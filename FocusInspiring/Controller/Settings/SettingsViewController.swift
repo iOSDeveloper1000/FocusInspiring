@@ -146,15 +146,15 @@ class SettingsViewController: UITableViewController {
         enableTestingCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.enableTestMode) ? .checkmark : .none
 
         // Setup labels for user default periods
-        addNewDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.addNewNoteDefaultPeriod)
-        repeatDefaultPeriodLabel.text = collectUserDefaultPeriod(for: UserKey.repeatNoteDefaultPeriod)
+        addNewDefaultPeriodLabel.text = fetchUserDefaultPeriod(for: UserKey.addNewNoteDefaultPeriod)
+        repeatDefaultPeriodLabel.text = fetchUserDefaultPeriod(for: UserKey.repeatNoteDefaultPeriod)
 
         addNewDefaultPeriodLabel.onValueConfirm = {
-            self.updateUserDefaultPeriod(with: $0, for: UserKey.addNewNoteDefaultPeriod)
+            self.setUserDefaultPeriod(with: $0, for: UserKey.addNewNoteDefaultPeriod)
             self.alertUserForChangedSetting(with: .afterRestart)
         }
         repeatDefaultPeriodLabel.onValueConfirm = {
-            self.updateUserDefaultPeriod(with: $0, for: UserKey.repeatNoteDefaultPeriod)
+            self.setUserDefaultPeriod(with: $0, for: UserKey.repeatNoteDefaultPeriod)
             self.alertUserForChangedSetting(with: .afterRestart)
         }
     }
@@ -199,25 +199,28 @@ class SettingsViewController: UITableViewController {
         UserDefaults.standard.setValue(isAccessoryTypeNone, forKey: key)
     }
 
-    private func collectUserDefaultPeriod(for userKey: UserKey.PeriodValueKeyType) -> String {
+    private func fetchUserDefaultPeriod(for userKey: UserKey.PeriodValueKeyType) -> String {
 
         let countValue = UserDefaults.standard.integer(forKey: userKey.count)
         let unitIntValue = UserDefaults.standard.integer(forKey: userKey.unit)
 
-        let defaultPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
+        let periodValue = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 
-        return defaultPeriod.description
+        return periodValue.isValid() ? periodValue.description: TextParameter.nilPeriod
     }
 
-    private func updateUserDefaultPeriod(with timeValue: ConvertibleTimeComponent?, for userKey: UserKey.PeriodValueKeyType) {
-        guard let timeValue = timeValue else {
-            track("GUARD FAILED: Selected default period is nil")
-            return
-        }
+    private func setUserDefaultPeriod(with timeValue: ConvertibleTimeComponent, for userKey: UserKey.PeriodValueKeyType) {
 
-        // Store user selected values persistently in UserDefaults
-        UserDefaults.standard.set(timeValue.count, forKey: userKey.count)
-        UserDefaults.standard.set(timeValue.component.rawValue, forKey: userKey.unit)
+        if let countValue = timeValue.count,
+           let unitValue = timeValue.component {
+            // Store user selected values persistently
+            UserDefaults.standard.set(countValue, forKey: userKey.count)
+            UserDefaults.standard.set(unitValue.rawValue, forKey: userKey.unit)
+        } else {
+            // Store dummy values
+            UserDefaults.standard.set(0 /* unset */, forKey: userKey.count)
+            UserDefaults.standard.set(99 /* unset */, forKey: userKey.unit)
+        }
     }
 
     private func handleCustomTimePickerCell(enable: Bool) {

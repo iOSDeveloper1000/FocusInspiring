@@ -119,8 +119,10 @@ class DisplayNoteViewController: UIViewController {
     }
 
     @IBAction func repeatButtonPressed(_ sender: Any) {
-        guard let selectedPeriod = selectedPeriod else {
-            popupAlert(title: "Period not set", message: "It seems like you have not entered a time duration for this note becoming visible again. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
+
+        guard let selectedPeriod = selectedPeriod,
+              selectedPeriod.isValid() else {
+            popupAlert(title: "Period incomplete or unset", message: "It seems like you have not entered a valid time duration for this note to come back into focus. Try to set a new period.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [nil])
             return
         }
 
@@ -399,7 +401,7 @@ class DisplayNoteViewController: UIViewController {
 
         selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 
-        return selectedPeriod?.description
+        return selectedPeriod!.isValid() ? selectedPeriod!.description : TextParameter.nilPeriod
     }
 
     private func setTabBarBadgeValue(count: Int) {

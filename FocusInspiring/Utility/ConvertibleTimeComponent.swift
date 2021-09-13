@@ -15,46 +15,68 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
 
     // MARK: - Properties
 
-    let count: Int
-    let component: Calendar.Component
+    let count: Int?
+    let component: Calendar.Component?
 
+    /**
+     A readable string that represents a time period composed of a number and a date component.
+
+     Missing components will be replaced by a question mark.
+     */
     var description: String {
-        var unitString: String
+        let unitStr: String
 
         switch component {
-        case .second: unitString = "sec"
-        case .minute: unitString = "min"
-        case .day: unitString = "day"
-        case .weekOfYear: unitString = "week"
-        case .month: unitString = "month"
-        case .year: unitString = "year"
-        default: unitString = "?"
+        case .second: unitStr = "sec"
+        case .minute: unitStr = "min"
+        case .day: unitStr = "day"
+        case .weekOfYear: unitStr = "week"
+        case .month: unitStr = "month"
+        case .year: unitStr = "year"
+        default: unitStr = "?"
         }
 
-        var valueString = (count > 0) ? "\(count) \(unitString)" : "none"
+        guard let count = count, count > 0 else { return "? \(unitStr)" }
+        guard let component = component else { return "\(count) ?" }
+
+        var resultStr = "\(count) \(unitStr)"
 
         // Append plural s for some units
         let appendPluralSUnits: Array<Calendar.Component> = [.day, .weekOfYear, .month, .year]
-        valueString = (count > 1 && appendPluralSUnits.contains(component)) ? "\(valueString)s" : valueString
+        if count > 1 && appendPluralSUnits.contains(component) {
+            resultStr = "\(resultStr)s"
+        }
 
-        return valueString
+        return resultStr
     }
 
 
     // MARK: - Initialization
 
-    init(count: Int, calendarComponent: Calendar.Component) {
+    init(count: Int?, calendarComponent: Calendar.Component?) {
         self.count = count
         self.component = calendarComponent
     }
 
     init(count: Int, componentRawValue: Int) {
-        self.count = count
-        self.component = Calendar.Component(rawValue: componentRawValue) ?? .calendar // .calender = "unset"
+        self.init(count: count, calendarComponent: Calendar.Component(rawValue: componentRawValue))
+    }
+
+    init() {
+        self.init(count: nil, calendarComponent: nil)
     }
 
 
     // MARK: - Public
+
+    /**
+     Returns _true_,  if count and calendar component have non-zero and non-nil values, otherwise _false_.
+     */
+    func isValid() -> Bool {
+        if description.contains("?") { return false }
+
+        return true
+    }
 
     /**
      Compute future date (with exact time) by adding self to given reference date.
@@ -63,9 +85,9 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
      - Parameter given: Reference date
      */
     func computeDeliveryDate(given refDate: Date) -> DateComponents? {
-        guard let targetRawDate = Calendar.current.date(byAdding: component, value: count, to: refDate) else {
-            return nil
-        }
+        guard let component = component,
+              let count = count else { return nil }
+        guard let targetRawDate = Calendar.current.date(byAdding: component, value: count, to: refDate) else { return nil }
 
         var targetDateComponents: DateComponents?
 
