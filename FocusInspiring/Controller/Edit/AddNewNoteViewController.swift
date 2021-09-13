@@ -182,7 +182,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         })
 
         // Setup text view
-        textView.setUpCustomTextView(with: temporaryNote?.attributedText, saveRoutine: { (attributedString) in
+        textView.setup(with: temporaryNote?.attributedText, saveRoutine: { (attributedString) in
             self.temporaryNote?.attributedText = attributedString
             self.dataController.saveBackgroundContext()
         })
@@ -289,7 +289,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
             return true
         }
 
-        return titleText.isEmpty || (imageView.image == nil && textView.isEmptyText())
+        return titleText.isEmpty || (imageView.image == nil && textView.isEmpty())
     }
 
     private func toggleUserInterface(enable: Bool) {
@@ -309,7 +309,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     private func clearUserInterface() {
         titleField.clearTextField()
-        textView.clearTextView()
+        textView.clear()
         imageView.image = nil
 
         /// Clear also temporary note from managed object context

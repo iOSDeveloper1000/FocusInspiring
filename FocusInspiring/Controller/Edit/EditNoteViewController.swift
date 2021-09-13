@@ -126,7 +126,7 @@ class EditNoteViewController: UIViewController {
             self.temporaryNote.title = titleString
         })
 
-        textView.setUpCustomTextView(with: temporaryNote.attributedText, saveRoutine: { attributedString in
+        textView.setup(with: temporaryNote.attributedText, saveRoutine: { attributedString in
             self.temporaryNote.attributedText = attributedString
         })
 

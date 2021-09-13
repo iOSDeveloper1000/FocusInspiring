@@ -30,29 +30,43 @@ class EditableTextView: UITextView, UITextViewDelegate {
 
     // MARK: - Public
 
-    public func setUpCustomTextView(with initText: NSAttributedString?, saveRoutine: ((NSAttributedString) -> Void)?) {
+    /**
+     Setup method for editable textviews.
+
+     - Parameter with: Attributed string that will be displayed in the textview.
+     - Parameter saveRoutine: Optional closure that will be called on releasing input mode and format changes.
+     */
+    public func setup(with initText: NSAttributedString?, saveRoutine: ((NSAttributedString) -> Void)?) {
         delegate = self
 
         saveContentChanges = saveRoutine
         setUpKeyboardToolbar()
 
-        /// Initialize textview with saved attributed text if existing, else placeholder text
+        // Set text to given attributed string else to placeholder
         if let initText = initText {
             attributedText = initText
         } else {
-            clearTextView()
+            clear()
         }
     }
 
-    /// Set textview to placeholder text with default formatting
-    public func clearTextView() {
+    /**
+     Reset text in textview to placeholder text.
+
+     Formatting will be default one.
+     */
+    public func clear() {
+
         attributedText = attributedPlaceholder
         adjustsFontForContentSizeCategory = true
         textColor = UIColor.lightGray
     }
 
-    /// Returns true if textview is empty or holding placeholder, false otherwise
-    public func isEmptyText() -> Bool {
+    /**
+     Returns _true_, if textview is empty or holding placeholder text, otherwise _false_.
+     */
+    public func isEmpty() -> Bool {
+
         return text.isEmpty || (text == TextParameter.textPlaceholder)
     }
 
@@ -61,10 +75,10 @@ class EditableTextView: UITextView, UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
 
-        /// Empty placeholder text
+        // Empty the placeholder text
         if textView.textColor == UIColor.lightGray {
             textView.text = ""
-            textView.textColor = UIColor.black
+            textView.textColor = UIColor.label
         }
     }
 
@@ -72,11 +86,11 @@ class EditableTextView: UITextView, UITextViewDelegate {
 
         saveContentChanges?(textView.attributedText)
 
-        /// Reset to placeholder text
+        guard let textView = textView as? EditableTextView else { return }
+
+        // Reset to placeholder text if empty
         if textView.attributedText.string.isEmpty {
-            textView.attributedText = attributedPlaceholder
-            textView.adjustsFontForContentSizeCategory = true
-            textView.textColor = UIColor.lightGray
+            textView.clear()
         }
     }
 
@@ -87,26 +101,28 @@ class EditableTextView: UITextView, UITextViewDelegate {
         let boldSystemFont = UIFont.boldSystemFont(ofSize: 17)
         let font = UIFontMetrics(forTextStyle: .body).scaledFont(for: boldSystemFont)
 
-        addFormatAttribute(.font, value: font, in: selectedRange)
+        addFormatAttributes([.font: font], in: selectedRange)
     }
 
     @IBAction func italicPressed(sender: UIBarButtonItem) {
         let italicSystemFont = UIFont.italicSystemFont(ofSize: 17)
         let font = UIFontMetrics(forTextStyle: .body).scaledFont(for: italicSystemFont)
 
-        addFormatAttribute(.font, value: font, in: selectedRange)
+        addFormatAttributes([.font: font], in: selectedRange)
     }
 
     @IBAction func underlinePressed(sender: UIBarButtonItem) {
-        addFormatAttribute(.underlineStyle, value: 1, in: selectedRange)
+        addFormatAttributes([.underlineStyle: 1], in: selectedRange)
     }
 
     @IBAction func highlightPressed(sender: UIBarButtonItem) {
-        addFormatAttribute(.backgroundColor, value: UIColor.yellow, in: selectedRange)
+        addFormatAttributes([.backgroundColor: UIColor.yellow,
+                             .foregroundColor: UIColor.black],
+                            in: selectedRange)
     }
 
     @IBAction func clearFormattingPressed(sender: UIBarButtonItem) {
-        addFormatAttribute(nil, value: 0, in: selectedRange)
+        addFormatAttributes([:], in: selectedRange)
     }
 
     @IBAction func donePressed(sender: UIBarButtonItem) {
@@ -135,15 +151,20 @@ class EditableTextView: UITextView, UITextViewDelegate {
         inputAccessoryView = toolbar
     }
 
-    private func addFormatAttribute(_ name: NSAttributedString.Key?, value: Any, in range: NSRange) {
+    /**
+     Add format attributes to specified text range or reset formatting.
+
+     - Parameter attrs: Format attributes to be applied. If empty, formatting will be reset to default.
+     - Parameter in: Range in which the attributes shall be applied.
+     */
+    private func addFormatAttributes(_ attrs: [NSAttributedString.Key: Any], in range: NSRange) {
         let newAttributedString = attributedText.mutableCopy() as! NSMutableAttributedString
 
-        if let name = name {
-            // Add formatting
-            newAttributedString.addAttribute(name, value: value, range: range)
+        if attrs.count > 0 {
+            newAttributedString.addAttributes(attrs, range: range)
         } else {
             // Clear formatting to app default
-            newAttributedString.setAttributes([.font: UIFont.preferredFont(forTextStyle: .body)], range: range)
+            newAttributedString.setAttributes([.font: UIFont.preferredFont(forTextStyle: .body), .foregroundColor: UIColor.label], range: range)
         }
 
         let selectedTextRangeCopy = selectedTextRange
