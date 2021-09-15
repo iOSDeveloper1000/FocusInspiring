@@ -187,7 +187,7 @@ struct ReuseIdentifier {
     }
 
     struct forObjectKey {
-        static let editingNote = "EditingNoteIdentifier"
-        static let addingNewNote = "AddingNewNoteIdentifier"
+        static let restoreTmpNoteInEdit = "EditTemporaryNoteIdentifier"
+        static let restoreTmpNoteInAddNew = "AddNewTemporaryNoteIdentifier"
     }
 }

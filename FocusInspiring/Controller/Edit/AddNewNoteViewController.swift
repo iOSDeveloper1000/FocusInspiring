@@ -134,6 +134,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
             flickrController.returnImage = { imageData in
 
+                self.imageView.isHidden = false
                 self.imageView.image = UIImage(data: imageData)
 
                 /// Save image data in temporary note
@@ -149,7 +150,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     private func setUpFetchedResultsController() {
         let fetchRequest:NSFetchRequest<TemporaryDataItem> = TemporaryDataItem.fetchRequest()
 
-        let objectIdentifier = ReuseIdentifier.forObjectKey.addingNewNote
+        let objectIdentifier = ReuseIdentifier.forObjectKey.restoreTmpNoteInAddNew
         fetchRequest.predicate = NSPredicate(format: "objectKey == %@", objectIdentifier)
         fetchRequest.sortDescriptors = []
 
@@ -189,7 +190,10 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
         // Setup image view
         if let imgData = temporaryNote?.image {
+            imageView.isHidden = false
             imageView.image = UIImage(data: imgData)
+        } else {
+            imageView.isHidden = true
         }
 
         // Setup period setter view and initialize button with user default value
@@ -310,6 +314,8 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     private func clearUserInterface() {
         titleField.clearTextField()
         textView.clear()
+
+        imageView.isHidden = true
         imageView.image = nil
 
         /// Clear also temporary note from managed object context
@@ -340,6 +346,7 @@ extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigatio
 
         if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 
+            imageView.isHidden = false
             imageView.image = uiImage
 
             /// Save image data in temporary note

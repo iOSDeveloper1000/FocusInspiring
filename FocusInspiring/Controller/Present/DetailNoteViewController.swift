@@ -81,6 +81,7 @@ class DetailNoteViewController: UIViewController {
         guard  let note = note else { return }
 
         // Header part
+
         let creatingDateStr: String
         let presentingDateStr: String
 
@@ -99,16 +100,17 @@ class DetailNoteViewController: UIViewController {
         creatingDateLabel.text = "Created on: \(creatingDateStr)"
         presentingDateLabel.text = "Displayed on: \(presentingDateStr)"
 
-        // Main part
-        let imageToDisplay: UIImage?
 
-        if let imageData = note.image {
-            imageToDisplay = UIImage(data: imageData)
+        // Main part
+
+        if let imgData = note.image {
+            imageView.isHidden = false
+            imageView.image = UIImage(data: imgData)
         } else {
-            imageToDisplay = nil
+            imageView.isHidden = true
+            imageView.image = nil
         }
 
-        imageView.image = imageToDisplay
         textView.attributedText = note.attributedText
     }
 }

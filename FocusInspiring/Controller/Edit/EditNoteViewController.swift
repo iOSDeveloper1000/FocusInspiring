@@ -92,6 +92,7 @@ class EditNoteViewController: UIViewController {
 
             flickrController.returnImage = { imgData in
 
+                self.imageView.isHidden = false
                 self.imageView.image = UIImage(data: imgData)
 
                 self.temporaryNote.image = imgData
@@ -131,8 +132,10 @@ class EditNoteViewController: UIViewController {
         })
 
         if let imgData = temporaryNote.image {
+            imageView.isHidden = false
             imageView.image = UIImage(data: imgData)
         } else {
+            imageView.isHidden = true
             imageView.image = nil
         }
     }
@@ -157,6 +160,7 @@ extension EditNoteViewController: UIImagePickerControllerDelegate, UINavigationC
 
         if let uiImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 
+            imageView.isHidden = false
             imageView.image = uiImage
 
             /// Save image data into temporary note

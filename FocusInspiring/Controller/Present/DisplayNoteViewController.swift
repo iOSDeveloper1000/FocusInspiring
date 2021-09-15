@@ -169,7 +169,7 @@ class DisplayNoteViewController: UIViewController {
             editNote.title = displayedItem?.title ?? ""
             editNote.attributedText = displayedItem?.attributedText ?? nil
             editNote.image = displayedItem?.image ?? nil
-            editNote.objectKey = ReuseIdentifier.forObjectKey.editingNote
+            editNote.objectKey = ReuseIdentifier.forObjectKey.restoreTmpNoteInEdit
 
             vc.temporaryNote = editNote
             vc.completion = { (editConfirmed, edit) in
@@ -281,6 +281,7 @@ class DisplayNoteViewController: UIViewController {
     private func updateNoteOnScreen() {
 
         // Header part
+
         let creatingDateStr: String
         let presentingDateStr: String
 
@@ -299,16 +300,17 @@ class DisplayNoteViewController: UIViewController {
         creatingDateLabel.text = "Created on: \(creatingDateStr)"
         presentingDateLabel.text = "Displayed on: \(presentingDateStr)"
 
-        // Main part
-        let imageToDisplay: UIImage?
 
-        if let imageData = displayedItem.image {
-            imageToDisplay = UIImage(data: imageData)
+        // Main part
+
+        if let imgData = displayedItem.image {
+            imageView.isHidden = false
+            imageView.image = UIImage(data: imgData)
         } else {
-            imageToDisplay = nil
+            imageView.isHidden = true
+            imageView.image = nil
         }
 
-        imageView.image = imageToDisplay
         textView.attributedText = displayedItem.attributedText
     }
 
