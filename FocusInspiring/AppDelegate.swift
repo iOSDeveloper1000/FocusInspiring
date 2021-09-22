@@ -92,25 +92,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
 
-    /// Called when user taps on a delivered notification no matter whether app is in foreground, background or closed
+    /**
+     Handles a notification request when the user taps on a delivered notification.
+
+     Valid for each notification independent of app state (foreground, background or closed).
+     */
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 
         let id = response.notification.request.identifier
 
         // Determine the user action: DefaultAction = user tapped on notification
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
-                track("GUARD FAILED: Scene Delegate not found")
-                return
-            }
-
-            guard let tabBarController = sceneDelegate.window?.rootViewController as? UITabBarController else {
-                track("GUARD FAILED: Root view controller not found")
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+                  let rootVC = sceneDelegate.rootViewController else {
+                track("GUARD FAILED: Root VC in Scene Delegate not found")
                 return
             }
 
             // Set tabbar index to DisplayNoteVC
-            tabBarController.selectedIndex = ViewControllerIdentifier.displayNoteVC
+            let displayNoteIndex = ViewControllerIdentifier.displayNoteVC
+            rootVC.selectedIndex = displayNoteIndex
+
+            if let displayNoteVC = rootVC.viewControllers?[displayNoteIndex] as? DisplayNoteViewController {
+                // Do not present overlay after tap on notification
+                displayNoteVC.presentOverlayViewInitially = false
+            }
 
         } else if response.actionIdentifier != UNNotificationDismissActionIdentifier {
             track("Unknown user action after notification was sent")
@@ -121,7 +127,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler()
     }
 
-    /// Called when a notification arrives while app is running in foreground
+    /**
+     Handles a notification when the app is in foreground.
+
+     Called before delivery to the user.
+     */
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
         let id = notification.request.identifier
