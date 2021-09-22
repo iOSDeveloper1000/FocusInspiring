@@ -17,20 +17,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2021_AppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xzw-tV-RqT">
-                                <rect key="frame" x="55" y="291" width="324" height="324"/>
+                                <rect key="frame" x="55" y="220.5" width="324" height="324"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xzw-tV-RqT" secondAttribute="height" multiplier="1:1" id="ePR-oW-ctW"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="600" id="jCm-Lh-XxI"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="500" id="jCm-Lh-XxI"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOCUS INSPIRING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8k-VZ-f8g">
+                                <rect key="frame" x="80" y="624.5" width="254" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="IFI-XG-n06"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xzw-tV-RqT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="2WB-3O-OKO"/>
+                            <constraint firstItem="U8k-VZ-f8g" firstAttribute="top" secondItem="xzw-tV-RqT" secondAttribute="bottom" constant="80" id="B67-9e-GdU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="centerX" secondItem="U8k-VZ-f8g" secondAttribute="centerX" id="FNk-td-dpy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xzw-tV-RqT" secondAttribute="trailing" constant="35" id="LYo-uQ-5ia"/>
                             <constraint firstItem="xzw-tV-RqT" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="10" id="Tbu-Ln-RDS"/>
-                            <constraint firstItem="xzw-tV-RqT" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="khx-mg-nNO"/>
+                            <constraint firstItem="xzw-tV-RqT" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.8" constant="20" id="khx-mg-nNO"/>
                         </constraints>
                     </view>
                 </viewController>
