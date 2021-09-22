@@ -11,6 +11,23 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // MARK: - Properties
+
+    lazy var rootViewController: RootViewController? = {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return nil }
+
+        return sceneDelegate.rootViewController
+    }()
+
+    lazy var displayNoteViewController: DisplayNoteViewController? = {
+        guard let tabBarViewControllers = rootViewController?.viewControllers else { return nil }
+
+        return tabBarViewControllers[ViewControllerIdentifier.displayNoteVC] as? DisplayNoteViewController
+    }()
+
+
+    // MARK: - Launch Lifecycle
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
@@ -103,20 +120,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         // Determine the user action: DefaultAction = user tapped on notification
         if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
-                  let rootVC = sceneDelegate.rootViewController else {
-                track("GUARD FAILED: Root VC in Scene Delegate not found")
-                return
-            }
 
             // Set tabbar index to DisplayNoteVC
-            let displayNoteIndex = ViewControllerIdentifier.displayNoteVC
-            rootVC.selectedIndex = displayNoteIndex
+            rootViewController?.selectedIndex = ViewControllerIdentifier.displayNoteVC
 
-            if let displayNoteVC = rootVC.viewControllers?[displayNoteIndex] as? DisplayNoteViewController {
-                // Do not present overlay after tap on notification
-                displayNoteVC.presentOverlayViewInitially = false
-            }
+            // Do not present overlay after tap on notification
+            displayNoteViewController?.presentOverlayViewInitially = false
 
         } else if response.actionIdentifier != UNNotificationDismissActionIdentifier {
             track("Unknown user action after notification was sent")
@@ -137,7 +146,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let id = notification.request.identifier
         LocalNotificationHandler.shared.removePendingNotification(uuid: id)
 
-        // @todo COUNT DUE NOTES FOR TABBAR BADGE - MAYBE REFACTOR FRC WITH VCs
+        if let displayNoteViewController = displayNoteViewController,
+           displayNoteViewController.isViewLoaded {
+            // Ensure to update badge counter
+            displayNoteViewController.updateStackCount()
+        }
 
         // Possible UNNotificationPresentationOptions in iOS 14: badge, banner, list, sound
         completionHandler([.banner, .list])

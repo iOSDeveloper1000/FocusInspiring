@@ -213,8 +213,7 @@ class DisplayNoteViewController: UIViewController {
         let sortDescriptor = NSSortDescriptor(key: "presentingDate", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
 
-        /// Count of currently due notes -- used as return value.
-        let count: Int
+        let count: Int // currently due notes -- return value
 
         do {
             count = try dataController.viewContext.count(for: fetchRequest)
@@ -240,6 +239,22 @@ class DisplayNoteViewController: UIViewController {
 
         periodSetterView.setup(inputView: responsiveSelectorView, preLabelText: "Further cycle for ", postLabelText: "?") { self.selectedPeriod = $0 }
         periodSetterView.buttonText = collectDefaultPeriod()
+    }
+
+
+    // MARK: - Public
+
+    /**
+     Updates the counter in the badge of the tab bar.
+
+     Performs a mere count fetch if further notes have already been loaded.
+     */
+    func updateStackCount() {
+        // Perform a count fetch or a full fetch if no item available yet
+        let dueNotesCount = setUpAndPerformFetch()
+
+        // Update badge value counter
+        setTabBarBadgeValue(count: dueNotesCount)
     }
 
 
