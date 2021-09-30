@@ -16,10 +16,9 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
     // MARK: - Properties
 
     override var intrinsicContentSize: CGSize {
-        let targetWidth: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+        let targetSize: CGFloat = min(UIScreen.lengthShortEdge, LayoutParameter.maxWidthInputView)
 
-        // For textfield space, height shall be greater than width of view.
-        return CGSize(width: targetWidth, height: targetWidth + 44)
+        return CGSize(width: targetSize, height: targetSize)
     }
 
     /**
@@ -39,7 +38,14 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
         return formattedPeriod
     }
 
-    // Buffer for pressed buttons
+    /**
+     Called on every text update in order to print a new text string.
+     */
+    var updateTextFieldTextBy: ((String) -> Void)?
+
+
+    // Buffers for pressed buttons
+
     private var beforeLastDigitEntered: Int?
     private var lastDigitEntered: Int?
     private var timeComponentEntered: Calendar.Component?
@@ -50,8 +56,6 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
     // MARK: - Outlets
 
     @IBOutlet var contentView: UIView!
-
-    @IBOutlet weak var textField: UITextField!
 
     // 1st row of buttons
     @IBOutlet weak var button_7: UIButton!
@@ -125,7 +129,7 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
         beforeLastDigitEntered = lastDigitEntered
         lastDigitEntered = digit
 
-        textField.text = printedRawInput
+        updateTextFieldTextBy?(printedRawInput)
     }
 
     @IBAction func secondButtonPressed(_ sender: UIButton) {
@@ -154,7 +158,7 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
      Clears the complete user input to the input form.
      */
     func clearInput() {
-        textField.text = ""
+        updateTextFieldTextBy?("")
 
         beforeLastDigitEntered = nil
         lastDigitEntered = nil
@@ -164,7 +168,7 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
     private func updateComponentSelection(by component: Calendar.Component) {
         timeComponentEntered = component
 
-        textField.text = printedRawInput
+        updateTextFieldTextBy?(printedRawInput)
     }
 
     /**

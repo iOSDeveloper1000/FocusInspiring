@@ -25,8 +25,6 @@ class DisplayNoteViewController: UIViewController {
     /// Flag indicates to present FirstViewController once (presented modally)
     var presentOverlayViewInitially: Bool = true
 
-    let responsiveSelectorView = ResponsiveSelectorView(frame: CGRect(origin: .zero, size: CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)))
-
     var selectedPeriod: ConvertibleTimeComponent? // Written by closure
 
     /// Target date for future display of note in DateComponents
@@ -51,7 +49,7 @@ class DisplayNoteViewController: UIViewController {
     @IBOutlet weak var presentingDateLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var periodSetterView: ASCustomValueSetterView!
+    @IBOutlet weak var periodSetterView: CustomValueSetterView!
     @IBOutlet weak var contentStackView: UIStackView!
 
     @IBOutlet weak var checkmarkButton: UIBarButtonItem!
@@ -237,7 +235,7 @@ class DisplayNoteViewController: UIViewController {
      */
     private func setupPeriodSetterView() {
 
-        periodSetterView.setup(inputView: responsiveSelectorView, preLabelText: "Further cycle for ", postLabelText: "?") { self.selectedPeriod = $0 }
+        periodSetterView.setup(preLabelText: "Further cycle for ", postLabelText: "?") { self.selectedPeriod = $0 }
         periodSetterView.buttonText = collectDefaultPeriod()
     }
 

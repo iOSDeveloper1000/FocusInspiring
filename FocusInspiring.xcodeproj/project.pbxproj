@@ -39,8 +39,8 @@
 		E76D2EE82672110C00E78FB5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76D2EE72672110C00E78FB5 /* SettingsViewController.swift */; };
 		E77042AC260B588D00335445 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77042AB260B588D00335445 /* UIViewController.swift */; };
 		E77042C2260B8A6100335445 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77042C1260B8A6100335445 /* UIAlertController.swift */; };
-		E7901D02269F281C0093B10A /* ASCustomValueSetterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */; };
-		E7901D04269F28280093B10A /* ASCustomValueSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */; };
+		E7901D02269F281C0093B10A /* CustomValueSetterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7901D01269F281C0093B10A /* CustomValueSetterView.xib */; };
+		E7901D04269F28280093B10A /* CustomValueSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D03269F28280093B10A /* CustomValueSetterView.swift */; };
 		E7901D06269F29A80093B10A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D05269F29A80093B10A /* UIView.swift */; };
 		E7AAF49E26B4402D005197A1 /* EditablePeriodLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */; };
 		E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */; };
@@ -91,8 +91,8 @@
 		E76D2EE72672110C00E78FB5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E77042AB260B588D00335445 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		E77042C1260B8A6100335445 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
-		E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASCustomValueSetterView.xib; sourceTree = "<group>"; };
-		E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASCustomValueSetterView.swift; sourceTree = "<group>"; };
+		E7901D01269F281C0093B10A /* CustomValueSetterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomValueSetterView.xib; sourceTree = "<group>"; };
+		E7901D03269F28280093B10A /* CustomValueSetterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomValueSetterView.swift; sourceTree = "<group>"; };
 		E7901D05269F29A80093B10A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePeriodLabel.swift; sourceTree = "<group>"; };
 		E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCell.swift; sourceTree = "<group>"; };
@@ -280,8 +280,8 @@
 				E715F43226AF07F000930E36 /* ResponsiveInputView.swift */,
 				E715F42E26AF012500930E36 /* ResponsiveSelectorView.swift */,
 				E715F42F26AF012500930E36 /* ResponsiveSelectorView.xib */,
-				E7901D03269F28280093B10A /* ASCustomValueSetterView.swift */,
-				E7901D01269F281C0093B10A /* ASCustomValueSetterView.xib */,
+				E7901D03269F28280093B10A /* CustomValueSetterView.swift */,
+				E7901D01269F281C0093B10A /* CustomValueSetterView.xib */,
 				E72EE63925F97DE400B228C5 /* EditableTextField.swift */,
 				E7ED60B125EFA9DC00811762 /* EditableTextView.swift */,
 			);
@@ -378,7 +378,7 @@
 			files = (
 				E732C73F25DBE11900A4CE31 /* LaunchScreen.storyboard in Resources */,
 				E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */,
-				E7901D02269F281C0093B10A /* ASCustomValueSetterView.xib in Resources */,
+				E7901D02269F281C0093B10A /* CustomValueSetterView.xib in Resources */,
 				E710FF3A26DFD7E40074DA05 /* 2021-09-01_LegalNotice_en_raw.html in Resources */,
 				E732C73725DBE11800A4CE31 /* Main.storyboard in Resources */,
 				E710FF3626DF72470074DA05 /* 2021-09-01_LegalNotice_dt_raw.html in Resources */,
@@ -410,7 +410,7 @@
 				E70A3F6C26862A5200895FBB /* ListNotesCollectionViewController.swift in Sources */,
 				E7117BE826D7D857002A0C78 /* BackgroundLabel.swift in Sources */,
 				E77042AC260B588D00335445 /* UIViewController.swift in Sources */,
-				E7901D04269F28280093B10A /* ASCustomValueSetterView.swift in Sources */,
+				E7901D04269F28280093B10A /* CustomValueSetterView.swift in Sources */,
 				E732C73A25DBE11800A4CE31 /* FocusInspiring.xcdatamodeld in Sources */,
 				E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */,
 				E715F43326AF07F100930E36 /* ResponsiveInputView.swift in Sources */,

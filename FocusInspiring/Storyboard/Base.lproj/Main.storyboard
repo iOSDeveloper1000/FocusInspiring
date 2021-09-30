@@ -98,7 +98,7 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obt-0B-CqR" customClass="ASCustomValueSetterView" customModule="FocusInspiring" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obt-0B-CqR" customClass="CustomValueSetterView" customModule="FocusInspiring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="626" width="374" height="35"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -879,7 +879,7 @@
                                             </textView>
                                         </subviews>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0r9-cD-ccI" customClass="ASCustomValueSetterView" customModule="FocusInspiring" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0r9-cD-ccI" customClass="CustomValueSetterView" customModule="FocusInspiring" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="670" width="374" height="35"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>

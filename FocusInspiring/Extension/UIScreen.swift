@@ -26,4 +26,11 @@ extension UIScreen {
             return main.bounds.height > main.bounds.width
         }
     }
+
+    /**
+     The length of the shorter screen edge.
+     */
+    public static var lengthShortEdge: CGFloat {
+        min(main.bounds.width, main.bounds.height)
+    }
 }

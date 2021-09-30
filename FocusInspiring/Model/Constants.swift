@@ -96,6 +96,7 @@ struct LabelText {
 }
 
 struct LayoutParameter {
+    static let maxWidthInputView: CGFloat = 480
 
     struct ListNotesCollectionView {
         static let itemsPerRowPortrait: Int = 3

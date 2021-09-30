@@ -12,13 +12,19 @@ import UIKit
 protocol ResponsiveInputView {
     associatedtype ReturnValue: CustomStringConvertible
 
-    /// String that describes the user input
+    /**
+     String that describes the user input.
+     */
     var printedRawInput: String { get }
 
-    /// Formatted user specified value that can be fetched by calling instances
+    /**
+     Formatted user specified value that can be fetched by calling instances.
+     */
     var convertedData: ReturnValue { get }
 
-    /// Clear former input from any output medium (like textField or textView).
+    /**
+     Clear former input from any output medium (like a text field or text view).
+     */
     func clearInput()
 
 }

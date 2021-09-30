@@ -21,8 +21,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<TemporaryDataItem>!
 
-    let responsiveSelectorView = ResponsiveSelectorView(frame: CGRect(origin: .zero, size: CGSize(width: UIView.noIntrinsicMetric, height: UIView.noIntrinsicMetric)))
-
     var selectedPeriod: ConvertibleTimeComponent? // Written by closure
 
     /// Target date for future display of note in DateComponents
@@ -41,7 +39,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     @IBOutlet weak var titleField: EditableTextField!
     @IBOutlet weak var textView: EditableTextView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var periodSetterView: ASCustomValueSetterView!
+    @IBOutlet weak var periodSetterView: CustomValueSetterView!
 
     @IBOutlet weak var imageButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -197,7 +195,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
 
         // Setup period setter view and initialize button with user default value
-        periodSetterView.setup(inputView: responsiveSelectorView, preLabelText: "Will be presented in ", postLabelText: ".") { self.selectedPeriod = $0 }
+        periodSetterView.setup(preLabelText: "Will be presented in ", postLabelText: ".") { self.selectedPeriod = $0 }
         periodSetterView.buttonText = collectDefaultPeriod()
     }
 
