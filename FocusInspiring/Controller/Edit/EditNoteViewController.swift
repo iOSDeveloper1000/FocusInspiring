@@ -116,7 +116,9 @@ class EditNoteViewController: UIViewController {
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
 
-    /// Fill in content into the view controller's fields for edit
+    /**
+     Fill in content into view controller's fields for editing.
+     */
     private func loadNoteOnScreen() {
         guard let temporaryNote = temporaryNote else {
             popupAlert(title: "Internal error", message: "Could not load the note for editing.", alertStyle: .alert, actionTitles: ["OK"], actionStyles: [.default], actions: [cancelAlertHandler(alertAction:)])
@@ -140,7 +142,9 @@ class EditNoteViewController: UIViewController {
         }
     }
 
-    /// Present image picker
+    /**
+     Present image picker controller.
+     */
     private func pickImage(sourceType: UIImagePickerController.SourceType) {
 
         let imagePicker = UIImagePickerController()

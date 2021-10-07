@@ -15,14 +15,15 @@ class EditableTextView: UITextView, UITextViewDelegate {
 
     // MARK: - Properties
 
-    /// Routine set by caller of this class to save contents at certain points
-    var saveContentChanges: ((NSAttributedString) -> Void)?
+    /**
+     Will be called for intermediate saving of text view input.
+     */
+    var saveOnEdit: ((NSAttributedString) -> Void)?
 
     private var attributedPlaceholder: NSAttributedString {
         let placeholder = NSMutableAttributedString(string: TextParameter.textPlaceholder)
 
-        let range = NSRange(location: 0, length: placeholder.string.utf16.count)
-        placeholder.setAttributes([.font: UIFont.preferredFont(forTextStyle: .subheadline)], range: range)
+        placeholder.setAttributes([.font: LayoutParameter.Font.body], range: NSMakeRange(0, placeholder.string.utf16.count))
 
         return placeholder
     }
@@ -39,13 +40,20 @@ class EditableTextView: UITextView, UITextViewDelegate {
     public func setup(with initText: NSAttributedString?, saveRoutine: ((NSAttributedString) -> Void)?) {
         delegate = self
 
-        saveContentChanges = saveRoutine
-        setUpKeyboardToolbar()
+        saveOnEdit = saveRoutine
+        setupKeyboardToolbar()
 
         // Set text to given attributed string else to placeholder
         if let initText = initText {
+
             attributedText = initText
+
+            font = LayoutParameter.Font.body
+            adjustsFontForContentSizeCategory = true
+            textColor = LayoutParameter.TextColor.standard
+
         } else {
+
             clear()
         }
     }
@@ -58,8 +66,10 @@ class EditableTextView: UITextView, UITextViewDelegate {
     public func clear() {
 
         attributedText = attributedPlaceholder
+
+        font = LayoutParameter.Font.body
         adjustsFontForContentSizeCategory = true
-        textColor = UIColor.lightGray
+        textColor = LayoutParameter.TextColor.placeholder
     }
 
     /**
@@ -76,17 +86,18 @@ class EditableTextView: UITextView, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
 
         // Empty the placeholder text
-        if textView.textColor == UIColor.lightGray {
-            textView.text = ""
-            textView.textColor = UIColor.label
+        if textView.textColor == LayoutParameter.TextColor.placeholder {
+
+            textView.attributedText = NSAttributedString(string: "")
+
+            textView.textColor = LayoutParameter.TextColor.standard
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
-
-        saveContentChanges?(textView.attributedText)
-
         guard let textView = textView as? EditableTextView else { return }
+
+        saveOnEdit?(textView.attributedText)
 
         // Reset to placeholder text if empty
         if textView.attributedText.string.isEmpty {
@@ -132,7 +143,7 @@ class EditableTextView: UITextView, UITextViewDelegate {
 
     // MARK: - Helper
 
-    private func setUpKeyboardToolbar() {
+    private func setupKeyboardToolbar() {
 
         let boldItem = UIBarButtonItem(image: UIImage(systemName: "bold"), style: .plain, target: self, action: #selector(boldPressed(sender:)))
         let italicItem = UIBarButtonItem(image: UIImage(systemName: "italic"), style: .plain, target: self, action: #selector(italicPressed(sender:)))
@@ -146,6 +157,7 @@ class EditableTextView: UITextView, UITextViewDelegate {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed(sender:)))
 
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: bounds.width, height: 44))
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
         toolbar.items = [flexSpace, boldItem, italicItem, underlineItem, flexSpace, highlightItem, flexSpace, clearFormatItem, flexSpace, flexSpace, doneButton]
 
         inputAccessoryView = toolbar
@@ -164,15 +176,14 @@ class EditableTextView: UITextView, UITextViewDelegate {
             newAttributedString.addAttributes(attrs, range: range)
         } else {
             // Clear formatting to app default
-            newAttributedString.setAttributes([.font: UIFont.preferredFont(forTextStyle: .body), .foregroundColor: UIColor.label], range: range)
+            newAttributedString.setAttributes([.font: LayoutParameter.Font.body, .foregroundColor: LayoutParameter.TextColor.standard], range: range)
         }
 
         let selectedTextRangeCopy = selectedTextRange
 
         attributedText = newAttributedString
         selectedTextRange = selectedTextRangeCopy
-        adjustsFontForContentSizeCategory = true
 
-        saveContentChanges?(newAttributedString)
+        saveOnEdit?(newAttributedString)
     }
 }

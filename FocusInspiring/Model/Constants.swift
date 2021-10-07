@@ -98,6 +98,16 @@ struct LabelText {
 struct LayoutParameter {
     static let maxWidthInputView: CGFloat = 480
 
+    struct Font {
+        static let body = UIFont.preferredFont(forTextStyle: .body)
+        static let largeTitle = UIFont.preferredFont(forTextStyle: .largeTitle)
+    }
+
+    struct TextColor {
+        static let standard = UIColor.label
+        static let placeholder = UIColor.lightGray
+    }
+
     struct ListNotesCollectionView {
         static let itemsPerRowPortrait: Int = 3
         static let itemsPerRowLandscape: Int = 4

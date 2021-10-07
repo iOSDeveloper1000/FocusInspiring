@@ -174,6 +174,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     }
 
     private func setUpUserInterface() {
+
         // Setup title field
         titleField.setUpCustomTextField(with: temporaryNote?.title, saveRoutine: { (titleString) in
             self.temporaryNote?.title = titleString
@@ -225,7 +226,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         // .uuid and .creationDate are set automatically
         newItem.presentingDate = targetDate
 
-        /// Save text note if one was created
+        // Save text note if one was created
         if textView.text != TextParameter.textPlaceholder {
             newItem.attributedText = textView.attributedText
         }
@@ -316,7 +317,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         imageView.isHidden = true
         imageView.image = nil
 
-        /// Clear also temporary note from managed object context
+        // Clear temporary note from managed object context as well
         temporaryNote.title = nil
         temporaryNote.attributedText = nil
         temporaryNote.image = nil

@@ -40,7 +40,7 @@ class FirstViewController: UIViewController {
         welcomeLabel.text = TextParameter.welcomeSlogan
         welcomeLabel.textAlignment = .center
 
-        welcomeLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        welcomeLabel.font = LayoutParameter.Font.largeTitle
         welcomeLabel.adjustsFontForContentSizeCategory = true
 
         // Layout of icon image

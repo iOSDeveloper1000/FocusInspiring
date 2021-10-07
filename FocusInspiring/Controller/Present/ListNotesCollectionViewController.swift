@@ -217,12 +217,12 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
 
         let note = fetchedResultsController.object(at: indexPath)
 
-        /// Active notes shall be shaded such that it is immediately noticeable when not the success list is presented
+        // Active notes are shaded: then recognizable at once that not success notes are presented
         let shadeThisItem: Bool = note.active
 
-        /// Equip cell with label and (default) image
+        // Equip cell with label and (default) image
         cell.subtitle.text = (note.title ?? "").isEmpty ? "<no title>" : note.title
-        cell.subtitle.textColor = shadeThisItem ? UIColor.lightGray : UIColor.label
+        cell.subtitle.textColor = shadeThisItem ? LayoutParameter.TextColor.placeholder : LayoutParameter.TextColor.standard
 
         if let img = note.image {
             cell.imageView.image = UIImage(data: img)

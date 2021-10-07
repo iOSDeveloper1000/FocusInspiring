@@ -43,6 +43,7 @@ class EditablePeriodLabel: UILabel {
 
         // Make toolbar for resigning from first responder
         let accessory = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
+        accessory.translatesAutoresizingMaskIntoConstraints = false
 
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(inputCancelled(_:)))
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(inputConfirmed(_:)))
