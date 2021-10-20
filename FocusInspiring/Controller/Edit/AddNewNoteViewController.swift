@@ -43,8 +43,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     @IBOutlet weak var imageButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var searchButton: UIBarButtonItem!
-
     @IBOutlet weak var clearButton: UIBarButtonItem!
     @IBOutlet weak var saveButton: UIBarButtonItem!
 
@@ -57,7 +55,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         // Fetch temporary note object
         setUpFetchedResultsController()
 
-        setUpUserInterface()
+        setupUserInterface()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -85,14 +83,11 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         pickImage(sourceType: .camera)
     }
 
-    // For searchButton action see segue preparation below
-
-
     @IBAction func clearButtonPressed(_ sender: Any) {
-        /// Disallow user to edit during clear action
+        // Disallow user to edit during clear action
         toggleUserInterface(enable: false)
 
-        /// Get confirmation by user to clear unsaved contents
+        // Get confirmation by user for clearing unsaved contents
         popupAlert(title: "Your unsaved note will be deleted permanently.", message: "", alertStyle: .actionSheet, actionTitles: ["Clear", "Cancel"], actionStyles: [.destructive, .cancel], actions: [clearHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
     }
 
@@ -119,26 +114,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         } else {
             let dateStr = DateFormatting.declarationFormat.string(from: targetDate)
             popupAlert(title: "Your new inspirational note will be saved and presented on \(dateStr)", message: "", alertStyle: .actionSheet, actionTitles: ["Save", "Cancel"], actionStyles: [.default, .cancel], actions: [saveHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
-        }
-    }
-
-
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ReuseIdentifier.forSegue.addNewNoteToImageSearch {
-            let navigationController = segue.destination as! UINavigationController
-            let flickrController = navigationController.topViewController as! FlickrSearchCollectionViewController
-
-            flickrController.returnImage = { imageData in
-
-                self.imageView.isHidden = false
-                self.imageView.image = UIImage(data: imageData)
-
-                /// Save image data in temporary note
-                self.temporaryNote?.image = imageData
-                self.dataController.saveBackgroundContext()
-            }
         }
     }
 
@@ -173,7 +148,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         }
     }
 
-    private func setUpUserInterface() {
+    private func setupUserInterface() {
 
         // Setup title field
         titleField.setUpCustomTextField(with: temporaryNote?.title, saveRoutine: { (titleString) in
@@ -303,7 +278,6 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         // Toolbar button items
         imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary) ? enable : false
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera) ? enable : false
-        searchButton.isEnabled = enable
 
         // Navigation bar button items
         clearButton.isEnabled = enable
@@ -325,7 +299,9 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         dataController.saveBackgroundContext()
     }
 
-    /// Retrieve user's default period setting
+    /**
+     Retrieve user's default period setting.
+     */
     private func collectDefaultPeriod() -> String? {
         let countValue = UserDefaults.standard.integer(forKey: UserKey.addNewNoteDefaultPeriod.count)
         let unitIntValue = UserDefaults.standard.integer(forKey: UserKey.addNewNoteDefaultPeriod.unit)
@@ -348,7 +324,7 @@ extension AddNewNoteViewController: UIImagePickerControllerDelegate, UINavigatio
             imageView.isHidden = false
             imageView.image = uiImage
 
-            /// Save image data in temporary note
+            // Save image data to a temporary note
             temporaryNote?.image = uiImage.jpegData(compressionQuality: 0.98)
             dataController.saveBackgroundContext()
 

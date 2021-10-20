@@ -13,51 +13,54 @@ import UIKit
 
 class EditNoteViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
 
-    /// Temporary note holding all edits - calling view controller reads from this object afterwards if user saves his edit
+    /**
+     Note item holding current edit.
+     */
     var temporaryNote: TemporaryDataItem!
 
-    /// Pass back result of editing with state confirmed (--> 'Done') or canceled
+    /**
+     Completion handler for returning edited note.
+
+     Confirm flag set to _true_ when user taps _Done_, _false_ when canceled.
+     */
     var completion: ((_ editConfirmed: Bool, _ edit: TemporaryDataItem?) -> Void)?
 
 
-    // MARK: Outlets
+    // MARK: - Outlets
 
+    @IBOutlet weak var contentStackView: UIStackView!
     @IBOutlet weak var titleField: EditableTextField!
     @IBOutlet weak var textView: EditableTextView!
     @IBOutlet weak var imageView: UIImageView!
 
     @IBOutlet weak var imageButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var searchButton: UIBarButtonItem!
-
-    @IBOutlet weak var contentStackView: UIStackView!
-
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
 
 
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpToolbar()
+        setupToolbar()
 
-        /// Load temporary note into view
+        // Load temporary note into view
         loadNoteOnScreen()
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        /// Change to horizontal axis in landscape orientation
+        // Change to horizontal axis in landscape orientation
         contentStackView.axis = UIScreen.isDeviceOrientationPortrait() ? .vertical : .horizontal
     }
 
 
-    // MARK: Actions
+    // MARK: - Actions
 
     @IBAction func imageButtonPressed(_ sender: Any) {
         pickImage(sourceType: .photoLibrary)
@@ -67,51 +70,32 @@ class EditNoteViewController: UIViewController {
         pickImage(sourceType: .camera)
     }
 
-    // For searchButton action see segue preparation below
-
-
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        /// Cancel view controller without saving any edit
+        // Cancel view controller without saving any edit
         completion?(false, nil)
         dismiss(animated: true, completion: nil)
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        /// Return to calling view controller with edit transfered
+        // Return to calling view controller with edit transfered
         completion?(true, temporaryNote)
         dismiss(animated: true, completion: nil)
     }
 
 
-    // MARK: Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ReuseIdentifier.forSegue.editNoteToImageSearch {
-            let navigationController = segue.destination as! UINavigationController
-            let flickrController = navigationController.topViewController as! FlickrSearchCollectionViewController
-
-            flickrController.returnImage = { imgData in
-
-                self.imageView.isHidden = false
-                self.imageView.image = UIImage(data: imgData)
-
-                self.temporaryNote.image = imgData
-            }
-        }
-    }
-
-
-    // MARK: Helpers
+    // MARK: - Helpers
 
     func cancelAlertHandler(alertAction: UIAlertAction) {
-        /// Cancel view controller without any edit
+        // Cancel view controller without any edit
         completion?(false, nil)
         dismiss(animated: true, completion: nil)
     }
 
 
-    /// Set up toolbar elements
-    private func setUpToolbar() {
+    /**
+     Setup method for toolbar items.
+     */
+    private func setupToolbar() {
         imageButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
@@ -156,7 +140,7 @@ class EditNoteViewController: UIViewController {
 }
 
 
-// MARK: Extension for UIImagePickerController Delegation
+// MARK: - UIImagePickerController Delegate
 
 extension EditNoteViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -167,7 +151,7 @@ extension EditNoteViewController: UIImagePickerControllerDelegate, UINavigationC
             imageView.isHidden = false
             imageView.image = uiImage
 
-            /// Save image data into temporary note
+            // Save image to a temporary note
             temporaryNote.image = uiImage.jpegData(compressionQuality: 0.98)
 
         } else {

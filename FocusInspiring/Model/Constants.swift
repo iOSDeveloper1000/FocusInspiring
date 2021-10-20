@@ -175,7 +175,6 @@ struct ReuseIdentifier {
 
     struct forCollectionViewCell {
         static let inspirationalNote = "InspirationalNoteCellIdentifier"
-        static let imageSearchResult = "ImageSearchResultCellIdentifier"
     }
 
     struct forTableViewCell {
@@ -190,8 +189,6 @@ struct ReuseIdentifier {
     struct forSegue {
         static let initialDisplayNoteToFirst = "SegueInitiallyToFirstVC"
         static let displayNoteToEditNote = "SegueDisplayNoteToEditNote"
-        static let addNewNoteToImageSearch = "SegueAddNewNoteToImageSearch"
-        static let editNoteToImageSearch = "SegueEditNoteToImageSearch"
 
         static let buyCoffeeSettingToDetail = "SegueBuyCoffeeSettingToDetail"
         static let aboutInfoToDetail = "SegueAboutAppInfoToDetail"

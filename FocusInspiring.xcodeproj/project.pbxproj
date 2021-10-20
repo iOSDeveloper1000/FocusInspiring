@@ -28,7 +28,6 @@
 		E732C73C25DBE11900A4CE31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E732C73B25DBE11900A4CE31 /* Assets.xcassets */; };
 		E732C73F25DBE11900A4CE31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E732C73D25DBE11900A4CE31 /* LaunchScreen.storyboard */; };
 		E735C0692693598600B27ECE /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E735C0682693598600B27ECE /* UIScreen.swift */; };
-		E769880E25E5472E0020466A /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769880D25E5472E0020466A /* NetworkClient.swift */; };
 		E769881125E548420020466A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881025E548420020466A /* DataController.swift */; };
 		E769881925E54BCB0020466A /* InspirationalNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769881825E54BCB0020466A /* InspirationalNoteCell.swift */; };
 		E769882125E54C220020466A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769882025E54C220020466A /* FirstViewController.swift */; };
@@ -43,13 +42,9 @@
 		E7901D04269F28280093B10A /* CustomValueSetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D03269F28280093B10A /* CustomValueSetterView.swift */; };
 		E7901D06269F29A80093B10A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7901D05269F29A80093B10A /* UIView.swift */; };
 		E7AAF49E26B4402D005197A1 /* EditablePeriodLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */; };
-		E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */; };
-		E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */; };
-		E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */; };
 		E7E12E9E267BA42700057EC7 /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E12E9D267BA42700057EC7 /* SettingsDetailViewController.swift */; };
 		E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */; };
 		E7E29BEC25FFCFB600FF7CE7 /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */; };
-		E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */; };
 		E7EC899926B1A8990009BEC2 /* ConvertibleTimeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7EC899826B1A8990009BEC2 /* ConvertibleTimeComponent.swift */; };
 		E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ED60B125EFA9DC00811762 /* EditableTextView.swift */; };
 		E7F3141B2603B5100041F05C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3141A2603B5100041F05C /* Constants.swift */; };
@@ -80,7 +75,6 @@
 		E732C73E25DBE11900A4CE31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E732C74025DBE11900A4CE31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E735C0682693598600B27ECE /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
-		E769880D25E5472E0020466A /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		E769881025E548420020466A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		E769881825E54BCB0020466A /* InspirationalNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationalNoteCell.swift; sourceTree = "<group>"; };
 		E769882025E54C220020466A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -95,13 +89,9 @@
 		E7901D03269F28280093B10A /* CustomValueSetterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomValueSetterView.swift; sourceTree = "<group>"; };
 		E7901D05269F29A80093B10A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		E7AAF49D26B4402D005197A1 /* EditablePeriodLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePeriodLabel.swift; sourceTree = "<group>"; };
-		E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCell.swift; sourceTree = "<group>"; };
-		E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpStatusResponse.swift; sourceTree = "<group>"; };
-		E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchResponse.swift; sourceTree = "<group>"; };
 		E7E12E9D267BA42700057EC7 /* SettingsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailViewController.swift; sourceTree = "<group>"; };
 		E7E29BE625FF970700FF7CE7 /* NSAttributedStringTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringTransformer.swift; sourceTree = "<group>"; };
 		E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
-		E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchCollectionViewController.swift; sourceTree = "<group>"; };
 		E7EC899826B1A8990009BEC2 /* ConvertibleTimeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertibleTimeComponent.swift; sourceTree = "<group>"; };
 		E7ED60B125EFA9DC00811762 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		E7F3141A2603B5100041F05C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -179,7 +169,6 @@
 			children = (
 				E7F3141A2603B5100041F05C /* Constants.swift */,
 				E77042AF260B85DC00335445 /* Data Model */,
-				E7D7441625FCCE59007D4FB7 /* Network */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -238,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				E769881825E54BCB0020466A /* InspirationalNoteCell.swift */,
-				E7D7440C25FCB77C007D4FB7 /* FlickrSearchCell.swift */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -257,7 +245,6 @@
 			children = (
 				E769882E25E54DD90020466A /* AddNewNoteViewController.swift */,
 				E7E29BEB25FFCFB600FF7CE7 /* EditNoteViewController.swift */,
-				E7EBA0A925FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -306,16 +293,6 @@
 				E735C0682693598600B27ECE /* UIScreen.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		E7D7441625FCCE59007D4FB7 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				E769880D25E5472E0020466A /* NetworkClient.swift */,
-				E7D7440F25FCCBE8007D4FB7 /* HttpStatusResponse.swift */,
-				E7D7441225FCCD37007D4FB7 /* FlickrSearchResponse.swift */,
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,7 +378,6 @@
 				E70FA9F526498E0000D6BE56 /* DevTracking.swift in Sources */,
 				E76D2EE82672110C00E78FB5 /* SettingsViewController.swift in Sources */,
 				E7F3141B2603B5100041F05C /* Constants.swift in Sources */,
-				E7D7441025FCCBE8007D4FB7 /* HttpStatusResponse.swift in Sources */,
 				E76BF3E825E915D400EE4992 /* RootViewController.swift in Sources */,
 				E7F3835D2609FB9A002D28B9 /* DetailNoteViewController.swift in Sources */,
 				E732C73025DBE11800A4CE31 /* AppDelegate.swift in Sources */,
@@ -424,13 +400,9 @@
 				E7202E53263AF0AF00715A7F /* Notification.swift in Sources */,
 				E769882C25E54D2E0020466A /* DisplayNoteViewController.swift in Sources */,
 				E7117BE626D7D2D7002A0C78 /* CustomTypes.swift in Sources */,
-				E7D7441325FCCD37007D4FB7 /* FlickrSearchResponse.swift in Sources */,
 				E7E29BE725FF970700FF7CE7 /* NSAttributedStringTransformer.swift in Sources */,
-				E7D7440D25FCB77C007D4FB7 /* FlickrSearchCell.swift in Sources */,
-				E7EBA0AA25FC12C100AC99E3 /* FlickrSearchCollectionViewController.swift in Sources */,
 				E7ED60B225EFA9DC00811762 /* EditableTextView.swift in Sources */,
 				E735C0692693598600B27ECE /* UIScreen.swift in Sources */,
-				E769880E25E5472E0020466A /* NetworkClient.swift in Sources */,
 				E7E12E9E267BA42700057EC7 /* SettingsDetailViewController.swift in Sources */,
 				E769882F25E54DD90020466A /* AddNewNoteViewController.swift in Sources */,
 			);
