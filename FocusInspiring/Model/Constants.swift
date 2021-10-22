@@ -178,10 +178,12 @@ struct ReuseIdentifier {
     }
 
     struct forTableViewCell {
-        static let reduceUserQueriesSetting = "ReduceUserQueriesCellIdentifier"
         static let enableTestModeSetting = "EnableTestModeCellIdentifier"
         static let addNewDefaultPeriodSetting = "AddNewDefaultPeriodCellIdentifier"
         static let repeatDefaultPeriodSetting = "RepeatDefaultPeriodCellIdentifier"
+
+        static let deliverNotesAtSaveTime = "NotifyAtSaveTimeCellIdentifier"
+        static let deliverNotesAtCustomTime = "NotifyAtCustomTimeCellIdentifier"
 
         static let recommendationInfo = "RecommendationCellIdentifier"
     }
@@ -190,7 +192,6 @@ struct ReuseIdentifier {
         static let initialDisplayNoteToFirst = "SegueInitiallyToFirstVC"
         static let displayNoteToEditNote = "SegueDisplayNoteToEditNote"
 
-        static let buyCoffeeSettingToDetail = "SegueBuyCoffeeSettingToDetail"
         static let aboutInfoToDetail = "SegueAboutAppInfoToDetail"
     }
 

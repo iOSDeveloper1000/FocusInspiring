@@ -10,23 +10,25 @@ import UIKit
 import CoreData
 
 
-// MARK: ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
+// MARK: ListNotesCollectionViewController: UIViewController
 
-class ListNotesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ListNotesCollectionViewController: UIViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
 
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<InspirationItem>!
 
-    /// Label presented when collection view section  is empty
-    var emptyViewLabel: BackgroundLabel?
+    /**
+     Background view with a hint that the chosen collection view section is empty.
+     */
+    private var emptyViewLabel: BackgroundLabel?
 
-    var successNotesSectionIndex: Int? /// Section index of successful terminated notes in FRC
-    var activeNotesSectionIndex: Int? /// Section index of ongoing active notes in FRC
+    private var successNotesSectionIndex: Int? // Section index of successful terminated notes in FRC
+    private var activeNotesSectionIndex: Int? // Section index of ongoing active notes in FRC
 
 
-    // MARK: Outlets
+    // MARK: - Outlets
 
     @IBOutlet weak var listControl: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -35,12 +37,12 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     @IBOutlet weak var collectionViewTopLayoutConstraint: NSLayoutConstraint!
 
 
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpFetchedResultsController()
+        setupFetchedResultsController()
 
         // @todo REFACTOR TO SEPARATE METHOD
         collectionView.delegate = self
@@ -58,9 +60,9 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        setUpFetchedResultsController()
+        setupFetchedResultsController()
 
-        /// Select List of Glory as default and primary view
+        // Select Success List as default and primary view
         navigationItem.title = TextParameter.Title.listOfSuccess
         listControl.selectedSegmentIndex = 0
 
@@ -99,11 +101,11 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
     }
 
 
-    // MARK: Action
+    // MARK: - Action
 
     @IBAction func listControlIndexChanged(_ sender: Any) {
 
-        /// Disable segmented control to change during reload of collection view
+        // Disable change of segmented control selection during reload
         listControl.isUserInteractionEnabled = false
 
         let titleStruct = TextParameter.Title.self
@@ -111,14 +113,14 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
 
         collectionView.reloadData()
 
-        /// Enable segmented control again
+        // Enable segmented control again
         listControl.isUserInteractionEnabled = true
     }
 
 
-    // MARK: Setup
+    // MARK: - Setup
 
-    private func setUpFetchedResultsController() {
+    private func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<InspirationItem> = InspirationItem.fetchRequest()
 
         // No predicate used since all notes shall be loaded
@@ -137,15 +139,15 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
     }
+}
 
 
-    // MARK: CollectionView Data Source & Delegation
+// MARK: - UICollectionView Data Source & Delegate
+
+extension ListNotesCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        guard let countSections = fetchedResultsController.sections?.count else {
-            track("GUARD FAILED: FRC has no sections")
-            return 1
-        }
+        guard let countSections = fetchedResultsController.sections?.count else { return 1 }
 
         let selectedSegment = listControl.selectedSegmentIndex
 
@@ -153,8 +155,8 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
         var emptyViewMsg: Message? = (selectedSegment == 1) ? LabelText.EmptyView.activeNotesList : LabelText.EmptyView.successList
 
         // Reset section indices
-        successNotesSectionIndex = nil /// nil = empty section for success entries
-        activeNotesSectionIndex = nil /// nil = empty section for active entries
+        successNotesSectionIndex = nil // nil = empty section for success entries
+        activeNotesSectionIndex = nil // nil = empty section for active entries
 
         switch countSections {
         case 0:
@@ -204,7 +206,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
         let selectedSection: Int? = (listControl.selectedSegmentIndex == 1) ? activeNotesSectionIndex : successNotesSectionIndex
 
         if selectedSection != section {
-            /// This method's call belongs to the section that shall be hidden.
+            // This section shall be hidden
             count = 0
         }
 
@@ -239,7 +241,7 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        /// Instantiate and push viewcontroller for presenting note in detail mode
+        // Instantiate and push viewcontroller for presenting note in detail
         let detailNoteVC = self.storyboard?.instantiateViewController(identifier: ReuseIdentifier.forViewController.detailNote) as! DetailNoteViewController
 
         detailNoteVC.dataController = dataController
@@ -253,12 +255,12 @@ class ListNotesCollectionViewController: UIViewController, UICollectionViewDeleg
 }
 
 
-// MARK: Extension for NSFetchedResultsControllerDelegate
+// MARK: - NSFetchedResultsController Delegate
 
 extension ListNotesCollectionViewController: NSFetchedResultsControllerDelegate {
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        /// Empty body -- from the Documentation:
-        ///     "A delegate must implement at least one of the change tracking delegate methods in order for change tracking to be enabled. Providing an empty implementation of controllerDidChangeContent(_:) is sufficient."
+        // Empty body -- from the Documentation:
+        //     "A delegate must implement at least one of the change tracking delegate methods in order for change tracking to be enabled. Providing an empty implementation of controllerDidChangeContent(_:) is sufficient."
     }
 }

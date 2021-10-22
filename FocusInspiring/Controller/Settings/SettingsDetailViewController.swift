@@ -27,19 +27,16 @@ class SettingsDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Open requested resource
-        switch requestedPage {
-        case "Contribution":
-            print("@todo Contribution page")
-
-        case "About":
+        if requestedPage == "About" {
             guard let urlPath = Bundle.main.url(forResource: "2021-09-01_LegalNotice_en_raw", withExtension: "html") else {
                 track("GUARD FAILED: Local URL not found")
                 return
             }
+
             webView.load(URLRequest(url: urlPath))
 
-        default:
-            track("UNKNOWN DEFAULT: Requested page not found")
+        } else {
+            track("Requested page not found")
         }
     }
 }

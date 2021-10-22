@@ -13,7 +13,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
 
-    // MARK: - Type Definition
+    // MARK: - Types and Properties
 
     private enum AlertUserForChangedSetting {
         case afterRestart
@@ -29,19 +29,25 @@ class SettingsViewController: UITableViewController {
         }
     }
 
+    private enum NotifyTimeMode {
+        case saveTime
+        case customTime
+    }
+
+    /**
+     Selected mode for delivery time of due notes.
+     */
+    private var selectedNotifyMode: NotifyTimeMode = .saveTime
+
 
     // MARK: - Outlets
 
-    @IBOutlet weak var reduceConfirmationsCell: UITableViewCell!
     @IBOutlet weak var enableTestingCell: UITableViewCell!
-
     @IBOutlet weak var addNewDefaultPeriodLabel: EditablePeriodLabel!
     @IBOutlet weak var repeatDefaultPeriodLabel: EditablePeriodLabel!
 
-    @IBOutlet weak var deliveryModeSwitch: UISwitch!
-
+    @IBOutlet weak var deliverAtSaveTimeCell: UITableViewCell!
     @IBOutlet weak var deliverAtCustomTimeCell: UITableViewCell!
-    @IBOutlet weak var deliverAtCustomTimeLabel: UILabel!
     @IBOutlet weak var customTimePicker: UIDatePicker!
 
     @IBOutlet weak var versionLabel: UILabel!
@@ -59,23 +65,14 @@ class SettingsViewController: UITableViewController {
     }
 
 
-    // MARK: - Actions
-
-    @IBAction func deliveryModeSwitchValueChanged(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: UserKey.deliverAtSaveTime)
-        UserDefaults.standard.set(customTimePicker.date, forKey: UserKey.customDeliveryTime)
-
-        // Disable custom time picker cell
-        handleCustomTimePickerCell(enable: !sender.isOn)
-        alertUserForChangedSetting(with: .forFutureActions)
-    }
+    // MARK: - Action
 
     @IBAction func customTimePickerValueChanged(sender: UIDatePicker) {
         UserDefaults.standard.set(sender.date, forKey: UserKey.customDeliveryTime)
     }
 
 
-    // MARK: - TableView Delegate
+    // MARK: - UITableView Delegate
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         guard let identifier = tableView.cellForRow(at: indexPath)?.reuseIdentifier else {
@@ -87,12 +84,8 @@ class SettingsViewController: UITableViewController {
 
         // Handle user interaction according to selected cell
         switch identifier {
-        case cellIdentifier.reduceUserQueriesSetting:
-            handleAccessoryTypeAndPersistency(for: reduceConfirmationsCell, withKey: UserKey.reduceUserQueries)
-
         case cellIdentifier.enableTestModeSetting:
-            handleAccessoryTypeAndPersistency(for: enableTestingCell, withKey: UserKey.enableTestMode)
-            alertUserForChangedSetting(with: .afterRestart)
+            handleTestModeSetting()
 
         case cellIdentifier.addNewDefaultPeriodSetting:
             addNewDefaultPeriodLabel.clearInputField()
@@ -102,15 +95,16 @@ class SettingsViewController: UITableViewController {
             repeatDefaultPeriodLabel.clearInputField()
             repeatDefaultPeriodLabel.becomeFirstResponder()
 
+        case cellIdentifier.deliverNotesAtSaveTime:
+            handleNotifyTimeSetting(selected: .saveTime)
+
+        case cellIdentifier.deliverNotesAtCustomTime:
+            handleNotifyTimeSetting(selected: .customTime)
+
         case cellIdentifier.recommendationInfo:
             shareAppWithFriends()
 
-        case "SegueCell", "NonSelectableCell":
-            // Processed with Action or Navigation method
-            break
-
-        default:
-            track("UNKNOWN DEFAULT: Reuse identifier in Settings table")
+        default: // Cell without interaction or calling segue
             break
         }
 
@@ -123,17 +117,8 @@ class SettingsViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let vc = segue.destination as? SettingsDetailViewController else { return }
 
-        let segueIdentifier = ReuseIdentifier.forSegue.self
-
-        switch segue.identifier {
-        case segueIdentifier.buyCoffeeSettingToDetail:
-            vc.requestedPage = "Contribution"
-
-        case segueIdentifier.aboutInfoToDetail:
+        if segue.identifier == ReuseIdentifier.forSegue.aboutInfoToDetail {
             vc.requestedPage = "About"
-
-        default:
-            track("UNKNOWN DEFAULT: Segue in Settings")
         }
     }
 
@@ -142,7 +127,6 @@ class SettingsViewController: UITableViewController {
 
     private func setupUserSettingsSection() {
         // Retrieve user settings
-        reduceConfirmationsCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.reduceUserQueries) ? .checkmark : .none
         enableTestingCell.accessoryType = UserDefaults.standard.bool(forKey: UserKey.enableTestMode) ? .checkmark : .none
 
         // Setup labels for user default periods
@@ -160,14 +144,18 @@ class SettingsViewController: UITableViewController {
     }
 
     private func setupUserNotificationsSection() {
-        let deliverAtSaveTime = UserDefaults.standard.bool(forKey: UserKey.deliverAtSaveTime)
+        let isModeSaveTime = UserDefaults.standard.bool(forKey: UserKey.deliverAtSaveTime)
 
-        deliveryModeSwitch.isOn = deliverAtSaveTime
-        handleCustomTimePickerCell(enable: !deliverAtSaveTime)
+        deliverAtSaveTimeCell.accessoryType = isModeSaveTime ? .checkmark : .none
+        deliverAtCustomTimeCell.accessoryType = isModeSaveTime ? .none : .checkmark
+
+        customTimePicker.isEnabled = !isModeSaveTime
 
         if let storedTime = UserDefaults.standard.object(forKey: UserKey.customDeliveryTime) as? Date {
             customTimePicker.date = storedTime
         }
+
+        selectedNotifyMode = isModeSaveTime ? .saveTime : .customTime
     }
 
 
@@ -191,12 +179,33 @@ class SettingsViewController: UITableViewController {
         present(activityVC, animated: true, completion: nil)
     }
 
-    private func handleAccessoryTypeAndPersistency(for cell: UITableViewCell, withKey key: String) {
+    private func handleTestModeSetting() {
 
-        let isAccessoryTypeNone = (cell.accessoryType == .none)
+        let isAccessoryTypeNone = (enableTestingCell.accessoryType == .none)
 
-        cell.accessoryType = isAccessoryTypeNone ? .checkmark : .none
-        UserDefaults.standard.setValue(isAccessoryTypeNone, forKey: key)
+        enableTestingCell.accessoryType = isAccessoryTypeNone ? .checkmark : .none
+        UserDefaults.standard.setValue(isAccessoryTypeNone, forKey: UserKey.enableTestMode)
+
+        alertUserForChangedSetting(with: .afterRestart)
+    }
+
+    private func handleNotifyTimeSetting(selected mode: NotifyTimeMode) {
+
+        // Execute only if changed
+        if mode != selectedNotifyMode {
+            let isModeSaveTime = (mode == .saveTime)
+
+            deliverAtSaveTimeCell.accessoryType = isModeSaveTime ? .checkmark : .none
+            deliverAtCustomTimeCell.accessoryType = isModeSaveTime ? .none : .checkmark
+
+            customTimePicker.isEnabled = !isModeSaveTime
+
+            UserDefaults.standard.setValue(isModeSaveTime, forKey: UserKey.deliverAtSaveTime)
+
+            selectedNotifyMode = mode
+
+            alertUserForChangedSetting(with: .forFutureActions)
+        }
     }
 
     private func fetchUserDefaultPeriod(for userKey: UserKey.PeriodValueKeyType) -> String {
@@ -221,13 +230,6 @@ class SettingsViewController: UITableViewController {
             UserDefaults.standard.set(0 /* unset */, forKey: userKey.count)
             UserDefaults.standard.set(99 /* unset */, forKey: userKey.unit)
         }
-    }
-
-    private func handleCustomTimePickerCell(enable: Bool) {
-
-        deliverAtCustomTimeCell.isUserInteractionEnabled = enable
-        deliverAtCustomTimeLabel.isEnabled = enable
-        customTimePicker.isEnabled = enable
     }
 
     private func alertUserForChangedSetting(with useCase: AlertUserForChangedSetting) {

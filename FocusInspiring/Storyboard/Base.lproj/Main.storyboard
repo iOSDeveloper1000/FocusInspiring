@@ -267,25 +267,8 @@
                         <sections>
                             <tableViewSection headerTitle="USER SETTINGS" id="OOV-GX-2qt" userLabel="USER">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReduceUserQueriesCellIdentifier" textLabel="v7z-FB-iWr" style="IBUITableViewCellStyleDefault" id="wgu-12-kBO" userLabel="Confirmations Setting">
-                                        <rect key="frame" x="20" y="49.5" width="374" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wgu-12-kBO" id="tEg-5u-OQ5">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Reduce Number of Confirmations (tbd)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v7z-FB-iWr">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EnableTestModeCellIdentifier" textLabel="xPE-Dc-Snx" style="IBUITableViewCellStyleDefault" id="pAE-mG-MJH" userLabel="Test Mode Setting">
-                                        <rect key="frame" x="20" y="93.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="49.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pAE-mG-MJH" id="tK0-0U-FLq">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -302,7 +285,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddNewDefaultPeriodCellIdentifier" textLabel="NQ1-cp-OaP" detailTextLabel="vty-Ow-vis" style="IBUITableViewCellStyleValue1" id="8QN-0J-fRF" userLabel="AddNewVC Default Period Setting">
-                                        <rect key="frame" x="20" y="137.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="93.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8QN-0J-fRF" id="yOI-Q4-LoR">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -326,7 +309,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RepeatDefaultPeriodCellIdentifier" textLabel="0hC-KB-s0y" detailTextLabel="JSA-3i-wq2" style="IBUITableViewCellStyleValue1" id="9Gj-xE-yIy" userLabel="DisplayVC Default Period Setting">
-                                        <rect key="frame" x="20" y="181.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="137.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Gj-xE-yIy" id="ueP-Zf-ugc">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -354,13 +337,13 @@
                             <tableViewSection headerTitle="USER NOTIFICATIONS" id="u9y-15-Eak" userLabel="NOTIFICATIONS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NonSelectableCell" textLabel="hvN-gI-d9g" style="IBUITableViewCellStyleDefault" id="gDr-qX-XfV" userLabel="Delivery Info Cell">
-                                        <rect key="frame" x="20" y="275.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="231.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gDr-qX-XfV" id="ufh-Fj-inY">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Deliver Notes and Notifications..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hvN-gI-d9g">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Deliver Notes ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hvN-gI-d9g">
                                                     <rect key="frame" x="20" y="0.0" width="334" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -369,43 +352,25 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NonSelectableCell" id="GkM-Lb-5Td" userLabel="Switch Delivery Mode Setting">
-                                        <rect key="frame" x="20" y="319.5" width="374" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationLevel="1" indentationWidth="10" reuseIdentifier="NotifyAtSaveTimeCellIdentifier" textLabel="zgI-Mt-sz4" style="IBUITableViewCellStyleDefault" id="GkM-Lb-5Td" userLabel="Save Time Delivery Setting">
+                                        <rect key="frame" x="20" y="275.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GkM-Lb-5Td" id="ujl-lY-sox">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="333.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8GK-vR-Q6a">
-                                                    <rect key="frame" x="30" y="0.0" width="324" height="43.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="... at time of saving the note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dI-tY-DAi">
-                                                            <rect key="frame" x="0.0" y="14" width="173" height="16"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g0r-w3-exx" userLabel="Deliver at Save Time Switch">
-                                                            <rect key="frame" x="275" y="6.5" width="51" height="31"/>
-                                                            <connections>
-                                                                <action selector="deliveryModeSwitchValueChanged:" destination="4ut-KC-SHj" eventType="valueChanged" id="3CK-ld-0Nw"/>
-                                                            </connections>
-                                                        </switch>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="43.5" id="oLo-5y-QRe"/>
-                                                    </constraints>
-                                                </stackView>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="at save time of note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zgI-Mt-sz4">
+                                                    <rect key="frame" x="30" y="0.0" width="295.5" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="8GK-vR-Q6a" secondAttribute="trailing" id="5et-2f-dYv"/>
-                                                <constraint firstItem="8GK-vR-Q6a" firstAttribute="top" secondItem="ujl-lY-sox" secondAttribute="top" id="gJy-oB-lp9"/>
-                                                <constraint firstItem="8GK-vR-Q6a" firstAttribute="leading" secondItem="ujl-lY-sox" secondAttribute="leadingMargin" constant="10" id="lep-Ft-cwv"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationLevel="-2" indentationWidth="10" reuseIdentifier="NonSelectableCell" id="GjO-Ys-Mph" userLabel="Custom Delivery Time Setting">
-                                        <rect key="frame" x="20" y="363.5" width="374" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationLevel="1" indentationWidth="10" reuseIdentifier="NotifyAtCustomTimeCellIdentifier" id="GjO-Ys-Mph" userLabel="Custom Time Delivery Setting">
+                                        <rect key="frame" x="20" y="319.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GjO-Ys-Mph" id="Cms-KS-jnc">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -414,8 +379,8 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4MS-Cf-lRV">
                                                     <rect key="frame" x="30" y="0.0" width="324" height="50"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="... at specific time of day:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhA-Kj-5Pj">
-                                                            <rect key="frame" x="0.0" y="0.0" width="152.5" height="50"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="at custom time of day:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhA-Kj-5Pj">
+                                                            <rect key="frame" x="0.0" y="0.0" width="135" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="73q-pV-fMk"/>
                                                             </constraints>
@@ -424,7 +389,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <datePicker contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="RAq-ml-OJs">
-                                                            <rect key="frame" x="160.5" y="0.0" width="163.5" height="50"/>
+                                                            <rect key="frame" x="143" y="0.0" width="181" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="ZCj-ze-cIs"/>
                                                             </constraints>
@@ -447,7 +412,7 @@
                             <tableViewSection headerTitle="INFO" id="Gct-Jc-6Um">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NonSelectableCell" textLabel="QvM-zD-0xR" detailTextLabel="chh-fX-WVy" style="IBUITableViewCellStyleValue1" id="osY-vY-i5g" userLabel="Version Entry">
-                                        <rect key="frame" x="20" y="457.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="413.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="osY-vY-i5g" id="I3G-XU-bj6">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
@@ -471,7 +436,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecommendationCellIdentifier" textLabel="d5F-r7-unU" style="IBUITableViewCellStyleDefault" id="wZ8-Hl-xQc" userLabel="Share Button">
-                                        <rect key="frame" x="20" y="501.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="457.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wZ8-Hl-xQc" id="C7z-22-4Iu">
                                             <rect key="frame" x="0.0" y="0.0" width="344.5" height="44"/>
@@ -487,28 +452,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SegueCell" textLabel="o8A-Dg-RHb" style="IBUITableViewCellStyleDefault" id="p6W-j2-fXh" userLabel="Coffee Button">
-                                        <rect key="frame" x="20" y="545.5" width="374" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p6W-j2-fXh" id="tG6-cC-caM">
-                                            <rect key="frame" x="0.0" y="0.0" width="344.5" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Buy Me a Coffee (tbd)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o8A-Dg-RHb">
-                                                    <rect key="frame" x="20" y="0.0" width="316.5" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="23Y-45-PAV" kind="show" identifier="SegueBuyCoffeeSettingToDetail" id="TEh-Od-7A2"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SegueCell" textLabel="KhQ-JS-EIm" style="IBUITableViewCellStyleDefault" id="f5P-IR-OW8" userLabel="Legal Notice">
-                                        <rect key="frame" x="20" y="589.5" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="501.5" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f5P-IR-OW8" id="g9c-hd-W2U">
                                             <rect key="frame" x="0.0" y="0.0" width="344.5" height="44"/>
@@ -540,10 +485,8 @@
                         <outlet property="addNewDefaultPeriodLabel" destination="vty-Ow-vis" id="N98-7H-JIJ"/>
                         <outlet property="customTimePicker" destination="RAq-ml-OJs" id="cDN-i4-ZOo"/>
                         <outlet property="deliverAtCustomTimeCell" destination="GjO-Ys-Mph" id="mDB-Ib-PyA"/>
-                        <outlet property="deliverAtCustomTimeLabel" destination="DhA-Kj-5Pj" id="nm0-rk-Mzh"/>
-                        <outlet property="deliveryModeSwitch" destination="g0r-w3-exx" id="Z86-kB-f84"/>
+                        <outlet property="deliverAtSaveTimeCell" destination="GkM-Lb-5Td" id="3Td-X6-Ru2"/>
                         <outlet property="enableTestingCell" destination="pAE-mG-MJH" id="8W3-1c-wKp"/>
-                        <outlet property="reduceConfirmationsCell" destination="wgu-12-kBO" id="PQx-Hr-ePT"/>
                         <outlet property="repeatDefaultPeriodLabel" destination="JSA-3i-wq2" id="Ezj-1h-4Qi"/>
                         <outlet property="versionLabel" destination="chh-fX-WVy" id="FFl-yB-ec4"/>
                     </connections>
@@ -1097,9 +1040,6 @@
             <point key="canvasLocation" x="2214" y="696"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="TEh-Od-7A2"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="ellipsis.bubble" catalog="system" width="128" height="110"/>
