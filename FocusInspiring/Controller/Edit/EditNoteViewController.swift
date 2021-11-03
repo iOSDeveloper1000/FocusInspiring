@@ -62,21 +62,21 @@ class EditNoteViewController: UIViewController {
 
     // MARK: - Actions
 
-    @IBAction func imageButtonPressed(_ sender: Any) {
-        pickImage(sourceType: .photoLibrary)
+    @IBAction func imageButtonPressed(_ sender: UIBarButtonItem) {
+        replaceImage(sourceType: .photoLibrary)
     }
 
-    @IBAction func cameraButtonPressed(_ sender: Any) {
-        pickImage(sourceType: .camera)
+    @IBAction func cameraButtonPressed(_ sender: UIBarButtonItem) {
+        replaceImage(sourceType: .camera)
     }
 
-    @IBAction func cancelButtonPressed(_ sender: Any) {
+    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         // Cancel view controller without saving any edit
         completion?(false, nil)
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func doneButtonPressed(_ sender: Any) {
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         // Return to calling view controller with edit transfered
         completion?(true, temporaryNote)
         dismiss(animated: true, completion: nil)
@@ -126,10 +126,20 @@ class EditNoteViewController: UIViewController {
         }
     }
 
+    private func replaceImage(sourceType: UIImagePickerController.SourceType) {
+
+        if imageView.image != nil {
+            popupAlert(title: "New image will overwrite former one", message: "Are you sure you want to pick a new image overwriting the currently chosen one?", alertStyle: .alert, actionTitles: ["Overwrite", "Cancel"], actionStyles: [.destructive, .cancel], actions: [{ _ in self.pickNewImage(sourceType: sourceType) }, nil]
+            )
+        } else {
+            pickNewImage(sourceType: sourceType)
+        }
+    }
+
     /**
      Present image picker controller.
      */
-    private func pickImage(sourceType: UIImagePickerController.SourceType) {
+    private func pickNewImage(sourceType: UIImagePickerController.SourceType) {
 
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self

@@ -75,15 +75,15 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     // MARK: - Actions
 
-    @IBAction func imageButtonPressed(_ sender: Any) {
-        pickImage(sourceType: .photoLibrary)
+    @IBAction func imageButtonPressed(_ sender: UIBarButtonItem) {
+        replaceImage(sourceType: .photoLibrary)
     }
 
-    @IBAction func cameraButtonPressed(_ sender: Any) {
-        pickImage(sourceType: .camera)
+    @IBAction func cameraButtonPressed(_ sender: UIBarButtonItem) {
+        replaceImage(sourceType: .camera)
     }
 
-    @IBAction func clearButtonPressed(_ sender: Any) {
+    @IBAction func clearButtonPressed(_ sender: UIBarButtonItem) {
         // Disallow user to edit during clear action
         toggleUserInterface(enable: false)
 
@@ -91,7 +91,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         popupAlert(title: "Your unsaved note will be deleted permanently.", message: "", alertStyle: .actionSheet, actionTitles: ["Clear", "Cancel"], actionStyles: [.destructive, .cancel], actions: [clearHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
     }
 
-    @IBAction func saveButtonPressed(_ sender: Any) {
+    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         // Disallow user to edit during save action
         toggleUserInterface(enable: false)
 
@@ -178,7 +178,17 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
     // MARK: - Private Core API
 
-    private func pickImage(sourceType: UIImagePickerController.SourceType) {
+    private func replaceImage(sourceType: UIImagePickerController.SourceType) {
+
+        if imageView.image != nil {
+            popupAlert(title: "New image will overwrite former one", message: "Are you sure you want to pick a new image overwriting the currently chosen one?", alertStyle: .alert, actionTitles: ["Overwrite", "Cancel"], actionStyles: [.destructive, .cancel], actions: [{ _ in self.pickNewImage(sourceType: sourceType) }, nil]
+            )
+        } else {
+            pickNewImage(sourceType: sourceType)
+        }
+    }
+
+    private func pickNewImage(sourceType: UIImagePickerController.SourceType) {
 
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -222,7 +232,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
     func clearHandler(alertAction: UIAlertAction) {
         clearUserInterface()
 
-        /// Reenable user interface for further editing
+        // Reenable user interface for further editing
         toggleUserInterface(enable: true)
     }
 
