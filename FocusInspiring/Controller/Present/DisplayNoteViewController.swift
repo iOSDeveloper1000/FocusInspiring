@@ -417,7 +417,7 @@ class DisplayNoteViewController: UIViewController {
 
         selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 
-        return selectedPeriod!.isValid() ? selectedPeriod!.description : TextParameter.nilPeriod
+        return selectedPeriod!.isValid() ? selectedPeriod!.description : "period-unassigned"~
     }
 
     private func setTabBarBadgeValue(count: Int) {

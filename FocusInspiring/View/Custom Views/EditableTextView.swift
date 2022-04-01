@@ -21,7 +21,7 @@ class EditableTextView: UITextView, UITextViewDelegate {
     var saveOnEdit: ((NSAttributedString) -> Void)?
 
     private var attributedPlaceholder: NSAttributedString {
-        let placeholder = NSMutableAttributedString(string: TextParameter.textPlaceholder)
+        let placeholder = NSMutableAttributedString(string: "add-new-text-placeholder"~)
 
         placeholder.setAttributes([.font: LayoutParameter.Font.body], range: NSMakeRange(0, placeholder.string.utf16.count))
 
@@ -77,7 +77,7 @@ class EditableTextView: UITextView, UITextViewDelegate {
      */
     public func isEmpty() -> Bool {
 
-        return text.isEmpty || (text == TextParameter.textPlaceholder)
+        return text.isEmpty || (text == "add-new-text-placeholder"~)
     }
 
 

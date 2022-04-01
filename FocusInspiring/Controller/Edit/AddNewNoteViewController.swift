@@ -212,7 +212,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         newItem.presentingDate = targetDate
 
         // Save text note if one was created
-        if textView.text != TextParameter.textPlaceholder {
+        if textView.text != "add-new-text-placeholder"~ {
             newItem.attributedText = textView.attributedText
         }
 
@@ -318,7 +318,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
 
         selectedPeriod = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 
-        return selectedPeriod!.isValid() ? selectedPeriod!.description : TextParameter.nilPeriod
+        return selectedPeriod!.isValid() ? selectedPeriod!.description : "period-unassigned"~
     }
 }
 

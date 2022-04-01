@@ -74,7 +74,7 @@ class EditablePeriodLabel: UILabel {
 
         let rawString = responsiveInputView.printedRawInput
 
-        text = rawString.contains("?") ? TextParameter.nilPeriod : rawString
+        text = rawString.contains("?") ? "period-unassigned"~ : rawString
     }
 
     @IBAction func inputCancelled(_ sender: UIBarButtonItem) {

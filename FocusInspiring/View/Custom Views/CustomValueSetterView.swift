@@ -125,7 +125,7 @@ class CustomValueSetterView: UIView {
         onValueConfirm?(responsiveInputView.convertedData)
 
         let rawString = responsiveInputView.printedRawInput
-        buttonText = rawString.contains("?") ? TextParameter.nilPeriod : rawString
+        buttonText = rawString.contains("?") ? "period-unassigned"~ : rawString
     }
 
     @IBAction func inputCancelled(_ sender: UIBarButtonItem) {

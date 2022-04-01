@@ -215,7 +215,7 @@ class SettingsViewController: UITableViewController {
 
         let periodValue = ConvertibleTimeComponent(count: countValue, componentRawValue: unitIntValue)
 
-        return periodValue.isValid() ? periodValue.description: TextParameter.nilPeriod
+        return periodValue.isValid() ? periodValue.description : "period-unassigned"~
     }
 
     private func setUserDefaultPeriod(with timeValue: ConvertibleTimeComponent, for userKey: UserKey.PeriodValueKeyType) {

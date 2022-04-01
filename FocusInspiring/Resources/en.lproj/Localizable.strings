@@ -25,6 +25,8 @@
 
 "placeholder-text-period" = " Tap to select a time period.  ";
 
+"period-unassigned" = "unassigned";
+
 "notification-message-general" = "An note of inspiration awaits you to be seen again...";
 
 
@@ -51,8 +53,13 @@
 
 "label-extending-note" = "Extend the note by ";
 
+"display-note-vc-empty-title" = "No more Inspirational\nNotes for Today";
+"display-note-vc-empty-body" = "Feel lucky anyway :-)";
+
 
 // MARK: - Add New VC
+
+"add-new-text-placeholder" = "Enter text here";
 
 "alert-title-delete-temporary-note" = "The note has not been saved yet. Continuing will delete it permanently.";
 
@@ -76,6 +83,18 @@
 
 "alert-title-note-unloadable" = "Internal error";
 "alert-message-note-unloadable" = "Could not load the note for editing. Please try again or copy to a new note.";
+
+
+// MARK: - List Notes VC
+
+"list-notes-title-success" = "Story of Success";
+"list-notes-title-active" = "List of active Notes";
+
+"list-notes-vc-empty-success-title" = "List still empty";
+"list-notes-vc-empty-success-body" = "It seems like you have not added\nany inspirational note\nto your personal List of Success yet.";
+
+"list-notes-vc-empty-active-title" = "List currently empty";
+"list-notes-vc-empty-active-body" = "It seems like you have currently\nno open ideas. Enjoy the day :-)";
 
 
 // MARK: - Detail Note VC

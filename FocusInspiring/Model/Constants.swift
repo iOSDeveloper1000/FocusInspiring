@@ -68,30 +68,15 @@ struct UserKey {
 
 
 // MARK: - View and Layout Parameters
-
-struct TextParameter {
-
-    struct Title {
-        static let listOfSuccess = "List of Glory"
-        static let listOfActiveNotes = "List of Active Notes"
-    }
-
-    static let welcomeSlogan = "WELCOME\t\t\t\t\t\nFEELING\n\t\t\t\tINSPIRED"
-
-    static let textPlaceholder = "Enter your text note here"
-
-    static let nilPeriod = "unset"
-}
-
 /**
  Structure containing strings for label texts across the app.
  */
 struct LabelText {
 
     struct EmptyView {
-        static let displayNoteStack = Message(title: "No more Inspirational\nNotes for Today", body: "Feel lucky anyway :-)")
-        static let successList = Message(title: "List still empty", body: "It seems like you have not added\nany inspirational note\nto your personal List of Glory yet.")
-        static let activeNotesList = Message(title: "List currently empty", body: "It seems like you have currently\nno open ideas. Enjoy the day :-)")
+        static let displayNoteStack = Message(title: "display-note-vc-empty-title"~, body: "display-note-vc-empty-body"~)
+        static let successList = Message(title: "list-notes-vc-empty-success-title"~, body: "list-notes-vc-empty-success-body"~)
+        static let activeNotesList = Message(title: "list-notes-vc-empty-active-title"~, body: "list-notes-vc-empty-active-body"~)
     }
 }
 

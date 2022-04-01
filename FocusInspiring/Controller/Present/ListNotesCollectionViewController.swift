@@ -63,7 +63,7 @@ class ListNotesCollectionViewController: UIViewController {
         setupFetchedResultsController()
 
         // Select Success List as default and primary view
-        navigationItem.title = TextParameter.Title.listOfSuccess
+        navigationItem.title = "list-notes-title-success"~
         listControl.selectedSegmentIndex = 0
 
         collectionView.reloadData()
@@ -108,8 +108,7 @@ class ListNotesCollectionViewController: UIViewController {
         // Disable change of segmented control selection during reload
         listControl.isUserInteractionEnabled = false
 
-        let titleStruct = TextParameter.Title.self
-        navigationItem.title = (listControl.selectedSegmentIndex == 1) ? titleStruct.listOfActiveNotes : titleStruct.listOfSuccess
+        navigationItem.title = (listControl.selectedSegmentIndex == 1) ? "list-notes-title-active"~ : "list-notes-title-success"~
 
         collectionView.reloadData()
 

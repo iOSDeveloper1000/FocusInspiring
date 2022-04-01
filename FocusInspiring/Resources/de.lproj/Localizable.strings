@@ -25,6 +25,8 @@
 
 "placeholder-text-period" = " Tippe um eine Frist auszuwählen.  ";
 
+"period-unassigned" = "unbestimmt";
+
 "notification-message-general" = "Eine Notiz der Inspiration erwartet von dir erneut gesehen zu werden...";
 
 
@@ -51,13 +53,18 @@
 
 "label-extending-note" = "Verlängere die Notiz um ";
 
+"display-note-vc-empty-title" = "Keine Notiz der\nInspiration mehr für heute";
+"display-note-vc-empty-body" = "Sei trotzdem glücklich :-)";
+
 
 // MARK: - Add New VC
+
+"add-new-text-placeholder" = "Füge hier Text ein";
 
 "alert-title-delete-temporary-note" = "Die Notiz wurde noch nicht gespeichert. Fortfahren wird sie dauerhaft löschen.";
 
 "alert-title-note-incomplete" = "Unvollständige Notiz";
-"alert-message-note-incomplete" = "Es scheint, als hättest noch keinen Titel oder Beschreibung (Text, Bild, ...) hinzugefügt.";
+"alert-message-note-incomplete" = "Es scheint, als hättest du noch keinen Titel oder Beschreibung (Text, Bild, ...) hinzugefügt.";
 "action-save-note-incomplete" = "Trotzdem speichern";
 
 "action-title-save-note" = "Deine Notiz wird gespeichert und am %@ angezeigt.";
@@ -76,6 +83,18 @@
 
 "alert-title-note-unloadable" = "Interner Fehler";
 "alert-message-note-unloadable" = "Die Notiz konnte nicht zum Bearbeiten geladen werden. Versuche es bitte erneut oder kopiere die Inhalte in eine neue Notiz.";
+
+
+// MARK: - List Notes VC
+
+"list-notes-title-success" = "Erfolgsstory";
+"list-notes-title-active" = "Liste aktiver Notizen";
+
+"list-notes-vc-empty-success-title" = "Liste noch leer";
+"list-notes-vc-empty-success-body" = "Es sieht so aus, als hättest du noch\nkeine inspirierende Notiz zu deiner\npersönlichen Erfolgsstory hinzugefügt.";
+
+"list-notes-vc-empty-active-title" = "Liste aktuell leer";
+"list-notes-vc-empty-active-body" = "Es sieht so aus, als hättest du\ngerade keine offene Idee.\nGenieße den Tag. :-)";
 
 
 // MARK: - Detail Note VC
