@@ -24,31 +24,27 @@ struct ConvertibleTimeComponent: CustomStringConvertible {
      Missing components will be replaced by a question mark.
      */
     var description: String {
-        let unitStr: String
+        let unit: String
 
-        // @todo LOCALIZE TIME UNITS - NOTE PLURAL FORMS
         switch component {
-        case .second: unitStr = "sec"
-        case .minute: unitStr = "min"
-        case .day: unitStr = "day"
-        case .weekOfYear: unitStr = "week"
-        case .month: unitStr = "month"
-        case .year: unitStr = "year"
-        default: unitStr = "?"
+        case .second: unit = "second"
+        case .minute: unit = "minute"
+        case .day: unit = "day"
+        case .weekOfYear: unit = "week"
+        case .month: unit = "month"
+        case .year: unit = "year"
+        default: unit = "undefined"
         }
 
-        guard let count = count, count > 0 else { return "? \(unitStr)" }
-        guard let component = component else { return "\(count) ?" }
+        let unitSingular = "\(unit)-singular"~
+        let unitPlural = "\(unit)-plural"~
 
-        var resultStr = "\(count) \(unitStr)"
+        guard let count = count, count > 0 else { return "? \(unitPlural)" }
+        guard unit != "undefined" else { return "\(count) \(unitPlural)" }
 
-        // Append plural s for some units
-        let appendPluralSUnits: Array<Calendar.Component> = [.day, .weekOfYear, .month, .year]
-        if count > 1 && appendPluralSUnits.contains(component) {
-            resultStr = "\(resultStr)s"
-        }
+        let describing = (count > 1) ? "\(count) \(unitPlural)" : "\(count) \(unitSingular)"
 
-        return resultStr
+        return describing
     }
 
 

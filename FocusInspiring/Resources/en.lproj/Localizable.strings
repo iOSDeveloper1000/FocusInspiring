@@ -108,3 +108,28 @@
 "hint-changed-setting-for-future-actions" = "Changed setting will be used for all notes saved in future.";
 
 "resource-title-about-page" = "2021-09-01_LegalNotice_en_raw";
+
+
+// MARK: - Period Selection
+
+"button-sec-title" = "SEC";
+"button-min-title" = "MIN";
+"button-day-title" = "days";
+"button-week-title" = "weeks";
+"button-month-title" = "months";
+"button-year-title" = "years";
+
+"second-singular" = "second";
+"second-plural" = "seconds";
+"minute-singular" = "minute";
+"minute-plural" = "minutes";
+"day-singular" = "day";
+"day-plural" = "days";
+"week-singular" = "week";
+"week-plural" = "weeks";
+"month-singular" = "month";
+"month-plural" = "months";
+"year-singular" = "year";
+"year-plural" = "years";
+"undefined-singular" = "?";
+"undefined-plural" = "?";

@@ -108,3 +108,28 @@
 "hint-changed-setting-for-future-actions" = "Die geänderte Einstellung wird für alle zukünftig gespeicherten Notizen verwendet werden.";
 
 "resource-title-about-page" = "2021-09-01_LegalNotice_de_raw";
+
+
+// MARK: - Period Selection
+
+"button-sec-title" = "SEC";
+"button-min-title" = "MIN";
+"button-day-title" = "Tage";
+"button-week-title" = "Wochen";
+"button-month-title" = "Monate";
+"button-year-title" = "Jahre";
+
+"second-singular" = "Sekunde";
+"second-plural" = "Sekunden";
+"minute-singular" = "Minute";
+"minute-plural" = "Minuten";
+"day-singular" = "Tag";
+"day-plural" = "Tage";
+"week-singular" = "Woche";
+"week-plural" = "Wochen";
+"month-singular" = "Monat";
+"month-plural" = "Monate";
+"year-singular" = "Jahr";
+"year-plural" = "Jahre";
+"undefined-singular" = "?";
+"undefined-plural" = "?";

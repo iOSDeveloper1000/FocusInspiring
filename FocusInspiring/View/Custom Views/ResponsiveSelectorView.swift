@@ -109,6 +109,14 @@ class ResponsiveSelectorView: UIInputView, ResponsiveInputView {
             button?.clipsToBounds = true
         }
 
+        // Set button titles with localization
+        button_sec.setTitle("button-sec-title"~, for: .normal)
+        button_min.setTitle("button-min-title"~, for: .normal)
+        button_day.setTitle("button-day-title"~, for: .normal)
+        button_week.setTitle("button-week-title"~, for: .normal)
+        button_month.setTitle("button-month-title"~, for: .normal)
+        button_year.setTitle("button-year-title"~, for: .normal)
+
         // Disable "SEC" and "MIN" button in normal (non-testing) mode
         if !(UserDefaults.standard.bool(forKey: UserKey.enableTestMode)) {
             button_sec.isUserInteractionEnabled = false

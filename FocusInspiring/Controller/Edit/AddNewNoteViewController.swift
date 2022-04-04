@@ -88,7 +88,7 @@ class AddNewNoteViewController: UIViewController, NSFetchedResultsControllerDele
         toggleUserInterface(enable: false)
 
         // Get confirmation by user for clearing unsaved contents
-        popupAlert(title: "alert-title-delete-temporary-note"~, message: "", alertStyle: .actionSheet, actionTitles: ["action-delete-confirm"~, "action-cancel"], actionStyles: [.destructive, .cancel], actions: [clearHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
+        popupAlert(title: "alert-title-delete-temporary-note"~, message: "", alertStyle: .actionSheet, actionTitles: ["action-delete-confirm"~, "action-cancel"~], actionStyles: [.destructive, .cancel], actions: [clearHandler(alertAction:), cancelActionSheetHandler(alertAction:)])
     }
 
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
