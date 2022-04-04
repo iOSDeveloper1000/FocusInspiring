@@ -94,7 +94,7 @@
 "j8f-Ox-Aa4.title" = "Detail View";
 
 /* Class = "UILabel"; text = "<unused here>"; ObjectID = "Iwk-ad-SVt"; */
-"Iwk-ad-SVt.text" = "<note-title-large>"
+"Iwk-ad-SVt.text" = "<note-title-large>";
 
 /* Class = "UILabel"; text = "<unused here>"; ObjectID = "kBv-9W-ktz"; */
 "kBv-9W-ktz.text" = "<creation-date-label>";

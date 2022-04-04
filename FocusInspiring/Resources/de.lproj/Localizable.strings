@@ -7,7 +7,7 @@
 //
 
 
-/// MARK: - General
+// MARK: - General
 
 "action-cancel" = "Abbrechen";
 "action-quick-confirm" = "OK";
@@ -23,7 +23,7 @@
 
 //"label-empty-title" = "<no title>";
 
-"placeholder-text-period" = " Tippe um eine Frist auszuwählen.  ";
+"placeholder-text-period" = " Wähle eine Frist  ";
 
 "period-unassigned" = "unbestimmt";
 

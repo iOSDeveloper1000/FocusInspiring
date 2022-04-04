@@ -81,7 +81,7 @@ struct LabelText {
 }
 
 struct LayoutParameter {
-    static let maxWidthInputView: CGFloat = 480
+    static let maxWidthInputView: CGFloat = 320
 
     struct Font {
         static let body = UIFont.preferredFont(forTextStyle: .body)
