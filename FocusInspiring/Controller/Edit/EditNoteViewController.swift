@@ -77,7 +77,9 @@ class EditNoteViewController: UIViewController {
     }
 
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        // Return to calling view controller with edit transfered
+        saveItems()
+
+        // Transfer handler object to calling view controller
         completion?(true, temporaryNote)
         dismiss(animated: true, completion: nil)
     }
@@ -91,6 +93,13 @@ class EditNoteViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    /**
+     Saves title and textview text to the handler object.
+     */
+    func saveItems() {
+        temporaryNote.title = titleField.text
+        temporaryNote.attributedText = textView.attributedText
+    }
 
     /**
      Setup method for toolbar items.
